@@ -8,7 +8,7 @@
 	</head>
 	<body>
 
-		<h1> CANJE HORAS</h1>
+		<h1> CANJE HORAS </h1>
 
 	</body>
 </html>

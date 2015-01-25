@@ -9,12 +9,12 @@ import com.vcortes.canjehoras.utils.Constantes;
 
 
 public class InicioController extends BaseController{
-	
-	
-	
-	public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response){
+
+	@Override
+	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		
 		return new ModelAndView(Constantes.INICIO);
+		
 	}
 
 }
