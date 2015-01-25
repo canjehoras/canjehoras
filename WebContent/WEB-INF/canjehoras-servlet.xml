@@ -10,7 +10,7 @@
 	<!-- Resolucion de la parte de vista por parte del DispatcherServlet -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="prefix" value="jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 		<property name="order" value="1" />
 	</bean>
