@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 31-ene-2015 11:15:40 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.vcortes.canjehoras.model.Usuario" table="usuario" >
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="idioma" class="com.vcortes.canjehoras.model.Idioma" fetch="select">
+            <column name="ID_IDIOMA" not-null="true" />
+        </many-to-one>
+        <many-to-one name="provincia" class="com.vcortes.canjehoras.model.Provincia" fetch="select">
+            <column name="ID_PROVINCIA" />
+        </many-to-one>
+        <many-to-one name="perfil" class="com.vcortes.canjehoras.model.Perfil" fetch="select">
+            <column name="ID_PERFIL" not-null="true" />
+        </many-to-one>
+        <property name="correoElectronico" type="string">
+            <column name="CORREO_ELECTRONICO" length="50" not-null="true" />
+        </property>
+        <property name="pass" type="string">
+            <column name="PASS" length="20" not-null="true" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="ESTADO"/>
+        </property>
+        <property name="fechaAlta" type="timestamp">
+            <column name="FECHA_ALTA" length="19" not-null="true" />
+        </property>
+        <property name="fechaBaja" type="timestamp">
+            <column name="FECHA_BAJA" length="19" />
+        </property>
+        <property name="apellido1" type="string">
+            <column name="APELLIDO1" length="25" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="APELLIDO2" length="25" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="20" not-null="true" />
+        </property>
+        <property name="movil" type="string">
+            <column name="MOVIL" length="15" not-null="true" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="TELEFONO" length="15" />
+        </property>
+        <property name="wassap" type="java.lang.Boolean">
+            <column name="WASSAP"/>
+        </property>
+        <property name="numAcceso" type="java.lang.Integer">
+            <column name="NUM_ACCESO" />
+        </property>
+        <property name="fechaUltimoAcceso" type="timestamp">
+            <column name="FECHA_ULTIMO_ACCESO" length="19" />
+        </property>
+        <set name="preferenciases" table="preferencias" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_USUARIO" not-null="true" />
+            </key>
+            <one-to-many class="com.vcortes.canjehoras.model.Preferencias" />
+        </set>
+    </class>
+</hibernate-mapping>
