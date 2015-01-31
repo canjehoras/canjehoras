@@ -27,6 +27,8 @@
 	<!-- Fin de Tratamiento de excepciones -->
 
 	<!-- mapping request-controller para el DispatcherServlet para car -->
-	<bean name="/inicio.html" class="com.vcortes.canjehoras.controller.InicioController"></bean>
+	<bean name="/inicio.html" class="com.vcortes.canjehoras.controller.InicioController">
+		<property name="usuarioBL" ref="usuarioBL" />
+	</bean>
 
 </beans>
