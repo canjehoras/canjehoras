@@ -1,6 +1,6 @@
 package com.vcortes.canjehoras.model;
 
-// Generated 31-ene-2015 11:15:40 by Hibernate Tools 3.4.0.CR1
+// Generated 31-ene-2015 17:30:18 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,6 +28,7 @@ public class Usuario implements java.io.Serializable {
 	private Boolean wassap;
 	private Integer numAcceso;
 	private Date fechaUltimoAcceso;
+	private Set trueques = new HashSet(0);
 	private Set preferenciases = new HashSet(0);
 
 	public Usuario() {
@@ -48,7 +49,8 @@ public class Usuario implements java.io.Serializable {
 			String correoElectronico, String pass, Boolean estado,
 			Date fechaAlta, Date fechaBaja, String apellido1, String apellido2,
 			String nombre, String movil, String telefono, Boolean wassap,
-			Integer numAcceso, Date fechaUltimoAcceso, Set preferenciases) {
+			Integer numAcceso, Date fechaUltimoAcceso, Set trueques,
+			Set preferenciases) {
 		this.idioma = idioma;
 		this.provincia = provincia;
 		this.perfil = perfil;
@@ -65,6 +67,7 @@ public class Usuario implements java.io.Serializable {
 		this.wassap = wassap;
 		this.numAcceso = numAcceso;
 		this.fechaUltimoAcceso = fechaUltimoAcceso;
+		this.trueques = trueques;
 		this.preferenciases = preferenciases;
 	}
 
@@ -202,6 +205,14 @@ public class Usuario implements java.io.Serializable {
 
 	public void setFechaUltimoAcceso(Date fechaUltimoAcceso) {
 		this.fechaUltimoAcceso = fechaUltimoAcceso;
+	}
+
+	public Set getTrueques() {
+		return this.trueques;
+	}
+
+	public void setTrueques(Set trueques) {
+		this.trueques = trueques;
 	}
 
 	public Set getPreferenciases() {

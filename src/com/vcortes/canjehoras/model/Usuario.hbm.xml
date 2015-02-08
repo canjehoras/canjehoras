@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 31-ene-2015 11:15:40 by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated 31-ene-2015 17:30:18 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="com.vcortes.canjehoras.model.Usuario" table="usuario" >
+    <class name="com.vcortes.canjehoras.model.Usuario" table="usuario" catalog="canjehoras">
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
@@ -24,7 +24,9 @@
             <column name="PASS" length="20" not-null="true" />
         </property>
         <property name="estado" type="java.lang.Boolean">
-            <column name="ESTADO"/>
+            <column name="ESTADO">
+                <comment>1-ACTIVO / 0-BAJA</comment>
+            </column>
         </property>
         <property name="fechaAlta" type="timestamp">
             <column name="FECHA_ALTA" length="19" not-null="true" />
@@ -48,7 +50,9 @@
             <column name="TELEFONO" length="15" />
         </property>
         <property name="wassap" type="java.lang.Boolean">
-            <column name="WASSAP"/>
+            <column name="WASSAP">
+                <comment>1-SI / 0-NO</comment>
+            </column>
         </property>
         <property name="numAcceso" type="java.lang.Integer">
             <column name="NUM_ACCESO" />
@@ -56,6 +60,12 @@
         <property name="fechaUltimoAcceso" type="timestamp">
             <column name="FECHA_ULTIMO_ACCESO" length="19" />
         </property>
+        <set name="trueques" table="trueque" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ID_USUARIO" not-null="true" />
+            </key>
+            <one-to-many class="com.vcortes.canjehoras.model.Trueque" />
+        </set>
         <set name="preferenciases" table="preferencias" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="ID_USUARIO" not-null="true" />
