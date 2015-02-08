@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 31-ene-2015 17:30:18 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.vcortes.canjehoras.model.Agenda" table="agenda" catalog="canjehoras">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="trueque" class="com.vcortes.canjehoras.model.Trueque" fetch="select">
+            <column name="ID_TRUEQUE" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="timestamp">
+            <column name="FECHA" length="19" not-null="true" />
+        </property>
+        <property name="horaInicio" type="string">
+            <column name="HORA_INICIO" length="5" not-null="true" />
+        </property>
+        <property name="horaFin" type="string">
+            <column name="HORA_FIN" length="5" not-null="true" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="ESTADO">
+                <comment>1-DISPONIBLE / 0-NO DISPONIBLE</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

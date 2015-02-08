@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.model;
-// Generated 31-ene-2015 11:15:40 by Hibernate Tools 3.4.0.CR1
+
+// Generated 31-ene-2015 17:30:18 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;

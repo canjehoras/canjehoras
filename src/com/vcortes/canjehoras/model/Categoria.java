@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.model;
-// Generated 31-ene-2015 11:15:40 by Hibernate Tools 3.4.0.CR1
+
+// Generated 31-ene-2015 17:30:18 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ public class Categoria implements java.io.Serializable {
 	private Integer id;
 	private String codigo;
 	private String descripcion;
+	private Set trueques = new HashSet(0);
 	private Set preferenciases = new HashSet(0);
 
 	public Categoria() {
@@ -22,9 +24,11 @@ public class Categoria implements java.io.Serializable {
 		this.descripcion = descripcion;
 	}
 
-	public Categoria(String codigo, String descripcion, Set preferenciases) {
+	public Categoria(String codigo, String descripcion, Set trueques,
+			Set preferenciases) {
 		this.codigo = codigo;
 		this.descripcion = descripcion;
+		this.trueques = trueques;
 		this.preferenciases = preferenciases;
 	}
 
@@ -50,6 +54,14 @@ public class Categoria implements java.io.Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Set getTrueques() {
+		return this.trueques;
+	}
+
+	public void setTrueques(Set trueques) {
+		this.trueques = trueques;
 	}
 
 	public Set getPreferenciases() {

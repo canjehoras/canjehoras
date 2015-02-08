@@ -9,15 +9,13 @@ import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.utils.Constantes;
 
 
-public class InicioController extends BaseController{
+public class LoginController extends BaseController{
 	
 	private UsuarioBL usuarioBL;
 
 	@Override
 	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
-		//usuarioBL.findUsuarioByLogin("ALAVA");
-		return new ModelAndView(Constantes.INICIO);
-		
+		return new ModelAndView(Constantes.LOGIN);
 	}
 
 	
