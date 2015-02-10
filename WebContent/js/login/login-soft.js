@@ -130,8 +130,8 @@ var Login = function () {
         }
 
 
-		$("#select2_sample4").select2({
-		  	placeholder: '<i class="icon-map-marker"></i>&nbsp;Select a Country',
+		$("#select_provincia").select2({
+		  	placeholder: '<i class="icon-map-marker"></i>&nbsp;Provincia',
             allowClear: true,
             formatResult: format,
             formatSelection: format,
@@ -141,11 +141,40 @@ var Login = function () {
         });
 
 
-			$('#select2_sample4').change(function () {
+			$('#select_provincia').change(function () {
                 $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
             });
 
+			
+			$("#select_pref_categoria").select2({
+		  	placeholder: '<i class="icon-map-marker"></i>&nbsp;Categoria',
+            allowClear: true,
+            formatResult: format,
+            formatSelection: format,
+            escapeMarkup: function (m) {
+                return m;
+            }
+        });
 
+
+			$('#select_pref_categoria').change(function () {
+                $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+            });
+
+			$("#select_pref_provincia").select2({
+			  	placeholder: '<i class="icon-map-marker"></i>&nbsp;Provincia',
+	            allowClear: true,
+	            formatResult: format,
+	            formatSelection: format,
+	            escapeMarkup: function (m) {
+	                return m;
+	            }
+	        });
+
+
+				$('#select_pref_provincia').change(function () {
+	                $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
+	            });
 
          $('.register-form').validate({
 	            errorElement: 'label', //default input error message container
