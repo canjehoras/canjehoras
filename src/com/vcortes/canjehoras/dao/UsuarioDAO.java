@@ -16,32 +16,28 @@ public class UsuarioDAO extends BaseDAO {
 	private static final Log log = LogFactory.getLog(UsuarioDAO.class);
 	
 	
-	public Provincia findUsuarioByLogin(String login) throws Exception {
-		log.info("findUsuarioByLogin");
-		try{
-			Criteria q = sessionFactory.getCurrentSession().createCriteria(Provincia.class);
-			q.add(Restrictions.eq("codigo", login));
-			List result = q.list();
-			sessionFactory.getCurrentSession().createCriteria(Usuario.class).list();
-			
-			Provincia p = new Provincia();
-			p.setCodigo("aaaa");
-			p.setDescripcion("aaaa");
-			p.setId(999);
-			saveOrUpdate(p); 
-			
-			if(result!=null && result.size()>0){
-				return (Provincia) result.get(0);
-			}else{
-				return null;
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+	public Usuario findUsuarioByLogin(String login) throws Exception {
+		log.info("findUsuarioByLogin");		
+		Criteria q = sessionFactory.getCurrentSession().createCriteria(Provincia.class);
+		q.add(Restrictions.eq("codigo", login));
+		List result = q.list();
 		
+		return (Usuario) first(result);
+	}
+
+	
+	/**
+	 Provincia p = new Provincia();
+	p.setCodigo("aaaa");
+	p.setDescripcion("aaaa");
+	p.setId(999);
+	saveOrUpdate(p); 
+	
+	if(result!=null && result.size()>0){
+		return (Provincia) result.get(0);
+	}else{
 		return null;
 	}
-	
-	
+	 */
 
 }

@@ -14,6 +14,13 @@ public class BaseDAO {
 	
 	protected SessionFactory sessionFactory;
 	
+	public Object first(List result){
+		if(list!=null && list.size()>0){
+			return list.get(0);
+		}
+		return null;
+	}
+	
 	public Object saveOrUpdate(Object instance) throws Exception {
 		logger.info("saveOrUpdate - BaseDAO");
 		sessionFactory.getCurrentSession().saveOrUpdate(instance);
