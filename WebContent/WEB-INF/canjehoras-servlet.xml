@@ -10,10 +10,12 @@
 	<!-- Resolucion de la parte de vista por parte del DispatcherServlet -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="jsp/"></property>
+		<property name="prefix" value="/jsp/"></property>
 		<property name="suffix" value=".jsp"></property>
 		<property name="order" value="1" />
 	</bean>
+	
+	
 
 	<!-- Tratamiento de excepciones -->
 	<bean
@@ -36,12 +38,18 @@
 		</property>
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
+	
 
 	<!-- login -->
-	<bean name="/login.html" class="com.vcortes.canjehoras.controller.LoginController">
+	
+	<bean name="/login/*.html" class="com.vcortes.canjehoras.controller.LoginController">
+        <property name="methodNameResolver">
+            <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
+        </property>
 		<property name="usuarioBL" ref="usuarioBL" />
-	</bean>
-
+		<property name="commandName"><value>country</value></property>
+    </bean> 
+	
 	<!-- Pagina de inicio -->
 	<bean name="/inicio.html" class="com.vcortes.canjehoras.controller.InicioController">
 		<property name="usuarioBL" ref="usuarioBL" />

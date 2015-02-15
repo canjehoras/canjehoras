@@ -6,10 +6,10 @@ var Login = function () {
 	            errorClass: 'help-inline', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	                username: {
+	            	correoElectronico: {
 	                    required: true
 	                },
-	                password: {
+	                pass: {
 	                    required: true
 	                },
 	                remember: {
@@ -18,10 +18,10 @@ var Login = function () {
 	            },
 
 	            messages: {
-	                username: {
+	            	correoElectronico: {
 	                    required: "Username is required1."
 	                },
-	                password: {
+	                pass: {
 	                    required: "Password is required2."
 	                }
 	            },
@@ -200,10 +200,10 @@ var Login = function () {
 	                    required: true
 	                },
 
-	                username: {
+	                correoElectronico: {
 	                    required: true
 	                },
-	                password: {
+	                pass: {
 	                    required: true
 	                },
 	                rpassword: {

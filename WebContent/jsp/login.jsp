@@ -4,15 +4,15 @@
 	<meta charset="utf-8" />
 	<title><fmt:message key="titulo"/></title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
-	<link href="css/login/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/login/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/login/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-	<link href="css/login/style-metro.css" rel="stylesheet" type="text/css"/>
-	<link href="css/login/style.css" rel="stylesheet" type="text/css"/>
-	<link href="css/login/style-responsive.css" rel="stylesheet" type="text/css"/>
-	<link href="css/login/purple.css" rel="stylesheet" type="text/css" id="style_color"/>
-	<link href="css/login/select2_metro.css" rel="stylesheet" type="text/css" />
-	<link href="css/login/login-soft.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/login/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/login/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/login/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/login/style-metro.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/login/style.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/login/style-responsive.css" rel="stylesheet" type="text/css"/>
+	<link href="../css/login/purple.css" rel="stylesheet" type="text/css" id="style_color"/>
+	<link href="../css/login/select2_metro.css" rel="stylesheet" type="text/css" />
+	<link href="../css/login/login-soft.css" rel="stylesheet" type="text/css"/>
 	<link rel="shortcut icon" href="favicon.ico" />
 </head>
 <!-- END HEAD -->
@@ -28,7 +28,7 @@
 	<!-- BEGIN LOGIN -->
 	<div class="content">
 		<!-- BEGIN LOGIN FORM -->
-		<form class="form-vertical login-form" action="" method="post">
+		<form:form class="form-vertical login-form" action="login.html" method="post" commandName="LoginForm">
 			<h3 class="form-title"><fmt:message key="login.titulo"/></h3>
 			<div class="alert alert-error hide">
 				<button class="close" data-dismiss="alert"></button>
@@ -40,7 +40,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-user"></i>
-						<input class="m-wrap placeholder-no-fix" type="text" autocomplete="off" placeholder="<fmt:message key="login.usuario"/>" name="correoElectronico"/>
+						<form:input cssClass="m-wrap placeholder-no-fix"  path="correoElectronico"/>
 					</div>
 				</div>
 			</div>
@@ -49,7 +49,7 @@
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-lock"></i>
-						<input class="m-wrap placeholder-no-fix" type="password" autocomplete="off" placeholder="<fmt:message key="login.pass"/>" name="pass"/>
+						<form:input cssClass="m-wrap placeholder-no-fix" type="password" path="pass"/>
 					</div>
 				</div>
 			</div>
@@ -70,10 +70,10 @@
 					<a href="javascript:;" id="register-btn" ><fmt:message key="login.cuenta.crear"/></a>
 				</p>
 			</div>
-		</form>	
+		</form:form>	
 		<!-- END LOGIN FORM -->        
 		<!-- BEGIN FORGOT PASSWORD FORM -->
-		<form class="form-vertical forget-form" action="index.html" method="post">
+		<form class="form-vertical forget-form" action="" method="post">
 			<h3 ><fmt:message key="login.recuperar.pass"/></h3>
 			<p><fmt:message key="login.recuperar.password"/></p>
 			<div class="control-group">
@@ -95,7 +95,7 @@
 		</form>
 		<!-- END FORGOT PASSWORD FORM -->
 		<!-- BEGIN REGISTRATION FORM -->
-		<form class="form-vertical register-form" action="index.html" method="post">
+		<form class="form-vertical register-form" action="registro.html" method="post">
 			<h3><fmt:message key="registro.titulo"/></h3>
 			<p><fmt:message key="registro.cuenta"/></p>
 			<div class="control-group">
@@ -229,18 +229,18 @@
 		<!-- END REGISTRATION FORM -->
 	</div>
 	<!-- END LOGIN -->
-	<script src="js/login/jquery-1.10.1.min.js" type="text/javascript"></script>
-	<script src="js/login/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
-	<script src="js/login/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
-	<script src="js/login/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../js/login/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="../js/login/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+	<script src="../js/login/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>      
+	<script src="../js/login/bootstrap.min.js" type="text/javascript"></script>
 
-	<script src="js/login/jquery.slimscroll.min.js" type="text/javascript"></script>
-	<script src="js/login/jquery.blockui.min.js" type="text/javascript"></script>  
-	<script src="js/login/jquery.validate.min.js" type="text/javascript"></script>
-	<script src="js/login/jquery.backstretch.min.js" type="text/javascript"></script>
-	<script src="js/login/select2.min.js" type="text/javascript"></script>
-	<script src="js/login/app.js" type="text/javascript"></script>
-	<script src="js/login/login-soft.js" type="text/javascript"></script>      
+	<script src="../js/login/jquery.slimscroll.min.js" type="text/javascript"></script>
+	<script src="../js/login/jquery.blockui.min.js" type="text/javascript"></script>  
+	<script src="../js/login/jquery.validate.min.js" type="text/javascript"></script>
+	<script src="../js/login/jquery.backstretch.min.js" type="text/javascript"></script>
+	<script src="../js/login/select2.min.js" type="text/javascript"></script>
+	<script src="../js/login/app.js" type="text/javascript"></script>
+	<script src="../js/login/login-soft.js" type="text/javascript"></script>      
 	<script>
 		jQuery(document).ready(function() {     
 		  App.init();

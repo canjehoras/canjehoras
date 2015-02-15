@@ -15,8 +15,8 @@ public class BaseDAO {
 	protected SessionFactory sessionFactory;
 	
 	public Object first(List result){
-		if(list!=null && list.size()>0){
-			return list.get(0);
+		if(result!=null && result.size()>0){
+			return result.get(0);
 		}
 		return null;
 	}
