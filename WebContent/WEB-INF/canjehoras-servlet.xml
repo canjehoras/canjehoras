@@ -41,20 +41,20 @@
 	
 
 	<!-- login -->
-	
 	<bean name="/login/*.html" class="com.vcortes.canjehoras.controller.LoginController">
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
         </property>
 		<property name="usuarioBL" ref="usuarioBL" />
-		<property name="commandName"><value>country</value></property>
     </bean> 
 	
 	<!-- Pagina de inicio -->
-	<bean name="/inicio.html" class="com.vcortes.canjehoras.controller.InicioController">
+	<bean name="/inicio/*.html" class="com.vcortes.canjehoras.controller.InicioController">
+        <property name="methodNameResolver">
+            <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
+        </property>
 		<property name="usuarioBL" ref="usuarioBL" />
-	</bean>
-
+    </bean> 
 
 	
 </beans>

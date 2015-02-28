@@ -19,6 +19,11 @@ public class InicioController extends BaseController{
 		return new ModelAndView(Constantes.INICIO);
 		
 	}
+	public ModelAndView inicio(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
+		//usuarioBL.findUsuarioByLogin("ALAVA");
+		return new ModelAndView(Constantes.INICIO);
+		
+	}
 
 	
 	
