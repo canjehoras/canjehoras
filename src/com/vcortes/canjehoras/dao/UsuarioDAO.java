@@ -18,7 +18,7 @@ public class UsuarioDAO extends BaseDAO {
 	public Usuario findUsuarioByLogin(String login) throws Exception {
 		log.info("findUsuarioByLogin");		
 		Criteria q = sessionFactory.getCurrentSession().createCriteria(Usuario.class);
-		q.add(Restrictions.eq("correoElectronico", login));
+		q.add(Restrictions.eq("correo_electronico", login));
 		List result = q.list();
 		
 		return (Usuario) first(result);
