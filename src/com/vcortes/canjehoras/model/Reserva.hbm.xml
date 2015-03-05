@@ -6,7 +6,7 @@
 			<column name="ID" precision="22" scale="0" />
 			<generator class="native" />
 		</id>
-		<property name="fecha" type="timestamp">
+		<property name="fecha" type="java.util.Date">
             <column name="FECHA" length="19" not-null="true" />
         </property>
 		<property name="hora_inicio" type="string">

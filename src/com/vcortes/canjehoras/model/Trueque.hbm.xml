@@ -6,7 +6,7 @@
 			<column name="ID" precision="22" scale="0" />
 			<generator class="native" />
 		</id>
-		<property name="fecha_alta" type="timestamp">
+		<property name="fecha_alta" type="java.util.Date">
             <column name="FECHA_ALTA" length="19" not-null="true" />
         </property>
 		<property name="estado" type="string">

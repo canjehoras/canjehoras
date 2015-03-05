@@ -4,7 +4,7 @@
 	<class name="Usuario" table="USUARIO">
 		<id name="id" type="java.lang.Long">
 			<column name="ID" precision="22" scale="0" />
-			<generator class="native" />
+			 <generator class="native" />
 		</id>
 		<property name="idioma" type="string">
             <column name="IDIOMA" length="2" not-null="true" />
@@ -12,10 +12,10 @@
         <property name="perfil" type="string">
             <column name="PERFIL" length="2" not-null="true" />
         </property>
-		<property name="fecha_alta" type="timestamp">
+		<property name="fecha_alta" type="java.util.Date">
             <column name="FECHA_ALTA" length="19" not-null="true" />
         </property>
-        <property name="fecha_baja" type="timestamp">
+        <property name="fecha_baja" type="java.util.Date">
             <column name="FECHA_BAJA" length="19" />
         </property>
         <property name="correo_electronico" type="string">
@@ -47,7 +47,7 @@
         <property name="num_acceso" type="java.lang.Integer">
             <column name="NUM_ACCESO" />
         </property>
-        <property name="fecha_ultimo_acceso" type="timestamp">
+        <property name="fecha_ultimo_acceso" type="java.util.Date">
             <column name="FECHA_ULTIMO_ACCESO" length="19" />
         </property>
 		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none"/>

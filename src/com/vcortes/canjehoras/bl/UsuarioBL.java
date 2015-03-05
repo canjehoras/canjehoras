@@ -12,6 +12,10 @@ public class UsuarioBL {
 		return usuarioDAO.findUsuarioByLogin(login);
 	}
 	
+	public Object saveOrUpdate(Object instance) throws Exception{
+		return usuarioDAO.saveOrUpdate(instance);
+	}
+	
 	
 	public UsuarioDAO getUsuarioDAO() {
 		return usuarioDAO;

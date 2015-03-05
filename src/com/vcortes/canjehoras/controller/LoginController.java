@@ -1,5 +1,7 @@
 package com.vcortes.canjehoras.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,7 +28,7 @@ public class LoginController extends BaseController{
 	 * @param form
 	 * @return
 	 */
-	public ModelAndView login (HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView login(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView model = new ModelAndView(); 
 		try {
 			
@@ -66,9 +68,54 @@ public class LoginController extends BaseController{
 	 * @param form
 	 * @return
 	 */
-	public ModelAndView registro(HttpServletRequest arg0, HttpServletResponse arg1){
+	public ModelAndView registro(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio registro");
 		return new ModelAndView(Pantallas.LOGIN);
+	}
+	
+	
+	/**
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 * @param form
+	 * @return
+	 */
+	public ModelAndView envioRegistro(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Inicio registro");
+		
+		try {
+		
+			String correo_electronico = (String) request.getParameter("correo_electronico");
+			String pass = (String) request.getParameter("pass");
+			String nombre = (String) request.getParameter("nombre");
+			String apellido1 = (String) request.getParameter("apellido1");
+			String apellido2 = (String) request.getParameter("apellido2");
+			String movil = (String) request.getParameter("movil");
+			String telefono = (String) request.getParameter("telefono");
+			String wassap = (String) request.getParameter("wassap");
+			
+			Usuario usuario = new Usuario();
+			
+			usuario.setCorreo_electronico(correo_electronico);
+			usuario.setPass(pass);
+			usuario.setNombre(nombre);
+			usuario.setApellido1(apellido1);
+			usuario.setApellido2(apellido2);
+			usuario.setMovil(movil);
+			usuario.setTelefono(telefono);
+			usuario.setWassap(new Boolean(wassap));
+			usuario.setFecha_alta(new Date());
+			usuario.setFecha_ultimo_acceso(new Date());
+			usuario.setIdioma("es");
+			usuario.setPerfil("A");
+		
+			usuarioBL.saveOrUpdate(usuario);
+		} catch (Exception e) {
+			logger.error("Error registrando usuario", e);
+		}
+		
+		return new ModelAndView(Pantallas.INICIO);
 	}
 	
 	/**
