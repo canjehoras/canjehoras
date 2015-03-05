@@ -6,14 +6,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Usuario;
+import com.vcortes.canjehoras.utils.Constantes;
 import com.vcortes.canjehoras.utils.Pantallas;
 
 
-public class LoginController extends MultiActionController{
+public class LoginController extends BaseController{
 	
 	public static final Log log = LogFactory.getLog(LoginController.class);
 	private UsuarioBL usuarioBL;
@@ -26,17 +26,22 @@ public class LoginController extends MultiActionController{
 	 * @param form
 	 * @return
 	 */
-	public ModelAndView login (HttpServletRequest arg0, HttpServletResponse arg1){
+	public ModelAndView login (HttpServletRequest request, HttpServletResponse response){
 		ModelAndView model = new ModelAndView(); 
 		try {
-			/*Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(form.getCorreoElectronico());
-			if(usuario != null && comprobarPass(usuario, form.getPass())){
+			
+			String email = request.getParameter("correoElectronico");
+			String pass = request.getParameter("pass");
+			Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(email);
+			if(usuario != null && comprobarPass(usuario, pass)){
+				//ponemos usuario en sesión
+				request.getSession().setAttribute(Constantes.USUARIO, usuario);
 				model = new ModelAndView(Pantallas.INICIO); 
-			}*/
+			}
 		} catch (Exception e) {
 			log.error("Error obteniendo usuario",e);
 		}
-		model = new ModelAndView(Pantallas.LOGIN); 
+		model = new ModelAndView(Pantallas.INICIO); 
 		return model;
 	}
 	
@@ -63,17 +68,21 @@ public class LoginController extends MultiActionController{
 	 */
 	public ModelAndView registro(HttpServletRequest arg0, HttpServletResponse arg1){
 		log.debug("Inicio registro");
-		
-		arg0.getParameter("pass");
-		
-		
-		
-		
-		
-		
-		return null;
+		return new ModelAndView(Pantallas.LOGIN);
 	}
 	
+	/**
+	 * Cierre de sesión
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView model = new ModelAndView(); 
+		request.getSession().setAttribute(Constantes.USUARIO, null);
+		model = new ModelAndView(Pantallas.INICIO); 
+		return model;
+	}
 	
 	
 	public UsuarioBL getUsuarioBL() {

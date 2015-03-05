@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Usuario;
 
 
@@ -18,8 +17,8 @@ public class UsuarioDAO extends BaseDAO {
 	
 	public Usuario findUsuarioByLogin(String login) throws Exception {
 		log.info("findUsuarioByLogin");		
-		Criteria q = sessionFactory.getCurrentSession().createCriteria(Provincia.class);
-		q.add(Restrictions.eq("codigo", login));
+		Criteria q = sessionFactory.getCurrentSession().createCriteria(Usuario.class);
+		q.add(Restrictions.eq("correoElectronico", login));
 		List result = q.list();
 		
 		return (Usuario) first(result);

@@ -1,4 +1,5 @@
 <!doctype html>
+<%@ include file="comunes/include-taglib.jspf" %>
 <html>
 <head>
 <meta charset="utf-8">
@@ -7,8 +8,18 @@
 <link rel="icon" href="../favicon.png" type="image/png">
 <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="../css/style.css" rel="stylesheet" type="text/css"> 
-<link href="../css/font-awesome.min.css" rel="stylesheet" type="text/css"> 
+<link href="../css/login/font-awesome.min.css" rel="stylesheet" type="text/css"> 
 <link href="../css/animate.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../js/jquery-scrolltofixed.js"></script>
+<script type="text/javascript" src="../js/jquery.nav.js"></script> 
+<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../js/jquery.isotope.js"></script>
+<script type="text/javascript" src="../js/wow.js"></script> 
+<script type="text/javascript" src="../js/custom.js"></script>
+<script type="text/javascript" src="../js/canjehoras.js"></script>
  
 <!--[if lt IE 9]>
     <script src="../js/respond-1.1.0.min.js"></script>
@@ -30,19 +41,53 @@
         </div>
 	    <div id="main-nav" class="collapse navbar-collapse navStyle">
 			<ul class="nav navbar-nav" id="mainNav">
+				<c:if test="${sessionScope.usuario == null}">
+			  		<li><a href="#" class="scroll-link" id="toggle-login">Log in</a></li>
+				</c:if>
+				<c:if test="${sessionScope.usuario != null}">
+			  		<li><a href="#" class="scroll-link" id="toggle-login">Bienvenido ${sessionScope.usuario.nombre}</a></li>
+				</c:if>
+			  
+			 <!--  <li><span href="#" class="button" id="toggle-login">Log in</span></li> -->
+			  
 			  <li class="active"><a href="#hero_section" class="scroll-link">Home</a></li>
 			  <li><a href="#aboutUs" class="scroll-link">About Us</a></li>
 			  <li><a href="#service" class="scroll-link">Services</a></li>
 			  <li><a href="#Portfolio" class="scroll-link">Portfolio</a></li>
 			  <li><a href="#clients" class="scroll-link">Clients</a></li>
 			  <li><a href="#team" class="scroll-link">Team</a></li>
-			  <li><a href="#contact" class="scroll-link">Contact</a></li>
+			  <li><a href="#contact" class="scroll-link">Identificate</a></li>
 			</ul>
       </div>
 	 </nav>
     </div>
   </div>
+<script>
+$('#toggle-login').click(function(){
+  $('#login').toggle();
+});
+</script>
+<div id="login" style="display: none; position: absolute; z-index: 100;">
+  <div id="triangle"></div>
+  <h1>Log in</h1>
+  	<c:if test="${sessionScope.usuario == null}">
+	 	<form action="/canjehoras/login/login.html" method="post">
+		    <input type="email" name="correoElectronico" id="correoElectronico" placeholder="Email" />
+		    <input type="password" name="pass" id="pass" placeholder="Password" />
+			<input type="submit" value="Log in" />
+			<input type="button" value="Registrate" onclick="registro();"/>
+		</form>
+	</c:if>
+	<c:if test="${sessionScope.usuario != null}">
+		<form action="/canjehoras/login/logout.html" method="post">
+			<input type="submit" value="Log out" />
+		</form>
+	</c:if>
+  
+</div>
 </header>
+
+
 <!--Header_section--> 
 
 <!--Hero_Section-->
@@ -434,15 +479,6 @@
     <div class="footer_bottom"><span>Copyright � 2014,    Template by <a href="http://webthemez.com">WebThemez.com</a>. </span> </div>
   </div>
 </footer>
-
-<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="../js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../js/jquery-scrolltofixed.js"></script>
-<script type="text/javascript" src="../js/jquery.nav.js"></script> 
-<script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
-<script type="text/javascript" src="../js/jquery.isotope.js"></script>
-<script type="text/javascript" src="../js/wow.js"></script> 
-<script type="text/javascript" src="../js/custom.js"></script>
 
 </body>
 </html>
