@@ -1,29 +1,21 @@
 <?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 31-ene-2015 17:30:18 by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping>
-    <class name="com.vcortes.canjehoras.model.Trueque" table="trueque" catalog="canjehoras">
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="usuario" class="com.vcortes.canjehoras.model.Usuario" fetch="select">
-            <column name="ID_USUARIO" not-null="true" />
-        </many-to-one>
-        <many-to-one name="categoria" class="com.vcortes.canjehoras.model.Categoria" fetch="select">
-            <column name="ID_CATEGORIA" not-null="true" />
-        </many-to-one>
-        <many-to-one name="estado" class="com.vcortes.canjehoras.model.Estado" fetch="select">
-            <column name="ID_ESTADO" not-null="true" />
-        </many-to-one>
-        <property name="fechaAlta" type="timestamp">
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.vcortes.canjehoras.model">
+	<class name="Trueque" table="TRUEQUE">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="22" scale="0" />
+			<generator class="native" />
+		</id>
+		<property name="fecha_alta" type="timestamp">
             <column name="FECHA_ALTA" length="19" not-null="true" />
+        </property>
+		<property name="estado" type="string">
+            <column name="ESTADO" length="20" not-null="true" />
         </property>
         <property name="titulo" type="string">
             <column name="TITULO" length="50" not-null="true" />
         </property>
-        <property name="descripcion" type="string">
+		<property name="descripcion" type="string">
             <column name="DESCRIPCION" length="500" not-null="true" />
         </property>
         <property name="tipo" type="string">
@@ -31,12 +23,8 @@
         </property>
         <property name="imagen" type="binary">
             <column name="IMAGEN" />
-        </property>
-        <set name="agendas" table="agenda" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ID_TRUEQUE" not-null="true" />
-            </key>
-            <one-to-many class="com.vcortes.canjehoras.model.Agenda" />
-        </set>
-    </class>
+        </property>       
+		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="all"/>
+		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="all"/>               
+	</class>
 </hibernate-mapping>

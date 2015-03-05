@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
 <hibernate-mapping package="com.vcortes.canjehoras.model">
-	<class name="Provincia" table="PROVINCIA">
+	<class name="Preferencia" table="PREFERENCIA">
 		<id name="id" type="java.lang.Long">
 			<column name="ID" precision="22" scale="0" />
 			<generator class="native" />
 		</id>
-		<property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="50" not-null="true" />
-        </property>
+		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="all"/>
+		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="all"/>
+		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="all"/>
 	</class>
 </hibernate-mapping>
