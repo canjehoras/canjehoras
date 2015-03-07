@@ -14,6 +14,7 @@
 		<ul class="nav navbar-nav" id="mainNav">
 			<c:if test="${sessionScope.usuario == null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login"/></a></li>
+		  		<li><a href="#" class="scroll-link" id="toggle-registro"><fmt:message key="registrar"/></a></li>
 			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login.ok"/> ${sessionScope.usuario.nombre}</a></li>
@@ -27,6 +28,9 @@
 	<script>
 		$('#toggle-login').click(function(){
 		  $('#login').toggle();
+		});
+		$('#toggle-registro').click(function(){
+			registro();
 		});
 	</script>
 	

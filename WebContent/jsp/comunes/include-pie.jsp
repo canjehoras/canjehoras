@@ -4,6 +4,6 @@
     
   </div>
   <div class="container">
-    <div class="footer_bottom"><span>Copyright � 2014,    Template by <a href="http://webthemez.com">WebThemez.com</a>. </span> </div>
+    <div class="footer_bottom"><span><fmt:message key="pie"/></span> </div>
   </div>
 </footer>
