@@ -32,7 +32,7 @@ public class LoginController extends BaseController{
 		ModelAndView model = new ModelAndView(); 
 		try {
 			
-			String email = request.getParameter("correoElectronico");
+			String email = request.getParameter("correo_electronico");
 			String pass = request.getParameter("pass");
 			Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(email);
 			if(usuario != null && comprobarPass(usuario, pass)){
