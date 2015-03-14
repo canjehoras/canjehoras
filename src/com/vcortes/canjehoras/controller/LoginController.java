@@ -2,6 +2,7 @@ package com.vcortes.canjehoras.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +11,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vcortes.canjehoras.bl.CategoriaBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
+import com.vcortes.canjehoras.model.Categoria;
+import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
 import com.vcortes.canjehoras.utils.Pantallas;
@@ -19,7 +23,9 @@ import com.vcortes.canjehoras.utils.Pantallas;
 public class LoginController extends BaseController{
 	
 	public static final Log log = LogFactory.getLog(LoginController.class);
+	
 	private UsuarioBL usuarioBL;
+	private CategoriaBL categoriaBL;
 
 	
 	/**
@@ -71,7 +77,18 @@ public class LoginController extends BaseController{
 	 */
 	public ModelAndView registro(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio registro");
-		return new ModelAndView(Pantallas.LOGIN);
+		ModelAndView model = new ModelAndView(Pantallas.LOGIN);
+		try{
+			List<Categoria> categorias = categoriaBL.findAll(new Categoria());
+			model.addObject("categorias", categorias);
+			
+			List<Categoria> provincias = categoriaBL.findAll(new Provincia());
+			model.addObject("provincias", provincias);
+		
+		} catch(Exception e){
+			logger.error("Error al obtener los listados de la pantalla de login",e);
+		}
+		return model;
 	}
 	
 	
@@ -143,6 +160,14 @@ public class LoginController extends BaseController{
 
 	public void setUsuarioBL(UsuarioBL usuarioBL) {
 		this.usuarioBL = usuarioBL;
+	}
+
+	public CategoriaBL getCategoriaBL() {
+		return categoriaBL;
+	}
+
+	public void setCategoriaBL(CategoriaBL categoriaBL) {
+		this.categoriaBL = categoriaBL;
 	}
 
 }

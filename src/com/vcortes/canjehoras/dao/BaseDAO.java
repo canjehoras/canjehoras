@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
+import org.hibernate.criterion.Order;
 
 public class BaseDAO {
 
@@ -46,11 +48,17 @@ public class BaseDAO {
 		return (sessionFactory.getCurrentSession().get(instance.getClass(), id));
 	}
 	
-	public List findAll(Object instance) throws Throwable{
+	public List findAll(Object instance) throws Exception{
 		logger.info("findAll - BaseDAO");
-		return null; //sessionFactory.getCurrentSession()
-	};
+		return (sessionFactory.getCurrentSession().createCriteria(instance.getClass()).list());
+	}
 			
+	public List findAll(Object instance, String orderBy) throws Exception{
+		logger.info("findAll - BaseDAO");
+		Session session = (Session) sessionFactory.getCurrentSession();
+		return (session.createCriteria(instance.getClass()).addOrder(Order.asc(orderBy)).list());
+	}
+	
 	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
