@@ -15,6 +15,9 @@ public class CategoriaBL {
 		return categoriaDAO.findAll(instance);
 	}
 
+	public List<Categoria> findAll(Object instance, String orderBy) throws Exception {
+		return categoriaDAO.findAll(instance, orderBy);
+	}
 
 	public CategoriaDAO getCategoriaDAO() {
 		return categoriaDAO;

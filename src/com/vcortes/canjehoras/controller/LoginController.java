@@ -79,10 +79,10 @@ public class LoginController extends BaseController{
 		log.debug("Inicio registro");
 		ModelAndView model = new ModelAndView(Pantallas.LOGIN);
 		try{
-			List<Categoria> categorias = categoriaBL.findAll(new Categoria());
+			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), "descripcion");
 			model.addObject("categorias", categorias);
 			
-			List<Categoria> provincias = categoriaBL.findAll(new Provincia());
+			List<Categoria> provincias = categoriaBL.findAll(new Provincia(),  "descripcion");
 			model.addObject("provincias", provincias);
 		
 		} catch(Exception e){
