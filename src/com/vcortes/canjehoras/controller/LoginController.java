@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,6 +87,7 @@ public class LoginController extends BaseController{
 		
 		try {
 		
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 			String correo_electronico = (String) request.getParameter("correo_electronico");
 			String pass = (String) request.getParameter("pass");
 			String nombre = (String) request.getParameter("nombre");
@@ -105,12 +107,15 @@ public class LoginController extends BaseController{
 			usuario.setMovil(movil);
 			usuario.setTelefono(telefono);
 			usuario.setWassap(new Boolean(wassap));
-			usuario.setFecha_alta(new Date());
-			usuario.setFecha_ultimo_acceso(new Date());
+			usuario.setFecha_alta(sdf.parse(sdf.format(new Date())));
+			usuario.setFecha_ultimo_acceso(sdf.parse(sdf.format(new Date())));
 			usuario.setIdioma("es");
 			usuario.setPerfil("A");
 		
 			usuarioBL.saveOrUpdate(usuario);
+			
+			// una vez registrado el usuario lo logueamos
+			login(request, response);
 		} catch (Exception e) {
 			logger.error("Error registrando usuario", e);
 		}
