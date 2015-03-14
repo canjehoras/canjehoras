@@ -7,15 +7,20 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vcortes.canjehoras.bl.CategoriaBL;
 import com.vcortes.canjehoras.utils.Pantallas;
 
 
-public class CategoriasController extends BaseController{
+public class CategoriaController extends BaseController{
 	
-	public static final Log log = LogFactory.getLog(CategoriasController.class);
-	//private UsuarioBL usuarioBL;
+	public static final Log log = LogFactory.getLog(CategoriaController.class);
+	private CategoriaBL categoriaBL;
 
-	
+	public void setCategoriaBL(CategoriaBL categoriaBL) {
+		this.categoriaBL = categoriaBL;
+	}
+
+
 	/**
 	
 	 */

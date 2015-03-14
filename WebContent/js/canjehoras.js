@@ -3,5 +3,5 @@ registro = function(){
 }
 
 categorias = function(){
-	window.location.href= "/canjehoras/categorias/inicio.html"
+	window.location.href= "/canjehoras/categoria/inicio.html"
 }

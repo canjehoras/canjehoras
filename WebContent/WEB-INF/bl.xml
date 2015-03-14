@@ -22,4 +22,16 @@
 		<property name="usuarioDAO"><ref bean="usuarioDAO"/></property>
 	</bean>
 	
+	<bean id="categoriaBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="categoriaBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="categoriaBLTarget" class="com.vcortes.canjehoras.bl.CategoriaBL">
+		<property name="categoriaDAO"><ref bean="categoriaDAO"/></property>
+	</bean>
 </beans>
