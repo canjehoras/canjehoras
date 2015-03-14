@@ -46,6 +46,10 @@ public class BaseDAO {
 		return (sessionFactory.getCurrentSession().get(instance.getClass(), id));
 	}
 	
+	public List findAll(Object instance) throws Throwable{
+		logger.info("findAll - BaseDAO");
+		return null; //sessionFactory.getCurrentSession()
+	};
 			
 	
 	public SessionFactory getSessionFactory() {

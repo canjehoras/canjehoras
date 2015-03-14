@@ -19,6 +19,9 @@
 			<c:if test="${sessionScope.usuario != null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login.ok"/> ${sessionScope.usuario.nombre}</a></li>
 			</c:if>
+			<li><a href="#" class="scroll-link" id="toggle-categorias"><fmt:message key="categorias"/></a></li>
+			<!--<li><a href="#Categorias" class="scroll-link"><fmt:message key="categorias"/></a></li>-->
+			<li><a href="#" class="scroll-link" id="toggle-acerca"><fmt:message key="acerca.de"/></a></li>
 		</ul>
       </div>
 	 </nav>
@@ -31,6 +34,9 @@
 		});
 		$('#toggle-registro').click(function(){
 			registro();
+		});
+		$('#toggle-categorias').click(function(){
+			categorias();
 		});
 	</script>
 	

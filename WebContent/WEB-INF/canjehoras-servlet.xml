@@ -56,5 +56,12 @@
 		<property name="usuarioBL" ref="usuarioBL" />
     </bean> 
 
+	<!-- Categoria -->
+	<bean name="/categoria/*.html" class="com.vcortes.canjehoras.controller.CategoriaController">
+        <property name="methodNameResolver">
+            <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
+        </property>
+		<property name="categoriaBL" ref="categoriaBL" />
+    </bean> 
 	
 </beans>
