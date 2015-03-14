@@ -13,15 +13,15 @@
 <section id="login" class="top_cont_outer">
 	<h1><fmt:message key="registrar"/></h1>
  	<form action="/canjehoras/login/envioRegistro.html" method="post">
-	    <input type="email" name="correo_electronico" id="correo_electronico" placeholder="<fmt:message key="registro.usuario"/>" />
-	    <input type="password" name="pass" id="pass" placeholder="<fmt:message key="registro.pass"/>" />
-	    <input type="password" name="pass2" id="pass2" placeholder="<fmt:message key="registro.repass"/>" />
-	    <input type="text" name="nombre" id="nombre" placeholder="<fmt:message key="registro.nombre"/>" />
-	    <input type="text" name="apellido1" id="apellido1" placeholder="<fmt:message key="registro.apellido1"/>" />
-	    <input type="text" name="apellido2" id="apellido2" placeholder="<fmt:message key="registro.apellido2"/>" />
-	    <input type="text" name="movil" id="movil" placeholder="<fmt:message key="registro.movil"/>" />
-	    <input type="text" name="telefono" id="telefono" placeholder="<fmt:message key="registro.telefono"/>" />
-	    <input type="text" name="wassap" id="wassap" placeholder="<fmt:message key="registro.wassap"/>" />
+	    <input type="email" name="correo_electronico" id="correo_electronico" placeholder="<fmt:message key="registro.usuario"/>" required/>
+	    <input type="password" name="pass" id="pass" placeholder="<fmt:message key="registro.pass"/>" required/>
+	    <input type="password" name="pass2" id="pass2" placeholder="<fmt:message key="registro.repass"/>" required/>
+	    <input type="text" title="Introduzca el nombre" name="nombre" id="nombre" placeholder="<fmt:message key="registro.nombre"/>" required/>
+	    <input type="text" title="Introduzca el primer apellido" name="apellido1" id="apellido1" placeholder="<fmt:message key="registro.apellido1"/>" required/>
+	    <input type="text" title="Introduzca el segundo apellido" name="apellido2" id="apellido2" placeholder="<fmt:message key="registro.apellido2"/>" required/>
+	    <input type="tel" name="movil" title="Introduzca un movil válido"  id="movil" placeholder="<fmt:message key="registro.movil"/>" pattern="[0-9]{9}" required/>
+	    <input type="tel" name="telefono" title="Introduzca un teléfono válido"  id="telefono" placeholder="<fmt:message key="registro.telefono"/>" pattern="[0-9]{9}" required/>
+	    <fmt:message key="registro.wassap"/> <input type="checkbox" name="wassap" id="wassap" placeholder="<fmt:message key="registro.wassap"/>" />
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 	</form>
 </section>
