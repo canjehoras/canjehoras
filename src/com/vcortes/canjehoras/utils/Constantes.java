@@ -7,4 +7,5 @@ public class Constantes {
 	
 	public static final String LOGIN  = "login";
 	public static final String INICIO  = "inicio";
+	public static final String PUBLICAR  = "publicar";
 }

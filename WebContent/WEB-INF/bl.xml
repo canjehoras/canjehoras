@@ -34,4 +34,18 @@
 	<bean id="categoriaBLTarget" class="com.vcortes.canjehoras.bl.CategoriaBL">
 		<property name="categoriaDAO"><ref bean="categoriaDAO"/></property>
 	</bean>
+	
+	<bean id="truequeBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="truequeBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="truequeBLTarget" class="com.vcortes.canjehoras.bl.TruequeBL">
+		<property name="truequeDAO"><ref bean="truequeDAO"/></property>
+	</bean>
+	
 </beans>

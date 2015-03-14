@@ -25,7 +25,11 @@ public class InicioController extends BaseController{
 		
 	}
 
-	
+	public ModelAndView publicar(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
+		//usuarioBL.findUsuarioByLogin("ALAVA");
+		return new ModelAndView(Constantes.PUBLICAR);
+		
+	}
 	
 	
 	public UsuarioBL getUsuarioBL() {

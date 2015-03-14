@@ -12,9 +12,11 @@
       </div>
 	  <div id="main-nav" class="collapse navbar-collapse navStyle">
 		<ul class="nav navbar-nav" id="mainNav">
+			<li><a href="#" class="scroll-link" id="toggle-inicio"><fmt:message key="inicio"/></a></li>
 			<c:if test="${sessionScope.usuario == null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login"/></a></li>
 		  		<li><a href="#" class="scroll-link" id="toggle-registro"><fmt:message key="registrar"/></a></li>
+		  		<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
 			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login.ok"/> ${sessionScope.usuario.nombre}</a></li>
@@ -29,6 +31,9 @@
   </div>
   
 	<script>
+		$('#toggle-inicio').click(function(){
+		  inicio();
+		});
 		$('#toggle-login').click(function(){
 		  $('#login').toggle();
 		});
@@ -37,6 +42,9 @@
 		});
 		$('#toggle-categorias').click(function(){
 			categorias();
+		});
+		$('#toggle-publicar').click(function(){
+			publicar();
 		});
 	</script>
 	
