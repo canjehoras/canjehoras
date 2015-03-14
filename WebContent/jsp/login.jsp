@@ -22,6 +22,23 @@
 	    <input type="tel" name="movil" title="Introduzca un movil válido"  id="movil" placeholder="<fmt:message key="registro.movil"/>" pattern="[0-9]{9}" required/>
 	    <input type="tel" name="telefono" title="Introduzca un teléfono válido"  id="telefono" placeholder="<fmt:message key="registro.telefono"/>" pattern="[0-9]{9}" required/>
 	    <fmt:message key="registro.wassap"/> <input type="checkbox" name="wassap" id="wassap" placeholder="<fmt:message key="registro.wassap"/>" />
+	    	<c:forEach var="categoria" items="${categorias}">
+	    		${categoria.id} - ${categoria.descripcion} 
+	    	</c:forEach>
+	    <div class="tituloSelect">Categorías</div>
+	    <select multiple >
+		  	<option value="volvo">Volvo</option>
+		  	<option value="saab">Saab</option>
+		  	<option value="opel">Opel</option>
+		  	<option value="audi">Audi</option>
+		</select> 
+		<div class="tituloSelect">Provincias</div>
+	 	<select multiple>
+		  	<option value="volvo">Volvo</option>
+		  	<option value="saab">Saab</option>
+		  	<option value="opel">Opel</option>
+		  	<option value="audi">Audi</option>
+		</select> 
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 	</form>
 </section>

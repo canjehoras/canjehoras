@@ -1775,8 +1775,28 @@ form{
   padding:6% 4%;
 }
 
-input[type="email"],input[type="password"],input[type="text"],input[type="tel"]{
+input[type="email"],input[type="password"],input[type="text"],input[type="tel"] {
   width:92%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:95%;
+  color:#555;
+}
+select {
+  width:92%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:1%;
+  font-family:'Open Sans',sans-serif;
+  font-size:95%;
+  color:#555;
+}
+input[type="checkbox"]{
+  width:80%;
   background:#fff;
   margin-bottom:4%;
   border:1px solid #ccc;
