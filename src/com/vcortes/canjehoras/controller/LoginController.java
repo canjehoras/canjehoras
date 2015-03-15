@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vcortes.canjehoras.bl.CategoriaBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Categoria;
+import com.vcortes.canjehoras.model.Preferencia;
 import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
@@ -114,6 +115,7 @@ public class LoginController extends BaseController{
 			String telefono = (String) request.getParameter("telefono");
 			String wassap = (String) request.getParameter("wassap");
 			
+			
 			Usuario usuario = new Usuario();
 			
 			usuario.setCorreo_electronico(correo_electronico);
@@ -129,7 +131,23 @@ public class LoginController extends BaseController{
 			usuario.setIdioma("es");
 			usuario.setPerfil("A");
 		
-			usuarioBL.saveOrUpdate(usuario);
+			usuario = (Usuario) usuarioBL.saveOrUpdate(usuario);
+			
+			String categoria[]= request.getParameterValues("categoria");
+			String provincia[]= request.getParameterValues("provincia");
+			
+			for (int i = 0; i < provincia.length; i++) {
+				Provincia p = (Provincia) categoriaBL.findById(new Provincia(), provincia[i]);
+				for (int j = 0; j < categoria.length; j++) {					
+					Preferencia preferencia = new Preferencia();
+					preferencia.setUsuario(usuario);
+					preferencia.setCategoria((Categoria) categoriaBL.findById(new Categoria(), categoria[j]));
+					preferencia.setProvincia(p);
+					
+					usuarioBL.saveOrUpdate(preferencia);
+				}
+			}
+
 			
 			// una vez registrado el usuario lo logueamos
 			login(request, response);

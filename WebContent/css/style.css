@@ -1834,3 +1834,22 @@ input[type="button"]{
 input[type="submit"]:hover{
   background:#2288bb;
 }
+
+.tituloSelect{
+	width:92%;
+	padding:1%;
+	font-family:'Open Sans',sans-serif;
+	font-size:95%;
+	color:#555;
+}
+
+#selectorOpciones input[type="checkbox"]{
+	background:#fff;
+	border:1px solid #ccc;
+	font-family:'Open Sans',sans-serif;
+	font-size:95%;
+	color:#555;
+	width:5%;
+	padding:0%;
+	margin-bottom:0%;
+}

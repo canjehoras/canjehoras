@@ -22,23 +22,24 @@
 	    <input type="tel" name="movil" title="Introduzca un movil válido"  id="movil" placeholder="<fmt:message key="registro.movil"/>" pattern="[0-9]{9}" required/>
 	    <input type="tel" name="telefono" title="Introduzca un teléfono válido"  id="telefono" placeholder="<fmt:message key="registro.telefono"/>" pattern="[0-9]{9}" required/>
 	    <fmt:message key="registro.wassap"/> <input type="checkbox" name="wassap" id="wassap" placeholder="<fmt:message key="registro.wassap"/>" />
-	    	<c:forEach var="categoria" items="${categorias}">
-	    		${categoria.id} - ${categoria.descripcion} 
-	    	</c:forEach>
+	    	
 	    <div class="tituloSelect">Categorías</div>
-	    <select multiple >
-		  	<option value="volvo">Volvo</option>
-		  	<option value="saab">Saab</option>
-		  	<option value="opel">Opel</option>
-		  	<option value="audi">Audi</option>
-		</select> 
+	    <div id="selectorOpciones" class="tituloSelect" style="max-height: 100px; border: 1px solid #000; background: #fff; overflow: auto;">
+	    	<c:forEach var="categoria" items="${categorias}">
+	    		<div style="width: 100%"><input type="checkbox" name="categoria" value="${categoria.id}" /> ${categoria.descripcion}</div>
+	    	</c:forEach>
+	    </div>
 		<div class="tituloSelect">Provincias</div>
-	 	<select multiple>
-		  	<option value="volvo">Volvo</option>
-		  	<option value="saab">Saab</option>
-		  	<option value="opel">Opel</option>
-		  	<option value="audi">Audi</option>
+	 	<select multiple multiple name="provincias" id="provincias" size="10">
+		  	<<c:forEach var="provincia" items="${provincias}">
+	    		<option value="${provincia.id}">${provincia.descripcion}</option>
+	    	</c:forEach>
 		</select> 
+		<div id="selectorOpciones" class="tituloSelect" style="max-height: 100px; border: 1px solid #000; background: #fff; overflow: auto;">
+	    	<c:forEach var="provincia" items="${provincias}">
+	    		<div style="width: 100%"><input type="checkbox" name="provincia" value="${provincia.id}" /> ${provincia.descripcion}</div>
+	    	</c:forEach>
+	    </div>
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 	</form>
 </section>

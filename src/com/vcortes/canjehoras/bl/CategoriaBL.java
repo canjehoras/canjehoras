@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.bl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.vcortes.canjehoras.dao.CategoriaDAO;
@@ -17,6 +18,10 @@ public class CategoriaBL {
 
 	public List<Categoria> findAll(Object instance, String orderBy) throws Exception {
 		return categoriaDAO.findAll(instance, orderBy);
+	}
+	
+	public Object findById(Object instance, Serializable id) throws Exception {
+		return categoriaDAO.findById(instance, id);
 	}
 
 	public CategoriaDAO getCategoriaDAO() {
