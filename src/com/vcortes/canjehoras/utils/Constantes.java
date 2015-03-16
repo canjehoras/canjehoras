@@ -6,6 +6,7 @@ public class Constantes {
 	public final static String FORMATO_FECHA = "dd/MM/yyy";
 	public final static String USUARIO = "usuario";
 	public final static String CATEGORIA = "categoria";
+	public final static String CATEGORIAS = "categorias";
 	public final static String TIPO = "tipo";
 	public final static String DESCRIPCION = "descripcion";
 	public final static String TITULO = "titulo";

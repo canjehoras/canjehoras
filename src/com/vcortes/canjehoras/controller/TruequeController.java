@@ -46,7 +46,7 @@ public class TruequeController extends BaseController{
 		ModelAndView model = new ModelAndView(); 
 		try{
 			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
-			model.addObject("categorias", Constantes.CATEGORIA);
+			model.addObject("categorias", Constantes.CATEGORIAS);
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
 		}
@@ -88,8 +88,7 @@ public class TruequeController extends BaseController{
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque");	
 		try{
-			List<Trueque> listado = null;
-			listado = truequeBL.find
+			List<Trueque> listado = truequeBL.findAll(Trueque.class);
 			
 		} catch (Exception e) {
 			logger.error("Error registrando trueque", e);
