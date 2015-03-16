@@ -24,18 +24,14 @@
 	    <fmt:message key="registro.wassap"/> <input type="checkbox" name="wassap" id="wassap" placeholder="<fmt:message key="registro.wassap"/>" />
 	    	
 	    <div class="tituloSelect">Categorías</div>
-	    <div id="selectorOpciones" class="tituloSelect" style="max-height: 100px; border: 1px solid #000; background: #fff; overflow: auto;">
+	    <div id="selectorOpciones" class="tituloSelect" style="max-height: 200px; border: 1px solid #000; background: #fff; overflow: auto;">
 	    	<c:forEach var="categoria" items="${categorias}">
 	    		<div style="width: 100%"><input type="checkbox" name="categoria" value="${categoria.id}" /> ${categoria.descripcion}</div>
 	    	</c:forEach>
 	    </div>
+
 		<div class="tituloSelect">Provincias</div>
-	 	<select multiple multiple name="provincias" id="provincias" size="10">
-		  	<<c:forEach var="provincia" items="${provincias}">
-	    		<option value="${provincia.id}">${provincia.descripcion}</option>
-	    	</c:forEach>
-		</select> 
-		<div id="selectorOpciones" class="tituloSelect" style="max-height: 100px; border: 1px solid #000; background: #fff; overflow: auto;">
+		<div id="selectorOpciones" class="tituloSelect" style="max-height: 200px; border: 1px solid #000; background: #fff; overflow: auto; margin-bottom: 5%;">
 	    	<c:forEach var="provincia" items="${provincias}">
 	    		<div style="width: 100%"><input type="checkbox" name="provincia" value="${provincia.id}" /> ${provincia.descripcion}</div>
 	    	</c:forEach>

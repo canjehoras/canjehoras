@@ -136,11 +136,11 @@ public class LoginController extends BaseController{
 			String provincia[]= request.getParameterValues("provincia");
 			
 			for (int i = 0; i < provincia.length; i++) {
-				Provincia p = (Provincia) categoriaBL.findById(new Provincia(), provincia[i]);
+				Provincia p = (Provincia) categoriaBL.findById(new Provincia(), new Long(provincia[i]));
 				for (int j = 0; j < categoria.length; j++) {					
 					Preferencia preferencia = new Preferencia();
 					preferencia.setUsuario(usuario);
-					preferencia.setCategoria((Categoria) categoriaBL.findById(new Categoria(), categoria[j]));
+					preferencia.setCategoria((Categoria) categoriaBL.findById(new Categoria(), new Long(categoria[j])));
 					preferencia.setProvincia(p);
 					
 					usuarioBL.saveOrUpdate(preferencia);
