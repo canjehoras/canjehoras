@@ -11,5 +11,5 @@ categorias = function(){
 }
 
 publicar = function(){
-	window.location.href= "/canjehoras/inicio/publicar.html"
+	window.location.href= "/canjehoras/trueque/nuevo.html"
 }

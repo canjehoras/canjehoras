@@ -18,7 +18,6 @@ import com.vcortes.canjehoras.model.Preferencia;
 import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
-import com.vcortes.canjehoras.utils.Pantallas;
 
 
 public class LoginController extends BaseController{
@@ -46,12 +45,12 @@ public class LoginController extends BaseController{
 			if(usuario != null && comprobarPass(usuario, pass)){
 				//ponemos usuario en sesión
 				request.getSession().setAttribute(Constantes.USUARIO, usuario);
-				model = new ModelAndView(Pantallas.INICIO); 
+				model = new ModelAndView(Constantes.INICIO); 
 			}
 		} catch (Exception e) {
 			log.error("Error obteniendo usuario",e);
 		}
-		model = new ModelAndView(Pantallas.INICIO); 
+		model = new ModelAndView(Constantes.INICIO); 
 		return model;
 	}
 	
@@ -78,7 +77,7 @@ public class LoginController extends BaseController{
 	 */
 	public ModelAndView registro(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio registro");
-		ModelAndView model = new ModelAndView(Pantallas.LOGIN);
+		ModelAndView model = new ModelAndView(Constantes.LOGIN);
 		try{
 			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), "descripcion");
 			model.addObject("categorias", categorias);
@@ -155,7 +154,7 @@ public class LoginController extends BaseController{
 			logger.error("Error registrando usuario", e);
 		}
 		
-		return new ModelAndView(Pantallas.INICIO);
+		return new ModelAndView(Constantes.INICIO);
 	}
 	
 	/**
@@ -167,7 +166,7 @@ public class LoginController extends BaseController{
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView model = new ModelAndView(); 
 		request.getSession().setAttribute(Constantes.USUARIO, null);
-		model = new ModelAndView(Pantallas.INICIO); 
+		model = new ModelAndView(Constantes.INICIO); 
 		return model;
 	}
 	

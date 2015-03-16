@@ -19,13 +19,9 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 			</props>
 	    </property>
-	    
-	   
 	</bean>
 
 	<bean id="sessionFactory" parent="abstractSessionFactory">
 	    <property name="dataSource" ref="dataSource"/>
 	</bean>
-	
-
 </beans>

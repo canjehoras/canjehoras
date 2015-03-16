@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vcortes.canjehoras.bl.CategoriaBL;
-import com.vcortes.canjehoras.utils.Pantallas;
+import com.vcortes.canjehoras.utils.Constantes;
 
 
 public class CategoriaController extends BaseController{
@@ -39,7 +39,7 @@ public class CategoriaController extends BaseController{
 //		} catch (Exception e) {
 //			log.error("Error obteniendo usuario",e);
 //		}
-		model = new ModelAndView(Pantallas.INICIO); 
+		model = new ModelAndView(Constantes.INICIO); 
 		return model;
 	}
 	
