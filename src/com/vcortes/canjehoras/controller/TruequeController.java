@@ -43,14 +43,13 @@ public class TruequeController extends BaseController{
 	
 	 */
 	public ModelAndView nuevo(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView model = new ModelAndView(); 
+		ModelAndView model = new ModelAndView(Constantes.NUEVO_TRUEQUE); 
 		try{
 			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
-			model.addObject("categorias", Constantes.CATEGORIAS);
+			model.addObject( Constantes.CATEGORIAS, categorias);
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
 		}
-		model = new ModelAndView(Constantes.NUEVO_TRUEQUE); 
 		return model;
 	}
 	
