@@ -39,7 +39,7 @@ public class CategoriaController extends BaseController{
 //		} catch (Exception e) {
 //			log.error("Error obteniendo usuario",e);
 //		}
-		model = new ModelAndView(Constantes.INICIO); 
+		model = new ModelAndView(Constantes.LISTA_CATEGORIA); 
 		return model;
 	}
 	

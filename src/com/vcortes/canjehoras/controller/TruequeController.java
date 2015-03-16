@@ -86,12 +86,15 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque");	
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
-			List<Trueque> listado = truequeBL.findAll(Trueque.class);
+			List<Trueque> listado = truequeBL.findAll(new Trueque());
+			model.addObject( Constantes.TRUEQUES, listado);
+			
 			
 		} catch (Exception e) {
 			logger.error("Error registrando trueque", e);
 		}
-		return new ModelAndView(Constantes.LISTA_TRUEQUE);
+		return model;
 	}
 }

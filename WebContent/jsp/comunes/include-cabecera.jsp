@@ -17,12 +17,13 @@
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login"/></a></li>
 		  		<li><a href="#" class="scroll-link" id="toggle-registro"><fmt:message key="registrar"/></a></li>
 		  		<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
+		  		<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
+		  		<li><a href="#" class="scroll-link" id="toggle-trueques"><fmt:message key="trueques"/></a></li>
 			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login.ok"/> ${sessionScope.usuario.nombre}</a></li>
 			</c:if>
 			<li><a href="#" class="scroll-link" id="toggle-categorias"><fmt:message key="categorias"/></a></li>
-			<!--<li><a href="#Categorias" class="scroll-link"><fmt:message key="categorias"/></a></li>-->
 			<li><a href="#" class="scroll-link" id="toggle-acerca"><fmt:message key="acerca.de"/></a></li>
 		</ul>
       </div>
@@ -45,6 +46,9 @@
 		});
 		$('#toggle-publicar').click(function(){
 			publicar();
+		});
+		$('#toggle-trueques').click(function(){
+			trueques();
 		});
 	</script>
 	

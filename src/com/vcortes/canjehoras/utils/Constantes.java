@@ -11,7 +11,7 @@ public class Constantes {
 	public final static String DESCRIPCION = "descripcion";
 	public final static String TITULO = "titulo";
 	public final static String IMAGEN = "imagen";
-	
+	public final static String TRUEQUES = "trueques";
 	
 	// Nombre de los .jsp
 	public static final String LOGIN  = "login";
@@ -19,6 +19,7 @@ public class Constantes {
 	public static final String PUBLICAR  = "publicar";
 	public static final String NUEVO_TRUEQUE  = "nuevoTrueque";
 	public static final String LISTA_TRUEQUE  = "listadoTrueque";
+	public static final String LISTA_CATEGORIA = "categorias";
 	
 	// Estados de los trueques
 	public static final String TRUEQUE_ESTADO_NUEVO  = "nuevo";

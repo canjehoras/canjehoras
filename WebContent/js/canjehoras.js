@@ -13,3 +13,7 @@ categorias = function(){
 publicar = function(){
 	window.location.href= "/canjehoras/trueque/nuevo.html"
 }
+
+trueques = function(){
+	window.location.href= "/canjehoras/trueque/listado.html"
+}
