@@ -1,5 +1,7 @@
 package com.vcortes.canjehoras.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vcortes.canjehoras.bl.CategoriaBL;
+import com.vcortes.canjehoras.model.Categoria;
 import com.vcortes.canjehoras.utils.Constantes;
 
 
@@ -25,21 +28,13 @@ public class CategoriaController extends BaseController{
 	
 	 */
 	public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView model = new ModelAndView(); 
-//		try {
-//			
-//			String email = request.getParameter("correo_electronico");
-//			String pass = request.getParameter("pass");
-//			Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(email);
-//			if(usuario != null && comprobarPass(usuario, pass)){
-//				//ponemos usuario en sesión
-//				request.getSession().setAttribute(Constantes.USUARIO, usuario);
-//				model = new ModelAndView(Pantallas.INICIO); 
-//			}
-//		} catch (Exception e) {
-//			log.error("Error obteniendo usuario",e);
-//		}
-		model = new ModelAndView(Constantes.LISTA_CATEGORIA); 
+		ModelAndView model = new ModelAndView(Constantes.LISTA_CATEGORIA); 
+		try{
+			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			model.addObject( Constantes.CATEGORIAS, categorias);
+		} catch(Exception e){
+			logger.error("Error al obtener el listado de las categorias",e);
+		}
 		return model;
 	}
 	
