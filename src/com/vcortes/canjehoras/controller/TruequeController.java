@@ -97,4 +97,36 @@ public class TruequeController extends BaseController{
 		}
 		return model;
 	}
+	
+	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Editar trueque");
+		
+		try {
+			String id = request.getParameter("id");
+			
+//			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+//			String titulo = (String) request.getParameter(Constantes.TITULO);
+//			String descripcion = (String) request.getParameter(Constantes.DESCRIPCION);
+//			String tipo = (String) request.getParameter(Constantes.TIPO);
+//			String categoria = (String) request.getParameter(Constantes.CATEGORIA);
+//			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+//			//Blob imagen = (Blob) request.getParameter(Constantes.IMAGEN);
+//			
+//			Trueque trueque = new Trueque();
+//			trueque.setTitulo(titulo);
+//			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
+//			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
+//			trueque.setDescripcion(descripcion);
+//			trueque.setTipo(tipo);
+//			trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), categoria));
+//			//trueque.setImagen(imagen);
+//			trueque.setUsuario(usuario);
+//			
+//			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+		} catch (Exception e) {
+			logger.error("Error editando trueque", e);
+		}
+		return new ModelAndView(Constantes.EDITAR_TRUEQUE);
+	}
 }

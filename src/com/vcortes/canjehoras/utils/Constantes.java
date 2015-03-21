@@ -19,6 +19,7 @@ public class Constantes {
 	public static final String PUBLICAR  = "publicar";
 	public static final String NUEVO_TRUEQUE  = "nuevoTrueque";
 	public static final String LISTA_TRUEQUE  = "listadoTrueque";
+	public static final String EDITAR_TRUEQUE  = "edicionTrueque";
 	public static final String LISTA_CATEGORIA = "categorias";
 	
 	// Estados de los trueques
