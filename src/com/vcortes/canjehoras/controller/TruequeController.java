@@ -1,12 +1,19 @@
 package com.vcortes.canjehoras.controller;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialBlob;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -58,21 +65,60 @@ public class TruequeController extends BaseController{
 		
 		try {
 			
+			request.setCharacterEncoding("UTF-8");
+			
 			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 			String titulo = (String) request.getParameter(Constantes.TITULO);
 			String descripcion = (String) request.getParameter(Constantes.DESCRIPCION);
 			String tipo = (String) request.getParameter(Constantes.TIPO);
 			String categoria = (String) request.getParameter(Constantes.CATEGORIA);
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
-			//Blob imagen = (Blob) request.getParameter(Constantes.IMAGEN);
 			
+			
+			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			Trueque trueque = new Trueque();
-			trueque.setTitulo(titulo);
+		    for (FileItem item : items) {
+		    	if (item.isFormField()) {
+		    		String fieldName = item.getFieldName();
+		            String fieldValue = item.getString();
+		            
+		            if(Constantes.TITULO.equals(fieldName)){
+		            	trueque.setTitulo(fieldValue);
+		            } else if(Constantes.DESCRIPCION.equals(fieldName)){
+		            	trueque.setDescripcion(fieldValue);
+		            } else if(Constantes.TIPO.equals(fieldName)){
+		            	trueque.setTipo(fieldValue);
+		            } else if(Constantes.CATEGORIA.equals(fieldName)){
+		            	trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), Long.valueOf(fieldValue)));
+		            }
+		                
+		    	} else {
+		    		String fieldName = item.getFieldName();
+		            String fileName = item.getName();
+		            InputStream fileContent = item.getInputStream();
+		            
+		            //IOUtils.toByteArray(item.getInputStream())		            
+		            //byte[] bytes = IOUtils.toByteArray(fileContent);
+		            
+		            ByteArrayOutputStream output = new ByteArrayOutputStream();
+		            byte[] bytes = new byte[1024];
+		            int count;
+		            while ((count = fileContent.read(bytes)) != -1)
+		                output.write(bytes, 0, count);
+		            output.toByteArray();
+		            
+		            Blob myBlob = new SerialBlob(bytes);
+		            trueque.setImagen(myBlob);
+		            
+		            
+		           
+		                
+		                
+		    	}
+		    }
+			
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
-			trueque.setDescripcion(descripcion);
-			trueque.setTipo(tipo);
-			trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), categoria));
 			//trueque.setImagen(imagen);
 			trueque.setUsuario(usuario);
 			

@@ -1,9 +1,9 @@
 package com.vcortes.canjehoras.model;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.Date;
 
-import com.mysql.jdbc.Blob;
 
 /**
  * Almacena todos los trueques existentes en la aplicación
