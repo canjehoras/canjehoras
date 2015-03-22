@@ -3,6 +3,7 @@ package com.vcortes.canjehoras.bl;
 import java.util.List;
 
 import com.vcortes.canjehoras.dao.TruequeDAO;
+import com.vcortes.canjehoras.model.Trueque;
 
 
 public class TruequeBL {
@@ -25,6 +26,10 @@ public class TruequeBL {
 
 	public void setTruequeDAO(TruequeDAO truequeDAO) {
 		this.truequeDAO = truequeDAO;
+	}
+	
+	public List<Trueque> findTrueque(Long idCategoria, Long idUsuario) throws Throwable {
+		return truequeDAO.findTrueque(idCategoria, idUsuario);
 	}
 
 }

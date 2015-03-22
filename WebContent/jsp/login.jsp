@@ -2,8 +2,8 @@
 <%@ include file="comunes/include-taglib.jspf" %>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, maximum-scale=1">
+	<%@page contentType="text/html" pageEncoding="UTF-8"%>
+	<meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8; width=device-width, maximum-scale=1"> 
 <title><fmt:message key="titulo"/></title>
 </head>
 <body>

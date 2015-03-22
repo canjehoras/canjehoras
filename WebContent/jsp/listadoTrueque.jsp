@@ -2,8 +2,8 @@
 <%@ include file="comunes/include-taglib.jspf" %>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, maximum-scale=1">
+	<%@page contentType="text/html" pageEncoding="UTF-8"%>
+	<meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8; width=device-width, maximum-scale=1"> 
 	<title><fmt:message key="titulo"/></title>
 	
 	<script type="text/javascript">
@@ -31,6 +31,8 @@
 		<div class="service_block">
 		  	<div class="service_icon delay-03s animated wow  zoomIn"> <span><i class="fa fa-dropbox"></i></span> </div>
 		  	<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
+		  	<p class="animated fadeInDown wow">${trueques.fecha_alta}</p>
+		  	<p class="animated fadeInDown wow">${trueques.categoria.id}</p>
 		  	<p class="animated fadeInDown wow">${trueques.descripcion}</p>
 		  	<input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>
 		  	<input type="button" value="<fmt:message key="boton.borrar"/>" onclick="borrarTrueque(${trueques.id});"/>
