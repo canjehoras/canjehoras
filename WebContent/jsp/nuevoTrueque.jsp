@@ -14,7 +14,7 @@
 	<h1><fmt:message key="nuevo.trueque.inicio"/></h1>
  	<form action="/canjehoras/trueque/publicar.html" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
  		<div class="tituloSelect"><fmt:message key="nuevo.trueque.titulo"/></div>
- 		<input type="text" title="<fmt:message key="nuevo.trueque.titulo2"/>" name="titulo" id="titulo" placeholder="<fmt:message key="nuevo.trueque.titulo"/>" required/>
+ 		<input type="text" title="<fmt:message key="nuevo.trueque.titulo2"/>" maxlength="50" name="titulo" id="titulo" placeholder="<fmt:message key="nuevo.trueque.titulo"/>" required/>
  		<div class="tituloSelect"><fmt:message key="nuevo.trueque.categoria"/></div>	
 		<select name="categorias" id="categorias" required="required">
 			<option value="-1"><fmt:message key="nuevo.trueque.seleccione.categoria" /></option>

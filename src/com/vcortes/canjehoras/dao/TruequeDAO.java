@@ -34,4 +34,17 @@ public class TruequeDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
+	public Trueque detalle(Long id)throws Throwable {
+		log.debug("detalle");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class);
+			q.add(Restrictions.eq("id", id));
+			return (Trueque) q.uniqueResult();
+			
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}
 }

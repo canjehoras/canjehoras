@@ -24,14 +24,13 @@
 				</c:otherwise>
 				</c:choose>
 				<div class="service_block">
-					  	<div class="service_icon delay-03s animated wow  zoomIn"> <span><i class="fa fa-dropbox"></i></span> </div>
-					  	<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
-					<p class="animated fadeInDown wow">${trueques.fecha_alta}</p>
-					<p class="animated fadeInDown wow">${trueques.categoria.descripcion}</p>
-					<p class="animated fadeInDown wow">${trueques.usuario.nombre} ${trueques.usuario.apellido1} ${trueques.usuario.apellido2}</p>
+					<div class="service_icon delay-03s animated wow  zoomIn"> 
+						<span><i class="fa fa-dropbox"></i></span> 
+					</div>
+					<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
 					<p class="animated fadeInDown wow">${trueques.descripcion}</p>
 					<c:if test="${sessionScope.usuario == null}">
-						<input type="button" value="<fmt:message key="boton.ver.mas"/>" onclick="editarTrueque(${trueques.id});"/>
+						<input type="button" value="<fmt:message key="boton.ver.mas"/>" onclick="detalleTrueque(${trueques.id});"/>
 					</c:if>
 					<c:if test="${sessionScope.usuario != null}">
 						<input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>

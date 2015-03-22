@@ -132,6 +132,19 @@ public class TruequeController extends BaseController{
 		return model;
 	}
 	
+	public ModelAndView detalle(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Detalle de trueque");	
+		ModelAndView model = new ModelAndView(Constantes.DETALLE_TRUEQUE); 
+		try{
+			String id = (String) request.getParameter(Constantes.ID);
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			model.addObject( Constantes.TRUEQUE, trueque);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Editar trueque");
 		

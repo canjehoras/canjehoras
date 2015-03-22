@@ -31,4 +31,8 @@ public class TruequeBL {
 	public List<Trueque> findTrueque(Long idCategoria, Long idUsuario) throws Throwable {
 		return truequeDAO.findTrueque(idCategoria, idUsuario);
 	}
+	
+	public Trueque detalle(Long id) throws Throwable {
+		return truequeDAO.detalle(id);
+	}
 }

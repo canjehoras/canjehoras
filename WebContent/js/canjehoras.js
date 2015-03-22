@@ -22,6 +22,10 @@ editarTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/editar.html?id=" + id
 }
 
+detalleTrueque = function(id){
+	window.location.href= "/canjehoras/trueque/detalle.html?id=" + id
+}
+
 borrarTrueque = function(){
 	var txt;
 	var r = confirm("Press a button!");
