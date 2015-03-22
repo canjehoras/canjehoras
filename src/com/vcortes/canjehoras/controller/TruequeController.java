@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
@@ -94,28 +95,22 @@ public class TruequeController extends BaseController{
 		    		String fieldName = item.getFieldName();
 		            String fileName = item.getName();
 		            fileContent = item.getInputStream();
-		            
-		           
-		                
-		                
 		    	}
 		    }
 			
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
-			//trueque.setImagen(imagen);
+			trueque.setImagen(IOUtils.toByteArray(fileContent));
 			trueque.setUsuario(usuario);
 			
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
 			
-			//truequeBL.saveTrueque(trueque, fileContent);
-			
 		} catch (Exception e) {
 			logger.error("Error registrando trueque", e);
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("Error registrando trueque", e);
 		}
+		
 		return new ModelAndView(Constantes.LISTA_TRUEQUE);
 	}
 	

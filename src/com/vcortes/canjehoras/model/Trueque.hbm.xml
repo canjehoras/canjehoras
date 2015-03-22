@@ -21,7 +21,7 @@
         <property name="tipo" type="string">
             <column name="TIPO" length="1" />
         </property>
-        <property name="imagen" type="java.sql.Blob">
+        <property name="imagen" type="binary">
             <column name="IMAGEN" />
         </property>       
 		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"  fetch="join"/>

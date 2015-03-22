@@ -1,7 +1,6 @@
 package com.vcortes.canjehoras.model;
 
 import java.io.Serializable;
-import java.sql.Blob;
 import java.util.Date;
 
 
@@ -18,7 +17,7 @@ public class Trueque implements Serializable{
 	private String titulo;
 	private String descripcion;
 	private String tipo;
-	private Blob imagen;
+	private byte[] imagen;
 	private Usuario usuario;
 	private Categoria categoria;
 
@@ -43,7 +42,7 @@ public class Trueque implements Serializable{
 	 * @param categoria
 	 */
 	public Trueque(Long id, Date fecha_alta, String estado, String titulo, 
-					String descripcion, String tipo, Blob imagen, Usuario usuario, Categoria categoria) {
+					String descripcion, String tipo, byte[] imagen, Usuario usuario, Categoria categoria) {
 		this.id = id;
 		this.fecha_alta = fecha_alta;
 		this.estado = estado;
@@ -168,7 +167,7 @@ public class Trueque implements Serializable{
 	 * 
 	 * @return imagen
 	 */
-	public Blob getImagen() {
+	public byte[] getImagen() {
 		return imagen;
 	}
 
@@ -177,7 +176,7 @@ public class Trueque implements Serializable{
 	 * 
 	 * @param imagen
 	 */
-	public void setImagen(Blob imagen) {
+	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
 
