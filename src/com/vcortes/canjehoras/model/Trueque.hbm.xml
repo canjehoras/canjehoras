@@ -24,7 +24,7 @@
         <property name="imagen" type="java.sql.Blob">
             <column name="IMAGEN" />
         </property>       
-		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"/>
-		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="none"/>   
+		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"  fetch="join"/>
+		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="none" fetch="join"/>   
 	</class>
 </hibernate-mapping>
