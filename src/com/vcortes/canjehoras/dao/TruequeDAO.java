@@ -25,7 +25,7 @@ public class TruequeDAO extends BaseDAO {
 			if(null != idUsuario){
 				q.add(Restrictions.eq("usuario.id", idUsuario));
 			}
-			q.addOrder(Order.desc("fecha_alta"));
+			q.addOrder(Order.desc("id"));
 			List result = q.list();
 			return result;
 			
