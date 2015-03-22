@@ -63,6 +63,7 @@
             <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
         </property>
 		<property name="categoriaBL" ref="categoriaBL" />
+		<property name="truequeBL" ref="truequeBL" />
     </bean> 
     
    <!-- Trueque-->

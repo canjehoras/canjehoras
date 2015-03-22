@@ -31,6 +31,8 @@
 		<div class="service_block">
 		  	<div class="service_icon delay-03s animated wow  zoomIn"> <span><i class="fa fa-dropbox"></i></span> </div>
 		  	<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
+		  	<p class="animated fadeInDown wow">${trueques.fecha_alta}</p>
+		  	<p class="animated fadeInDown wow">${trueques.categoria.id}</p>
 		  	<p class="animated fadeInDown wow">${trueques.descripcion}</p>
 		  	<input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>
 		  	<input type="button" value="<fmt:message key="boton.borrar"/>" onclick="borrarTrueque(${trueques.id});"/>
