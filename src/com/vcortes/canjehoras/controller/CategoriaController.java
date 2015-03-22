@@ -39,12 +39,9 @@ public class CategoriaController extends BaseController {
 			List<Categoria> categorias = categoriaBL.findAll(new Categoria(),
 					Constantes.DESCRIPCION);
 			model.addObject(Constantes.CATEGORIAS, categorias);
+			
 
-			Long j = (long) 4;
-			Long jw = (long) 1;
-			List<Trueque> listado = truequeBL.findTrueque(j, jw);
-
-			// List<Trueque> listado = truequeBL.findAll(new Trueque());
+			List<Trueque> listado = truequeBL.findAll(new Trueque());
 			model.addObject(Constantes.TRUEQUES, listado);
 		} catch (Exception e) {
 			logger.error("Error al obtener el listado de las categorias", e);

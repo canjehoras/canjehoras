@@ -1,15 +1,12 @@
 package com.vcortes.canjehoras.controller;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.sql.Blob;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.rowset.serial.SerialBlob;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -77,6 +74,7 @@ public class TruequeController extends BaseController{
 			
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			Trueque trueque = new Trueque();
+			InputStream fileContent = null;
 		    for (FileItem item : items) {
 		    	if (item.isFormField()) {
 		    		String fieldName = item.getFieldName();
@@ -88,28 +86,14 @@ public class TruequeController extends BaseController{
 		            	trueque.setDescripcion(fieldValue);
 		            } else if(Constantes.TIPO.equals(fieldName)){
 		            	trueque.setTipo(fieldValue);
-		            } else if(Constantes.CATEGORIA.equals(fieldName)){
+		            } else if(Constantes.CATEGORIAS.equals(fieldName)){
 		            	trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), Long.valueOf(fieldValue)));
 		            }
 		                
 		    	} else {
 		    		String fieldName = item.getFieldName();
 		            String fileName = item.getName();
-		            InputStream fileContent = item.getInputStream();
-		            
-		            //IOUtils.toByteArray(item.getInputStream())		            
-		            //byte[] bytes = IOUtils.toByteArray(fileContent);
-		            
-		            ByteArrayOutputStream output = new ByteArrayOutputStream();
-		            byte[] bytes = new byte[1024];
-		            int count;
-		            while ((count = fileContent.read(bytes)) != -1)
-		                output.write(bytes, 0, count);
-		            output.toByteArray();
-		            
-		            Blob myBlob = new SerialBlob(bytes);
-		            trueque.setImagen(myBlob);
-		            
+		            fileContent = item.getInputStream();
 		            
 		           
 		                
@@ -124,8 +108,13 @@ public class TruequeController extends BaseController{
 			
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
 			
+			//truequeBL.saveTrueque(trueque, fileContent);
+			
 		} catch (Exception e) {
 			logger.error("Error registrando trueque", e);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return new ModelAndView(Constantes.LISTA_TRUEQUE);
 	}
