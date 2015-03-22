@@ -28,6 +28,7 @@
  		<input type="file" accept="image/*" title="<fmt:message key="nuevo.trueque.imagen2"/>" name="imagen" id="imagen" placeholder="<fmt:message key="nuevo.trueque.imagen"/>" style="margin-bottom: 5%"/>
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 
+		<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
 
  		<input type="hidden" name="id" id="id" value="${trueque.id}"/>
 	</form>

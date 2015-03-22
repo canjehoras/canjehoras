@@ -37,6 +37,7 @@
 	    	</c:forEach>
 	    </div>
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
+		<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
 	</form>
 </section>
 
