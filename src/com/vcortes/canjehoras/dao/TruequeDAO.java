@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.vcortes.canjehoras.model.Trueque;
@@ -24,6 +25,7 @@ public class TruequeDAO extends BaseDAO {
 			if(null != idUsuario){
 				q.add(Restrictions.eq("usuario.id", idUsuario));
 			}
+			q.addOrder(Order.desc("fecha_alta"));
 			List result = q.list();
 			return result;
 			
