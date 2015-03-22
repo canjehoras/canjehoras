@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.bl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.vcortes.canjehoras.dao.TruequeDAO;
@@ -17,6 +18,10 @@ public class TruequeBL {
 	
 	public List findAll(Object instance) throws Exception{
 		return truequeDAO.findAll(instance);
+	}
+	
+	public Object findById(Object instance, Serializable id) throws Exception {
+		return truequeDAO.findById(instance, id);
 	}
 
 	public TruequeDAO getTruequeDAO() {

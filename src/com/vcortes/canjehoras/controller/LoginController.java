@@ -104,6 +104,7 @@ public class LoginController extends BaseController{
 		
 		try {
 		
+			request.setCharacterEncoding("UTF-8");
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
 			String correo_electronico = (String) request.getParameter("correo_electronico");
 			String pass = (String) request.getParameter("pass");

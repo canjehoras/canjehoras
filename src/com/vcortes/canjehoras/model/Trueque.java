@@ -20,6 +20,7 @@ public class Trueque implements Serializable{
 	private byte[] imagen;
 	private Usuario usuario;
 	private Categoria categoria;
+	private String imagen64;
 
 	/**
 	 * Constructor por defecto
@@ -214,6 +215,14 @@ public class Trueque implements Serializable{
 	 */
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getImagen64() {
+		return imagen64;
+	}
+
+	public void setImagen64(String imagen64) {
+		this.imagen64 = imagen64;
 	}	
 }
 

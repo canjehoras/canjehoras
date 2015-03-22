@@ -67,14 +67,14 @@ public class TruequeController extends BaseController{
 			request.setCharacterEncoding("UTF-8");
 			
 			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
-			String titulo = (String) request.getParameter(Constantes.TITULO);
-			String descripcion = (String) request.getParameter(Constantes.DESCRIPCION);
-			String tipo = (String) request.getParameter(Constantes.TIPO);
-			String categoria = (String) request.getParameter(Constantes.CATEGORIA);
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			
-			
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
+			String titulo = "";
+			String descripcion = "";
+			String categoria = "";
+			String tipo = "";
+			String id = "";
 			Trueque trueque = new Trueque();
 			InputStream fileContent = null;
 		    for (FileItem item : items) {
@@ -83,13 +83,15 @@ public class TruequeController extends BaseController{
 		            String fieldValue = item.getString();
 		            
 		            if(Constantes.TITULO.equals(fieldName)){
-		            	trueque.setTitulo(fieldValue);
+		            	titulo = fieldValue;
+		            } else if(Constantes.ID.equals(fieldName)){
+		            	id = fieldValue;
 		            } else if(Constantes.DESCRIPCION.equals(fieldName)){
-		            	trueque.setDescripcion(fieldValue);
+		            	descripcion = fieldValue;
 		            } else if(Constantes.TIPO.equals(fieldName)){
-		            	trueque.setTipo(fieldValue);
+		            	tipo = fieldValue;
 		            } else if(Constantes.CATEGORIAS.equals(fieldName)){
-		            	trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), Long.valueOf(fieldValue)));
+		            	categoria = fieldValue;
 		            }
 		                
 		    	} else {
@@ -99,6 +101,14 @@ public class TruequeController extends BaseController{
 		    	}
 		    }
 			
+		    if(id!=null && !("").equals(id)){
+		    	trueque = (Trueque) truequeBL.findById(new Trueque(), Long.valueOf(id));
+		    }
+		    
+		    trueque.setTitulo(titulo);
+		    trueque.setDescripcion(descripcion);
+		    trueque.setTipo(tipo);
+		    trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), Long.valueOf(categoria)));
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
 			trueque.setImagen(IOUtils.toByteArray(fileContent));
@@ -112,7 +122,7 @@ public class TruequeController extends BaseController{
 			logger.error("Error registrando trueque", e);
 		}
 		
-		return model;
+		return listado(request, response);
 	}
 	
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
@@ -139,6 +149,7 @@ public class TruequeController extends BaseController{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
 			model.addObject( Constantes.TRUEQUE, trueque);
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -147,33 +158,19 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Editar trueque");
+		ModelAndView model = new ModelAndView(Constantes.NUEVO_TRUEQUE);
 		
 		try {
-			String id = request.getParameter("id");
+			String id = request.getParameter("id");			
+			Trueque trueque = (Trueque) truequeBL.findById(new Trueque(), Long.valueOf(id));
+			model.addObject("trueque", trueque);
 			
-//			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
-//			String titulo = (String) request.getParameter(Constantes.TITULO);
-//			String descripcion = (String) request.getParameter(Constantes.DESCRIPCION);
-//			String tipo = (String) request.getParameter(Constantes.TIPO);
-//			String categoria = (String) request.getParameter(Constantes.CATEGORIA);
-//			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
-//			//Blob imagen = (Blob) request.getParameter(Constantes.IMAGEN);
-//			
-//			Trueque trueque = new Trueque();
-//			trueque.setTitulo(titulo);
-//			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
-//			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
-//			trueque.setDescripcion(descripcion);
-//			trueque.setTipo(tipo);
-//			trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), categoria));
-//			//trueque.setImagen(imagen);
-//			trueque.setUsuario(usuario);
-//			
-//			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			model.addObject( Constantes.CATEGORIAS, categorias);
 			
 		} catch (Exception e) {
 			logger.error("Error editando trueque", e);
 		}
-		return new ModelAndView(Constantes.EDITAR_TRUEQUE);
+		return model;
 	}
 }

@@ -12,7 +12,7 @@
 
 <section id="login" class="top_cont_outer">
 	<h1><fmt:message key="registrar"/></h1>
- 	<form action="/canjehoras/login/envioRegistro.html" method="post">
+ 	<form action="/canjehoras/login/envioRegistro.html" method="post" accept-charset="UTF-8">
 	    <input type="email" name="correo_electronico" id="correo_electronico" placeholder="<fmt:message key="registro.usuario"/>" required/>
 	    <input type="password" name="pass" id="pass" placeholder="<fmt:message key="registro.pass"/>" required/>
 	    <input type="password" name="pass2" id="pass2" placeholder="<fmt:message key="registro.repass"/>" required/>
