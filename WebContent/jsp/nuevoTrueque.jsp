@@ -2,9 +2,9 @@
 <%@ include file="comunes/include-taglib.jspf" %>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
-	<meta name="viewport" content="width=device-width, maximum-scale=1">
-<title><fmt:message key="titulo"/></title>
+	<%@page contentType="text/html" pageEncoding="UTF-8"%>
+	<meta http-equiv="Content-Type" name="viewport"
+	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
 </head>
 <body>
 
@@ -25,8 +25,8 @@
         <div class="tituloSelect"><fmt:message key="nuevo.trueque.descripcion"/></div>
  		<textarea title="<fmt:message key="nuevo.trueque.descripcion2"/>" name="descripcion" id="descripcion" placeholder="<fmt:message key="nuevo.trueque.descripcion"/>" required="required"></textarea>
  		<div class="tituloSelect"><fmt:message key="nuevo.trueque.imagen"/></div>
- 		<input  type="file" accept="image/*" title="<fmt:message key="nuevo.trueque.imagen2"/>" name="imagen" id="imagen" placeholder="<fmt:message key="nuevo.trueque.imagen"/>" style="margin-bottom: 5%"/>
- 
+ 		<input type="file" accept="image/*" title="<fmt:message key="nuevo.trueque.imagen2"/>" name="imagen" id="imagen" placeholder="<fmt:message key="nuevo.trueque.imagen"/>" style="margin-bottom: 5%"/>
+ 		<input type="file"  id="imagen" name='imagen'/>
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 	</form>
 </section>
