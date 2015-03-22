@@ -316,6 +316,8 @@ a.read_more2:hover {
     text-align: center;
     padding-left: 15px;
     padding-right: 15px;
+    background: #fff;
+    padding: 4%;
 }
 
 .service_icon {
@@ -1720,7 +1722,8 @@ width: 99%;
 *{margin:0;padding:0;}
 
 body{
-  background:#567;
+  /*background:#567;*/
+  background: #4BAAD6;
   font-family:'Open Sans',sans-serif;
 }
 
