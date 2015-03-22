@@ -32,3 +32,7 @@ borrarTrueque = function(){
 	}
 	window.location.href= "/canjehoras/trueque/borrar.html"
 }
+
+cerrar = function(){
+	window.location.href= "/canjehoras/login/logout.html"
+}

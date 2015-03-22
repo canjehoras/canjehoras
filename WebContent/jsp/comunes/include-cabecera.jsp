@@ -15,12 +15,12 @@
 			<c:if test="${sessionScope.usuario == null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login"/></a></li>
 		  		<li><a href="#" class="scroll-link" id="toggle-registro"><fmt:message key="registrar"/></a></li>
-		  		<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
+		  		<li><a href="#" class="scroll-link" id="toggle-publicar-sinregistro"><fmt:message key="publicar"/></a></li>
 			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
-		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login.ok"/> ${sessionScope.usuario.nombre}</a></li>
-		  		<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
-		  		<li><a href="#" class="scroll-link" id="toggle-trueques"><fmt:message key="trueques"/></a></li>
+				<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
+				<li><a href="#" class="scroll-link" id="toggle-trueques"><fmt:message key="trueques"/></a></li>
+				<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
 			</c:if>
 			<li><a href="#" class="scroll-link" id="toggle-categorias"><fmt:message key="categorias"/></a></li>
 			<li><a href="#" class="scroll-link" id="toggle-acerca"><fmt:message key="acerca.de"/></a></li>
@@ -28,6 +28,12 @@
       </div>
 	 </nav>
     </div>
+    <c:if test="${sessionScope.usuario != null}">
+	    <div class="logo">
+	    	Usuario Registrado: ${sessionScope.usuario.nombre}
+	    	<a href="#" class="scroll-link" id="toggle-cerrar"><img src="../img/close.png" alt="cerrar sesion"></a>
+	    </div>
+    </c:if>
   </div>
   
 	<script>
@@ -46,8 +52,14 @@
 		$('#toggle-publicar').click(function(){
 			publicar();
 		});
+		$('#toggle-publicar-sinregistro').click(function(){
+			registro();
+		});
 		$('#toggle-trueques').click(function(){
 			trueques();
+		});
+		$('#toggle-cerrar').click(function(){
+			cerrar();
 		});
 	</script>
 	
@@ -60,11 +72,6 @@
 			    <input type="password" name="pass" id="pass" placeholder="<fmt:message key="login.pass"/>" />
 				<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 				<input type="button" value="<fmt:message key="boton.registrar"/>" onclick="registro();"/>
-			</form>
-		</c:if>
-		<c:if test="${sessionScope.usuario != null}">
-			<form action="/canjehoras/login/logout.html" method="post">
-				<input type="submit" value="<fmt:message key="boton.salir"/>" />
 			</form>
 		</c:if>
 	</div>
