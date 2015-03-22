@@ -33,6 +33,7 @@
 		  	<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
 		  	<p class="animated fadeInDown wow">${trueques.fecha_alta}</p>
 		  	<p class="animated fadeInDown wow">${trueques.categoria.descripcion}</p>
+		  	<p class="animated fadeInDown wow">${trueques.usuario.nombre} ${trueques.usuario.apellido1} ${trueques.usuario.apellido2}</p>
 		  	<p class="animated fadeInDown wow">${trueques.descripcion}</p>
 		  	<input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>
 		  	<input type="button" value="<fmt:message key="boton.borrar"/>" onclick="borrarTrueque(${trueques.id});"/>

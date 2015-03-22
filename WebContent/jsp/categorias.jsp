@@ -2,8 +2,8 @@
 <%@ include file="comunes/include-taglib.jspf"%>
 <html>
 <head>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<meta http-equiv="Content-Type" name="viewport"
+	<%@page contentType="text/html" pageEncoding="UTF-8"%>
+	<meta http-equiv="Content-Type" name="viewport"
 	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
 </head>
 <body>

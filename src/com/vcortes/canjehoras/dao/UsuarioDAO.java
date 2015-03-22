@@ -13,8 +13,7 @@ import com.vcortes.canjehoras.model.Usuario;
 public class UsuarioDAO extends BaseDAO {
 
 	private static final Log log = LogFactory.getLog(UsuarioDAO.class);
-	
-	
+
 	public Usuario findUsuarioByLogin(String login) throws Exception {
 		log.info("findUsuarioByLogin");		
 		Criteria q = sessionFactory.getCurrentSession().createCriteria(Usuario.class);

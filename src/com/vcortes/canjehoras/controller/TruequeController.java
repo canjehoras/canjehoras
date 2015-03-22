@@ -60,6 +60,7 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView publicar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Publicar nuevo trueque");
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		
 		try {
 			
@@ -111,19 +112,20 @@ public class TruequeController extends BaseController{
 			logger.error("Error registrando trueque", e);
 		}
 		
-		return new ModelAndView(Constantes.LISTA_TRUEQUE);
+		return model;
 	}
 	
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque");	
+		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
-			List<Trueque> listado = truequeBL.findAll(new Trueque());
+			List<Trueque> listado = truequeBL.findTrueque(null, usuario.getId());
 			model.addObject( Constantes.TRUEQUES, listado);
 			
-			
-		} catch (Exception e) {
-			logger.error("Error registrando trueque", e);
+
+		} catch (Throwable e) {
+			e.printStackTrace();
 		}
 		return model;
 	}
