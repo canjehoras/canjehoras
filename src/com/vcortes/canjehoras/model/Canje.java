@@ -8,7 +8,7 @@ import java.util.Date;
  * @author Vanesa Cortés Gimeno
  *
  */
-public class Reserva implements Serializable{
+public class Canje implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Usuario usuario;
@@ -22,7 +22,7 @@ public class Reserva implements Serializable{
 	 * Constructor por defecto
 	 * 
 	 */
-	public Reserva(){
+	public Canje(){
 	}
 	
 	/**
@@ -32,7 +32,7 @@ public class Reserva implements Serializable{
 	 * @param descripcion
 	 *    
 	 */
-	public Reserva(Long id, Usuario usuario, Trueque trueque, Agenda agenda, 
+	public Canje(Long id, Usuario usuario, Trueque trueque, Agenda agenda, 
 			Date fecha, String hora_inicio, String hora_fin) {
 		this.id = id;
 		this.usuario = usuario;
