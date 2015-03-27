@@ -6,7 +6,7 @@ registro = function(){
 	window.location.href= "/canjehoras/login/registro.html"
 }
 
-categorias = function(){
+buscador = function(){
 	window.location.href= "/canjehoras/categoria/inicio.html"
 }
 

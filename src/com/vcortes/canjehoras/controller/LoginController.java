@@ -45,6 +45,7 @@ public class LoginController extends BaseController{
 			if(usuario != null && comprobarPass(usuario, pass)){
 				//ponemos usuario en sesión
 				request.getSession().setAttribute(Constantes.USUARIO, usuario);
+				request.getSession().setAttribute(Constantes.PERFIL, usuario.getPerfil());
 				model = new ModelAndView(Constantes.INICIO); 
 			}
 		} catch (Exception e) {
