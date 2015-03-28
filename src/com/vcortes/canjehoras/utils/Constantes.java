@@ -4,6 +4,11 @@ public class Constantes {
 
 	public final static String FORMATO_FECHA = "dd/MM/yyy";
 	public final static String ENCODING = "UTF-8";
+	public final static String MAX_DESCRIPCION = "25";
+	public final static String IDIOMA_ES = "ES";
+	public final static String IDIOMA_EN = "EN";
+	public final static String TIPO_ADMINISTRADOR = "A";
+	public final static String TIPO_USUARIO = "U";
 	
 	// Nombre de atributos
 	public final static String USUARIO = "usuario";
@@ -33,10 +38,7 @@ public class Constantes {
 	public static final String TRUEQUE_ESTADO_NUEVO  = "nuevo";
 	
 	//
-	public final static String IDIOMA_ES = "ES";
-	public final static String IDIOMA_EN = "EN";
-	public final static String TIPO_ADMINISTRADOR = "A";
-	public final static String TIPO_USUARIO = "U";
+
 	
 	// Atributos de base de datos
 	public final static String BBDD_USUARIO_CORREO = "correo_electronico";
