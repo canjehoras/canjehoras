@@ -47,6 +47,10 @@
         </property>
 		<property name="usuarioBL" ref="usuarioBL" />
 		<property name="categoriaBL" ref="categoriaBL" />
+		<property name="provinciaBL" ref="provinciaBL" />
+		<property name="truequeBL" ref="truequeBL" />
+		<property name="prefProvinciaBL" ref="prefProvinciaBL" />
+		<property name="prefCategoriaBL" ref="prefCategoriaBL" />
     </bean> 
 	
 	<!-- Pagina de inicio -->

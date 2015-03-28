@@ -12,9 +12,14 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vcortes.canjehoras.bl.CategoriaBL;
+import com.vcortes.canjehoras.bl.PrefCategoriaBL;
+import com.vcortes.canjehoras.bl.PrefProvinciaBL;
+import com.vcortes.canjehoras.bl.ProvinciaBL;
+import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Categoria;
-import com.vcortes.canjehoras.model.Preferencia;
+import com.vcortes.canjehoras.model.PrefCategoria;
+import com.vcortes.canjehoras.model.PrefProvincia;
 import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
@@ -26,7 +31,35 @@ public class LoginController extends BaseController{
 	
 	private UsuarioBL usuarioBL;
 	private CategoriaBL categoriaBL;
-
+	private ProvinciaBL provinciaBL;
+	private TruequeBL truequeBL;
+	private PrefProvinciaBL prefProvinciaBL;
+	private PrefCategoriaBL prefCategoriaBL;
+	
+	public UsuarioBL getUsuarioBL() {
+		return usuarioBL;
+	}
+	public void setUsuarioBL(UsuarioBL usuarioBL) {
+		this.usuarioBL = usuarioBL;
+	}
+	public CategoriaBL getCategoriaBL() {
+		return categoriaBL;
+	}
+	public void setProvinciaBL(ProvinciaBL provinciaBL) {
+		this.provinciaBL = provinciaBL;
+	}
+	public void setCategoriaBL(CategoriaBL categoriaBL) {
+		this.categoriaBL = categoriaBL;
+	}
+	public void setTruequeBL(TruequeBL truequeBL) {
+		this.truequeBL = truequeBL;
+	}
+	public void setPrefProvinciaBL(PrefProvinciaBL prefProvinciaBL) {
+		this.prefProvinciaBL = prefProvinciaBL;
+	}
+	public void setPrefCategoriaBL(PrefCategoriaBL prefCategoriaBL) {
+		this.prefCategoriaBL = prefCategoriaBL;
+	}
 	
 	/**
 	 * Método que comprueba si el login y la password son correctos
@@ -36,9 +69,9 @@ public class LoginController extends BaseController{
 	 * @return
 	 */
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView model = new ModelAndView(); 
+		ModelAndView model = new ModelAndView(Constantes.LOGIN);  
 		try {
-			
+			String descripcion = "";
 			String email = request.getParameter("correo_electronico");
 			String pass = request.getParameter("pass");
 			Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(email);
@@ -46,12 +79,28 @@ public class LoginController extends BaseController{
 				//ponemos usuario en sesión
 				request.getSession().setAttribute(Constantes.USUARIO, usuario);
 				request.getSession().setAttribute(Constantes.PERFIL, usuario.getPerfil());
-				model = new ModelAndView(Constantes.INICIO); 
+				
+//				List<Trueque> listado = truequeBL.findTrueque(null, null);
+//				for (int i = 0; i<listado.size(); i++){
+//					if(((Trueque)listado.get(i)).getDescripcion().length() > new Integer(25)){
+//						descripcion = ((Trueque)listado.get(i)).getDescripcion().substring(0,25) + "...";
+//						((Trueque)listado.get(i)).setDescripcion(descripcion);
+//					}
+////					if(null != ((Trueque)listado.get(i)).getUsuario()){
+////						if(null != ((Trueque)listado.get(i)).getUsuario().getProvincia()){
+////							((Trueque)listado.get(i)).setProvincia(((Trueque)listado.get(i)).getUsuario().getProvincia().getDescripcion());
+////						}
+////					}
+//				}
+//				model.addObject( Constantes.TRUEQUES, listado);
+
+				model = new ModelAndView(Constantes.LISTA_TRUEQUE);  
 			}
 		} catch (Exception e) {
 			log.error("Error obteniendo usuario",e);
+		} catch (Throwable e) {
+			log.error("Error obteniendo usuario",e);
 		}
-		model = new ModelAndView(Constantes.INICIO); 
 		return model;
 	}
 	
@@ -78,7 +127,7 @@ public class LoginController extends BaseController{
 	 */
 	public ModelAndView registro(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio registro");
-		ModelAndView model = new ModelAndView(Constantes.LOGIN);
+		ModelAndView model = new ModelAndView(Constantes.REGISTRO);
 		try{
 			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), "descripcion");
 			model.addObject("categorias", categorias);
@@ -104,21 +153,23 @@ public class LoginController extends BaseController{
 		log.debug("Inicio registro");
 		
 		try {
-		
-			request.setCharacterEncoding("UTF-8");
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyy");
-			String correo_electronico = (String) request.getParameter("correo_electronico");
-			String pass = (String) request.getParameter("pass");
-			String nombre = (String) request.getParameter("nombre");
-			String apellido1 = (String) request.getParameter("apellido1");
-			String apellido2 = (String) request.getParameter("apellido2");
-			String movil = (String) request.getParameter("movil");
-			String telefono = (String) request.getParameter("telefono");
-			String wassap = (String) request.getParameter("wassap");
+			
+			// Recuperación de los atributos
+			request.setCharacterEncoding(Constantes.ENCODING);
+			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+			String correo_electronico = (String) request.getParameter(Constantes.BBDD_USUARIO_CORREO);
+			String pass = (String) request.getParameter(Constantes.BBDD_USUARIO_PASS);
+			String nombre = (String) request.getParameter(Constantes.BBDD_USUARIO_NOMBRE);
+			String apellido1 = (String) request.getParameter(Constantes.BBDD_USUARIO_APELLIDO1);
+			String apellido2 = (String) request.getParameter(Constantes.BBDD_USUARIO_APELLIDO2);
+			String movil = (String) request.getParameter(Constantes.BBDD_USUARIO_MOVIL);
+			String telefono = (String) request.getParameter(Constantes.BBDD_USUARIO_TELEFONO);
+			String wassap = (String) request.getParameter(Constantes.BBDD_USUARIO_WASSAP);
+			String provincia[]= request.getParameterValues(Constantes.BBDD_USUARIO_PROVINCIA);
+			String categoria[]= request.getParameterValues(Constantes.BBDD_USUARIO_CATEGORIA);
 			
 			
 			Usuario usuario = new Usuario();
-			
 			usuario.setCorreo_electronico(correo_electronico);
 			usuario.setPass(pass);
 			usuario.setNombre(nombre);
@@ -129,25 +180,27 @@ public class LoginController extends BaseController{
 			usuario.setWassap(new Boolean(wassap));
 			usuario.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			usuario.setFecha_ultimo_acceso(sdf.parse(sdf.format(new Date())));
-			usuario.setIdioma("es");
-			usuario.setPerfil("A");
+			usuario.setIdioma(Constantes.IDIOMA_ES);
+			usuario.setPerfil(Constantes.TIPO_USUARIO);
 		
 			usuario = (Usuario) usuarioBL.saveOrUpdate(usuario);
 			
-			String categoria[]= request.getParameterValues("categoria");
-			String provincia[]= request.getParameterValues("provincia");
-			
 			for (int i = 0; i < provincia.length; i++) {
-				Provincia p = (Provincia) categoriaBL.findById(new Provincia(), new Long(provincia[i]));
-				for (int j = 0; j < categoria.length; j++) {					
-					Preferencia preferencia = new Preferencia();
-					preferencia.setUsuario(usuario);
-					preferencia.setCategoria((Categoria) categoriaBL.findById(new Categoria(), new Long(categoria[j])));
-					preferencia.setProvincia(p);
-					
-					usuarioBL.saveOrUpdate(preferencia);
-				}
+				Provincia p = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincia[i]));
+				PrefProvincia prefProvincia = new PrefProvincia();
+				prefProvincia.setUsuario(usuario);
+				prefProvincia.setProvincia(p);
+				prefProvinciaBL.saveOrUpdate(prefProvincia);
 			}
+				
+			for (int i = 0; i < categoria.length; i++) {
+				Categoria c = (Categoria) categoriaBL.findById(new Categoria(), new Long(categoria[i]));
+				PrefCategoria prefCategoria = new PrefCategoria();
+				prefCategoria.setUsuario(usuario);
+				prefCategoria.setCategoria(c);
+				prefCategoriaBL.saveOrUpdate(prefCategoria);
+			}
+			
 
 			
 			// una vez registrado el usuario lo logueamos
@@ -170,23 +223,6 @@ public class LoginController extends BaseController{
 		request.getSession().setAttribute(Constantes.USUARIO, null);
 		model = new ModelAndView(Constantes.INICIO); 
 		return model;
-	}
-	
-	
-	public UsuarioBL getUsuarioBL() {
-		return usuarioBL;
-	}
-
-	public void setUsuarioBL(UsuarioBL usuarioBL) {
-		this.usuarioBL = usuarioBL;
-	}
-
-	public CategoriaBL getCategoriaBL() {
-		return categoriaBL;
-	}
-
-	public void setCategoriaBL(CategoriaBL categoriaBL) {
-		this.categoriaBL = categoriaBL;
 	}
 
 }

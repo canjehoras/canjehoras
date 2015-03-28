@@ -2,8 +2,10 @@ package com.vcortes.canjehoras.utils;
 
 public class Constantes {
 
-	// Nombre de atributos
 	public final static String FORMATO_FECHA = "dd/MM/yyy";
+	public final static String ENCODING = "UTF-8";
+	
+	// Nombre de atributos
 	public final static String USUARIO = "usuario";
 	public final static String CATEGORIA = "categoria";
 	public final static String CATEGORIAS = "categorias";
@@ -18,6 +20,7 @@ public class Constantes {
 	
 	// Nombre de los .jsp
 	public static final String LOGIN  = "login";
+	public static final String REGISTRO  = "registro";
 	public static final String INICIO  = "inicio";
 	public static final String PUBLICAR  = "publicar";
 	public static final String NUEVO_TRUEQUE  = "nuevoTrueque";
@@ -28,5 +31,26 @@ public class Constantes {
 	
 	// Estados de los trueques
 	public static final String TRUEQUE_ESTADO_NUEVO  = "nuevo";
+	
+	//
+	public final static String IDIOMA_ES = "ES";
+	public final static String IDIOMA_EN = "EN";
+	public final static String TIPO_ADMINISTRADOR = "A";
+	public final static String TIPO_USUARIO = "U";
+	
+	// Atributos de base de datos
+	public final static String BBDD_USUARIO_CORREO = "correo_electronico";
+	public final static String BBDD_USUARIO_PASS = "pass";
+	public final static String BBDD_USUARIO_NOMBRE = "nombre";
+	public final static String BBDD_USUARIO_APELLIDO1 = "apellido1";
+	public final static String BBDD_USUARIO_APELLIDO2 = "apellido2";
+	public final static String BBDD_USUARIO_MOVIL = "movil";
+	public final static String BBDD_USUARIO_TELEFONO = "telefono";
+	public final static String BBDD_USUARIO_WASSAP = "wassap";
+	public final static String BBDD_USUARIO_PROVINCIA = "provincia";
+	public final static String BBDD_USUARIO_CATEGORIA = "categoria";
+	
+	
+	
 	
 }

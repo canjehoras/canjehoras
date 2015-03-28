@@ -48,4 +48,43 @@
 		<property name="truequeDAO"><ref bean="truequeDAO"/></property>
 	</bean>
 	
+	<bean id="provinciaBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="provinciaBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="provinciaBLTarget" class="com.vcortes.canjehoras.bl.ProvinciaBL">
+		<property name="provinciaDAO"><ref bean="provinciaDAO"/></property>
+	</bean>
+	
+	<bean id="prefProvinciaBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="prefProvinciaBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="prefProvinciaBLTarget" class="com.vcortes.canjehoras.bl.PrefProvinciaBL">
+		<property name="prefProvinciaDAO"><ref bean="prefProvinciaDAO"/></property>
+	</bean>
+	
+	<bean id="prefCategoriaBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="prefCategoriaBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="prefCategoriaBLTarget" class="com.vcortes.canjehoras.bl.PrefCategoriaBL">
+		<property name="prefCategoriaDAO"><ref bean="prefCategoriaDAO"/></property>
+	</bean>
+	
 </beans>

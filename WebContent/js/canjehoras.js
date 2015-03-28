@@ -2,6 +2,10 @@ inicio = function(){
 	window.location.href= "/canjehoras/inicio/inicio.html"
 }
 
+login = function(){
+	window.location.href= "/canjehoras/login/login.html"
+}
+
 registro = function(){
 	window.location.href= "/canjehoras/login/registro.html"
 }

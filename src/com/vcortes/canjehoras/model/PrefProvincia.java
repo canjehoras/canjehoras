@@ -7,18 +7,17 @@ import java.io.Serializable;
  * @author Vanesa Cortés Gimeno
  *
  */
-public class Preferencia implements Serializable{
+public class PrefProvincia implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Usuario usuario;
-	private Categoria categoria;
 	private Provincia provincia;
 	
 	/**
 	 * Constructor por defecto
 	 * 
 	 */
-	public Preferencia(){
+	public PrefProvincia(){
 	}
 	
 	/**
@@ -28,10 +27,9 @@ public class Preferencia implements Serializable{
 	 * @param descripcion
 	 *    
 	 */
-	public Preferencia(Long id, Usuario usuario, Categoria categoria, Provincia provincia) {
+	public PrefProvincia(Long id, Usuario usuario, Provincia provincia) {
 		this.id = id;
 		this.usuario = usuario;
-		this.categoria = categoria;
 		this.provincia = provincia;
 	}
 	
@@ -69,24 +67,6 @@ public class Preferencia implements Serializable{
 	 */
 	public void setUsuario(Usuario usuario){
 		this.usuario = usuario;
-	}
-	
-	/**
-	 * Obtiene la categoria asociado a la preferencia
-	 * 
-	 * @return categoria
-	 */
-	public Categoria getCategoria(){
-		return categoria;
-	}
-
-	/**
-	 * Fija la categoria asociado a la preferencia
-	 * 
-	 * @param categoria
-	 */
-	public void setCategoria(Categoria categoria){
-		this.categoria = categoria;
 	}
 	
 	/**

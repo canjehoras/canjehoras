@@ -29,26 +29,22 @@
 					<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-buscador"><fmt:message key="buscador"/></a></li>
 				</c:if>
+	    		<fmt:message key="registro"/> ${sessionScope.usuario.nombre}
+	    		<a href="#" class="scroll-link" id="toggle-cerrar"><img src="../img/close.png" alt="cerrar sesion"></a>
 			</c:if>
 			<li><a href="#" class="scroll-link" id="toggle-acerca"><fmt:message key="acerca.de"/></a></li>
 		</ul>
       </div>
 	 </nav>
     </div>
-    <c:if test="${sessionScope.usuario != null}">
-	    <div class="logo">
-	    	Usuario Registrado: ${sessionScope.usuario.nombre}
-	    	<a href="#" class="scroll-link" id="toggle-cerrar"><img src="../img/close.png" alt="cerrar sesion"></a>
-	    </div>
-    </c:if>
   </div>
   
 	<script>
 		$('#toggle-inicio').click(function(){
-		  inicio();
+		  	inicio();
 		});
 		$('#toggle-login').click(function(){
-		  $('#login').toggle();
+		  	login();
 		});
 		$('#toggle-registro').click(function(){
 			registro();
@@ -69,17 +65,4 @@
 			cerrar();
 		});
 	</script>
-	
-	<div id="login" style="display: none; position: absolute; z-index: 100;">
-	  <div id="triangle"></div>
-	  <h1><fmt:message key="login"/></h1>
-	  	<c:if test="${sessionScope.usuario == null}">
-		 	<form action="/canjehoras/login/login.html" method="post">
-			    <input type="email" name="correo_electronico" id="correo_electronico" placeholder="<fmt:message key="login.usuario"/>" />
-			    <input type="password" name="pass" id="pass" placeholder="<fmt:message key="login.pass"/>" />
-				<input type="submit" value="<fmt:message key="boton.enviar"/>" />
-				<input type="button" value="<fmt:message key="boton.registrar"/>" onclick="registro();"/>
-			</form>
-		</c:if>
-	</div>
 </header>

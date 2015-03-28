@@ -4,6 +4,9 @@
 	<bean id="usuarioDAO" class="com.vcortes.canjehoras.dao.UsuarioDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
 	<bean id="categoriaDAO" class="com.vcortes.canjehoras.dao.CategoriaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
 	<bean id="truequeDAO" class="com.vcortes.canjehoras.dao.TruequeDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
+	<bean id="provinciaDAO" class="com.vcortes.canjehoras.dao.ProvinciaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
+	<bean id="prefProvinciaDAO" class="com.vcortes.canjehoras.dao.PrefProvinciaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
+	<bean id="prefCategoriaDAO" class="com.vcortes.canjehoras.dao.PrefCategoriaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
 	
 	
 </beans>

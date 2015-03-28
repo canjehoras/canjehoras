@@ -33,8 +33,8 @@ public class TruequeBL {
 		this.truequeDAO = truequeDAO;
 	}
 	
-	public List<Trueque> findTrueque(Long idCategoria, Long idUsuario) throws Throwable {
-		return truequeDAO.findTrueque(idCategoria, idUsuario);
+	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario) throws Throwable {
+		return truequeDAO.findTrueque(idProvincia, idCategoria, idUsuario);
 	}
 	
 	public Trueque detalle(Long id) throws Throwable {

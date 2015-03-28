@@ -15,7 +15,7 @@ public class TruequeDAO extends BaseDAO {
 
 	private static final Log log = LogFactory.getLog(TruequeDAO.class);
 	
-	public List<Trueque> findTrueque(Long idCategoria, Long idUsuario)throws Throwable {
+	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario)throws Throwable {
 		log.debug("findTrueque");
 		try {
 			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class);
