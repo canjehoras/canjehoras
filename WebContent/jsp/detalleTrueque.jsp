@@ -12,7 +12,7 @@
 		<div class="container">
 				<div class="service_block">
 					<div class="service_icon delay-03s animated wow  zoomIn"> 
-						<span><i class="fa fa-dropbox"></i></span> 
+						<img src="data:image/jpg;base64,${trueque.imagen64}" style="width:100%; border: 2px solid #4BAAD6;"/> 
 					</div>
 					<h3 class="animated fadeInUp wow">${trueque.titulo}</h3>
 					<p class="animated fadeInDown wow">${trueque.fecha_alta}</p>

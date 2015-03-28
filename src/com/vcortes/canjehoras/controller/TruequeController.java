@@ -165,6 +165,7 @@ public class TruequeController extends BaseController{
 		try{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			getImagen(trueque);
 			model.addObject( Constantes.TRUEQUE, trueque);
 			
 		} catch (Throwable e) {
@@ -184,6 +185,9 @@ public class TruequeController extends BaseController{
 			
 			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
 			model.addObject( Constantes.CATEGORIAS, categorias);
+			
+			List<Categoria> provincias = categoriaBL.findAll(new Provincia(), Constantes.DESCRIPCION);
+			model.addObject(Constantes.PROVINCIAS, provincias);
 			
 		} catch (Exception e) {
 			logger.error("Error editando trueque", e);
