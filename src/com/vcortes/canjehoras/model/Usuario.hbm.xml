@@ -50,7 +50,7 @@
         <property name="fecha_ultimo_acceso" type="java.util.Date">
             <column name="FECHA_ULTIMO_ACCESO" length="19" />
         </property>
-		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none"/>
+		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none" fetch="select" not-found="ignore" />
 		<many-to-one column="ID_AGENDA" class="Agenda" name="agenda" lazy="proxy" cascade="all"/>
 	</class>
 </hibernate-mapping>

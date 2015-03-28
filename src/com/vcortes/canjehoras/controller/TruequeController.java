@@ -14,6 +14,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vcortes.canjehoras.bl.CategoriaBL;
@@ -23,7 +24,6 @@ import com.vcortes.canjehoras.model.Categoria;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
-
 
 public class TruequeController extends BaseController{
 	
@@ -137,17 +137,18 @@ public class TruequeController extends BaseController{
 		try{
 			List<Trueque> listado = truequeBL.findTrueque(null, null);
 			for (int i = 0; i<listado.size(); i++){
-				if(((Trueque)listado.get(i)).getDescripcion().length() > new Integer(25)){
-					descripcion = ((Trueque)listado.get(i)).getDescripcion().substring(0,25) + "...";
-					((Trueque)listado.get(i)).setDescripcion(descripcion);
+				Trueque trueque = listado.get(i);
+				if(trueque.getDescripcion().length() > new Integer(25)){
+					descripcion = trueque.getDescripcion().substring(0,25) + "...";
+					trueque.setDescripcion(descripcion);
 				}
-				if(null != ((Trueque)listado.get(i)).getUsuario()){
-					if(null != ((Trueque)listado.get(i)).getUsuario().getProvincia()){
-						((Trueque)listado.get(i)).setProvincia(((Trueque)listado.get(i)).getUsuario().getProvincia().getDescripcion());
-					}
+				if(null != trueque.getUsuario() && null != trueque.getUsuario().getProvincia()){
+					trueque.setProvincia(trueque.getUsuario().getProvincia().getDescripcion());
 				}
+				
+				getImagen(trueque);
 			}
-			model.addObject( Constantes.TRUEQUES, listado);
+			model.addObject(Constantes.TRUEQUES, listado);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -185,4 +186,12 @@ public class TruequeController extends BaseController{
 		}
 		return model;
 	}
+	
+	
+	private void getImagen(Trueque trueque){
+		if(trueque.getImagen()!=null){
+			trueque.setImagen64(Base64Utils.encodeToString(trueque.getImagen()));
+		}
+	}
+	
 }
