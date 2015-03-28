@@ -35,7 +35,9 @@ public class Constantes {
 	public static final String LISTA_CATEGORIA = "categorias";
 	
 	// Estados de los trueques
-	public static final String TRUEQUE_ESTADO_NUEVO  = "nuevo";
+	public static final String TRUEQUE_ESTADO_NUEVO  = "N";
+	public static final String TRUEQUE_ESTADO_REVISADO  = "R";
+	public static final String TRUEQUE_ESTADO_DENUNCIADO = "D";
 	
 	//
 
