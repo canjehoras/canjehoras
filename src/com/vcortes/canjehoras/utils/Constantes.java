@@ -22,6 +22,7 @@ public class Constantes {
 	public final static String TRUEQUE = "trueque";
 	public final static String ID = "id";
 	public final static String PERFIL = "perfil";
+	public final static String PROVINCIAS = "provincias";
 	
 	// Nombre de los .jsp
 	public static final String LOGIN  = "login";

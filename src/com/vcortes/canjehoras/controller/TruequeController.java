@@ -21,6 +21,7 @@ import com.vcortes.canjehoras.bl.CategoriaBL;
 import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Categoria;
+import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
@@ -52,6 +53,9 @@ public class TruequeController extends BaseController{
 		try{
 			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
 			model.addObject( Constantes.CATEGORIAS, categorias);
+
+			List<Categoria> provincias = categoriaBL.findAll(new Provincia(), Constantes.DESCRIPCION);
+			model.addObject(Constantes.PROVINCIAS, provincias);
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
 		}
@@ -75,6 +79,7 @@ public class TruequeController extends BaseController{
 			String categoria = "";
 			String tipo = "";
 			String id = "";
+			String provincia = "";
 			Trueque trueque = new Trueque();
 			InputStream fileContent = null;
 		    for (FileItem item : items) {
@@ -92,6 +97,8 @@ public class TruequeController extends BaseController{
 		            	tipo = fieldValue;
 		            } else if(Constantes.CATEGORIAS.equals(fieldName)){
 		            	categoria = fieldValue;
+		            } else if(Constantes.PROVINCIAS.equals(fieldName)){
+		            	provincia = fieldValue;
 		            }
 		                
 		    	} else {
@@ -109,6 +116,7 @@ public class TruequeController extends BaseController{
 		    trueque.setDescripcion(descripcion);
 		    trueque.setTipo(tipo);
 		    trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), Long.valueOf(categoria)));
+		    trueque.setProvincia((Provincia) categoriaBL.findById(new Provincia(), Long.valueOf(provincia)));
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
 			trueque.setImagen(IOUtils.toByteArray(fileContent));
