@@ -136,10 +136,15 @@ public class TruequeController extends BaseController{
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
 			List<Trueque> listado = truequeBL.findTrueque(null, null);
-			for (int i = 0; listado.size()>0; i++){
-				if(((Trueque)listado.get(i)).getDescripcion().length() > new Integer(20)){
-					descripcion = ((Trueque)listado.get(i)).getDescripcion().substring(0,20);
+			for (int i = 0; i<listado.size(); i++){
+				if(((Trueque)listado.get(i)).getDescripcion().length() > new Integer(25)){
+					descripcion = ((Trueque)listado.get(i)).getDescripcion().substring(0,25) + "...";
 					((Trueque)listado.get(i)).setDescripcion(descripcion);
+				}
+				if(null != ((Trueque)listado.get(i)).getUsuario()){
+					if(null != ((Trueque)listado.get(i)).getUsuario().getProvincia()){
+						((Trueque)listado.get(i)).setProvincia(((Trueque)listado.get(i)).getUsuario().getProvincia().getDescripcion());
+					}
 				}
 			}
 			model.addObject( Constantes.TRUEQUES, listado);

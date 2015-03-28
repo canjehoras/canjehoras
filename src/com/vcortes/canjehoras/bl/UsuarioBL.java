@@ -25,5 +25,8 @@ public class UsuarioBL {
 		this.usuarioDAO = usuarioDAO;
 	}
 	
+/**	public Usuario findProvincia(Long id_usuario) throws Throwable {
+		return usuarioDAO.findProvincia(id_usuario);
+	}*/
 
 }

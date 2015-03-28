@@ -28,9 +28,9 @@
 						<span><i class="fa fa-dropbox"></i></span> 
 					</div>
 					<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>&nbps;${trueques.categoria.descripcion}</p>
-					<!-- <p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>&nbps;${trueques.usuario.provincia.descripcion}</p> -->
-					<p class="animated fadeInDown wow"><fmt:message key="listado.tipo"/>&nbps;${trueques.tipo}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueques.categoria.descripcion}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueques.provincia}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.tipo"/>${trueques.tipo}</p>
 					<p class="animated fadeInDown wow">${trueques.descripcion}</p>
 					<c:if test="${sessionScope.usuario == null}">
 						<input type="button" value="<fmt:message key="boton.ver.mas"/>" onclick="detalleTrueque(${trueques.id});"/>
