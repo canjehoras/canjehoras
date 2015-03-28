@@ -127,6 +127,7 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque");	
+		String descripcion = "";
 		Long idUsuario = null;
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
@@ -135,9 +136,12 @@ public class TruequeController extends BaseController{
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
 			List<Trueque> listado = truequeBL.findTrueque(null, null);
-//			for (int i = 0; listado.size()>0; i++){
-//				listado.get(i).setDescripcion(listado.get(i).getDescripcion().substring(0, 20) + "...");
-//			}
+			for (int i = 0; listado.size()>0; i++){
+				if(((Trueque)listado.get(i)).getDescripcion().length() > new Integer(20)){
+					descripcion = ((Trueque)listado.get(i)).getDescripcion().substring(0,20);
+					((Trueque)listado.get(i)).setDescripcion(descripcion);
+				}
+			}
 			model.addObject( Constantes.TRUEQUES, listado);
 		} catch (Throwable e) {
 			e.printStackTrace();

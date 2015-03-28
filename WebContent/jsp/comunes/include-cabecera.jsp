@@ -18,12 +18,12 @@
 		  		<li><a href="#" class="scroll-link" id="toggle-publicar-sinregistro"><fmt:message key="publicar"/></a></li>
 			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
-				<c:if test="${sessionScope.perfil == "A"}">
+				<c:if test="${sessionScope.perfil == 'A'}">
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="gestion.usuarios"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.activos"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.denunciados"/></a></li>
 				</c:if>
-				<c:if test="${sessionScope.perfil == "U"}">
+				<c:if test="${sessionScope.perfil == 'U'}">
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-trueques"><fmt:message key="trueques"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
