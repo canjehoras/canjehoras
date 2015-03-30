@@ -28,6 +28,13 @@
                     <option value="${provincia.id}" <c:if test="${provincia.id == sessionScope.usuario.provincia.id}">selected</c:if>>${provincia.descripcion}</option>
             </c:forEach>
         </select> 
+        
+        <div class="tituloSelect">Seleccione el tipo</div>
+        <div style=" background: none repeat scroll 0 0 #fff; border: 1px solid #ccc; color: #555; font-size: 95%; margin-bottom: 4%; padding: 2%; width: 92%;">
+	        <input type="radio" value="O" name="tipo" id="tipo" <c:if test="${'O' == trueque.tipo}">selected</c:if>/> Oferta <br />
+	        <input type="radio" value="D" name="tipo" id="tipo" <c:if test="${'D' == trueque.tipo}">selected</c:if>/> Demanda
+        </div>
+        
  		<textarea title="<fmt:message key="nuevo.trueque.descripcion2"/>" name="descripcion" id="descripcion" placeholder="<fmt:message key="nuevo.trueque.descripcion"/>" required="required">${trueque.descripcion}</textarea>
  		<div class="tituloSelect"><fmt:message key="nuevo.trueque.imagen"/></div>
  		<input type="file" accept="image/*" title="<fmt:message key="nuevo.trueque.imagen2"/>" name="imagen" id="imagen" placeholder="<fmt:message key="nuevo.trueque.imagen"/>" style="margin-bottom: 5%"/>
