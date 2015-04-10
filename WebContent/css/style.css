@@ -972,6 +972,39 @@ img {
     color: #222;
 }
 
+
+/* Registro
+---------------------------------*/
+
+.registro_wrapper {
+    background: #232323;
+}
+
+.registro_bottom {
+    /*border-top: 1px solid #3C3A3A;*/
+    padding: 0px 0;
+}
+
+.registro_bottom span {
+    display: block;
+    font-size: 14px;
+    color: #cccccc;
+    text-align: right;
+}
+
+.registro_bottom span a {
+    display: inline-block;
+    color: #4BAAD6;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+}
+
+.registro_bottom span a:hover {
+    color: #fff;
+}
+
 /* Footer
 ---------------------------------*/
 

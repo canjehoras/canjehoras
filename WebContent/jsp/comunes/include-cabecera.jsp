@@ -3,6 +3,22 @@
 
 <!--Header_section-->
 <header id="header_wrapper">
+	<registro class="registro_wrapper" id="contact">
+		<div class="container">
+		  	<div class="registro_bottom">
+		  		<span>
+		  			<c:if test="${sessionScope.usuario == null}">
+		        		<p><fmt:message key="registro.no"/></p>
+		        	</c:if>
+		        	<c:if test="${sessionScope.usuario != null}">
+		        		<p>
+		        			<fmt:message key="registro"/>${sessionScope.usuario.nombre}<a href="#" class="scroll-link" id="toggle-cerrar"><img src="../img/close.png" alt="cerrar sesion"></a>
+		        		</p>
+		        	</c:if>
+				</span> 
+			</div>
+		</div>
+	</registro>
   <div class="container">
     <div class="header_box">
       <div class="logo"><a href="#" class="scroll-link" id="toggle-inicio"><img src="../img/logo.png" alt="logo"></a></div>
@@ -14,7 +30,6 @@
 		<ul class="nav navbar-nav" id="mainNav">
 			<c:if test="${sessionScope.usuario == null}">
 		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login"/></a></li>
-		  		<li><a href="#" class="scroll-link" id="toggle-registro"><fmt:message key="registrar"/></a></li>
 		  		<li><a href="#" class="scroll-link" id="toggle-publicar-sinregistro"><fmt:message key="publicar"/></a></li>
 			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
@@ -22,6 +37,11 @@
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="gestion.usuarios"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.activos"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.denunciados"/></a></li>
+					****************
+					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
+					<li><a href="#" class="scroll-link" id="toggle-trueques"><fmt:message key="trueques"/></a></li>
+					<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
+					<li><a href="#" class="scroll-link" id="toggle-buscador"><fmt:message key="buscador"/></a></li>
 				</c:if>
 				<c:if test="${sessionScope.perfil == 'U'}">
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
@@ -29,9 +49,8 @@
 					<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-buscador"><fmt:message key="buscador"/></a></li>
 				</c:if>
-	    		<fmt:message key="registro"/> ${sessionScope.usuario.nombre}
-	    		<a href="#" class="scroll-link" id="toggle-cerrar"><img src="../img/close.png" alt="cerrar sesion"></a>
 			</c:if>
+			
 			<li><a href="#" class="scroll-link" id="toggle-acerca"><fmt:message key="acerca.de"/></a></li>
 		</ul>
       </div>
@@ -45,9 +64,6 @@
 		});
 		$('#toggle-login').click(function(){
 		  	login();
-		});
-		$('#toggle-registro').click(function(){
-			registro();
 		});
 		$('#toggle-buscador').click(function(){
 			buscador();

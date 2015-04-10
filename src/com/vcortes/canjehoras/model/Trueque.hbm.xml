@@ -10,7 +10,7 @@
             <column name="FECHA_ALTA" length="19" not-null="true" />
         </property>
 		<property name="estado" type="string">
-            <column name="ESTADO" length="20" not-null="true" />
+            <column name="ESTADO" length="1" not-null="true" />
         </property>
         <property name="titulo" type="string">
             <column name="TITULO" length="50" not-null="true" />

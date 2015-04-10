@@ -8,7 +8,6 @@
 	</head>
 	
 	<body>
-	
 	<%@ include file="comunes/include-cabecera.jsp" %>
 	
 	<section id="hero_section" class="top_cont_outer">
