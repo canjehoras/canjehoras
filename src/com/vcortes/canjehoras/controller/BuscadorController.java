@@ -9,37 +9,28 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.vcortes.canjehoras.bl.CategoriaBL;
+import com.vcortes.canjehoras.bl.BuscadorBL;
 import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.model.Categoria;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.utils.Constantes;
 
-public class CategoriaController extends BaseController {
+public class BuscadorController extends BaseController {
 
-	public static final Log log = LogFactory.getLog(CategoriaController.class);
-	private CategoriaBL categoriaBL;
+	public static final Log log = LogFactory.getLog(BuscadorController.class);
+	private BuscadorBL buscadorBL;
 	private TruequeBL truequeBL;
 
-	public void setCategoriaBL(CategoriaBL categoriaBL) {
-		this.categoriaBL = categoriaBL;
-	}
-
-	public void setTruequeBL(TruequeBL truequeBL) {
-		this.truequeBL = truequeBL;
-	}
 
 	/**
 	 * @throws Throwable
 	 */
-	public ModelAndView inicio(HttpServletRequest request,
-			HttpServletResponse response) throws Throwable {
-		ModelAndView model = new ModelAndView(Constantes.LISTA_CATEGORIA);
+	public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		ModelAndView model = new ModelAndView(Constantes.BUSCADOR);
 		try {
-			List<Categoria> categorias = categoriaBL.findAll(new Categoria(),
-					Constantes.DESCRIPCION);
-			model.addObject(Constantes.CATEGORIAS, categorias);
 			
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			model.addObject(Constantes.CATEGORIAS, categorias);			
 
 			List<Trueque> listado = truequeBL.findAll(new Trueque());
 			model.addObject(Constantes.TRUEQUES, listado);
@@ -47,5 +38,13 @@ public class CategoriaController extends BaseController {
 			logger.error("Error al obtener el listado de las categorias", e);
 		}
 		return model;
+	}
+
+	public void setBuscadorBL(BuscadorBL buscadorBL) {
+		this.buscadorBL = buscadorBL;
+	}
+
+	public void setTruequeBL(TruequeBL truequeBL) {
+		this.truequeBL = truequeBL;
 	}
 }

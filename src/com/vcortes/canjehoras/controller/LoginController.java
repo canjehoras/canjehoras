@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.vcortes.canjehoras.bl.CategoriaBL;
+import com.vcortes.canjehoras.bl.BuscadorBL;
 import com.vcortes.canjehoras.bl.PrefCategoriaBL;
 import com.vcortes.canjehoras.bl.PrefProvinciaBL;
 import com.vcortes.canjehoras.bl.ProvinciaBL;
@@ -30,7 +30,7 @@ public class LoginController extends BaseController{
 	public static final Log log = LogFactory.getLog(LoginController.class);
 	
 	private UsuarioBL usuarioBL;
-	private CategoriaBL categoriaBL;
+	private BuscadorBL buscadorBL;
 	private ProvinciaBL provinciaBL;
 	private TruequeBL truequeBL;
 	private PrefProvinciaBL prefProvinciaBL;
@@ -42,14 +42,14 @@ public class LoginController extends BaseController{
 	public void setUsuarioBL(UsuarioBL usuarioBL) {
 		this.usuarioBL = usuarioBL;
 	}
-	public CategoriaBL getCategoriaBL() {
-		return categoriaBL;
+	public BuscadorBL getBuscadorBL() {
+		return buscadorBL;
 	}
 	public void setProvinciaBL(ProvinciaBL provinciaBL) {
 		this.provinciaBL = provinciaBL;
 	}
-	public void setCategoriaBL(CategoriaBL categoriaBL) {
-		this.categoriaBL = categoriaBL;
+	public void setBuscadorBL(BuscadorBL buscadorBL) {
+		this.buscadorBL = buscadorBL;
 	}
 	public void setTruequeBL(TruequeBL truequeBL) {
 		this.truequeBL = truequeBL;
@@ -129,10 +129,10 @@ public class LoginController extends BaseController{
 		log.debug("Inicio registro");
 		ModelAndView model = new ModelAndView(Constantes.REGISTRO);
 		try{
-			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), "descripcion");
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), "descripcion");
 			model.addObject("categorias", categorias);
 			
-			List<Categoria> provincias = categoriaBL.findAll(new Provincia(),  "descripcion");
+			List<Categoria> provincias = buscadorBL.findAll(new Provincia(),  "descripcion");
 			model.addObject("provincias", provincias);
 		
 		} catch(Exception e){
@@ -194,7 +194,7 @@ public class LoginController extends BaseController{
 			}
 				
 			for (int i = 0; i < categoria.length; i++) {
-				Categoria c = (Categoria) categoriaBL.findById(new Categoria(), new Long(categoria[i]));
+				Categoria c = (Categoria) buscadorBL.findById(new Categoria(), new Long(categoria[i]));
 				PrefCategoria prefCategoria = new PrefCategoria();
 				prefCategoria.setUsuario(usuario);
 				prefCategoria.setCategoria(c);

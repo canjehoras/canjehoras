@@ -8,9 +8,9 @@ import org.apache.commons.logging.LogFactory;
 import com.vcortes.canjehoras.model.Categoria;
 
 
-public class CategoriaDAO extends BaseDAO {
+public class BuscadorDAO extends BaseDAO {
 
-	private static final Log log = LogFactory.getLog(CategoriaDAO.class);
+	private static final Log log = LogFactory.getLog(BuscadorDAO.class);
 	
 	public List<Categoria> findAll() throws Throwable {
 		log.debug("findAll");

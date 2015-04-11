@@ -34,6 +34,7 @@ public class Constantes {
 	public static final String EDITAR_TRUEQUE  = "edicionTrueque";
 	public static final String DETALLE_TRUEQUE  = "detalleTrueque";
 	public static final String LISTA_CATEGORIA = "categorias";
+	public static final String BUSCADOR ="buscador";
 	
 	// Estados de los trueques
 	public static final String TRUEQUE_ESTADO_NUEVO  = "N";
