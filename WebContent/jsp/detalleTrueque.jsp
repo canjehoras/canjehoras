@@ -12,20 +12,20 @@
 	<%@ include file="comunes/include-cabecera.jsp"%>
 	<div class="container">
 		<div class="service_block">
-			<div class="service_icon delay-03s animated wow  zoomIn"> 
-				<img src="data:image/jpg;base64,${trueques.imagen64}" style="max-height: 190px; border: 2px solid #4BAAD6;"/> 
+			<div class="service_icon delay-03s animated wow  zoomIn" style="height: 300px;"> 
+				<img src="data:image/jpg;base64,${trueque.imagen64}" style="height: 300px; border: 2px solid #4BAAD6;"/> 
 			</div>
-			<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
-			<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueques.categoria.descripcion}</p>
-			<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueques.provincia.descripcion}</p>
-			<p class="animated fadeInDown wow"><fmt:message key="listado.tipo"/>${trueques.tipo}</p>
-			<p class="animated fadeInDown wow">${trueques.descripcion}</p>
-					
-			<input type="button" value="<fmt:message key="boton.contacte"/>" onclick="contacteUsuarioTrueque(${trueques.id});"/>
-			<input type="button" value="<fmt:message key="boton.agenda"/>" onclick="agendaTrueque(${trueques.id});"/>
-			<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueques.id});"/>
-
-
+			<h3 class="animated fadeInUp wow">${trueque.titulo}</h3>
+			<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueque.categoria.descripcion}</p>
+			<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueque.provincia.descripcion}</p>
+			<p class="animated fadeInDown wow"><fmt:message key="listado.tipo"/>${trueque.tipo}</p>
+			<p class="animated fadeInDown wow">${trueque.descripcion}</p>
+			
+			<div id="botonesDetalle">		
+				<input type="button" value="<fmt:message key="boton.contacte"/>" onclick="contacteUsuarioTrueque(${trueque.id});"/>
+				<input type="button" value="<fmt:message key="boton.agenda"/>" onclick="agendaTrueque(${trueque.id});"/>
+				<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
+			</div>
 
 			<h3 class="animated fadeInUp wow">
 				<fmt:message key="contacte" />
