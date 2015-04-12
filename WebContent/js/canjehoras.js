@@ -34,6 +34,10 @@ detalleTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/detalle.html?id=" + id
 }
 
+foroTrueque = function(id){
+	window.location.href= "/canjehoras/foro/listado.html?id=" + id
+}
+
 borrarTrueque = function(){
 	var txt;
 	var r = confirm("Press a button!");

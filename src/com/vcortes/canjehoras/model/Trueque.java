@@ -22,6 +22,7 @@ public class Trueque implements Serializable{
 	private Categoria categoria;
 	private String imagen64;
 	private Provincia provincia;
+	private String modalidad;
 
 	/**
 	 * Constructor por defecto
@@ -45,7 +46,7 @@ public class Trueque implements Serializable{
 	 */
 	public Trueque(Long id, Date fecha_alta, String estado, String titulo, 
 					String descripcion, String tipo, byte[] imagen, Usuario usuario, 
-					Categoria categoria, Provincia provincia) {
+					Categoria categoria, Provincia provincia, String modalidad) {
 		this.id = id;
 		this.fecha_alta = fecha_alta;
 		this.estado = estado;
@@ -56,6 +57,7 @@ public class Trueque implements Serializable{
 		this.usuario = usuario;
 		this.categoria = categoria;
 		this.provincia = provincia;
+		this.modalidad = modalidad;
 	}
 	
 	/**
@@ -236,5 +238,12 @@ public class Trueque implements Serializable{
 		this.provincia = provincia;
 	}
 
+	public String getModalidad() {
+		return modalidad;
+	}
+
+	public void setModalidad(String modalidad) {
+		this.modalidad = modalidad;
+	}
 }
 

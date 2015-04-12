@@ -34,6 +34,7 @@
 					<p class="animated fadeInDown wow">${trueques.descripcion}</p>
 					<c:if test="${sessionScope.usuario == null}">
 						<input type="button" value="<fmt:message key="boton.ver.mas"/>" onclick="detalleTrueque(${trueques.id});"/>
+						<input type="button" value="<fmt:message key="boton.foro"/>" onclick="foroTrueque(${trueques.id});"/>
 					</c:if>
 					<c:if test="${sessionScope.usuario != null}">
 						<input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>

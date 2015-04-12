@@ -83,6 +83,15 @@
 	
    <!-- Agenda-->
 	<bean name="/agenda/*.html" class="com.vcortes.canjehoras.controller.AgendaController">
+		<property name="methodNameResolver">
+            <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
+        </property>
+		<property name="usuarioBL" ref="usuarioBL" />
+		<property name="truequeBL" ref="truequeBL" />
+    </bean> 
+
+	<!-- Foro -->
+	<bean name="/foro/*.html" class="com.vcortes.canjehoras.controller.ForoController">
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
         </property>

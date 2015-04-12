@@ -53,6 +53,18 @@ public abstract class BaseController extends MultiActionController {
 				descripcion = trueque.getDescripcion().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
 				trueque.setDescripcion(descripcion);
 			}
+			if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+				trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
+			}
+			if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
+				trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
+			}
+			if(trueque.getTipo().equals(Constantes.TIPO_COMPARTIR_HORAS)){
+				trueque.setTipo(Constantes.TIPO_COMPARTIR_HORAS_DESC);
+			}
+			if(trueque.getTipo().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
+				trueque.setTipo(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
+			}
 			getImagen(trueque);
 		}
 		
