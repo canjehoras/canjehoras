@@ -1644,11 +1644,19 @@ div.mc-image {
     padding: 0;
 }
 
+#categoria h1, #categoria2 h1{
+	background: none repeat scroll 0 0 #3399cc;
+    color: #fff;
+    font-size: 140%;
+    font-weight: 300;
+    padding: 20px 0;
+    text-align: center;	
+}
+
 /*
    Media Queries
 --------------------------- */
 @media (min-width: 768px) {
-<<<<<<< HEAD
 	.mapa{
 		width:65%;
 		float: left;
@@ -1665,106 +1673,110 @@ div.mc-image {
 		height: 540px;
 	}
 }
-=======
->>>>>>> 8b19787a4142ab00dd55f1a6ae1aeed5104c8a08
 
-
-}
 @media (max-width: 768px) {
-p{
-font-size:14px;
-}
-.hero_section {
-position: relative;
-padding-top: 10px;
-}
-.top_left_cont {
-padding: 38px 0;
-}
-.top_left_cont h2 {
-font-size: 25px;
-color: #FFF;
-line-height: 39px;
-margin: 0 0 9px 0;
-}
-.inner_section {
-padding: 20px 0 20px;
-}
-#aboutUs img{
-margin-bottom:20px;
-}
-#aboutUs h3{
-font-size:16px;
-line-height:22px;
-}
-.service_block h3 { 
-font-size: 16px;
-}
-service_block p {
-font-size: 14px; 
-margin: 0px;
-margin-bottom: 20px;
-}
-#filters ul{
-padding-left:0px;
-}
-.form {
-margin: 0 18px;
-}
-.page_section.team{
-padding: 40px 0;
-}
-, #clients {
-padding: 40px 0;
-}
-.client_logos ul li {
-display: inline;
-margin: 0 25px;
-padding: 11px 0;
-display: inline-block;
-}
-.social_links li {
-float: left; 
-}
-.contact_section{
-margin:0;
-}
-h2, .contact_section h2 {
-font-size: 30px;
-}
-.page_section.contact {
-padding: 60px 0 50px;
-} 
-.navbar-inverse .navbar-toggle .icon-bar{
-background:#4BAAD6;
-}
-.navbar-inverse .navbar-toggle {
-border-color: transparent;
-}
-.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus{
-background:none;
-outline: none;
-}
-.navStyle ul li {
-display: block;
-}
-.navStyle {
-float: right;
-width: 100%;
-text-align:center;
-}
-.navStyle ul li:last-child {
-margin: 0px;
-}
-.navbar-inverse .navbar-nav > li > a {
-color: #222;
-background: #F9F9F9;
-}
+	.mapa{
+		width:100%;
+		margin: 4px;
+	}
+	.mapaCombo{
+		width:100%;
+		margin: 4px;
+	}
+	p{
+		font-size:14px;
+	}
+	.hero_section {
+		position: relative;
+		padding-top: 10px;
+	}
+	.top_left_cont {
+		padding: 38px 0;
+	}
+	.top_left_cont h2 {
+		font-size: 25px;
+		color: #FFF;
+		line-height: 39px;
+		margin: 0 0 9px 0;
+	}
+	.inner_section {
+		padding: 20px 0 20px;
+	}
+	#aboutUs img{
+		margin-bottom:20px;
+	}
+	#aboutUs h3{
+		font-size:16px;
+		line-height:22px;
+	}
+	.service_block h3 { 
+		font-size: 16px;
+	}
+	service_block p {
+		font-size: 14px; 
+		margin: 0px;
+		margin-bottom: 20px;
+	}
+	#filters ul{
+		padding-left:0px;
+	}
+	.form {
+		margin: 0 18px;
+	}
+	.page_section.team{
+		padding: 40px 0;
+	}
+	, #clients {
+		padding: 40px 0;
+	}
+	.client_logos ul li {
+		display: inline;
+		margin: 0 25px;
+		padding: 11px 0;
+		display: inline-block;
+	}
+	.social_links li {
+		float: left; 
+	}
+	.contact_section{
+		margin:0;
+	}
+	h2, .contact_section h2 {
+		font-size: 30px;
+	}
+	.page_section.contact {
+	padding: 60px 0 50px;
+	} 
+	.navbar-inverse .navbar-toggle .icon-bar{
+		background:#4BAAD6;
+	}
+	.navbar-inverse .navbar-toggle {
+		border-color: transparent;
+	}
+	.navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus{
+		background:none;
+		outline: none;
+	}
+	.navStyle ul li {
+	display: block;
+	}
+	.navStyle {
+		float: right;
+		width: 100%;
+		text-align:center;
+	}
+	.navStyle ul li:last-child {
+		margin: 0px;
+	}
+	.navbar-inverse .navbar-nav > li > a {
+		color: #222;
+		background: #F9F9F9;
+	}
 } 
 @media (max-width: 480px){ 
-.team_area {
-width: 99%;
-}
+	.team_area {
+		width: 99%;
+	}
 }
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
@@ -1829,7 +1841,7 @@ form{
 }
 
 input[type="email"],input[type="password"],input[type="text"],input[type="tel"], textarea {
-  width:92%;
+  width:100%;
   background:#fff;
   margin-bottom:4%;
   border:1px solid #ccc;
@@ -1839,7 +1851,7 @@ input[type="email"],input[type="password"],input[type="text"],input[type="tel"],
   color:#555;
 }
 select {
-  width:92%;
+  width:100%;
   background:#fff;
   margin-bottom:4%;
   border:1px solid #ccc;
@@ -1894,6 +1906,13 @@ input[type="submit"]:hover, input[type="button"]:hover{
 	font-family:'Open Sans',sans-serif;
 	font-size:95%;
 	color:#555;
+}
+
+.subtituloSelect{
+	width:92%;
+	font-family:'Open Sans',sans-serif;
+	font-size:100%;
+	color:#2288bb;
 }
 
 #selectorOpciones input[type="checkbox"]{

@@ -14,10 +14,9 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.vcortes.canjehoras.bl.CategoriaBL;
+import com.vcortes.canjehoras.bl.BuscadorBL;
 import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Categoria;
@@ -30,15 +29,15 @@ public class TruequeController extends BaseController{
 	
 	public static final Log log = LogFactory.getLog(TruequeController.class);
 	private UsuarioBL usuarioBL;
-	private CategoriaBL categoriaBL;
+	private BuscadorBL buscadorBL;
 	private TruequeBL truequeBL;
 
 	public void setUsuarioBL(UsuarioBL usuarioBL) {
 		this.usuarioBL = usuarioBL;
 	}
 
-	public void setCategoriaBL(CategoriaBL categoriaBL) {
-		this.categoriaBL = categoriaBL;
+	public void setBuscadorBL(BuscadorBL buscadorBL) {
+		this.buscadorBL = buscadorBL;
 	}
 
 	public void setTruequeBL(TruequeBL truequeBL) {
@@ -51,10 +50,10 @@ public class TruequeController extends BaseController{
 	public ModelAndView nuevo(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView model = new ModelAndView(Constantes.NUEVO_TRUEQUE); 
 		try{
-			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
 			model.addObject( Constantes.CATEGORIAS, categorias);
 
-			List<Categoria> provincias = categoriaBL.findAll(new Provincia(), Constantes.DESCRIPCION);
+			List<Categoria> provincias = buscadorBL.findAll(new Provincia(), Constantes.DESCRIPCION);
 			model.addObject(Constantes.PROVINCIAS, provincias);
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
@@ -115,8 +114,8 @@ public class TruequeController extends BaseController{
 		    trueque.setTitulo(titulo);
 		    trueque.setDescripcion(descripcion);
 		    trueque.setTipo(tipo);
-		    trueque.setCategoria((Categoria) categoriaBL.findById(new Categoria(), Long.valueOf(categoria)));
-		    trueque.setProvincia((Provincia) categoriaBL.findById(new Provincia(), Long.valueOf(provincia)));
+		    trueque.setCategoria((Categoria) buscadorBL.findById(new Categoria(), Long.valueOf(categoria)));
+		    trueque.setProvincia((Provincia) buscadorBL.findById(new Provincia(), Long.valueOf(provincia)));
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
 			trueque.setImagen(IOUtils.toByteArray(fileContent));
@@ -135,7 +134,6 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque");	
-		String descripcion = "";
 		Long idUsuario = null;
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
@@ -144,20 +142,7 @@ public class TruequeController extends BaseController{
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
 			List<Trueque> listado = truequeBL.findTrueque(null, null,null);
-			for (int i = 0; i<listado.size(); i++){
-				Trueque trueque = listado.get(i);
-				if(trueque.getDescripcion().length() > new Integer(Constantes.MAX_DESCRIPCION)){
-					descripcion = trueque.getDescripcion().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
-					trueque.setDescripcion(descripcion);
-				}
-				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
-					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
-				}
-				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
-					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
-				}
-				getImagen(trueque);
-			}
+			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -171,12 +156,6 @@ public class TruequeController extends BaseController{
 		try{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
-			if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
-				trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
-			}
-			if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
-				trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
-			}
 			getImagen(trueque);
 			model.addObject( Constantes.TRUEQUE, trueque);
 			
@@ -195,10 +174,10 @@ public class TruequeController extends BaseController{
 			Trueque trueque = (Trueque) truequeBL.findById(new Trueque(), Long.valueOf(id));
 			model.addObject("trueque", trueque);
 			
-			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
 			model.addObject( Constantes.CATEGORIAS, categorias);
 			
-			List<Categoria> provincias = categoriaBL.findAll(new Provincia(), Constantes.DESCRIPCION);
+			List<Categoria> provincias = buscadorBL.findAll(new Provincia(), Constantes.DESCRIPCION);
 			model.addObject(Constantes.PROVINCIAS, provincias);
 			
 		} catch (Exception e) {
@@ -207,11 +186,5 @@ public class TruequeController extends BaseController{
 		return model;
 	}
 	
-	
-	private void getImagen(Trueque trueque){
-		if(trueque.getImagen()!=null){
-			trueque.setImagen64(Base64Utils.encodeToString(trueque.getImagen()));
-		}
-	}
 	
 }

@@ -76,6 +76,7 @@ public class BuscadorController extends BaseController {
 			}
 			
 			List<Trueque> listado = truequeBL.buscarTrueques(descripcion, provincias, categoria);
+			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
 		
 		} catch (Exception e) {
