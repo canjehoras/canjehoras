@@ -5,6 +5,8 @@
   </div>
   <div class="container">
   <!-- El pie ponerlo como en la USJ muy simple -->
-    <div class="footer_bottom"><span><fmt:message key="pie"/></span> </div>
+    <div class="footer_bottom">
+    	<span><fmt:message key="pie"/></span>
+    </div>
   </div>
 </footer>

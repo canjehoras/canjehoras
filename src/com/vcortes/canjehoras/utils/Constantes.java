@@ -9,6 +9,10 @@ public class Constantes {
 	public final static String IDIOMA_EN = "EN";
 	public final static String TIPO_ADMINISTRADOR = "A";
 	public final static String TIPO_USUARIO = "U";
+	public final static String TIPO_OFERTA = "O";
+	public final static String TIPO_DEMANDA = "D";
+	public final static String TIPO_OFERTA_DESC = "Oferta";
+	public final static String TIPO_DEMANDA_DESC = "Demanda";
 	
 	// Nombre de atributos
 	public final static String USUARIO = "usuario";
@@ -27,6 +31,7 @@ public class Constantes {
 	// Nombre de los .jsp
 	public static final String LOGIN  = "login";
 	public static final String REGISTRO  = "registro";
+	public static final String RECORDAR_PASS  = "recordarContrasenya";
 	public static final String INICIO  = "inicio";
 	public static final String PUBLICAR  = "publicar";
 	public static final String NUEVO_TRUEQUE  = "nuevoTrueque";
