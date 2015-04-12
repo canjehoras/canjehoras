@@ -9,5 +9,8 @@
 		<property name="descripcion" type="string">
             <column name="DESCRIPCION" length="50" not-null="true" />
         </property>
+		<property name="codigo" type="string">
+            <column name="CODIGO" length="10" not-null="true" />
+        </property>
 	</class>
 </hibernate-mapping>

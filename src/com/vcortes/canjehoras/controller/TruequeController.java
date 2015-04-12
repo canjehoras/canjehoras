@@ -14,7 +14,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vcortes.canjehoras.bl.BuscadorBL;
@@ -135,7 +134,6 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque");	
-		String descripcion = "";
 		Long idUsuario = null;
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
@@ -144,20 +142,15 @@ public class TruequeController extends BaseController{
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
 			List<Trueque> listado = truequeBL.findTrueque(null, null,null);
-			for (int i = 0; i<listado.size(); i++){
-				Trueque trueque = listado.get(i);
-				if(trueque.getDescripcion().length() > new Integer(Constantes.MAX_DESCRIPCION)){
-					descripcion = trueque.getDescripcion().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
-					trueque.setDescripcion(descripcion);
-				}
-				getImagen(trueque);
-			}
+			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		return model;
 	}
+	
+	
 	
 	public ModelAndView detalle(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Detalle de trueque");	
@@ -173,6 +166,8 @@ public class TruequeController extends BaseController{
 		}
 		return model;
 	}
+	
+	
 	
 	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Editar trueque");
@@ -195,11 +190,5 @@ public class TruequeController extends BaseController{
 		return model;
 	}
 	
-	
-	private void getImagen(Trueque trueque){
-		if(trueque.getImagen()!=null){
-			trueque.setImagen64(Base64Utils.encodeToString(trueque.getImagen()));
-		}
-	}
 	
 }

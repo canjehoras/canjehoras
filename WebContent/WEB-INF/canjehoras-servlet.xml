@@ -68,6 +68,7 @@
         </property>
 		<property name="buscadorBL" ref="buscadorBL" />
 		<property name="truequeBL" ref="truequeBL" />
+		<property name="provinciaBL" ref="provinciaBL" />
     </bean> 
     
    <!-- Trueque-->
