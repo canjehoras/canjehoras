@@ -49,6 +49,8 @@
 		</c:if>
 		</c:forEach>
 	</div>
+	</div>
+	</div>
 	<%@ include file="comunes/include-pie.jsp" %>
 	</body>
 </html>
