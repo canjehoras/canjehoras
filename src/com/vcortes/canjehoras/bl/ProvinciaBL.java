@@ -23,6 +23,10 @@ public class ProvinciaBL {
 	public Object findById(Object instance, Serializable id) throws Exception {
 		return ProvinciaDAO.findById(instance, id);
 	}
+	
+	public Provincia findProvinciaByCodigo(String codigo){
+		return ProvinciaDAO.findProvinciaByCodigo(codigo);
+	}
 
 	public ProvinciaDAO getProvinciaDAO() {
 		return ProvinciaDAO;

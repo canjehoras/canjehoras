@@ -11,7 +11,7 @@ registro = function(){
 }
 
 buscador = function(){
-	window.location.href= "/canjehoras/categoria/inicio.html"
+	window.location.href= "/canjehoras/buscador/inicio.html"
 }
 
 publicar = function(){

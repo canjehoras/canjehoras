@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.vcortes.canjehoras.dao.TruequeDAO;
+import com.vcortes.canjehoras.model.Categoria;
+import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Trueque;
 
 
@@ -39,5 +41,9 @@ public class TruequeBL {
 	
 	public Trueque detalle(Long id) throws Throwable {
 		return truequeDAO.detalle(id);
+	}
+	
+	public List<Trueque> buscarTrueques(String descripcion, List<Provincia> provincias, Categoria categoria){
+		return truequeDAO.buscarTrueques(descripcion, provincias, categoria);
 	}
 }

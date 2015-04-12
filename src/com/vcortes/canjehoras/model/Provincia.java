@@ -11,6 +11,7 @@ public class Provincia implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descripcion;
+	private String codigo;
 	
 	/**
 	 * Constructor por defecto
@@ -65,6 +66,14 @@ public class Provincia implements Serializable{
 	 */
 	public void setDescripcion(String descripcion){
 		this.descripcion = descripcion;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 }
 

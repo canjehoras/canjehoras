@@ -46,7 +46,7 @@
             <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
         </property>
 		<property name="usuarioBL" ref="usuarioBL" />
-		<property name="categoriaBL" ref="categoriaBL" />
+		<property name="buscadorBL" ref="buscadorBL" />
 		<property name="provinciaBL" ref="provinciaBL" />
 		<property name="truequeBL" ref="truequeBL" />
 		<property name="prefProvinciaBL" ref="prefProvinciaBL" />
@@ -62,12 +62,13 @@
     </bean> 
 
 	<!-- Categoria -->
-	<bean name="/categoria/*.html" class="com.vcortes.canjehoras.controller.CategoriaController">
+	<bean name="/buscador/*.html" class="com.vcortes.canjehoras.controller.BuscadorController">
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
         </property>
-		<property name="categoriaBL" ref="categoriaBL" />
+		<property name="buscadorBL" ref="buscadorBL" />
 		<property name="truequeBL" ref="truequeBL" />
+		<property name="provinciaBL" ref="provinciaBL" />
     </bean> 
     
    <!-- Trueque-->
@@ -76,7 +77,7 @@
             <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
         </property>
 		<property name="usuarioBL" ref="usuarioBL" />
-		<property name="categoriaBL" ref="categoriaBL" />
+		<property name="buscadorBL" ref="buscadorBL" />
 		<property name="truequeBL" ref="truequeBL" />
     </bean> 
 	
