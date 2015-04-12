@@ -79,6 +79,7 @@ public class TruequeController extends BaseController{
 			String tipo = "";
 			String id = "";
 			String provincia = "";
+			String modalidad = "";
 			Trueque trueque = new Trueque();
 			InputStream fileContent = null;
 		    for (FileItem item : items) {
@@ -98,6 +99,8 @@ public class TruequeController extends BaseController{
 		            	categoria = fieldValue;
 		            } else if(Constantes.PROVINCIAS.equals(fieldName)){
 		            	provincia = fieldValue;
+		            } else if(Constantes.MODALIDAD.equals(fieldName)){
+		            	modalidad = fieldValue;
 		            }
 		                
 		    	} else {
@@ -116,6 +119,7 @@ public class TruequeController extends BaseController{
 		    trueque.setTipo(tipo);
 		    trueque.setCategoria((Categoria) buscadorBL.findById(new Categoria(), Long.valueOf(categoria)));
 		    trueque.setProvincia((Provincia) buscadorBL.findById(new Provincia(), Long.valueOf(provincia)));
+		    trueque.setModalidad(modalidad);
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
 			trueque.setImagen(IOUtils.toByteArray(fileContent));
@@ -156,7 +160,21 @@ public class TruequeController extends BaseController{
 		try{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
-			getImagen(trueque);
+			if(null != trueque){				
+				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
+				}
+				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
+					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
+				}
+				if(trueque.getTipo().equals(Constantes.TIPO_COMPARTIR_HORAS)){
+					trueque.setTipo(Constantes.TIPO_COMPARTIR_HORAS_DESC);
+				}
+				if(trueque.getTipo().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
+					trueque.setTipo(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
+				}
+				getImagen(trueque);
+			}
 			model.addObject( Constantes.TRUEQUE, trueque);
 			
 		} catch (Throwable e) {

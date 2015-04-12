@@ -10,9 +10,13 @@ public class Constantes {
 	public final static String TIPO_ADMINISTRADOR = "A";
 	public final static String TIPO_USUARIO = "U";
 	public final static String TIPO_OFERTA = "O";
-	public final static String TIPO_DEMANDA = "D";
 	public final static String TIPO_OFERTA_DESC = "Oferta";
+	public final static String TIPO_DEMANDA = "D";
 	public final static String TIPO_DEMANDA_DESC = "Demanda";
+	public final static String TIPO_COMPARTIR_HORAS = "C";
+	public final static String TIPO_COMPARTIR_HORAS_DESC = "Compartir Horas";
+	public final static String TIPO_INTERCAMBIAR_HORAS = "I";
+	public final static String TIPO_INTERCAMBIAR_HORAS_DESC = "Intercambiar Horas";
 	
 	// Nombre de atributos
 	public final static String USUARIO = "usuario";
@@ -27,6 +31,7 @@ public class Constantes {
 	public final static String ID = "id";
 	public final static String PERFIL = "perfil";
 	public final static String PROVINCIAS = "provincias";
+	public final static String MODALIDAD = "modalidad";
 	
 	// Nombre de los .jsp
 	public static final String LOGIN  = "login";
