@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -141,6 +142,21 @@ public class LoginController extends BaseController{
 		return model;
 	}
 	
+	public ModelAndView recordarContrasenya(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Inicio recordar contrasenya");
+		ModelAndView model = new ModelAndView(Constantes.RECORDAR_PASS);
+//		try{
+//			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), "descripcion");
+//			model.addObject("categorias", categorias);
+//			
+//			List<Categoria> provincias = categoriaBL.findAll(new Provincia(),  "descripcion");
+//			model.addObject("provincias", provincias);
+//		
+//		} catch(Exception e){
+//			logger.error("Error al obtener los listados de la pantalla de login",e);
+//		}
+		return model;
+	}
 	
 	/**
 	 * 
@@ -208,8 +224,13 @@ public class LoginController extends BaseController{
 		} catch (Exception e) {
 			logger.error("Error registrando usuario", e);
 		}
-		
-		return new ModelAndView(Constantes.INICIO);
+		try {
+			response.sendRedirect("../trueque/listado.html");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new ModelAndView(Constantes.LISTA_TRUEQUE);
 	}
 	
 	/**

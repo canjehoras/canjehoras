@@ -150,6 +150,12 @@ public class TruequeController extends BaseController{
 					descripcion = trueque.getDescripcion().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
 					trueque.setDescripcion(descripcion);
 				}
+				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
+				}
+				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
+					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
+				}
 				getImagen(trueque);
 			}
 			model.addObject(Constantes.TRUEQUES, listado);
@@ -165,6 +171,12 @@ public class TruequeController extends BaseController{
 		try{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+				trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
+			}
+			if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
+				trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
+			}
 			getImagen(trueque);
 			model.addObject( Constantes.TRUEQUE, trueque);
 			
