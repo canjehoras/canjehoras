@@ -48,6 +48,7 @@ public class Constantes {
 	public static final String LISTA_CATEGORIA = "categorias";
 	public static final String BUSCADOR ="buscador";
 	public static final String BUSCADOR_RESULTADOS ="busquedaResultados";
+	public static final String AGENDA = "agenda";
 	
 	// Estados de los trueques
 	public static final String TRUEQUE_ESTADO_NUEVO  = "N";

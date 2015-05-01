@@ -14,6 +14,10 @@ buscador = function(){
 	window.location.href= "/canjehoras/buscador/inicio.html"
 }
 
+agenda = function(){
+	window.location.href= "/canjehoras/agenda/agenda.html"
+}
+
 publicar = function(){
 	window.location.href= "/canjehoras/trueque/nuevo.html"
 }
