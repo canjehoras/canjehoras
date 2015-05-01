@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -17,7 +18,7 @@ public class TruequeDAO extends BaseDAO {
 
 	private static final Log log = LogFactory.getLog(TruequeDAO.class);
 	
-	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario)throws Throwable {
+	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario, String estado)throws Throwable {
 		log.debug("findTrueque");
 		try {
 			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class);
@@ -26,6 +27,9 @@ public class TruequeDAO extends BaseDAO {
 			}
 			if(null != idUsuario){
 				q.add(Restrictions.eq("usuario.id", idUsuario));
+			}
+			if(null != estado){
+				q.add(Restrictions.eq("estado", estado));
 			}
 			q.addOrder(Order.desc("id"));
 			List result = q.list();
@@ -36,6 +40,29 @@ public class TruequeDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
+	public List<Trueque> findTruequePreferencias(ArrayList<Long> listadoProvincia, ArrayList<Long> listadoCategoria, String estado) throws Throwable {
+		log.debug("findTruequePreferencias");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class);
+			if(listadoProvincia.size()!=0){
+				q.add(Restrictions.in("provincia.id", listadoProvincia));
+			}
+			if(listadoCategoria.size()!=0){
+				q.add(Restrictions.in("categoria.id", listadoCategoria));
+			}
+			if(null != estado){
+				q.add(Restrictions.eq("estado", estado));
+			}
+			q.addOrder(Order.desc("id"));
+			List result = q.list();
+			return result;
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}
+	
 	
 	public Trueque detalle(Long id)throws Throwable {
 		log.debug("detalle");

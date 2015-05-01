@@ -1,6 +1,7 @@
 package com.vcortes.canjehoras.bl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.vcortes.canjehoras.dao.TruequeDAO;
@@ -35,10 +36,14 @@ public class TruequeBL {
 		this.truequeDAO = truequeDAO;
 	}
 	
-	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario) throws Throwable {
-		return truequeDAO.findTrueque(idProvincia, idCategoria, idUsuario);
+	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario, String estado) throws Throwable {
+		return truequeDAO.findTrueque(idProvincia, idCategoria, idUsuario, estado);
 	}
 	
+	public List<Trueque> findTruequePreferencias(ArrayList<Long> listadoProvincia, ArrayList<Long> listadoCategoria, String estado) throws Throwable {
+		return truequeDAO.findTruequePreferencias(listadoProvincia, listadoCategoria, estado);
+	}
+
 	public Trueque detalle(Long id) throws Throwable {
 		return truequeDAO.detalle(id);
 	}

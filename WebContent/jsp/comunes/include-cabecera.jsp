@@ -34,15 +34,13 @@
 			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
 				<c:if test="${sessionScope.perfil == 'A'}">
-					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="gestion.usuarios"/></a></li>
-					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.activos"/></a></li>
-					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.denunciados"/></a></li>
-					****************
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-trueques"><fmt:message key="trueques"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-agenda"><fmt:message key="agenda"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-buscador"><fmt:message key="buscador"/></a></li>
+					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.activos"/></a></li>
+					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="trueques.denunciados"/></a></li>
 				</c:if>
 				<c:if test="${sessionScope.perfil == 'U'}">
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>
@@ -52,8 +50,6 @@
 					<li><a href="#" class="scroll-link" id="toggle-buscador"><fmt:message key="buscador"/></a></li>
 				</c:if>
 			</c:if>
-			
-			<li><a href="#" class="scroll-link" id="toggle-acerca"><fmt:message key="acerca.de"/></a></li>
 		</ul>
       </div>
 	 </nav>

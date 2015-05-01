@@ -2,6 +2,7 @@ package com.vcortes.canjehoras.controller;
 
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -145,7 +146,47 @@ public class TruequeController extends BaseController{
 		}
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
-			List<Trueque> listado = truequeBL.findTrueque(null, null,null);
+			List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
+			getListadoTrueques(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	public ModelAndView preferencias(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Listado de trueque por preferencias");	
+		/**Long idUsuario = null;
+		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+		if(null !=usuario){
+			idUsuario = usuario.getId();
+		}*/
+		
+		ArrayList<Long> listadoProvincia = (ArrayList<Long>)request.getSession().getAttribute("listadoProvincia");
+		ArrayList<Long> listadoCategoria = (ArrayList<Long>)request.getSession().getAttribute("listadoCategoria");
+		
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
+		try{
+			List<Trueque> listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);
+			getListadoTrueques(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	public ModelAndView mistrueques(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Listado de mis trueque");	
+		Long idUsuario = null;
+		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+		if(null !=usuario){
+			idUsuario = usuario.getId();
+		}
+		ModelAndView model = new ModelAndView(Constantes.MI_LISTA_TRUEQUE); 
+		try{
+			List<Trueque> listado = truequeBL.findTrueque(null, null, idUsuario, null);
 			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
 		} catch (Throwable e) {
@@ -167,11 +208,11 @@ public class TruequeController extends BaseController{
 				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
 					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
 				}
-				if(trueque.getTipo().equals(Constantes.TIPO_COMPARTIR_HORAS)){
-					trueque.setTipo(Constantes.TIPO_COMPARTIR_HORAS_DESC);
+				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
 				}
-				if(trueque.getTipo().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
-					trueque.setTipo(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
+				if(trueque.getModalidad().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
 				}
 				getImagen(trueque);
 			}
@@ -200,6 +241,106 @@ public class TruequeController extends BaseController{
 			
 		} catch (Exception e) {
 			logger.error("Error editando trueque", e);
+		}
+		return model;
+	}
+	
+	public ModelAndView denunciado(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Denunciar trueque");	
+		ModelAndView model = new ModelAndView(Constantes.DETALLE_TRUEQUE); 
+		try{
+			String id = (String) request.getParameter(Constantes.ID);
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			// Modificar el estado
+			trueque.setEstado(Constantes.TRUEQUE_ESTADO_DENUNCIADO);
+			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+			if(null != trueque){				
+				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
+				}
+				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
+					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
+				}
+				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
+				}
+				if(trueque.getModalidad().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
+				}
+				getImagen(trueque);			
+			}
+			model.addObject( Constantes.TRUEQUE, trueque);
+			
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	public ModelAndView borrar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Borrar trueque");	
+		ModelAndView model = new ModelAndView(Constantes.MI_LISTA_TRUEQUE); 
+		try{
+			String id = (String) request.getParameter(Constantes.ID);
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			// Modificar el estado
+			trueque.setEstado(Constantes.TRUEQUE_ESTADO_BORRADO);
+			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+			Long idUsuario = null;
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(null !=usuario){
+				idUsuario = usuario.getId();
+			}
+			List<Trueque> listado = truequeBL.findTrueque(null, null, idUsuario, null);
+			getListadoTrueques(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;			
+	}
+	
+	public ModelAndView reactivar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Borrar trueque");	
+		ModelAndView model = new ModelAndView(Constantes.MI_LISTA_TRUEQUE); 
+		try{
+			String id = (String) request.getParameter(Constantes.ID);
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			// Modificar el estado
+			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
+			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+			Long idUsuario = null;
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(null !=usuario){
+				idUsuario = usuario.getId();
+			}
+			List<Trueque> listado = truequeBL.findTrueque(null, null, idUsuario, null);
+			getListadoTrueques(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;			
+	}
+	
+	/**
+	 * Se muestra la pantalla con las opciones que tiene el usuario de poder canjear el trueque
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ModelAndView opcionesCanjeo(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Opciones canjeo de trueque");	
+		ModelAndView model = new ModelAndView(Constantes.OPCIONES_CANJEO_TRUEQUE); 
+		try{
+			String id = (String) request.getParameter(Constantes.ID);
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			model.addObject( Constantes.TRUEQUE, trueque);
+		} catch (Throwable e) {
+			e.printStackTrace();
 		}
 		return model;
 	}

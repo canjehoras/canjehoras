@@ -42,7 +42,9 @@ public class Constantes {
 	public static final String NUEVO_TRUEQUE  = "nuevoTrueque";
 	public static final String LISTA_TRUEQUE  = "listadoTrueque";
 	public static final String EDITAR_TRUEQUE  = "edicionTrueque";
+	public static final String MI_LISTA_TRUEQUE  = "misTrueques";
 	public static final String DETALLE_TRUEQUE  = "detalleTrueque";
+	public static final String OPCIONES_CANJEO_TRUEQUE  = "opcionesCanjeo";
 	public static final String LISTA_CATEGORIA = "categorias";
 	public static final String BUSCADOR ="buscador";
 	public static final String BUSCADOR_RESULTADOS ="busquedaResultados";
@@ -51,6 +53,7 @@ public class Constantes {
 	public static final String TRUEQUE_ESTADO_NUEVO  = "N";
 	public static final String TRUEQUE_ESTADO_REVISADO  = "R";
 	public static final String TRUEQUE_ESTADO_DENUNCIADO = "D";
+	public static final String TRUEQUE_ESTADO_BORRADO = "B";
 	
 	//
 

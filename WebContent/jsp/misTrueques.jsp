@@ -39,14 +39,13 @@
 						</p>
 					</c:if>
 					<c:if test="${sessionScope.usuario != null}">
-						<c:if test="${sessionScope.perfil == 'A'}">
+						<c:if test="${trueques.estado == 'B'}">
+							<input type="button" value="<fmt:message key="boton.reactivar"/>" onclick="reactivarTrueque(${trueques.id});"/>
 						</c:if>
-						<c:if test="${sessionScope.perfil == 'U'}">
+						<c:if test="${trueques.estado == 'N'}">
+							<input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>
+							<input type="button" value="<fmt:message key="boton.borrar"/>" onclick="borrarTrueque(${trueques.id});"/>
 						</c:if>
-						
-						<input type="button" value="<fmt:message key="boton.ver.mas"/>" onclick="detalleTrueque(${trueques.id});"/>
-						<%-- <input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>
-						<input type="button" value="<fmt:message key="boton.borrar"/>" onclick="borrarTrueque(${trueques.id});"/>--%>
 					</c:if>
 				</div>
 		</div>

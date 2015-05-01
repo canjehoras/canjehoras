@@ -19,7 +19,7 @@ publicar = function(){
 }
 
 trueques = function(){
-	window.location.href= "/canjehoras/trueque/listado.html"
+	window.location.href= "/canjehoras/trueque/mistrueques.html"
 }
 
 editarTrueque = function(id){
@@ -30,8 +30,16 @@ detalleTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/detalle.html?id=" + id
 }
 
-foroTrueque = function(id){
-	window.location.href= "/canjehoras/foro/listado.html?id=" + id
+denunciarTrueque = function(id){
+	window.location.href= "/canjehoras/trueque/denunciado.html?id=" + id
+}
+
+reactivarTrueque = function(id){
+	window.location.href= "/canjehoras/trueque/reactivar.html?id=" + id
+}
+
+opcionesCanjeoTrueque = function(id){
+	window.location.href= "/canjehoras/trueque/opcionesCanjeo.html?id=" + id
 }
 
 borrarTrueque = function(){

@@ -21,7 +21,7 @@
 		<select name="categorias" id="categorias" required="required">
 			<option value="-1"><fmt:message key="nuevo.trueque.seleccione.categoria" /></option>
             <c:forEach var="categoria" items="${categorias}">
-                    <option value="${categoria.id}">${categoria.descripcion}</option>
+            	<option value="${categoria.id}">${categoria.descripcion}</option>
             </c:forEach>
         </select> 
         <div class="tituloSelect"><fmt:message key="nuevo.trueque.descripcion"/></div>

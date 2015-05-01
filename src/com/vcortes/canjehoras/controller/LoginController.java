@@ -2,6 +2,7 @@ package com.vcortes.canjehoras.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -81,20 +82,26 @@ public class LoginController extends BaseController{
 				request.getSession().setAttribute(Constantes.USUARIO, usuario);
 				request.getSession().setAttribute(Constantes.PERFIL, usuario.getPerfil());
 				
-//				List<Trueque> listado = truequeBL.findTrueque(null, null);
-//				for (int i = 0; i<listado.size(); i++){
-//					if(((Trueque)listado.get(i)).getDescripcion().length() > new Integer(25)){
-//						descripcion = ((Trueque)listado.get(i)).getDescripcion().substring(0,25) + "...";
-//						((Trueque)listado.get(i)).setDescripcion(descripcion);
-//					}
-////					if(null != ((Trueque)listado.get(i)).getUsuario()){
-////						if(null != ((Trueque)listado.get(i)).getUsuario().getProvincia()){
-////							((Trueque)listado.get(i)).setProvincia(((Trueque)listado.get(i)).getUsuario().getProvincia().getDescripcion());
-////						}
-////					}
-//				}
-//				model.addObject( Constantes.TRUEQUES, listado);
-
+				// Recuperar las preferencias
+				//Long[] listadoProvincia = new Long[] {}; //{Long.valueOf(20), Long.valueOf(2)};
+				ArrayList<Long> listadoProvincia = new ArrayList<Long>();
+				List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+				for(PrefProvincia provincia: listPrefProvincia){
+					listadoProvincia.add(provincia.getProvincia().getId());
+				}
+				request.getSession().setAttribute("listadoProvincia", listadoProvincia);
+				ArrayList<Long> listadoCategoria = new ArrayList<Long>();
+				List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+				for(PrefCategoria categoria: listPrefCategoria){
+					listadoCategoria.add(categoria.getCategoria().getId());
+				}
+				request.getSession().setAttribute("listadoCategoria", listadoCategoria);
+				
+				try {
+					response.sendRedirect("../trueque/preferencias.html");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				model = new ModelAndView(Constantes.LISTA_TRUEQUE);  
 			}
 		} catch (Exception e) {
