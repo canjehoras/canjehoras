@@ -77,7 +77,7 @@
 
 			} );
 			*/
-		cal.setData( {"04-15-2015" : "<div >My event here</div>"} );
+		cal.setData( {"04-15-2015" : "<div style='width:100%; height 20px; background:#F1AB37'>&nbsp;</div>"} );
 		});
 	</script>
 

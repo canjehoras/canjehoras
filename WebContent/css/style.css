@@ -1653,6 +1653,15 @@ div.mc-image {
     text-align: center;	
 }
 
+.glyphicon{
+	border: 1px solid #CCCCCC;
+    margin: 6px;
+    padding: 10px;
+    text-align: center;
+    width: 90%;
+    border-radius: 15px;
+}
+
 /*
    Media Queries
 --------------------------- */

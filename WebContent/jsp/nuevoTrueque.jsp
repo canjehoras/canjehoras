@@ -3,8 +3,8 @@
 <html>
 <head>
 	<%@page contentType="text/html" pageEncoding="UTF-8"%>
-	<meta http-equiv="Content-Type" name="viewport"
-	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
+	<meta http-equiv="Content-Type" name="viewport"	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
+	
 </head>
 <body>
 
@@ -29,7 +29,7 @@
             </c:forEach>
         </select> 
         
-        <div class="tituloSelect">Seleccione el tipo y la modalidad del trueque:</div>
+          
         <div style="background: none repeat scroll 0 0 #fff; border: 1px solid #ccc; color: #555; font-size: 95%; margin-bottom: 4%; padding: 2%; width: 92%;">
 	        <input type="radio" value="O" name="tipo" id="tipo" <c:if test="${'O' == trueque.tipo}">selected</c:if>/> Oferta 
 	        <input type="radio" value="D" name="tipo" id="tipo" <c:if test="${'D' == trueque.tipo}">selected</c:if>/> Demanda <br/>
@@ -41,6 +41,10 @@
  		<div class="tituloSelect"><fmt:message key="nuevo.trueque.imagen"/></div>
  		<input type="file" accept="image/*" title="<fmt:message key="nuevo.trueque.imagen2"/>" name="imagen" id="imagen" placeholder="<fmt:message key="nuevo.trueque.imagen"/>" style="margin-bottom: 5%"/>
 		
+		<div class="tituloSelect">Agenda:</div>
+		
+		<input type="text" id="hora" name="hora" />
+		
 		
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 		<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
@@ -48,6 +52,18 @@
  		<input type="hidden" name="id" id="id" value="${trueque.id}"/>
 	</form>
 </section>
+
+<script type="text/javascript">
+    $('#hora').timepicker({
+        minuteStep: 1,
+        template: 'modal',
+        appendWidgetTo: 'body',
+        showSeconds: false,
+        showMeridian: false,
+        defaultTime: false,
+        minuteStep: 5
+    });
+</script>
 
 <%@ include file="comunes/include-pie.jsp" %>
 

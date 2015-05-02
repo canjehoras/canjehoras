@@ -7,6 +7,7 @@
 <script type="text/javascript" src="../js/wow.js"></script> 
 <script type="text/javascript" src="../js/custom.js"></script>
 <script type="text/javascript" src="../js/canjehoras.js"></script>
+<script type="text/javascript" src="../js/bootstrap-timepicker.js"></script>
 
  
 <!--[if lt IE 9]>
