@@ -25,6 +25,7 @@ import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
+import com.vcortes.canjehoras.utils.Mail;
 
 public class TruequeController extends BaseController{
 	
@@ -126,6 +127,9 @@ public class TruequeController extends BaseController{
 			trueque.setImagen(IOUtils.toByteArray(fileContent));
 			trueque.setUsuario(usuario);
 			
+			Mail mail = new Mail();
+			mail.enviarMail(usuario.getCorreo_electronico(), null, null, "Nuevo canje", "Has publicado un nuevo canje", null, null);
+
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
 			
 		} catch (Exception e) {

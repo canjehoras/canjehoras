@@ -1,14 +1,9 @@
-package es.pwc.riesgos.utils;
+package com.vcortes.canjehoras.utils;
 
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.math.BigDecimal;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -31,20 +26,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.axis.attachments.OctetStream;
 import org.apache.axis.attachments.OctetStreamDataSource;
-import org.apache.axis.encoding.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import es.pwc.riesgos.bl.RMailsBL;
-import es.pwc.riesgos.commons.BeanGetter;
-import es.pwc.riesgos.commons.M;
-import es.pwc.riesgos.model.RMails;
 
-/**
- * Clase que tiene las funciones principales para el envio de e-mails
- */
 public class Mail {
 
 	private static Logger log = Logger.getLogger(Mail.class);
@@ -127,7 +114,7 @@ public class Mail {
 			if (adjunto != null && adjunto.length > 0 && !StringUtils.isEmpty(nombreFichero)) {
 				// Create the message part
 				BodyPart messageBody2 = new MimeBodyPart();
-				DataSource source = new OctetStreamDataSource("adjunto",new OctetStream(adjunto));
+				DataSource source = new OctetStreamDataSource("adjunto", new OctetStream(adjunto));
 				messageBody2.setDataHandler(new DataHandler(source));
 				messageBody2.setFileName(nombreFichero);
 				multiPart.addBodyPart(messageBody2);
@@ -231,181 +218,6 @@ public class Mail {
 
 	
 	
-	/**
-	 * NO SE UTILIZA PERO SE DEJA 
-	 * Pasamos al texto el filtro para sustiuir parámetros (campos marcados con @@)
-	 * @param texto
-	 */
-	private String filtroParametros(String texto){
-		log.debug("filtroParametros :: Mail");
-		try {
-			URL url = new URL("http://10.12.8.27:8684/grcsuite/images/" + M.sg("nombre.imagen.firma"));
-			BufferedImage img = ImageIO.read(url);
-		    //img = ImageIO.read(new File(M.sg("nombre.imagen.firma")));
-		    
-		    ByteArrayOutputStream os = new ByteArrayOutputStream();
-		    ImageIO.write(img, "jpg", os);
-		    InputStream is = new ByteArrayInputStream(os.toByteArray());
-		    
-		    byte [] data = os.toByteArray();
-		    Base64.encode(data);
-			// codificamos la imagen a base64
-			String imgBase64 = Base64.encode(data);
-			
-			return imgBase64;
-		} catch (Exception e) {
-			log.error("Error obteniendo imagen",e);
-		}
-		
-		
-		return "";		
-	}
-	
-	
-	/**
-	 * Metodo que obtiene de la tabla R_MAILS los email que no han sido enviados (ENVIADO = 0), los recorre uno a uno y los envia. 
-	 * Si el envio ha sido satisfactorio, los marca como enviados
-	 * @param request
-	 * @param response
-	 * @param form
-	 * @throws Exception
-	 */
-	public boolean enviarMail() throws Exception {
-		Boolean errorTotal = false;
-		try {
-			RMailsBL rMailsBL = (RMailsBL) BeanGetter.getBean("RMailsBL");
-			List<RMails> l = rMailsBL.getMailsNoEnviadosSinCC();
-			List<RMails> l2 = rMailsBL.getMailsNoEnviadosConCC();
-			if (l!=null && l.size()>0) {
-				BigDecimal tpProceso = null;
-				List<RMails> lNormativa = null;
-				for (RMails mail:l) {
-					if (tpProceso == null) {
-						tpProceso = mail.getFkTpProcesoRiesgos();
-						lNormativa = new ArrayList<RMails>(); 
-						lNormativa.add(mail);
-					} else if (tpProceso.compareTo(mail.getFkTpProcesoRiesgos()) == 0) {
-						lNormativa.add(mail);
-					} else {
-						if (rMailsBL.normativaMailsAgrupados(tpProceso)) {
-							errorTotal &= enviarMailNormativaAgrupado(lNormativa);
-						} else {
-							errorTotal &= enviarMailNormativa(lNormativa);
-						}
-						tpProceso = mail.getFkTpProcesoRiesgos();
-						lNormativa = new ArrayList<RMails>(); 
-						lNormativa.add(mail);
-					}
-				}
-				//ultima normativa
-				if (rMailsBL.normativaMailsAgrupados(tpProceso)) {
-					errorTotal &= enviarMailNormativaAgrupado(lNormativa);
-				} else {
-					errorTotal &= enviarMailNormativa(lNormativa);
-				}
-			} else {
-				if (!(l2!=null && l2.size()>0)) {
-					errorTotal = true;
-				}
-			}
-			if (l2!=null && l2.size()>0) {
-				errorTotal &= enviarMailNormativa(l2);
-			}
-		} catch (Exception e) {
-			errorTotal = true;
-			e.printStackTrace();
-		}
-		
-		return errorTotal;
-		
-	}
-	
-	public boolean enviarMailNormativa(List<RMails> l) throws Exception {
-		Boolean error = false;
-		Boolean errorTotal = false;
-		try{
-			RMailsBL rMailsBL = (RMailsBL) BeanGetter.getBean("RMailsBL");
-			if (l!=null && l.size()>0) {
-				List<RMails> ids = new ArrayList<RMails>(); 
-				for (RMails mail:l) {
-					mail.setEnviado(true);
-					ids = new ArrayList<RMails>();
-					ids.add(mail);
-					Mail m = new Mail();
-					String[] cc = mail.getUsrCc()!=null?mail.getUsrCc().split(","):null;
-					String subject = mail.getMailSubject()!=null?mail.getMailSubject():"";
-					String body = mail.getMailBody()!=null?mail.getMailBody():"";
-					error = m.enviarMail(mail.getUsrTo(), mail.getUsrFrom(), cc, subject, body, null, null);
-					errorTotal = error && errorTotal;
-					if (!error){
-						rMailsBL.setEnviados(ids);
-					}
-				}
-			}
-		}catch (Exception e) {
-			errorTotal = true;
-			e.printStackTrace();
-		}
-		
-		return errorTotal;
-		
-	}
-	
-	public boolean enviarMailNormativaAgrupado(List<RMails> l) throws Exception {
-		Boolean error = false;
-		Boolean errorTotal = false;
-		try{
-			RMailsBL rMailsBL = (RMailsBL) BeanGetter.getBean("RMailsBL");
-			if (l!=null && l.size()>0) {
-				StringBuffer asunto = new StringBuffer();
-				StringBuffer cuerpo = new StringBuffer();
-				String usuarioAnterior = "";
-				Integer tipoMailAnterior = 0;
-				String fromAnterior = "";
-				List<RMails> ids = new ArrayList<RMails>(); 
-				for (RMails mail:l) {
-					if (!usuarioAnterior.equals(mail.getUsrTo()) || mail.getTipoMail().compareTo(tipoMailAnterior) != 0) {
-						if (!usuarioAnterior.equals("")){
-							Mail m = new Mail();
-							error = m.enviarMail(usuarioAnterior, fromAnterior, null, asunto.toString(), cuerpo.toString(), null, null);
-							errorTotal = error && errorTotal;
-							if (!error){
-								rMailsBL.setEnviados(ids);
-							}
-						}
-						asunto = new StringBuffer(mail.getMailSubject()!=null?mail.getMailSubject():"");
-						cuerpo = new StringBuffer(mail.getMailBody()!=null?mail.getMailBody():"");
-						usuarioAnterior = mail.getUsrTo();
-						tipoMailAnterior = mail.getTipoMail();
-						fromAnterior = mail.getUsrFrom();
-						ids = new ArrayList<RMails>();
-						mail.setEnviado(true);
-						ids.add(mail);
-					} else {
-						asunto = new StringBuffer(mail.getMailSubject()!=null?mail.getMailSubject():"");
-						cuerpo.append("<BR>"+(mail.getMailBody()!=null?mail.getMailBody():""));
-						mail.setEnviado(true);
-						ids.add(mail);
-					}
-				}
-				if (!usuarioAnterior.equals("")){
-					//enviar el último mail
-					Mail m = new Mail();
-					error = m.enviarMail(usuarioAnterior, fromAnterior, null, asunto.toString(), cuerpo.toString(), null, null);
-					errorTotal = error && errorTotal;
-					if (!error){
-						rMailsBL.setEnviados(ids);
-					}
-				}
-			}
-		}catch (Exception e) {
-			errorTotal = true;
-			e.printStackTrace();
-		}
-		
-		return errorTotal;
-		
-	}
 
 	/**
 	 * Clase MailAuthenticator
