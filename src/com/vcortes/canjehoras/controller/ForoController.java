@@ -38,7 +38,7 @@ public class ForoController extends BaseController{
 		}
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		try{
-			List<Trueque> listado = truequeBL.findTrueque(null, null,null);
+			List<Trueque> listado = truequeBL.findTrueque(null, null,null,null);
 			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
 		} catch (Throwable e) {
