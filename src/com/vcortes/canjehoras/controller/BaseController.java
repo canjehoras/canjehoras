@@ -1,12 +1,15 @@
 package com.vcortes.canjehoras.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Base64Utils;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import com.vcortes.canjehoras.model.Trueque;
@@ -70,5 +73,19 @@ public abstract class BaseController extends MultiActionController {
 		
 		return listado;
 	}
+	
+	
+	public ModelAndView enviarRespuestaAJAX(HttpServletResponse response, String respuesta) throws Throwable {
+		try {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter screenWriter = response.getWriter();
+			screenWriter.write(respuesta);
+		} catch (Exception e) {
+			
+		}
+		return null;
+
+	}
+
 	
 }

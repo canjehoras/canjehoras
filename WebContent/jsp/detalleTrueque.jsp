@@ -25,7 +25,7 @@
 			<div id="botonesDetalle">		
 				<input type="button" value="<fmt:message key="boton.canjeo"/>" onclick="opcionesCanjeoTrueque(${trueque.id});"/>
 				<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
-				<input type="button" value="<fmt:message key="boton.graficas"/>" onclick="graficasUsuario(${trueque.id});"/>
+				<input type="button" value="<fmt:message key="boton.graficas"/>" onclick="graficasUsuario();"/>
 				<input type="button" value="<fmt:message key="boton.volver"/>" onclick="#"/>
 			</div>
 

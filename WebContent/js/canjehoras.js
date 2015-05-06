@@ -46,6 +46,10 @@ opcionesCanjeoTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/opcionesCanjeo.html?id=" + id
 }
 
+graficasUsuario = function(){
+	window.location.href= "/canjehoras/graficas/graficas.html"
+}
+
 borrarTrueque = function(){
 	var txt;
 	var r = confirm("Press a button!");

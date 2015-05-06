@@ -36,6 +36,11 @@ public class TruequeBL {
 		this.truequeDAO = truequeDAO;
 	}
 	
+	
+	public List<Trueque> graficaTrueque(Long idUsuario) throws Throwable {
+		return truequeDAO.graficaTrueque(idUsuario);
+	}
+	
 	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario, String estado) throws Throwable {
 		return truequeDAO.findTrueque(idProvincia, idCategoria, idUsuario, estado);
 	}

@@ -18,6 +18,23 @@ public class TruequeDAO extends BaseDAO {
 
 	private static final Log log = LogFactory.getLog(TruequeDAO.class);
 	
+	public List<Trueque> graficaTrueque (Long idUsuario)throws Throwable {
+		log.debug("graficaTrueque");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class);
+			if(null != idUsuario){
+				q.add(Restrictions.eq("usuario.id", idUsuario));
+			}
+			q.addOrder(Order.desc("id"));
+			List result = q.list();
+			return result;
+			
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}	
+	
 	public List<Trueque> findTrueque(Long idProvincia, Long idCategoria, Long idUsuario, String estado)throws Throwable {
 		log.debug("findTrueque");
 		try {
