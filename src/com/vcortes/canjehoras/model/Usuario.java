@@ -26,7 +26,6 @@ public class Usuario implements Serializable{
 	private Integer num_acceso;
 	private Date fecha_ultimo_acceso;	
 	private Provincia provincia;
-	private Agenda agenda;
 	
 	/**
 	 * Constructor por defecto
@@ -96,7 +95,7 @@ public class Usuario implements Serializable{
 			String nombre, String apellido1, String apellido2,
 			String movil, String telefono, Boolean wassap, 
 			Provincia provincia, String idioma, String perfil, Date fecha_alta, 
-			Date fecha_baja, Integer num_acceso, Date fecha_ultimo_acceso, Agenda agenda) {
+			Date fecha_baja, Integer num_acceso, Date fecha_ultimo_acceso) {
 		this.id = id;
 		this.correo_electronico = correo_electronico;
 		this.pass = pass;
@@ -113,7 +112,6 @@ public class Usuario implements Serializable{
 		this.fecha_baja = fecha_baja;
 		this.num_acceso = num_acceso;
 		this.fecha_ultimo_acceso = fecha_ultimo_acceso;
-		this.agenda = agenda;
 	}
 
 	/**
@@ -387,21 +385,4 @@ public class Usuario implements Serializable{
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
-
-	/**
-	 * Obtiene la agenda del usuario
-	 * @return agenda
-	 */
-	public Agenda getAgenda() {
-		return agenda;
-	}
-
-	/**
-	 * Fija la agenda del usuario
-	 * 
-	 * @param agenda
-	 */
-	public void setAgenda(Agenda agenda) {
-		this.agenda = agenda;
-	}	
 }

@@ -11,5 +11,6 @@
                 <comment>1-DISPONIBLE / 0-NO DISPONIBLE</comment>
             </column>
         </property>
+        <many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"  fetch="join"/>
 	</class>
 </hibernate-mapping>

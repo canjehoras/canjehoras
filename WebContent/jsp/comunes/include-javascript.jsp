@@ -7,9 +7,10 @@
 <script type="text/javascript" src="../js/wow.js"></script> 
 <script type="text/javascript" src="../js/custom.js"></script>
 <script type="text/javascript" src="../js/canjehoras.js"></script>
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../js/jquery-ui.js"></script>
 <script type="text/javascript" src="../js/bootstrap-timepicker.js"></script>
 
- 
 <!--[if lt IE 9]>
     <script src="../js/respond-1.1.0.min.js"></script>
     <script src="../js/html5shiv.js"></script>

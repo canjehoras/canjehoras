@@ -17,11 +17,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.vcortes.canjehoras.bl.AgendaBL;
 import com.vcortes.canjehoras.bl.BuscadorBL;
+import com.vcortes.canjehoras.bl.CanjeBL;
 import com.vcortes.canjehoras.bl.PrefCategoriaBL;
 import com.vcortes.canjehoras.bl.PrefProvinciaBL;
 import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
+import com.vcortes.canjehoras.model.Agenda;
+import com.vcortes.canjehoras.model.Canje;
 import com.vcortes.canjehoras.model.Categoria;
 import com.vcortes.canjehoras.model.PrefCategoria;
 import com.vcortes.canjehoras.model.PrefProvincia;
@@ -39,8 +43,17 @@ public class TruequeController extends BaseController{
 	private TruequeBL truequeBL;
 	private PrefCategoriaBL prefCategoriaBL;
 	private PrefProvinciaBL prefProvinciaBL;
+	private AgendaBL agendaBL;
+	private CanjeBL canjeBL;
 
-	
+	public void setCanjeBL(CanjeBL canjeBL) {
+		this.canjeBL = canjeBL;
+	}
+
+	public void setAgendaBL(AgendaBL agendaBL) {
+		this.agendaBL = agendaBL;
+	}
+
 	public void setUsuarioBL(UsuarioBL usuarioBL) {
 		this.usuarioBL = usuarioBL;
 	}
@@ -72,6 +85,13 @@ public class TruequeController extends BaseController{
 
 			List<Categoria> provincias = buscadorBL.findAll(new Provincia(), Constantes.DESCRIPCION);
 			model.addObject(Constantes.PROVINCIAS, provincias);
+			
+			List<String> listadoHoras = new ArrayList<String>();
+			for (int i= 0; i <24; i++){     
+				listadoHoras.add("" + i +":00"); 
+			}
+			model.addObject("listadoHoras", listadoHoras);
+			
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
 		}
@@ -83,9 +103,7 @@ public class TruequeController extends BaseController{
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		
 		try {
-			
 			request.setCharacterEncoding("UTF-8");
-			
 			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			
@@ -97,6 +115,9 @@ public class TruequeController extends BaseController{
 			String id = "";
 			String provincia = "";
 			String modalidad = "";
+			String fecha = "";
+			String hora_inicio = "";
+			String hora_fin = "";
 			Trueque trueque = new Trueque();
 			InputStream fileContent = null;
 		    for (FileItem item : items) {
@@ -104,22 +125,27 @@ public class TruequeController extends BaseController{
 		    		String fieldName = item.getFieldName();
 		            String fieldValue = item.getString();
 		            
-		            if(Constantes.TITULO.equals(fieldName)){
-		            	titulo = fieldValue;
-		            } else if(Constantes.ID.equals(fieldName)){
+		            if(Constantes.ID.equals(fieldName)){
 		            	id = fieldValue;
-		            } else if(Constantes.DESCRIPCION.equals(fieldName)){
-		            	descripcion = fieldValue;
-		            } else if(Constantes.TIPO.equals(fieldName)){
-		            	tipo = fieldValue;
+		            } else if(Constantes.TITULO.equals(fieldName)){
+		            	titulo = fieldValue;
 		            } else if(Constantes.CATEGORIAS.equals(fieldName)){
 		            	categoria = fieldValue;
 		            } else if(Constantes.PROVINCIAS.equals(fieldName)){
 		            	provincia = fieldValue;
+		            } else if(Constantes.TIPO.equals(fieldName)){
+		            	tipo = fieldValue;
 		            } else if(Constantes.MODALIDAD.equals(fieldName)){
 		            	modalidad = fieldValue;
+		            } else if(Constantes.DESCRIPCION.equals(fieldName)){
+		            	descripcion = fieldValue;
+		            } else if(Constantes.FECHA.equals(fieldName)){
+		            	fecha = fieldValue;
+		            } else if(Constantes.HORA_INICIO.equals(fieldName)){
+		            	hora_inicio = fieldValue;
+		            } else if(Constantes.HORA_FIN.equals(fieldName)){
+		            	hora_fin = fieldValue;
 		            }
-		                
 		    	} else {
 		    		String fieldName = item.getFieldName();
 		            String fileName = item.getName();
@@ -127,21 +153,39 @@ public class TruequeController extends BaseController{
 		    	}
 		    }
 			
+		    // Si ya existe en bbdd - Edición
 		    if(id!=null && !("").equals(id)){
 		    	trueque = (Trueque) truequeBL.findById(new Trueque(), Long.valueOf(id));
 		    }
-		    
+
+		    // Guardar los datos del trueque
 		    trueque.setTitulo(titulo);
-		    trueque.setDescripcion(descripcion);
-		    trueque.setTipo(tipo);
 		    trueque.setCategoria((Categoria) buscadorBL.findById(new Categoria(), Long.valueOf(categoria)));
 		    trueque.setProvincia((Provincia) buscadorBL.findById(new Provincia(), Long.valueOf(provincia)));
+		    trueque.setTipo(tipo);
 		    trueque.setModalidad(modalidad);
+		    trueque.setDescripcion(descripcion);
+		    trueque.setImagen(IOUtils.toByteArray(fileContent));		    
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
-			trueque.setImagen(IOUtils.toByteArray(fileContent));
 			trueque.setUsuario(usuario);
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+			// Guardar los datos de la agenda
+			Agenda agenda = new Agenda();
+			Canje canje = new Canje();
+			if(!"".equals(fecha)){
+				agenda.setEstado(true);
+				agenda.setUsuario(usuario);
+				agenda = (Agenda) agendaBL.saveOrUpdate(agenda);
+				canje.setFecha(sdf.parse(fecha));
+				canje.setHora_fin(hora_fin);
+				canje.setHora_inicio(hora_inicio);
+				canje.setAgenda(agenda);
+				canje.setTrueque(trueque);
+				canje.setUsuario(usuario);
+				canjeBL.saveOrUpdate(canje);
+			}
 			
 			// Se buscan los usuarios que corresponden con las preferencias
 			List <String> listadoEmail = new ArrayList<String>();

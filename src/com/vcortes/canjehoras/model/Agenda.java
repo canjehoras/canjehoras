@@ -10,6 +10,7 @@ import java.io.Serializable;
 public class Agenda implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
+	private Usuario usuario;
 	private Boolean estado;
 	
 	/**
@@ -26,9 +27,10 @@ public class Agenda implements Serializable{
 	 * @param descripcion
 	 *    
 	 */
-	public Agenda(Long id, Boolean estado) {
+	public Agenda(Long id, Boolean estado, Usuario usuario) {
 		this.id = id;
 		this.estado = estado;
+		this.usuario = usuario;
 	}
 	
 	/**
@@ -65,7 +67,16 @@ public class Agenda implements Serializable{
 	 */
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}	
 
+	
 }
 

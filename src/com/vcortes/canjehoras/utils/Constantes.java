@@ -2,7 +2,8 @@ package com.vcortes.canjehoras.utils;
 
 public class Constantes {
 
-	public final static String FORMATO_FECHA = "dd/MM/yyy";
+	public final static String FORMATO_FECHA = "dd/MM/yyyy";
+	public final static String FORMATO_FECHA2 = "dd-MM-yyyy";
 	public final static String ENCODING = "UTF-8";
 	public final static String MAX_DESCRIPCION = "25";
 	public final static String IDIOMA_ES = "ES";
@@ -32,6 +33,10 @@ public class Constantes {
 	public final static String PERFIL = "perfil";
 	public final static String PROVINCIAS = "provincias";
 	public final static String MODALIDAD = "modalidad";
+	public final static String FECHA = "fecha";
+	public final static String HORA_INICIO = "hora_inicio";
+	public final static String HORA_FIN = "hora_fin";
+	
 	
 	// Nombre de los .jsp
 	public static final String LOGIN  = "login";

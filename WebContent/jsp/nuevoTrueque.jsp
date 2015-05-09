@@ -4,7 +4,7 @@
 <head>
 	<%@page contentType="text/html" pageEncoding="UTF-8"%>
 	<meta http-equiv="Content-Type" name="viewport"	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
-	
+	<script src="jquery.ui.datepicker-es.js"></script>
 </head>
 <body>
 
@@ -41,27 +41,35 @@
  		<div class="tituloSelect"><fmt:message key="nuevo.trueque.imagen"/></div>
  		<input type="file" accept="image/*" title="<fmt:message key="nuevo.trueque.imagen2"/>" name="imagen" id="imagen" placeholder="<fmt:message key="nuevo.trueque.imagen"/>" style="margin-bottom: 5%"/>
 		
-		<div class="tituloSelect">Agenda:</div>
-		
-		<input type="text" id="hora" name="hora" />
-		
-		
+		<h1><fmt:message key="nuevo.trueque.agenda"/></h1>
+		<div class="subtituloSelect" style="margin-bottom: 5px;"><fmt:message key="nuevo.trueque.subtitulo"/></div>
+		<input type="text" name="fecha" id="fecha" placeholder="<fmt:message key="nuevo.trueque.seleccione.fecha" />"/>
+		<select name="hora_inicio" id="hora_inicio" >
+			<option value="-1"><fmt:message key="nuevo.trueque.hora.inicio" /></option>
+            <c:forEach var="hora_inicio" items="${listadoHoras}">
+                    <option value="${hora_inicio}">${hora_inicio}</option>
+            </c:forEach>
+        </select>       
+		<select name="hora_fin" id="hora_fin" >
+			<option value="-1"><fmt:message key="nuevo.trueque.hora.fin" /></option>
+            <c:forEach var="hora_fin" items="${listadoHoras}">
+                    <option value="${hora_fin}">${hora_fin}</option>
+            </c:forEach>
+        </select> 		
+        
 		<input type="submit" value="<fmt:message key="boton.enviar"/>" />
 		<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
-
  		<input type="hidden" name="id" id="id" value="${trueque.id}"/>
 	</form>
 </section>
 
 <script type="text/javascript">
-    $('#hora').timepicker({
-        minuteStep: 1,
-        template: 'modal',
-        appendWidgetTo: 'body',
-        showSeconds: false,
-        showMeridian: false,
-        defaultTime: false,
-        minuteStep: 5
+    $(document).ready(function() {
+    	$("#fecha").datepicker({ 
+    		dateFormat: 'dd/mm/yy',
+    		 changeMonth: true, 
+    		 changeYear: true
+    	});
     });
 </script>
 

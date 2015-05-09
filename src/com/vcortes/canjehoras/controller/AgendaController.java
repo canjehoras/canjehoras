@@ -29,10 +29,6 @@ public class AgendaController extends BaseController {
 			idUsuario = usuario.getId();
 		}
 		ModelAndView model = new ModelAndView(Constantes.AGENDA); 
-
-		
-		
-		
 		return model;
 	}
 
