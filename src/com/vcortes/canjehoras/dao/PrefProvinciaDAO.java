@@ -26,4 +26,17 @@ public class PrefProvinciaDAO extends BaseDAO {
 		return null;
 	}
 	
+	public List<PrefProvincia> findPreferenciaProvincia(Long provincia) throws Throwable {
+		log.debug("findPreferenciaProvincia");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(PrefProvincia.class);
+			q.add(Restrictions.eq("provincia.id", provincia));
+			q.addOrder(Order.desc("id"));
+			return q.list();
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}
+	
 }

@@ -21,6 +21,10 @@ public class PrefCategoriaBL {
 	public List<PrefCategoria> findByUsuario(Long id_usuario) throws Throwable {
 		return prefCategoriaDAO.findByUsuario(id_usuario);
 	}
+	
+	public List<PrefCategoria> findPreferenciaCategoria(Long categoria) throws Throwable {
+		return prefCategoriaDAO.findPreferenciaCategoria(categoria);
+	}
 
 	public Object saveOrUpdate(Object instance) throws Exception{
 		return prefCategoriaDAO.saveOrUpdate(instance);

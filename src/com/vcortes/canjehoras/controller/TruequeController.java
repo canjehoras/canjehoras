@@ -18,9 +18,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vcortes.canjehoras.bl.BuscadorBL;
+import com.vcortes.canjehoras.bl.PrefCategoriaBL;
+import com.vcortes.canjehoras.bl.PrefProvinciaBL;
 import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Categoria;
+import com.vcortes.canjehoras.model.PrefCategoria;
+import com.vcortes.canjehoras.model.PrefProvincia;
 import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
@@ -33,7 +37,10 @@ public class TruequeController extends BaseController{
 	private UsuarioBL usuarioBL;
 	private BuscadorBL buscadorBL;
 	private TruequeBL truequeBL;
+	private PrefCategoriaBL prefCategoriaBL;
+	private PrefProvinciaBL prefProvinciaBL;
 
+	
 	public void setUsuarioBL(UsuarioBL usuarioBL) {
 		this.usuarioBL = usuarioBL;
 	}
@@ -44,6 +51,14 @@ public class TruequeController extends BaseController{
 
 	public void setTruequeBL(TruequeBL truequeBL) {
 		this.truequeBL = truequeBL;
+	}
+	
+	public void setPrefCategoriaBL(PrefCategoriaBL prefCategoriaBL) {
+		this.prefCategoriaBL = prefCategoriaBL;
+	}
+
+	public void setPrefProvinciaBL(PrefProvinciaBL prefProvinciaBL) {
+		this.prefProvinciaBL = prefProvinciaBL;
 	}
 
 	/**
@@ -126,11 +141,35 @@ public class TruequeController extends BaseController{
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
 			trueque.setImagen(IOUtils.toByteArray(fileContent));
 			trueque.setUsuario(usuario);
-			
-			Mail mail = new Mail();
-			mail.enviarMail(usuario.getCorreo_electronico(), null, null, "Nuevo canje", "Has publicado un nuevo canje", null, null);
-
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+			// Se buscan los usuarios que corresponden con las preferencias
+			List <String> listadoEmail = new ArrayList<String>();
+			List <PrefCategoria> listadoCategoria = prefCategoriaBL.findPreferenciaCategoria(trueque.getCategoria().getId());
+			for(PrefCategoria listado: listadoCategoria){
+				listadoEmail.add(listado.getUsuario().getCorreo_electronico());
+			}
+			List <PrefProvincia> listadoProvincia = prefProvinciaBL.findPreferenciaProvincia(trueque.getProvincia().getId());
+			for(PrefProvincia listado: listadoProvincia){
+				listadoEmail.add(listado.getUsuario().getCorreo_electronico());
+			}
+			
+			// Envio de email por cada uno de los usuarios
+			for(String email: listadoEmail){
+				Mail mail = new Mail();
+				String cuerpo = "<img src=\"https://ci5.googleusercontent.com/proxy/z7RMBizZYcW1ApMmTWW8xagRvYg2Pn4xeo17wINvNSD6wKgZ_MF20qcxm-PUsF9XlDJkZMUGLR_LA2WdoUpzsF0jhlIQA6hFU3tygljGZv_7bIsV1A=s0-d-e1-ft#http://img407.imageshack.us/img407/1795/headerbtburgosemail.png\" class=\"CToWUd\">" + 
+						"<h2>Hola, " + usuario.getNombre() + "</h2>" + 
+						"<h2>Te enviamos información de un nuevo Trueque publicado en la web conforme tus preferencias." + 
+						"Desde el equipo de canjehoras te animamos a que publiques tus ofertas y demandas." + 
+						"Puedes hacerlo desde la propia Web, iniciando sesión con tu E-mail y tu contraseña.</h2></br></br>" + 
+						"<h3>" + trueque.getTitulo() + "</h3>" +
+						"<h3>" + trueque.getCategoria().getDescripcion() + "</h3>" + 
+						"<h3>" + trueque.getProvincia().getDescripcion() + "</h3>" + 
+						"<h3>" + descripcion + "</h3>" + 
+						"<h4>Publicado por: " + trueque.getUsuario().getCorreo_electronico() + "</h4>"; 
+				mail.enviarMail(email, null, null, Constantes.EMAIL_ASUNTO, cuerpo, null, null);
+				log.debug("Envio email a " + email);
+			}
 			
 		} catch (Exception e) {
 			logger.error("Error registrando trueque", e);

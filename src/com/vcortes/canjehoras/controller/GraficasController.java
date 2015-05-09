@@ -43,18 +43,20 @@ public class GraficasController extends BaseController{
 		JSONObject respuesta = new JSONObject();
 		try {
 			List<Trueque> listado = truequeBL.graficaTrueque(idUsuario);
-			ArrayList<JSONObject> arrayRespuesta = new ArrayList<JSONObject>();
-			JSONObject oJSONVacio = new JSONObject();
-			oJSONVacio.put("value", "");
-			oJSONVacio.put("label", "");
-			arrayRespuesta.add(oJSONVacio);
-			for (Trueque l: listado) {
-			    JSONObject oJSON = new JSONObject();
-			    oJSON.put("value", l.getFecha_alta());
-			    oJSON.put("label", l.getUsuario());
-			    arrayRespuesta.add(oJSON);
-			}
-			respuesta.put("series", arrayRespuesta);
+		       if (listado != null) {
+		           ArrayList<JSONObject> arrayRespuesta = new ArrayList<JSONObject>();
+		           JSONObject oJSONVacio = new JSONObject();
+		           oJSONVacio.put("value", "");
+		           oJSONVacio.put("label", "");
+		           arrayRespuesta.add(oJSONVacio);
+		           for (Trueque l: listado) {
+		               JSONObject oJSON = new JSONObject();
+		               oJSON.put("fecha", l.getFecha_alta());
+		               oJSON.put("pulsacion", l.getTipo());
+		               arrayRespuesta.add(oJSON);
+		           }
+		           respuesta.put("lecturas", arrayRespuesta);
+		       }
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,4 +64,30 @@ public class GraficasController extends BaseController{
 		return model;
 		//return enviarRespuestaAJAX(response, respuesta.toString());
 	}
+	
+/**	public ActionForward listaLecturas(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Throwable {
+	       
+        ClaseForm claseForm = (ClaseForm) form;
+      
+       JSONObject respuesta = new JSONObject();
+      
+       List<Lecturas> listadoLecturas = lecturasBL.findBySesion(new Long(1));
+       if (listadoLecturas != null) {
+           ArrayList<JSONObject> arrayRespuesta = new ArrayList<JSONObject>();
+           JSONObject oJSONVacio = new JSONObject();
+           oJSONVacio.put("value", "");
+           oJSONVacio.put("label", "");
+           arrayRespuesta.add(oJSONVacio);
+           for (Lecturas l: listadoLecturas) {
+               JSONObject oJSON = new JSONObject();
+               oJSON.put("fecha", l.getFecha_lectura());
+               oJSON.put("pulsacion", l.getPulsaciones());
+               arrayRespuesta.add(oJSON);
+           }
+           respuesta.put("lecturas", arrayRespuesta);
+       }
+       return enviarRespuestaAJAX(response, respuesta.toString());
+   }
+*/
+	
 }

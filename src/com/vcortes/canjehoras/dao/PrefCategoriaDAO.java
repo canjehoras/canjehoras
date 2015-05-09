@@ -26,4 +26,16 @@ public class PrefCategoriaDAO extends BaseDAO {
 		return null;
 	}
 	
+	public List<PrefCategoria> findPreferenciaCategoria(Long categoria) throws Throwable {
+		log.debug("findPreferenciaCategoria");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(PrefCategoria.class);
+			q.add(Restrictions.eq("categoria.id", categoria));
+			q.addOrder(Order.desc("id"));
+			return q.list();
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}
 }

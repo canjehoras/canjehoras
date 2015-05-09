@@ -72,7 +72,8 @@ public class Constantes {
 	public final static String BBDD_USUARIO_PROVINCIA = "provincia";
 	public final static String BBDD_USUARIO_CATEGORIA = "categoria";
 	
-	
+	// Email
+	public final static String EMAIL_ASUNTO = "Nuevo trueque publicado";
 	
 	
 }

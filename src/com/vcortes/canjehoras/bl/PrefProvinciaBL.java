@@ -22,6 +22,10 @@ public class PrefProvinciaBL {
 		return prefProvinciaDAO.findByUsuario(id_usuario);
 	}
 	
+	public List<PrefProvincia> findPreferenciaProvincia(Long provincia) throws Throwable {
+		return prefProvinciaDAO.findPreferenciaProvincia(provincia);
+	}
+	
 	public Object saveOrUpdate(Object instance) throws Exception{
 		return prefProvinciaDAO.saveOrUpdate(instance);
 	}
