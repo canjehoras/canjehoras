@@ -75,6 +75,9 @@
 		$('#toggle-publicar-sinregistro').click(function(){
 			registro();
 		});
+		$('#toggle-datos').click(function(){
+			datos();
+		});
 		$('#toggle-trueques').click(function(){
 			trueques();
 		});

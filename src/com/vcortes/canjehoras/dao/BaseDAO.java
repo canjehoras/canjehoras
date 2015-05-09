@@ -1,6 +1,7 @@
 package com.vcortes.canjehoras.dao;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -57,6 +58,26 @@ public class BaseDAO {
 		logger.info("findAll - BaseDAO");
 		Session session = (Session) sessionFactory.getCurrentSession();
 		return (session.createCriteria(instance.getClass()).addOrder(Order.asc(orderBy)).list());
+	}
+	
+	/**
+	 * Elimina todos los objetos de la colección pasada como parámetro
+	 * @param list
+	 * @throws Exception
+	 */
+	public void deleteAll(Collection list) throws Exception {
+		logger.debug("deleteAll");
+		sessionFactory.getCurrentSession().delete(list);
+	}
+	
+	/**
+	 * Elimina el objeto pasado como parámetro
+	 * @param instance
+	 * @throws Exception
+	 */
+	public void delete(Object instance) throws Exception {
+		logger.debug("delete - BaseDAO");
+		sessionFactory.getCurrentSession().delete(instance);
 	}
 	
 	

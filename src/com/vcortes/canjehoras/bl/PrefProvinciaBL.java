@@ -29,4 +29,8 @@ public class PrefProvinciaBL {
 	public Object saveOrUpdate(Object instance) throws Exception{
 		return prefProvinciaDAO.saveOrUpdate(instance);
 	}
+	
+	public void delete(Object instance) throws Exception {
+		prefProvinciaDAO.delete(instance);
+	}
 }

@@ -36,6 +36,7 @@ public class Constantes {
 	// Nombre de los .jsp
 	public static final String LOGIN  = "login";
 	public static final String REGISTRO  = "registro";
+	public static final String EDITAR_REGISTRO  = "editarRegistro";
 	public static final String RECORDAR_PASS  = "recordarContrasenya";
 	public static final String INICIO  = "inicio";
 	public static final String PUBLICAR  = "publicar";
@@ -70,6 +71,7 @@ public class Constantes {
 	public final static String BBDD_USUARIO_TELEFONO = "telefono";
 	public final static String BBDD_USUARIO_WASSAP = "wassap";
 	public final static String BBDD_USUARIO_PROVINCIA = "provincia";
+	public final static String BBDD_USUARIO_PROVINCIAS = "provincias";
 	public final static String BBDD_USUARIO_CATEGORIA = "categoria";
 	
 	// Email

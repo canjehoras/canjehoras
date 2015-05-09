@@ -3,7 +3,9 @@ package com.vcortes.canjehoras.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -149,6 +151,49 @@ public class LoginController extends BaseController{
 		return model;
 	}
 	
+	/**
+	 * 
+	 * @param arg0
+	 * @param arg1
+	 * @param form
+	 * @return
+	 */
+	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Editar registro");
+		ModelAndView model = new ModelAndView(Constantes.EDITAR_REGISTRO);
+		try{
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), "descripcion");
+			model.addObject("categorias", categorias);
+			
+			List<Categoria> provincias = buscadorBL.findAll(new Provincia(),  "descripcion");
+			model.addObject("provincias", provincias);
+			
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			model.addObject("usuario", usuario);
+			
+			ArrayList<Long> listadoProvincia = new ArrayList<Long>();
+			List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+			for(PrefProvincia provincia: listPrefProvincia){
+				listadoProvincia.add(provincia.getProvincia().getId());
+			}
+			model.addObject("listadoProvincia", listadoProvincia);
+			
+			ArrayList<Long> listadoCategoria = new ArrayList<Long>();
+			List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+			for(PrefCategoria categoria: listPrefCategoria){
+				listadoCategoria.add(categoria.getCategoria().getId());
+			}
+			model.addObject("listadoCategoria", listadoCategoria);
+			
+		} catch(Exception e){
+			logger.error("Error al obtener los listados de la pantalla de login",e);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 	public ModelAndView recordarContrasenya(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio recordar contrasenya");
 		ModelAndView model = new ModelAndView(Constantes.RECORDAR_PASS);
@@ -190,9 +235,15 @@ public class LoginController extends BaseController{
 			String wassap = (String) request.getParameter(Constantes.BBDD_USUARIO_WASSAP);
 			String provincia[]= request.getParameterValues(Constantes.BBDD_USUARIO_PROVINCIA);
 			String categoria[]= request.getParameterValues(Constantes.BBDD_USUARIO_CATEGORIA);
+
+			String provincias = request.getParameter(Constantes.BBDD_USUARIO_PROVINCIAS);
 			
 			
-			Usuario usuario = new Usuario();
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(usuario == null){
+				usuario = new Usuario();
+			}
+			
 			usuario.setCorreo_electronico(correo_electronico);
 			usuario.setPass(pass);
 			usuario.setNombre(nombre);
@@ -205,9 +256,25 @@ public class LoginController extends BaseController{
 			usuario.setFecha_ultimo_acceso(sdf.parse(sdf.format(new Date())));
 			usuario.setIdioma(Constantes.IDIOMA_ES);
 			usuario.setPerfil(Constantes.TIPO_USUARIO);
+			
+			Provincia pr = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincias));
+			usuario.setProvincia(pr);
 		
 			usuario = (Usuario) usuarioBL.saveOrUpdate(usuario);
 			
+			/* Eliminamos las preferencias si la tubiera para incluirle las nuevas */
+			Collection<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+			for (Iterator iterator = listPrefProvincia.iterator(); iterator.hasNext();) {
+				PrefProvincia prefProvincia = (PrefProvincia) iterator.next();
+				prefProvinciaBL.delete(prefProvincia);
+			}
+			Collection<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+			for (Iterator iterator = listPrefCategoria.iterator(); iterator.hasNext();) {
+				PrefCategoria prefCategoria = (PrefCategoria) iterator.next();
+				prefProvinciaBL.delete(prefCategoria);
+			}
+			
+			/* Incluimos las nuevas preferencias */
 			for (int i = 0; i < provincia.length; i++) {
 				Provincia p = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincia[i]));
 				PrefProvincia prefProvincia = new PrefProvincia();
@@ -230,6 +297,9 @@ public class LoginController extends BaseController{
 			login(request, response);
 		} catch (Exception e) {
 			logger.error("Error registrando usuario", e);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		try {
 			response.sendRedirect("../trueque/listado.html");

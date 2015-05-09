@@ -26,6 +26,10 @@ trueques = function(){
 	window.location.href= "/canjehoras/trueque/mistrueques.html"
 }
 
+datos = function(){
+	window.location.href = "/canjehoras/login/editar.html";
+}
+
 editarTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/editar.html?id=" + id
 }
