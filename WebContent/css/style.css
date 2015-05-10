@@ -104,13 +104,6 @@ p {
     position: relative;
 }
 
-.logo {
-    float: left;
-    margin-top: 8px;
-	position: relative;
-	z-index: 2;
-}
-
 .res-nav_click {
     display: none;
 }
@@ -144,7 +137,7 @@ p {
 
 .navStyle ul li {
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 2px;
 }
 
 .navStyle ul li:first-child {
@@ -157,7 +150,7 @@ p {
 
 .navStyle ul li a {
     display: block;
-    font-size: 14px;
+    font-size: 11px;
     color: #222222;
     font-family: 'Raleway', sans-serif;
     text-decoration: none;
@@ -1686,9 +1679,24 @@ div.mc-image {
 		width: 30%;
 		margin: 3px;
 	}
+	
+	.logo {
+	    float: left;
+	    margin-top: 8px;
+		position: relative;
+		z-index: 2;
+		width: 20%;
+	}
 }
 
 @media (max-width: 768px) {
+	.logo {
+	    float: left;
+	    margin-top: 8px;
+		position: relative;
+		z-index: 2;
+		width: 45%;
+	}
 	.mapa{
 		width:100%;
 		margin: 4px;
