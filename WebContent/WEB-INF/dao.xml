@@ -7,6 +7,6 @@
 	<bean id="provinciaDAO" class="com.vcortes.canjehoras.dao.ProvinciaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
 	<bean id="prefProvinciaDAO" class="com.vcortes.canjehoras.dao.PrefProvinciaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
 	<bean id="prefCategoriaDAO" class="com.vcortes.canjehoras.dao.PrefCategoriaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
-	
-	
+	<bean id="agendaDAO" class="com.vcortes.canjehoras.dao.AgendaDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
+	<bean id="canjeDAO" class="com.vcortes.canjehoras.dao.CanjeDAO"> <property name="sessionFactory"><ref bean="sessionFactory"/></property></bean>
 </beans>

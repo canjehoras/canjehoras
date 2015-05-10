@@ -16,6 +16,7 @@
 				<img src="data:image/jpg;base64,${trueque.imagen64}" style="height: 300px; border: 2px solid #4BAAD6;"/> 
 			</div>
 			<h3 class="animated fadeInUp wow">${trueque.titulo}</h3>
+			<p class="animated fadeInDown wow"><fmt:message key="fecha.alta"/>${trueques.fecha_alta}</p>
 			<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueque.categoria.descripcion}</p>
 			<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueque.provincia.descripcion}</p>
 			<p class="animated fadeInDown wow"><fmt:message key="listado.tipo"/>${trueque.tipo}</p>

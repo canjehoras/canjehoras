@@ -7,8 +7,6 @@
 		<property name="sessionFactory"><ref bean="sessionFactory"/></property>
 	</bean>
 	
-	
-	
 	<bean id="usuarioBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 		<property name="transactionManager"><ref bean="transactionManager"/></property>
 		<property name="target"><ref bean="usuarioBLTarget"/></property>
@@ -87,4 +85,29 @@
 		<property name="prefCategoriaDAO"><ref bean="prefCategoriaDAO"/></property>
 	</bean>
 	
+	<bean id="agendaBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="agendaBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="agendaBLTarget" class="com.vcortes.canjehoras.bl.AgendaBL">
+		<property name="agendaDAO"><ref bean="agendaDAO"/></property>
+	</bean>
+	
+	<bean id="canjeBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="canjeBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="canjeBLTarget" class="com.vcortes.canjehoras.bl.CanjeBL">
+		<property name="canjeDAO"><ref bean="canjeDAO"/></property>
+	</bean>
 </beans>

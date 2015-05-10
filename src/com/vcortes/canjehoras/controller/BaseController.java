@@ -1,6 +1,7 @@
 package com.vcortes.canjehoras.controller;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,27 +51,34 @@ public abstract class BaseController extends MultiActionController {
 	 */
 	public List<Trueque> getListadoTrueques (List<Trueque> listado){
 		String descripcion = "";
-		for (int i = 0; i<listado.size(); i++){
-			Trueque trueque = listado.get(i);
-			if(trueque.getDescripcion().length() > new Integer(Constantes.MAX_DESCRIPCION)){
-				descripcion = trueque.getDescripcion().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
-				trueque.setDescripcion(descripcion);
+		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+		try{
+			for (int i = 0; i<listado.size(); i++){
+				Trueque trueque = listado.get(i);
+				if(trueque.getDescripcion().length() > new Integer(Constantes.MAX_DESCRIPCION)){
+					descripcion = trueque.getDescripcion().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
+					trueque.setDescripcion(descripcion);
+				}
+				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
+				}
+				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
+					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
+				}
+				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
+				}
+				if(trueque.getModalidad().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
+				}
+				if(null != trueque.getFecha_alta()){
+					trueque.setFecha(sdf.format(trueque.getFecha_alta()));
+				}
+				getImagen(trueque);
 			}
-			if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
-				trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
-			}
-			if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
-				trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
-			}
-			if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
-				trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
-			}
-			if(trueque.getModalidad().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
-				trueque.setModalidad(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
-			}
-			getImagen(trueque);
+		} catch (Exception e) {
+			
 		}
-		
 		return listado;
 	}
 	

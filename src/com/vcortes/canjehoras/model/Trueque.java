@@ -13,6 +13,7 @@ public class Trueque implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private Date fecha_alta;
+	private String fecha;
 	private String estado;
 	private String titulo;
 	private String descripcion;
@@ -245,5 +246,14 @@ public class Trueque implements Serializable{
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
 	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+	
 }
 

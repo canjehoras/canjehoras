@@ -58,7 +58,7 @@
         <property name="methodNameResolver">
             <bean class="org.springframework.web.servlet.mvc.multiaction.InternalPathMethodNameResolver"/>
         </property>
-		<property name="usuarioBL" ref="usuarioBL" />
+		<property name="truequeBL" ref="truequeBL" />
     </bean> 
 
 	<!-- Categoria -->
@@ -81,6 +81,8 @@
 		<property name="truequeBL" ref="truequeBL" />
 		<property name="prefProvinciaBL" ref="prefProvinciaBL" />
 		<property name="prefCategoriaBL" ref="prefCategoriaBL" />
+		<property name="agendaBL" ref="agendaBL" />
+		<property name="canjeBL" ref="canjeBL" />
     </bean> 
 	
    <!-- Agenda-->
