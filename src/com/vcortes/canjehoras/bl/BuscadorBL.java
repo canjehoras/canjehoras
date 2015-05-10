@@ -16,7 +16,7 @@ public class BuscadorBL {
 		return buscadorDAO.findAll(instance);
 	}
 
-	public List<Categoria> findAll(Object instance, String orderBy) throws Exception {
+	public List findAll(Object instance, String orderBy) throws Exception {
 		return buscadorDAO.findAll(instance, orderBy);
 	}
 	

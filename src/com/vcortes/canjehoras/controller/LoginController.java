@@ -162,11 +162,6 @@ public class LoginController extends BaseController{
 		log.debug("Editar registro");
 		ModelAndView model = new ModelAndView(Constantes.EDITAR_REGISTRO);
 		try{
-			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), "descripcion");
-			model.addObject("categorias", categorias);
-			
-			List<Categoria> provincias = buscadorBL.findAll(new Provincia(),  "descripcion");
-			model.addObject("provincias", provincias);
 			
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			model.addObject("usuario", usuario);
@@ -176,14 +171,32 @@ public class LoginController extends BaseController{
 			for(PrefProvincia provincia: listPrefProvincia){
 				listadoProvincia.add(provincia.getProvincia().getId());
 			}
-			model.addObject("listadoProvincia", listadoProvincia);
 			
 			ArrayList<Long> listadoCategoria = new ArrayList<Long>();
 			List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
 			for(PrefCategoria categoria: listPrefCategoria){
 				listadoCategoria.add(categoria.getCategoria().getId());
 			}
-			model.addObject("listadoCategoria", listadoCategoria);
+
+			
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), "descripcion");
+			for (Iterator iterator = categorias.iterator(); iterator.hasNext();) {
+				Categoria categoria = (Categoria) iterator.next();
+				if(listadoCategoria.contains(categoria.getId())){
+					categoria.setSeleccionado(Boolean.TRUE);
+				}
+			}
+			
+			model.addObject("categorias", categorias);
+			
+			List<Provincia> provincias = buscadorBL.findAll(new Provincia(),  "descripcion");
+			for (Iterator iterator = provincias.iterator(); iterator.hasNext();) {
+				Provincia provincia = (Provincia) iterator.next();
+				if(listadoProvincia.contains(provincia.getId())){
+					provincia.setSeleccionado(Boolean.TRUE);
+				}
+			}
+			model.addObject("provincias", provincias);
 			
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
@@ -273,7 +286,6 @@ public class LoginController extends BaseController{
 				PrefCategoria prefCategoria = (PrefCategoria) iterator.next();
 				prefProvinciaBL.delete(prefCategoria);
 			}
-			
 			/* Incluimos las nuevas preferencias */
 			for (int i = 0; i < provincia.length; i++) {
 				Provincia p = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincia[i]));
@@ -291,10 +303,6 @@ public class LoginController extends BaseController{
 				prefCategoriaBL.saveOrUpdate(prefCategoria);
 			}
 			
-
-			
-			// una vez registrado el usuario lo logueamos
-			login(request, response);
 		} catch (Exception e) {
 			logger.error("Error registrando usuario", e);
 		} catch (Throwable e) {
@@ -307,7 +315,7 @@ public class LoginController extends BaseController{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new ModelAndView(Constantes.LISTA_TRUEQUE);
+		return login(request, response);
 	}
 	
 	/**

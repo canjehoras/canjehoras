@@ -12,6 +12,7 @@ public class Provincia implements Serializable{
 	private Long id;
 	private String descripcion;
 	private String codigo;
+	private Boolean seleccionado;
 	
 	/**
 	 * Constructor por defecto
@@ -74,6 +75,14 @@ public class Provincia implements Serializable{
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public Boolean getSeleccionado() {
+		return seleccionado;
+	}
+
+	public void setSeleccionado(Boolean seleccionado) {
+		this.seleccionado = seleccionado;
 	}
 }
 

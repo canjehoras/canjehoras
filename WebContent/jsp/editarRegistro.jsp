@@ -37,18 +37,18 @@
 	    <div class="tituloSelect">Categorías</div>
 	    <div id="selectorOpciones" class="tituloSelect" style="max-height: 200px; border: 1px solid #000; background: #fff; overflow: auto;">
 	    	<c:forEach var="categoria" items="${categorias}">
-	    		<div style="width: 100%"><input type="checkbox" name="categoria" value="${categoria.id}" <c:if test="${fn:contains(listadoCategoria, categoria.id)}" > checked = "checked" </c:if>/> ${categoria.descripcion}</div>
+	    		<div style="width: 100%"><input type="checkbox" name="categoria" value="${categoria.id}" <c:if test="${categoria.seleccionado}" > checked = "checked" </c:if>/> ${categoria.descripcion}</div>
 	    	</c:forEach>
 	    </div>
 
 		<div class="tituloSelect">Provincias</div>
 		<div id="selectorOpciones" class="tituloSelect" style="max-height: 200px; border: 1px solid #000; background: #fff; overflow: auto; margin-bottom: 5%;">
 	    	<c:forEach var="provincia" items="${provincias}">
-	    		<div style="width: 100%"><input type="checkbox" name="provincia" value="${provincia.id}" <c:if test="${fn:contains(listadoProvincia, provincia.id)}" > checked = "checked" </c:if>/> ${provincia.descripcion}</div>
+	    		<div style="width: 100%"><input type="checkbox" name="provincia" value="${provincia.id}" <c:if test="${provincia.seleccionado}" > checked = "checked" </c:if>/> ${provincia.descripcion}</div>
 	    	</c:forEach>
 	    </div>
 	    <div class="tituloSelect"><fmt:message key="campos.obligatorios"/></div>
-		<input type="submit" value="<fmt:message key="boton.crear.cuenta"/>" />
+		<input type="submit" value="<fmt:message key="boton.guardar.cuenta"/>" />
 		<!--<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>  -->
 	</form>
 </section>

@@ -47,7 +47,7 @@
 	    	</c:forEach>
 	    </div>
 	    <div class="tituloSelect"><fmt:message key="campos.obligatorios"/></div>
-		<input type="submit" value="<fmt:message key="boton.guardar"/>" />
+		<input type="submit" value="<fmt:message key="boton.crear.cuenta"/>" />
 		<!--<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>  -->
 	</form>
 </section>

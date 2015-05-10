@@ -11,6 +11,7 @@ public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String descripcion;
+	private Boolean seleccionado;
 	
 	/**
 	 * Constructor por defecto
@@ -65,6 +66,14 @@ public class Categoria implements Serializable{
 	 */
 	public void setDescripcion(String descripcion){
 		this.descripcion = descripcion;
+	}
+
+	public Boolean getSeleccionado() {
+		return seleccionado;
+	}
+
+	public void setSeleccionado(Boolean seleccionado) {
+		this.seleccionado = seleccionado;
 	}
 }
 
