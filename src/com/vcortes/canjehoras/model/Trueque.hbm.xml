@@ -15,11 +15,11 @@
         <property name="titulo" type="string">
             <column name="TITULO" length="50" not-null="true" />
         </property>
-		<property name="descripcion" type="string">
-            <column name="DESCRIPCION" length="500" not-null="true" />
+		<property name="descripcionOferta" type="string">
+            <column name="DESCRIPCION_OFERTA" length="500" not-null="true" />
         </property>
-        <property name="tipo" type="string">
-            <column name="TIPO" length="1" />
+		<property name="descripcionDemanda" type="string">
+            <column name="DESCRIPCION_DEMANDA" length="500" not-null="true" />
         </property>
         <property name="imagen" type="binary">
             <column name="IMAGEN" />

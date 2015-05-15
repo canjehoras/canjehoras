@@ -16,8 +16,8 @@ public class Trueque implements Serializable{
 	private String fecha;
 	private String estado;
 	private String titulo;
-	private String descripcion;
-	private String tipo;
+	private String descripcionOferta;
+	private String descripcionDemanda;
 	private byte[] imagen;
 	private Usuario usuario;
 	private Categoria categoria;
@@ -46,14 +46,14 @@ public class Trueque implements Serializable{
 	 * @param categoria
 	 */
 	public Trueque(Long id, Date fecha_alta, String estado, String titulo, 
-					String descripcion, String tipo, byte[] imagen, Usuario usuario, 
-					Categoria categoria, Provincia provincia, String modalidad) {
+					String descripcionOferta, String descripcionDemanda, String tipo, byte[] imagen, 
+					Usuario usuario, Categoria categoria, Provincia provincia, String modalidad) {
 		this.id = id;
 		this.fecha_alta = fecha_alta;
 		this.estado = estado;
 		this.titulo = titulo;
-		this.descripcion = descripcion;
-		this.tipo = tipo;
+		this.descripcionOferta = descripcionOferta;
+		this.descripcionDemanda = descripcionDemanda;
 		this.imagen = imagen;
 		this.usuario = usuario;
 		this.categoria = categoria;
@@ -133,41 +133,6 @@ public class Trueque implements Serializable{
 		this.titulo = titulo;
 	}
 
-	/**
-	 * Obtiene el descripcion del trueque
-	 * 
-	 * @return descripcion
-	 */
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	/**
-	 * Fija la descripción del trueque
-	 * 
-	 * @param descripcion
-	 */
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	/**
-	 * Obtiene el tipo del trueque
-	 * 
-	 * @return tipo
-	 */
-	public String getTipo() {
-		return tipo;
-	}
-
-	/**
-	 * Fija el tipo del trueque
-	 * 
-	 * @param tipo
-	 */
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
 
 	/**
 	 * Obtiene el imagen del trueque
@@ -253,6 +218,22 @@ public class Trueque implements Serializable{
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getDescripcionOferta() {
+		return descripcionOferta;
+	}
+
+	public void setDescripcionOferta(String descripcionOferta) {
+		this.descripcionOferta = descripcionOferta;
+	}
+
+	public String getDescripcionDemanda() {
+		return descripcionDemanda;
+	}
+
+	public void setDescripcionDemanda(String descripcionDemanda) {
+		this.descripcionDemanda = descripcionDemanda;
 	}
 	
 }

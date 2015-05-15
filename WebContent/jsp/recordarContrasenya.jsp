@@ -21,8 +21,8 @@
 					</div>
 				</div>
 			</div>
+			<input type="submit" value="<fmt:message key="boton.enviar"/>" onclick="recordarContrasenya();"/>
 			<input type="button" value="<fmt:message key="boton.volver"/>" onclick="javascript:history.back();"/>
-			<input type="submit" value="<fmt:message key="boton.enviar"/>" onclick="recordar();"/>
 		</form>
 	</section>
 	<%@ include file="comunes/include-pie.jsp" %>

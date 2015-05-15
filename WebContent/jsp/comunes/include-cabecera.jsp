@@ -14,10 +14,6 @@
       </div>
 	  <div id="main-nav" class="collapse navbar-collapse navStyle">
 		<ul class="nav navbar-nav" id="mainNav">
-			<c:if test="${sessionScope.usuario == null}">
-		  		<li><a href="#" class="scroll-link" id="toggle-login"><fmt:message key="login"/></a></li>
-		  		<li><a href="#" class="scroll-link" id="toggle-publicar-sinregistro"><fmt:message key="publicar"/></a></li>
-			</c:if>
 			<c:if test="${sessionScope.usuario != null}">
 				<c:if test="${sessionScope.perfil == 'A'}">
 					<li><a href="#" class="scroll-link" id="toggle-datos"><fmt:message key="datos.personales"/></a></li>

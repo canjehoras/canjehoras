@@ -109,9 +109,10 @@ public class TruequeController extends BaseController{
 			
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			String titulo = "";
-			String descripcion = "";
+			String descripcionOferta = "";
+			String descripcionDemanda = "";
 			String categoria = "";
-			String tipo = "";
+			//String tipo = "";
 			String id = "";
 			String provincia = "";
 			String modalidad = "";
@@ -133,12 +134,12 @@ public class TruequeController extends BaseController{
 		            	categoria = fieldValue;
 		            } else if(Constantes.PROVINCIAS.equals(fieldName)){
 		            	provincia = fieldValue;
-		            } else if(Constantes.TIPO.equals(fieldName)){
-		            	tipo = fieldValue;
 		            } else if(Constantes.MODALIDAD.equals(fieldName)){
 		            	modalidad = fieldValue;
-		            } else if(Constantes.DESCRIPCION.equals(fieldName)){
-		            	descripcion = fieldValue;
+		            } else if(Constantes.DESCRIPCION_OFERTA.equals(fieldName)){
+		            	descripcionOferta = fieldValue;
+		            } else if(Constantes.DESCRIPCION_DEMANDA.equals(fieldName)){
+		            	descripcionDemanda = fieldValue;
 		            } else if(Constantes.FECHA.equals(fieldName)){
 		            	fecha = fieldValue;
 		            } else if(Constantes.HORA_INICIO.equals(fieldName)){
@@ -162,9 +163,10 @@ public class TruequeController extends BaseController{
 		    trueque.setTitulo(titulo);
 		    trueque.setCategoria((Categoria) buscadorBL.findById(new Categoria(), Long.valueOf(categoria)));
 		    trueque.setProvincia((Provincia) buscadorBL.findById(new Provincia(), Long.valueOf(provincia)));
-		    trueque.setTipo(tipo);
+		    //trueque.setTipo(tipo);
 		    trueque.setModalidad(modalidad);
-		    trueque.setDescripcion(descripcion);
+		    trueque.setDescripcionOferta(descripcionOferta);
+		    trueque.setDescripcionDemanda(descripcionDemanda);
 		    trueque.setImagen(IOUtils.toByteArray(fileContent));		    
 			trueque.setFecha_alta(sdf.parse(sdf.format(new Date())));
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
@@ -209,7 +211,8 @@ public class TruequeController extends BaseController{
 						"<h3>" + trueque.getTitulo() + "</h3>" +
 						"<h3>" + trueque.getCategoria().getDescripcion() + "</h3>" + 
 						"<h3>" + trueque.getProvincia().getDescripcion() + "</h3>" + 
-						"<h3>" + descripcion + "</h3>" + 
+						"<h3>" + "OFERTA: " + descripcionOferta + "</h3>" +
+						"<h3>" + "DEMANDA: " + descripcionDemanda + "</h3>" +
 						"<h4>Publicado por: " + trueque.getUsuario().getCorreo_electronico() + "</h4>"; 
 				mail.enviarMail(email, null, null, Constantes.EMAIL_ASUNTO, cuerpo, null, null);
 				log.debug("Envio email a " + email);
@@ -289,12 +292,12 @@ public class TruequeController extends BaseController{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
 			if(null != trueque){				
-				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+				/**if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
 					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
 				}
 				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
 					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
-				}
+				}*/
 				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
 					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
 				}
@@ -343,12 +346,12 @@ public class TruequeController extends BaseController{
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
 			
 			if(null != trueque){				
-				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+				/**if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
 					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
 				}
 				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
 					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
-				}
+				}*/
 				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
 					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
 				}

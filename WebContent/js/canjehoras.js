@@ -10,6 +10,10 @@ registro = function(){
 	window.location.href= "/canjehoras/login/registro.html"
 }
 
+recordarContrasenya = function(){
+	window.location.href= "/canjehoras/login/recordar.html"
+}
+
 buscador = function(){
 	window.location.href= "/canjehoras/buscador/inicio.html"
 }
@@ -67,4 +71,12 @@ borrarTrueque = function(){
 
 cerrar = function(){
 	window.location.href= "/canjehoras/login/logout.html"
+}
+
+habilitarDemanda = function(radio){
+	if (radio=='C'){
+		$("#divDescripcionDemanda").hide();
+	}else{
+		$("#divDescripcionDemanda").show();
+	} 
 }

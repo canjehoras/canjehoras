@@ -8,6 +8,7 @@ import java.util.Properties;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.imageio.ImageIO;
 import javax.mail.Address;
 import javax.mail.Authenticator;
@@ -104,6 +105,7 @@ public class Mail {
 				texto = reemplazar(texto);
 			}
 			
+			bodyPart.setDataHandler(new DataHandler(new FileDataSource("../img/sinfoto.jpg")));
 			bodyPart.setContent(texto, mailContentType);
 			
 			multiPart.addBodyPart(bodyPart);

@@ -50,21 +50,26 @@ public abstract class BaseController extends MultiActionController {
 	 * @return
 	 */
 	public List<Trueque> getListadoTrueques (List<Trueque> listado){
-		String descripcion = "";
+		String descripcionOferta = "";
+		String descripcionDemanda = "";
 		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 		try{
 			for (int i = 0; i<listado.size(); i++){
 				Trueque trueque = listado.get(i);
-				if(trueque.getDescripcion().length() > new Integer(Constantes.MAX_DESCRIPCION)){
-					descripcion = trueque.getDescripcion().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
-					trueque.setDescripcion(descripcion);
+				if(trueque.getDescripcionOferta().length() > new Integer(Constantes.MAX_DESCRIPCION)){
+					descripcionOferta = trueque.getDescripcionOferta().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
+					trueque.setDescripcionOferta(descripcionOferta);
 				}
-				if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
+				if(trueque.getDescripcionDemanda().length() > new Integer(Constantes.MAX_DESCRIPCION)){
+					descripcionDemanda = trueque.getDescripcionDemanda().substring(0,new Integer(Constantes.MAX_DESCRIPCION)) + "...";
+					trueque.setDescripcionDemanda(descripcionDemanda);
+				}
+				/**if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
 					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
 				}
 				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
 					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
-				}
+				}*/
 				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
 					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
 				}

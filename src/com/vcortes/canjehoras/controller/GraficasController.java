@@ -52,7 +52,7 @@ public class GraficasController extends BaseController{
 		           for (Trueque l: listado) {
 		               JSONObject oJSON = new JSONObject();
 		               oJSON.put("fecha", l.getFecha_alta());
-		               oJSON.put("pulsacion", l.getTipo());
+		               //oJSON.put("pulsacion", l.getTipo());
 		               arrayRespuesta.add(oJSON);
 		           }
 		           respuesta.put("lecturas", arrayRespuesta);

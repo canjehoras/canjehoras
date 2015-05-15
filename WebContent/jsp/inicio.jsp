@@ -15,13 +15,15 @@
 	    <div class="container">
 	      <div class="hero_section">
 	        <div class="row">
-	          <div class="col-lg-7 col-sm-7">
+	          <div class="col-lg-7 col-sm-7" style="margin-top: 20px">
 	            <div class="top_left_cont zoomIn wow animated"> 
-	              <h2><fmt:message key="inicio.titulo"/></h2>
-	              <p><fmt:message key="inicio.descripcion"/></p>
-	              <h3>Utimos trueques publicados</h3>
-	              <c:forEach var="trueques" items="${trueques}" varStatus="count" >
-	                 <a href="#" class="scroll-link" onclick="detalleTrueque(${trueques.id});"><p>${trueques.fecha} - ${trueques.titulo}</p></a>  
+	              <span style="color:white; text-align: justify;"><fmt:message key="inicio.descripcion"/></span>
+	              <p> </p>
+	              <span style="color:white; font-weight: bold;"><fmt:message key="inicio.ultimos.trueques"/></span>
+	              <c:forEach var="trueques" items="${trueques}" varStatus="count" begin="0" end="4">
+	                 <a href="#" class="scroll-link" style="color:white; font-weight: bold;" onclick="detalleTrueque(${trueques.id});">
+	                 	<div style="margin-left: 15px">${trueques.fecha} - ${trueques.titulo} (${trueques.provincia.descripcion})</div>
+	                 </a>  
 	              </c:forEach>
 	            </div>
 	          </div>
@@ -37,8 +39,7 @@
 							</div>
 							<div class="create-account">
 								<p>
-									<fmt:message key="login.cuenta"/>&nbsp; 
-									<a href="/canjehoras/login/registro.html" id="register-btn" ><fmt:message key="login.cuenta.crear"/></a>
+									<a href="/canjehoras/login/registro.html" id="register-btn" ><fmt:message key="login.cuenta"/></a>
 								</p>
 							</div>
 							

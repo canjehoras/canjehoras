@@ -20,8 +20,7 @@
 			</div>
 			<div class="create-account">
 				<p>
-					<fmt:message key="login.cuenta"/>&nbsp; 
-					<a href="/canjehoras/login/registro.html" id="register-btn" ><fmt:message key="login.cuenta.crear"/></a>
+					<a href="/canjehoras/login/registro.html" id="register-btn" ><fmt:message key="login.cuenta"/></a>
 				</p>
 			</div>
 			

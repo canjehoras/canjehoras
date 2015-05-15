@@ -29,8 +29,8 @@
 					<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
 					<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueques.categoria.descripcion}</p>
 					<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueques.provincia.descripcion}</p>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.tipo"/>${trueques.tipo}</p>
-					<p class="animated fadeInDown wow">${trueques.descripcion}</p>
+					<p class="animated fadeInDown wow">OFERTA: ${trueques.descripcionOferta}</p>
+					<p class="animated fadeInDown wow">DEMANDA: ${trueques.descripcionOferta}</p>
 					<c:if test="${sessionScope.usuario == null}">
 						<input type="button" value="<fmt:message key="boton.ver.mas"/>" onclick="detalleTrueque(${trueques.id});"/>
 					</c:if>

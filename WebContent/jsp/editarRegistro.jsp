@@ -30,8 +30,6 @@
         </select> 
 	    
 	    <input type="tel" name="movil" title="Introduzca un movil válido"  id="movil" placeholder="<fmt:message key="registro.movil"/>" pattern="[0-9]{9}" value="${usuario.movil}" required/>
-	    <input type="tel" name="telefono" title="Introduzca un teléfono válido"  id="telefono" placeholder="<fmt:message key="registro.telefono"/>" pattern="[0-9]{9}" value="${usuario.telefono}" required/>
-	    <fmt:message key="registro.wassap"/> <input type="checkbox" name="wassap" id="wassap" placeholder="<fmt:message key="registro.wassap"/>" />
 
 	    <h1>Indica las preferencias</h1>
 	    <div class="tituloSelect">Categorías</div>

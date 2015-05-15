@@ -22,9 +22,6 @@ public class InicioController extends BaseController{
 		try {
 			List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
 			getListadoTrueques(listado);
-			if(listado.size()>5){
-				listado.subList(0, 4);				
-			}
 			model.addObject("trueques", listado);
 		} catch (Throwable e) {
 			e.printStackTrace();

@@ -15,14 +15,13 @@ public class Usuario implements Serializable{
 	private String perfil;
 	private Date fecha_alta;
 	private Date fecha_baja;
+	private Date fecha_nacimiento;
 	private String correo_electronico;
 	private String pass;
 	private String apellido1;
 	private String apellido2;
 	private String nombre;
 	private String movil;
-	private String telefono;
-	private Boolean wassap;
 	private Integer num_acceso;
 	private Date fecha_ultimo_acceso;	
 	private Provincia provincia;
@@ -44,8 +43,6 @@ public class Usuario implements Serializable{
 	 * @param apellido1
 	 * @param apellido2
 	 * @param movil
-	 * @param telefono
-	 * @param wassap
 	 * @param provincia
 	 * @param idioma
 	 * @param perfil
@@ -53,8 +50,8 @@ public class Usuario implements Serializable{
 	 */
 	public Usuario(Long id, String correo_electronico, String pass,
 			String nombre, String apellido1, String apellido2,
-			String movil, String telefono, Boolean wassap, 
-			Provincia provincia, String idioma, String perfil, Date fecha_alta) {
+			String movil, Provincia provincia, String idioma, String perfil, 
+			Date fecha_alta, Date fecha_nacimiento) {
 		this.id = id;
 		this.correo_electronico = correo_electronico;
 		this.pass = pass;
@@ -62,12 +59,11 @@ public class Usuario implements Serializable{
 		this.apellido2 = apellido2;
 		this.nombre = nombre;
 		this.movil = movil;
-		this.telefono = telefono;
-		this.wassap = wassap;
 		this.idioma = idioma;
 		this.provincia = provincia;
 		this.perfil = perfil;
 		this.fecha_alta = fecha_alta;
+		this.fecha_nacimiento = fecha_nacimiento;
 	}
 	
 	/**
@@ -80,8 +76,6 @@ public class Usuario implements Serializable{
 	 * @param apellido1
 	 * @param apellido2
 	 * @param movil
-	 * @param telefono
-	 * @param wassap
 	 * @param provincia
 	 * @param idioma
 	 * @param perfil
@@ -93,9 +87,8 @@ public class Usuario implements Serializable{
 	 */
 	public Usuario(Long id, String correo_electronico, String pass,
 			String nombre, String apellido1, String apellido2,
-			String movil, String telefono, Boolean wassap, 
-			Provincia provincia, String idioma, String perfil, Date fecha_alta, 
-			Date fecha_baja, Integer num_acceso, Date fecha_ultimo_acceso) {
+			String movil, Provincia provincia, String idioma, String perfil, Date fecha_alta, 
+			Date fecha_baja, Integer num_acceso, Date fecha_ultimo_acceso, Date fecha_nacimiento) {
 		this.id = id;
 		this.correo_electronico = correo_electronico;
 		this.pass = pass;
@@ -103,8 +96,7 @@ public class Usuario implements Serializable{
 		this.apellido2 = apellido2;
 		this.nombre = nombre;
 		this.movil = movil;
-		this.telefono = telefono;
-		this.wassap = wassap;
+		this.fecha_nacimiento = fecha_nacimiento;
 		this.idioma = idioma;
 		this.provincia = provincia;
 		this.perfil = perfil;
@@ -302,40 +294,6 @@ public class Usuario implements Serializable{
 	}
 
 	/**
-	 * Obtiene el telefono del usuario
-	 * @return telefono
-	 */
-	public String getTelefono() {
-		return telefono;
-	}
-	
-	/**
-	 * Fija el telefono del usuario
-	 * 
-	 * @param telefono
-	 */
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
-
-	/**
-	 * Obtiene si el usuario tiene o no wassap
-	 * @return wassap
-	 */
-	public Boolean getWassap() {
-		return wassap;
-	}
-
-	/**
-	 * Fija si el usuario tiene o no wassap
-	 * 
-	 * @param wassap
-	 */
-	public void setWassap(Boolean wassap) {
-		this.wassap = wassap;
-	}
-
-	/**
 	 * Obtiene el numero de acceso del usuario
 	 * @return num_acceso
 	 */
@@ -385,4 +343,13 @@ public class Usuario implements Serializable{
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
+
+	public Date getFecha_nacimiento() {
+		return fecha_nacimiento;
+	}
+
+	public void setFecha_nacimiento(Date fecha_nacimiento) {
+		this.fecha_nacimiento = fecha_nacimiento;
+	}
+	
 }

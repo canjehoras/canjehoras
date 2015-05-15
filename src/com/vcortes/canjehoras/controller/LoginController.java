@@ -1,6 +1,5 @@
 package com.vcortes.canjehoras.controller;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,6 +24,7 @@ import com.vcortes.canjehoras.model.Categoria;
 import com.vcortes.canjehoras.model.PrefCategoria;
 import com.vcortes.canjehoras.model.PrefProvincia;
 import com.vcortes.canjehoras.model.Provincia;
+import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
 
@@ -85,7 +85,6 @@ public class LoginController extends BaseController{
 				request.getSession().setAttribute(Constantes.PERFIL, usuario.getPerfil());
 				
 				// Recuperar las preferencias
-				//Long[] listadoProvincia = new Long[] {}; //{Long.valueOf(20), Long.valueOf(2)};
 				ArrayList<Long> listadoProvincia = new ArrayList<Long>();
 				List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
 				for(PrefProvincia provincia: listPrefProvincia){
@@ -99,11 +98,19 @@ public class LoginController extends BaseController{
 				}
 				request.getSession().setAttribute("listadoCategoria", listadoCategoria);
 				
-				try {
-					response.sendRedirect("../trueque/preferencias.html");
-				} catch (IOException e) {
-					e.printStackTrace();
+				// Suma el contador de numero de accesos
+				int num_acceso = usuario.getNum_acceso();
+				if(num_acceso > 0){
+					num_acceso = num_acceso + new Integer(1);
+					usuario.setNum_acceso(num_acceso);
+					usuarioBL.saveOrUpdate(usuario);
 				}
+				
+//				try {
+//					response.sendRedirect("../trueque/preferencias.html");
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 				model = new ModelAndView(Constantes.LISTA_TRUEQUE);  
 			}
 		} catch (Exception e) {
@@ -145,6 +152,11 @@ public class LoginController extends BaseController{
 			List<Categoria> provincias = buscadorBL.findAll(new Provincia(),  "descripcion");
 			model.addObject("provincias", provincias);
 		
+			List<String> listadoIdiomas = new ArrayList<String>();  
+			listadoIdiomas.add("Castellano"); 
+			listadoIdiomas.add("Ingles"); 
+			model.addObject("listadoIdiomas", listadoIdiomas);
+			
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
 		}
@@ -210,16 +222,12 @@ public class LoginController extends BaseController{
 	public ModelAndView recordarContrasenya(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio recordar contrasenya");
 		ModelAndView model = new ModelAndView(Constantes.RECORDAR_PASS);
-//		try{
-//			List<Categoria> categorias = categoriaBL.findAll(new Categoria(), "descripcion");
-//			model.addObject("categorias", categorias);
-//			
-//			List<Categoria> provincias = categoriaBL.findAll(new Provincia(),  "descripcion");
-//			model.addObject("provincias", provincias);
-//		
-//		} catch(Exception e){
-//			logger.error("Error al obtener los listados de la pantalla de login",e);
-//		}
+		return model;
+	}
+	
+	public ModelAndView recordar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Inicio recordar");
+		ModelAndView model = new ModelAndView(Constantes.RECORDAR_PASS_OK);
 		return model;
 	}
 	
@@ -244,17 +252,23 @@ public class LoginController extends BaseController{
 			String apellido1 = (String) request.getParameter(Constantes.BBDD_USUARIO_APELLIDO1);
 			String apellido2 = (String) request.getParameter(Constantes.BBDD_USUARIO_APELLIDO2);
 			String movil = (String) request.getParameter(Constantes.BBDD_USUARIO_MOVIL);
-			String telefono = (String) request.getParameter(Constantes.BBDD_USUARIO_TELEFONO);
-			String wassap = (String) request.getParameter(Constantes.BBDD_USUARIO_WASSAP);
 			String provincia[]= request.getParameterValues(Constantes.BBDD_USUARIO_PROVINCIA);
 			String categoria[]= request.getParameterValues(Constantes.BBDD_USUARIO_CATEGORIA);
-
 			String provincias = request.getParameter(Constantes.BBDD_USUARIO_PROVINCIAS);
-			
+			String fechaNacimiento = request.getParameter(Constantes.BBDD_FECHA_NACIMIENTO);
+			String idioma = (String) request.getParameter(Constantes.BBDD_IDIOMA);
+			if(idioma.equals(Constantes.IDIOMA_ESPANOL)){
+				idioma = Constantes.IDIOMA_ES;
+			}
+			if(idioma.equals(Constantes.IDIOMA_INGLES)){
+				idioma = Constantes.IDIOMA_EN;
+			}
 			
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			if(usuario == null){
 				usuario = new Usuario();
+				usuario.setFecha_alta(sdf.parse(sdf.format(new Date())));
+				usuario.setNum_acceso(new Integer(1));				
 			}
 			
 			usuario.setCorreo_electronico(correo_electronico);
@@ -263,11 +277,9 @@ public class LoginController extends BaseController{
 			usuario.setApellido1(apellido1);
 			usuario.setApellido2(apellido2);
 			usuario.setMovil(movil);
-			usuario.setTelefono(telefono);
-			usuario.setWassap(new Boolean(wassap));
-			usuario.setFecha_alta(sdf.parse(sdf.format(new Date())));
+			usuario.setFecha_nacimiento(sdf.parse(fechaNacimiento));
 			usuario.setFecha_ultimo_acceso(sdf.parse(sdf.format(new Date())));
-			usuario.setIdioma(Constantes.IDIOMA_ES);
+			usuario.setIdioma(idioma);
 			usuario.setPerfil(Constantes.TIPO_USUARIO);
 			
 			Provincia pr = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincias));
@@ -275,18 +287,12 @@ public class LoginController extends BaseController{
 		
 			usuario = (Usuario) usuarioBL.saveOrUpdate(usuario);
 			
-			/* Eliminamos las preferencias si la tubiera para incluirle las nuevas */
+			/* Eliminamos las preferencias para incluirle las nuevas */
 			Collection<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
 			for (Iterator iterator = listPrefProvincia.iterator(); iterator.hasNext();) {
 				PrefProvincia prefProvincia = (PrefProvincia) iterator.next();
 				prefProvinciaBL.delete(prefProvincia);
 			}
-			Collection<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
-			for (Iterator iterator = listPrefCategoria.iterator(); iterator.hasNext();) {
-				PrefCategoria prefCategoria = (PrefCategoria) iterator.next();
-				prefProvinciaBL.delete(prefCategoria);
-			}
-			/* Incluimos las nuevas preferencias */
 			for (int i = 0; i < provincia.length; i++) {
 				Provincia p = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincia[i]));
 				PrefProvincia prefProvincia = new PrefProvincia();
@@ -294,7 +300,12 @@ public class LoginController extends BaseController{
 				prefProvincia.setProvincia(p);
 				prefProvinciaBL.saveOrUpdate(prefProvincia);
 			}
-				
+			
+			Collection<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+			for (Iterator iterator = listPrefCategoria.iterator(); iterator.hasNext();) {
+				PrefCategoria prefCategoria = (PrefCategoria) iterator.next();
+				prefProvinciaBL.delete(prefCategoria);
+			}
 			for (int i = 0; i < categoria.length; i++) {
 				Categoria c = (Categoria) buscadorBL.findById(new Categoria(), new Long(categoria[i]));
 				PrefCategoria prefCategoria = new PrefCategoria();
@@ -306,15 +317,15 @@ public class LoginController extends BaseController{
 		} catch (Exception e) {
 			logger.error("Error registrando usuario", e);
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
+			logger.error("Error registrando usuario", e);
 			e.printStackTrace();
 		}
-		try {
-			response.sendRedirect("../trueque/listado.html");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		try {
+//			response.sendRedirect("../trueque/listado.html");
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		return login(request, response);
 	}
 	
@@ -325,9 +336,15 @@ public class LoginController extends BaseController{
 	 * @return
 	 */
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView model = new ModelAndView(); 
+		ModelAndView model = new ModelAndView(Constantes.INICIO); 
+		try {
+			List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
+			getListadoTrueques(listado);
+			model.addObject("trueques", listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		request.getSession().setAttribute(Constantes.USUARIO, null);
-		model = new ModelAndView(Constantes.INICIO); 
 		return model;
 	}
 

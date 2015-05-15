@@ -35,14 +35,9 @@
         </property>       
         <property name="movil" type="string">
             <column name="MOVIL" length="15" not-null="true" />
-        </property>
-        <property name="telefono" type="string">
-            <column name="TELEFONO" length="15" />
-        </property>        
-        <property name="wassap" type="java.lang.Boolean">
-            <column name="WASSAP">
-                <comment>1-SI / 0-NO</comment>
-            </column>
+        </property>       
+        <property name="fecha_nacimiento" type="java.util.Date">
+            <column name="FECHA_NACIMIENTO" length="19" />
         </property>
         <property name="num_acceso" type="java.lang.Integer">
             <column name="NUM_ACCESO" />
