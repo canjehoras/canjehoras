@@ -59,6 +59,7 @@ public class Constantes {
 	public static final String BUSCADOR ="buscador";
 	public static final String BUSCADOR_RESULTADOS ="busquedaResultados";
 	public static final String AGENDA = "agenda";
+	public static final String AGENDA_DETALLE = "agendaDetalle";
 	public static final String GRAFICAS = "graficas";
 	public static final String CONTACTO = "contacto";
 	

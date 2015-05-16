@@ -86,9 +86,12 @@ habilitarDemanda = function(radio){
 	} 
 }
 
-mostrarEvento = function(){
-	alert("hola");
-}
+mostrarEvento = function(id){
+	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle.html?idCanje="+id,  function(){
+		showAgendaCanje();
+	}
+	);
+};
 
 gestionActivos = function(id){
 	window.location.href= "/canjehoras/trueque/gestionActivos.html"

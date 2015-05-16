@@ -55,6 +55,24 @@ public class AgendaController extends BaseController {
 		
 		return model;
 	}
+	
+	
+	public ModelAndView agendaDetalle(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Entramos en el detalle de la agenda del usuario");	
+		ModelAndView model = new ModelAndView(Constantes.AGENDA_DETALLE); 
+		try {
+			String idCanje = request.getParameter("idCanje");
+			Canje canje = new Canje();
+			if(idCanje!=null){
+				canje = (Canje) canjeBL.findById(new Canje(), Long.valueOf(idCanje));
+			}
+			model.addObject("canje", canje);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return model;
+	}
 
 
 	public UsuarioBL getUsuarioBL() {

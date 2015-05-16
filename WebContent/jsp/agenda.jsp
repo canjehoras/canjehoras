@@ -37,13 +37,6 @@
 		  $(function() {
 		
 			var cal = $( '#calendar' ).calendario( {
-					onDayClick : function( $el, $contentEl, dateProperties ) {
-						
-						for( var key in dateProperties ) {
-							console.log( key + ' = ' + dateProperties[ key ] );
-						}
-
-					},
 					caldata : codropsEvents
 				} ),
 				$month = $('#custom-month').html( cal.getMonthName() ),
@@ -78,8 +71,44 @@
 				
 			} );
 			*/
-		cal.setData( {"05-15-2015" : "<div onclick=\"mostrarEvento();\" style=\"width:100%; height 20px; background:#F1AB37\">11:00-12:00</div>"} );
+		
+		<c:forEach var="canje" items="${listadoCanjesLibres}">
+			cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento(${canje.id});\" style=\"width:100%; height 20px; background:#F1AB37; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+		</c:forEach>
+		<c:forEach var="canje" items="${listadoCanjesReservado}">
+			cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento(${canje.id});\" style=\"width:100%; height 20px; background:#fff; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+		</c:forEach>
 		});
+		  
+		  
+	</script>
+	
+
+	<div id="agendaCanje" style="display: none;"> sd asdf asdf af as</div>
+	
+	<script type="text/javascript">
+		var agendaCanje=$("#agendaCanje").dialog({
+			zIndex: 150,
+			width: 600,
+			height: 350,
+			modal: true,
+			autoOpen: false,
+			closeOnEscape: false,
+			resizable: false,
+			title: '',
+			close: function(event, ui) {
+				agendaCanje.hide();		
+			},
+			show: {effect: 'fade', duration: 400}
+		});
+	  
+	  showAgendaCanje = function(){
+			document.getElementById('agendaCanje').style.display="";
+			agendaCanje.dialog('open');
+		};
+		hideAgendaCanje = function(){
+			agendaCanje.dialog('close');
+		}
 	</script>
 
 	<%@ include file="comunes/include-pie.jsp"%>
