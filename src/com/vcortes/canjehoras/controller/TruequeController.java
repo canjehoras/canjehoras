@@ -20,16 +20,20 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vcortes.canjehoras.bl.AgendaBL;
 import com.vcortes.canjehoras.bl.BuscadorBL;
 import com.vcortes.canjehoras.bl.CanjeBL;
+import com.vcortes.canjehoras.bl.ForoBL;
 import com.vcortes.canjehoras.bl.PrefCategoriaBL;
 import com.vcortes.canjehoras.bl.PrefProvinciaBL;
+import com.vcortes.canjehoras.bl.PublicacionBL;
 import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Agenda;
 import com.vcortes.canjehoras.model.Canje;
 import com.vcortes.canjehoras.model.Categoria;
+import com.vcortes.canjehoras.model.Foro;
 import com.vcortes.canjehoras.model.PrefCategoria;
 import com.vcortes.canjehoras.model.PrefProvincia;
 import com.vcortes.canjehoras.model.Provincia;
+import com.vcortes.canjehoras.model.Publicacion;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
@@ -45,6 +49,12 @@ public class TruequeController extends BaseController{
 	private PrefProvinciaBL prefProvinciaBL;
 	private AgendaBL agendaBL;
 	private CanjeBL canjeBL;
+	private ForoBL foroBL;
+	private PublicacionBL publicacionBL;
+
+	public void setForoBL(ForoBL foroBL) {
+		this.foroBL = foroBL;
+	}
 
 	public void setCanjeBL(CanjeBL canjeBL) {
 		this.canjeBL = canjeBL;
@@ -430,6 +440,11 @@ public class TruequeController extends BaseController{
 		try{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			
+			Foro foro = foroBL.findForoPorTrueque(trueque.getId());
+			
+			List<Publicacion> listaPublicacion = publicacionBL.findPublicacionPorForo(foro.getId());
+			model.addObject("listaPublicacion", listaPublicacion);
 			model.addObject( Constantes.TRUEQUE, trueque);
 		} catch (Throwable e) {
 			e.printStackTrace();

@@ -31,7 +31,7 @@
 		            </div>
 		          </div>
 		          <div  id="foro" class="col-lg-7 col-sm-5">
-					hola
+					${listaPublicacion.comentario}
 				  </div>
 		        </div>
 		      </div>

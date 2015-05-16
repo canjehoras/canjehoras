@@ -78,6 +78,10 @@ cerrar = function(){
 	window.location.href= "/canjehoras/login/logout.html"
 }
 
+canjeForo = function(id){
+	$("#divForo").hide();
+}
+
 habilitarDemanda = function(radio){
 	if (radio=='C'){
 		$("#divDescripcionDemanda").hide();

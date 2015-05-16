@@ -110,4 +110,30 @@
 	<bean id="canjeBLTarget" class="com.vcortes.canjehoras.bl.CanjeBL">
 		<property name="canjeDAO"><ref bean="canjeDAO"/></property>
 	</bean>
+	
+	<bean id="foroBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="foroBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="foroBLTarget" class="com.vcortes.canjehoras.bl.ForoBL">
+		<property name="foroDAO"><ref bean="foroDAO"/></property>
+	</bean>
+	
+	<bean id="publicacionBL" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager"><ref bean="transactionManager"/></property>
+		<property name="target"><ref bean="publicacionBLTarget"/></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="publicacionBLTarget" class="com.vcortes.canjehoras.bl.PublicacionBL">
+		<property name="publicacionDAO"><ref bean="publicacionDAO"/></property>
+	</bean>	
 </beans>

@@ -83,6 +83,7 @@
 		<property name="prefCategoriaBL" ref="prefCategoriaBL" />
 		<property name="agendaBL" ref="agendaBL" />
 		<property name="canjeBL" ref="canjeBL" />
+		<property name="foroBL" ref="foroBL" />
     </bean> 
 	
    <!-- Agenda-->
