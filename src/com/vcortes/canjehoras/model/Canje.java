@@ -17,6 +17,7 @@ public class Canje implements Serializable{
 	private Date fecha;
 	private String hora_inicio;
 	private String hora_fin;
+	private String estado;
 	
 	/**
 	 * Constructor por defecto
@@ -33,7 +34,7 @@ public class Canje implements Serializable{
 	 *    
 	 */
 	public Canje(Long id, Usuario usuario, Trueque trueque, Agenda agenda, 
-			Date fecha, String hora_inicio, String hora_fin) {
+			Date fecha, String hora_inicio, String hora_fin, String estado) {
 		this.id = id;
 		this.usuario = usuario;
 		this.trueque = trueque;
@@ -41,6 +42,7 @@ public class Canje implements Serializable{
 		this.fecha = fecha;
 		this.hora_inicio = hora_inicio;
 		this.hora_fin = hora_fin;
+		this.estado = estado;
 	}
 	
 	/**
@@ -168,5 +170,14 @@ public class Canje implements Serializable{
 	public void setHora_fin(String hora_fin) {
 		this.hora_fin = hora_fin;
 	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	
 }
 

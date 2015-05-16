@@ -6,11 +6,6 @@
 			<column name="ID" precision="22" scale="0" />
 			<generator class="native" />
 		</id>
-		<property name="estado" type="java.lang.Boolean">
-            <column name="ESTADO">
-                <comment>1-DISPONIBLE / 0-NO DISPONIBLE</comment>
-            </column>
-        </property>
         <many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"  fetch="join"/>
 	</class>
 </hibernate-mapping>

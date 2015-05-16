@@ -7,7 +7,6 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 
-import com.vcortes.canjehoras.model.Agenda;
 import com.vcortes.canjehoras.model.Canje;
 
 public class CanjeDAO extends BaseDAO {
@@ -19,13 +18,14 @@ public class CanjeDAO extends BaseDAO {
 		return findAll(Canje.class);
 	}
 
-	public List<Canje> listadoCanjesLibres(Long idUsuario)throws Throwable {
+	public List<Canje> listadoCanjes(Long idAgenda, String estado)throws Throwable {
 		log.debug("listadoTruequesLibres");
 		try {
-			Criteria q = sessionFactory.getCurrentSession().createCriteria(Agenda.class);
-			if(null != idUsuario){
-				q.add(Restrictions.eq("usuario.id", idUsuario));
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Canje.class);
+			if(null != idAgenda){
+				q.add(Restrictions.eq("agenda.id", idAgenda));
 			}
+			q.add(Restrictions.eq("estado", estado));
 			List result = q.list();
 			return result;
 			

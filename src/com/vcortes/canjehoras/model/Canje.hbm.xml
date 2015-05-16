@@ -15,6 +15,9 @@
         <property name="hora_fin" type="string">
             <column name="HORA_FIN" length="5" not-null="true" />
         </property>
+        <property name="estado" type="string">
+            <column name="ESTADO" length="1" not-null="true" />
+        </property>
 		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="all"/>
 		<many-to-one column="ID_TRUEQUE" class="Trueque" name="trueque" lazy="proxy" cascade="all"/>
 		<many-to-one column="ID_AGENDA" class="Agenda" name="agenda" lazy="proxy" cascade="all"/>

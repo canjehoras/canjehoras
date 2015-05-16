@@ -174,18 +174,20 @@ public class TruequeController extends BaseController{
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
 			
 			// Guardar los datos de la agenda
-			Agenda agenda = new Agenda();
+			Agenda agenda = agendaBL.findAgendaPorUsuario(usuario.getId());
+		    if(agenda==null){
+		    	agenda = new Agenda();
+		    	agenda.setUsuario(usuario);
+		    	agenda = (Agenda) agendaBL.saveOrUpdate(agenda);
+		    }
 			Canje canje = new Canje();
 			if(!"".equals(fecha)){
-				agenda.setEstado(true);
-				agenda.setUsuario(usuario);
-				agenda = (Agenda) agendaBL.saveOrUpdate(agenda);
 				canje.setFecha(sdf.parse(fecha));
 				canje.setHora_fin(hora_fin);
 				canje.setHora_inicio(hora_inicio);
+				canje.setEstado(Constantes.ESTADO_CANJE_LIBRE);
 				canje.setAgenda(agenda);
 				canje.setTrueque(trueque);
-				canje.setUsuario(usuario);
 				canjeBL.saveOrUpdate(canje);
 			}
 			

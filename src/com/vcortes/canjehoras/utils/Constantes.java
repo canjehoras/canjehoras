@@ -68,6 +68,11 @@ public class Constantes {
 	public static final String TRUEQUE_ESTADO_DENUNCIADO = "D";
 	public static final String TRUEQUE_ESTADO_BORRADO = "B";
 	
+	// Estado de los canjes
+	public static final String ESTADO_CANJE_LIBRE  = "L";
+	public static final String ESTADO_CANJE_OCUPADO  = "O";
+	
+	
 	// Idiomas
 	public final static String IDIOMA_ES = "ES";
 	public final static String IDIOMA_EN = "EN";

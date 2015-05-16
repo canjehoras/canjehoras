@@ -20,7 +20,7 @@ public class CanjeBL {
 		return canjeDAO.saveOrUpdate(instance);
 	}
 	
-	public List<Canje> listadoCanjesLibres(Long idUsuario)throws Throwable {
-		return canjeDAO.listadoCanjesLibres(idUsuario);
+	public List<Canje> listadoCanjes(Long idAgenda, String estado)throws Throwable {
+		return canjeDAO.listadoCanjes(idAgenda, estado);
 	}
 }
