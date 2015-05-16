@@ -52,12 +52,15 @@ public class Constantes {
 	public static final String EDITAR_TRUEQUE  = "edicionTrueque";
 	public static final String MI_LISTA_TRUEQUE  = "misTrueques";
 	public static final String DETALLE_TRUEQUE  = "detalleTrueque";
+	public static final String LISTA_TRUEQUE_DENUNCIADOS = "gestionDenunciados";
+	public static final String LISTA_TRUEQUE_ACTIVOS = "gestionActivos";
 	public static final String OPCIONES_CANJEO_TRUEQUE  = "opcionesCanjeo";
 	public static final String LISTA_CATEGORIA = "categorias";
 	public static final String BUSCADOR ="buscador";
 	public static final String BUSCADOR_RESULTADOS ="busquedaResultados";
 	public static final String AGENDA = "agenda";
 	public static final String GRAFICAS = "graficas";
+	public static final String CONTACTO = "contacto";
 	
 	// Estados de los trueques
 	public static final String TRUEQUE_ESTADO_NUEVO  = "N";

@@ -92,6 +92,7 @@
         </property>
 		<property name="usuarioBL" ref="usuarioBL" />
 		<property name="truequeBL" ref="truequeBL" />
+		<property name="canjeBL" ref="canjeBL" />
     </bean> 
 
 	<!-- Foro -->

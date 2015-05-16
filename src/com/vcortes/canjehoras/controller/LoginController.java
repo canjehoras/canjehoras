@@ -347,5 +347,21 @@ public class LoginController extends BaseController{
 		request.getSession().setAttribute(Constantes.USUARIO, null);
 		return model;
 	}
+	
+	public ModelAndView contacto(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Contacto Usuario");
+		ModelAndView model = new ModelAndView(Constantes.CONTACTO); 
+		try {
+			request.setCharacterEncoding(Constantes.ENCODING);
+			String id_usuario = request.getParameter("id_usuario");
+			Long id = new Long(id_usuario);
+			Usuario usuario = usuarioBL.findUsuarioById(id);
+			model.addObject("usuario", usuario);
+		} catch (Throwable e) {
+			logger.error("Error registrando usuario", e);
+			e.printStackTrace();
+		}
+		return model;
+	}
 
 }

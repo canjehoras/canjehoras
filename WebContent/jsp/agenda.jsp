@@ -33,7 +33,8 @@
 	<script type="text/javascript" src="../js/jquery.calendario.js"></script>
 	<script type="text/javascript" src="../js/data.js"></script>
 	<script type="text/javascript">	
-		$(function() {
+	
+		  $(function() {
 		
 			var cal = $( '#calendar' ).calendario( {
 					onDayClick : function( $el, $contentEl, dateProperties ) {
@@ -74,10 +75,10 @@
 				} );
 				// goes to a specific month/year
 				cal.goto( 3, 2013, updateMonthYear );
-
+				
 			} );
 			*/
-		cal.setData( {"05-15-2015" : "<div style='width:100%; height 20px; background:#F1AB37'>&nbsp;</div>"} );
+		cal.setData( {"05-15-2015" : "<div onclick=\"mostrarEvento();\" style=\"width:100%; height 20px; background:#F1AB37\">11:00-12:00</div>"} );
 		});
 	</script>
 

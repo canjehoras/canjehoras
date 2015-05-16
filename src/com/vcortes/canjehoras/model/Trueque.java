@@ -24,6 +24,7 @@ public class Trueque implements Serializable{
 	private String imagen64;
 	private Provincia provincia;
 	private String modalidad;
+	private Usuario denunciante;
 
 	/**
 	 * Constructor por defecto
@@ -234,6 +235,14 @@ public class Trueque implements Serializable{
 
 	public void setDescripcionDemanda(String descripcionDemanda) {
 		this.descripcionDemanda = descripcionDemanda;
+	}
+
+	public Usuario getDenunciante() {
+		return denunciante;
+	}
+
+	public void setDenunciante(Usuario denunciante) {
+		this.denunciante = denunciante;
 	}
 	
 }

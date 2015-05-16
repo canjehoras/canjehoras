@@ -338,20 +338,20 @@ public class TruequeController extends BaseController{
 	public ModelAndView denunciado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Denunciar trueque");	
 		ModelAndView model = new ModelAndView(Constantes.DETALLE_TRUEQUE); 
+		Long idUsuario = null;
+		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+		if(null !=usuario){
+			idUsuario = usuario.getId();
+		}
 		try{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
 			// Modificar el estado
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_DENUNCIADO);
+			trueque.setDenunciante(usuario);
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
 			
 			if(null != trueque){				
-				/**if(trueque.getTipo().equals(Constantes.TIPO_OFERTA)){
-					trueque.setTipo(Constantes.TIPO_OFERTA_DESC);
-				}
-				if(trueque.getTipo().equals(Constantes.TIPO_DEMANDA)){
-					trueque.setTipo(Constantes.TIPO_DEMANDA_DESC);
-				}*/
 				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
 					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
 				}
@@ -435,5 +435,29 @@ public class TruequeController extends BaseController{
 		return model;
 	}
 	
+	public ModelAndView gestionDenunciados(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Gestión de trueque");	
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE_DENUNCIADOS); 
+		try{
+			List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_DENUNCIADO);
+			getListadoTruequesTotal(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
 	
+	public ModelAndView gestionActivos(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Gestión de trueque");	
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE_ACTIVOS); 
+		try{
+			List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
+			getListadoTruequesTotal(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
 }

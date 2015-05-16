@@ -54,6 +54,11 @@ opcionesCanjeoTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/opcionesCanjeo.html?id=" + id
 }
 
+contacto = function(id_usuario){
+	window.location.href= "/canjehoras/login/contacto.html?id_usuario=" + id_usuario
+}
+
+
 graficasUsuario = function(){
 	window.location.href= "/canjehoras/graficas/graficas.html"
 }
@@ -79,4 +84,16 @@ habilitarDemanda = function(radio){
 	}else{
 		$("#divDescripcionDemanda").show();
 	} 
+}
+
+mostrarEvento = function(){
+	alert("hola");
+}
+
+gestionActivos = function(id){
+	window.location.href= "/canjehoras/trueque/gestionActivos.html"
+}
+
+gestionDenunciados = function(id){
+	window.location.href= "/canjehoras/trueque/gestionDenunciados.html"
 }

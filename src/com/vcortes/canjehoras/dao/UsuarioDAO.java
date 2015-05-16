@@ -22,6 +22,14 @@ public class UsuarioDAO extends BaseDAO {
 		
 		return (Usuario) first(result);
 	}
+	
+	public Usuario findUsuarioById(Long id_usuario) throws Exception {
+		log.info("findUsuarioById");		
+		Criteria q = sessionFactory.getCurrentSession().createCriteria(Usuario.class);
+		q.add(Restrictions.eq("id", id_usuario));
+		List result = q.list();
+		return (Usuario) first(result);
+	}
 
 /**	public Usuario findProvincia(Long id_usuario)throws Throwable {
 		log.debug("detalle");

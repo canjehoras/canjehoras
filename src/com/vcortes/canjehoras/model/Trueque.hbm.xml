@@ -19,16 +19,17 @@
             <column name="DESCRIPCION_OFERTA" length="500" not-null="true" />
         </property>
 		<property name="descripcionDemanda" type="string">
-            <column name="DESCRIPCION_DEMANDA" length="500" not-null="true" />
+            <column name="DESCRIPCION_DEMANDA" length="500" not-null="false" />
         </property>
         <property name="imagen" type="binary">
             <column name="IMAGEN" />
         </property>       
         <property name="modalidad" type="string">
-            <column name="MODALIDAD" length="1" not-null="false" />
+            <column name="MODALIDAD" length="1" not-null="true" />
         </property>
 		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"  fetch="join"/>
 		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="none" fetch="join"/>   
-		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none" fetch="join"/>  
+		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none" fetch="join"/>
+		<many-to-one column="ID_DENUNCIANTE" class="Usuario" name="denunciante" lazy="proxy" cascade="none"  fetch="join"/>  
 	</class>
 </hibernate-mapping>

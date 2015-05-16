@@ -87,6 +87,27 @@ public abstract class BaseController extends MultiActionController {
 		return listado;
 	}
 	
+	public List<Trueque> getListadoTruequesTotal (List<Trueque> listado){
+		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+		try{
+			for (int i = 0; i<listado.size(); i++){
+				Trueque trueque = listado.get(i);
+				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
+				}
+				if(trueque.getModalidad().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
+					trueque.setModalidad(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
+				}
+				if(null != trueque.getFecha_alta()){
+					trueque.setFecha(sdf.format(trueque.getFecha_alta()));
+				}
+				getImagen(trueque);
+			}
+		} catch (Exception e) {
+			
+		}
+		return listado;
+	}
 	
 	public ModelAndView enviarRespuestaAJAX(HttpServletResponse response, String respuesta) throws Throwable {
 		try {
