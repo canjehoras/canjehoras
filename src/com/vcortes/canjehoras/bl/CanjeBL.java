@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.bl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.vcortes.canjehoras.dao.CanjeDAO;
@@ -22,5 +23,9 @@ public class CanjeBL {
 	
 	public List<Canje> listadoCanjes(Long idAgenda, String estado)throws Throwable {
 		return canjeDAO.listadoCanjes(idAgenda, estado);
+	}
+	
+	public Object findById(Object instance, Serializable id) throws Exception {
+		return canjeDAO.findById(instance, id);
 	}
 }
