@@ -37,6 +37,13 @@
 		  $(function() {
 		
 			var cal = $( '#calendar' ).calendario( {
+					onDayClick : function( $el, $contentEl, dateProperties ) {
+						
+						for( var key in dateProperties ) {
+							console.log( key + ' = ' + dateProperties[ key ] );
+						}
+
+					},
 					caldata : codropsEvents
 				} ),
 				$month = $('#custom-month').html( cal.getMonthName() ),
@@ -73,10 +80,10 @@
 			*/
 		
 		<c:forEach var="canje" items="${listadoCanjesLibres}">
-			cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento(${canje.id});\" style=\"width:100%; height 20px; background:#F1AB37; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+			cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#F1AB37; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
 		</c:forEach>
 		<c:forEach var="canje" items="${listadoCanjesReservado}">
-			cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento(${canje.id});\" style=\"width:100%; height 20px; background:#fff; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+			cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#fff; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
 		</c:forEach>
 		});
 		  
@@ -84,7 +91,7 @@
 	</script>
 	
 
-	<div id="agendaCanje" style="display: none;"> sd asdf asdf af as</div>
+	<div id="agendaCanje" style="display: none;"> </div>
 	
 	<script type="text/javascript">
 		var agendaCanje=$("#agendaCanje").dialog({
@@ -95,7 +102,7 @@
 			autoOpen: false,
 			closeOnEscape: false,
 			resizable: false,
-			title: '',
+			title: 'Listado de canjes',
 			close: function(event, ui) {
 				agendaCanje.hide();		
 			},

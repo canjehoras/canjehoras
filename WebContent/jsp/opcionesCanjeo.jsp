@@ -28,6 +28,7 @@
 						<input type="button" value="<fmt:message key="boton.email"/>" onclick="canjeEmail(${trueque.id});"/>
 						<input type="button" value="<fmt:message key="boton.foro"/>" onclick="canjeForo(${trueque.id});"/>
 						<input type="button" value="<fmt:message key="boton.agenda"/>" onclick="canjeAgenda(${trueque.id});"/>
+						<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
 		            </div>
 		          </div>
 		          <div  id="foro" class="col-lg-7 col-sm-5">

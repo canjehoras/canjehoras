@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.vcortes.canjehoras.model">
+	<class name="Categoria" table="CATEGORIA">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="22" scale="0" />
+			<generator class="native" />
+		</id>
+		<property name="descripcion" type="string">
+            <column name="DESCRIPCION" length="50" not-null="true" />
+        </property>
+	</class>
+</hibernate-mapping>

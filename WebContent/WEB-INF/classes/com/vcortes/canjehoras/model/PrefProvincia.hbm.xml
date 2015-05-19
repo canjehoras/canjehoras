@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.vcortes.canjehoras.model">
+	<class name="PrefProvincia" table="PREF_PROVINCIA">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="22" scale="0" />
+			<generator class="native" />
+		</id>
+		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"  fetch="join"/>
+		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none"  fetch="join"/>
+	</class>
+</hibernate-mapping>

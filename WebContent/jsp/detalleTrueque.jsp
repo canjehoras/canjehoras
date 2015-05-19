@@ -25,9 +25,6 @@
 			
 			<div id="botonesDetalle">		
 				<input type="button" value="<fmt:message key="boton.canjeo"/>" onclick="opcionesCanjeoTrueque(${trueque.id});"/>
-				<c:if test="${sessionScope.usuario != null}">
-					<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
-				</c:if>
 				<input type="button" value="<fmt:message key="boton.volver"/>" onclick="javascript:history.back();"/>			
 			</div>
 		</div>

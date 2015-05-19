@@ -13,6 +13,7 @@ import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
+import com.vcortes.canjehoras.model.Canje;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
@@ -80,6 +81,31 @@ public abstract class BaseController extends MultiActionController {
 					trueque.setFecha(sdf.format(trueque.getFecha_alta()));
 				}
 				getImagen(trueque);
+			}
+		} catch (Exception e) {
+			
+		}
+		return listado;
+	}
+	
+	public List<Canje> getListadoCanje(List<Canje> listado){
+		String descripcion = "";
+		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+		try{
+			for (int i = 0; i<listado.size(); i++){
+				Canje canje = listado.get(i);
+				if(canje.getEstado().equals(Constantes.ESTADO_CANJE_LIBRE)){
+					canje.setEstado(Constantes.ESTADO_CANJE_LIBRE_STRING);
+				}
+				if(canje.getEstado().equals(Constantes.ESTADO_CANJE_RESERVADO)){
+					canje.setEstado(Constantes.ESTADO_CANJE_RESERVADO_STRING);
+				}
+				if(canje.getEstado().equals(Constantes.ESTADO_CANJE_CANJEADO)){
+					canje.setEstado(Constantes.ESTADO_CANJE_CANJEADO_STRING);
+				}
+				if(null != canje.getFecha()){
+					canje.setFechaLabel(sdf.format(canje.getFecha()));
+				}
 			}
 		} catch (Exception e) {
 			

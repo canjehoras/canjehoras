@@ -71,8 +71,11 @@ public class Constantes {
 	
 	// Estado de los canjes
 	public static final String ESTADO_CANJE_LIBRE  = "L";
-	public static final String ESTADO_CANJE_OCUPADO  = "O";
-	
+	public static final String ESTADO_CANJE_LIBRE_STRING  = "LIBRE";
+	public static final String ESTADO_CANJE_RESERVADO  = "R";
+	public static final String ESTADO_CANJE_RESERVADO_STRING  = "RESERVADO";
+	public static final String ESTADO_CANJE_CANJEADO  = "C";
+	public static final String ESTADO_CANJE_CANJEADO_STRING  = "CANJEADO";
 	
 	// Idiomas
 	public final static String IDIOMA_ES = "ES";
@@ -95,7 +98,11 @@ public class Constantes {
 	public final static String BBDD_IDIOMA = "idioma";
 	
 	// Email
-	public final static String EMAIL_ASUNTO = "Nuevo trueque publicado";
-	
+	public final static String EMAIL_ASUNTO_NUEVO = "Nuevo trueque publicado";
+	public final static String EMAIL_ASUNTO_RESOLUCION = "Resolución del canjeo";
+	public final static String RESOLUCION_OK = "OK";
+	public final static String RESOLUCION_OK_LABEL = "ACEPTADO";
+	public final static String RESOLUCION_NOK = "NOK";
+	public final static String RESOLUCION_NOK_LABEL = "RECHAZADO";
 	
 }

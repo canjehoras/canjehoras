@@ -9,7 +9,6 @@
 	
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
- 
 		  <div class="container">
 		  <section id="hero_section" class="page_section contact">
 		      <div class="row">

@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -34,5 +35,33 @@ public class CanjeDAO extends BaseDAO {
 		}
 		return null;
 	}
+
+	public List<Canje> listadoCanjesFecha(Date fecha)throws Throwable {
+		log.debug("listadoCanjesFecha");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Canje.class);
+			if(null != fecha){
+				q.add(Restrictions.eq("fecha", fecha));
+			}
+			List result = q.list();
+			return result;
+			
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}
 	
+	public Canje detalle(Long id)throws Throwable {
+		log.debug("detalle");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Canje.class);
+			q.add(Restrictions.eq("id", id));
+			return (Canje) q.uniqueResult();
+			
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}
 }

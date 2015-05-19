@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.vcortes.canjehoras.model">
+	<class name="Usuario" table="USUARIO">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="22" scale="0" />
+			 <generator class="native" />
+		</id>
+		<property name="idioma" type="string">
+            <column name="IDIOMA" length="2" not-null="true" />
+        </property>
+        <property name="perfil" type="string">
+            <column name="PERFIL" length="2" not-null="true" />
+        </property>
+		<property name="fecha_alta" type="java.util.Date">
+            <column name="FECHA_ALTA" length="19" not-null="true" />
+        </property>
+        <property name="fecha_baja" type="java.util.Date">
+            <column name="FECHA_BAJA" length="19" />
+        </property>
+        <property name="correo_electronico" type="string">
+            <column name="CORREO_ELECTRONICO" length="50" not-null="true" />
+        </property>
+        <property name="pass" type="string">
+            <column name="PASS" length="20" not-null="true" />
+        </property>       
+         <property name="apellido1" type="string">
+            <column name="APELLIDO1" length="25" not-null="true" />
+        </property>
+        <property name="apellido2" type="string">
+            <column name="APELLIDO2" length="25" not-null="false" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="20" not-null="true" />
+        </property>       
+        <property name="movil" type="string">
+            <column name="MOVIL" length="15" not-null="true" />
+        </property>       
+        <property name="fecha_nacimiento" type="java.util.Date">
+            <column name="FECHA_NACIMIENTO" length="19" />
+        </property>
+        <property name="num_acceso" type="java.lang.Integer">
+            <column name="NUM_ACCESO" />
+        </property>
+        <property name="fecha_ultimo_acceso" type="java.util.Date">
+            <column name="FECHA_ULTIMO_ACCESO" length="19" />
+        </property>
+		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none" fetch="select" not-found="ignore" />
+	</class>
+</hibernate-mapping>

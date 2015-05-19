@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.vcortes.canjehoras.model">
+	<class name="Publicacion" table="PUBLICACION">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="22" scale="0" />
+			 <generator class="native" />
+		</id>
+        <property name="hora" type="java.lang.String">
+            <column name="HORA" />
+        </property>
+        <property name="fecha" type="java.util.Date">
+            <column name="FECHA" length="19" />
+        </property>
+        <property name="comentario" type="java.lang.String">
+            <column name="COMENTARIO" />
+        </property>
+		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none" fetch="select" not-found="ignore" />
+		<many-to-one column="ID_FORO" class="Foro" name="foro" lazy="proxy" cascade="none" fetch="select" not-found="ignore" />
+	</class>
+</hibernate-mapping>

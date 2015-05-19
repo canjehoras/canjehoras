@@ -90,8 +90,8 @@ habilitarDemanda = function(radio){
 	} 
 }
 
-mostrarEvento = function(id){
-	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle.html?idCanje="+id,  function(){
+mostrarEvento = function(fecha){
+	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle.html?fecha="+fecha,  function(){
 		showAgendaCanje();
 	}
 	);
@@ -103,4 +103,12 @@ gestionActivos = function(id){
 
 gestionDenunciados = function(id){
 	window.location.href= "/canjehoras/trueque/gestionDenunciados.html"
+}
+
+gestionActivos = function(id){
+	window.location.href= "/canjehoras/trueque/gestionActivos.html"
+}
+
+resolucionCanje = function(id, resolucion){
+	window.location.href= "/canjehoras/agenda/resolucionCanje.html?id="+id+"&resolucion="+resolucion
 }

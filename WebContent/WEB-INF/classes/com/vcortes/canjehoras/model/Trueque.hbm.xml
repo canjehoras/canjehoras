@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="com.vcortes.canjehoras.model">
+	<class name="Trueque" table="TRUEQUE">
+		<id name="id" type="java.lang.Long">
+			<column name="ID" precision="22" scale="0" />
+			<generator class="native" />
+		</id>
+		<property name="fecha_alta" type="java.util.Date">
+            <column name="FECHA_ALTA" length="19" not-null="true" />
+        </property>
+		<property name="estado" type="string">
+            <column name="ESTADO" length="1" not-null="true" />
+        </property>
+        <property name="titulo" type="string">
+            <column name="TITULO" length="50" not-null="true" />
+        </property>
+		<property name="descripcionOferta" type="string">
+            <column name="DESCRIPCION_OFERTA" length="500" not-null="true" />
+        </property>
+		<property name="descripcionDemanda" type="string">
+            <column name="DESCRIPCION_DEMANDA" length="500" not-null="false" />
+        </property>
+        <property name="imagen" type="binary">
+            <column name="IMAGEN" />
+        </property>       
+        <property name="modalidad" type="string">
+            <column name="MODALIDAD" length="1" not-null="true" />
+        </property>
+		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"  fetch="join"/>
+		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="none" fetch="join"/>   
+		<many-to-one column="ID_PROVINCIA" class="Provincia" name="provincia" lazy="proxy" cascade="none" fetch="join"/>
+		<many-to-one column="ID_DENUNCIANTE" class="Usuario" name="denunciante" lazy="proxy" cascade="none"  fetch="join"/>  
+	</class>
+</hibernate-mapping>

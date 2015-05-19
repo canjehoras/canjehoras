@@ -29,11 +29,9 @@ import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Agenda;
 import com.vcortes.canjehoras.model.Canje;
 import com.vcortes.canjehoras.model.Categoria;
-import com.vcortes.canjehoras.model.Foro;
 import com.vcortes.canjehoras.model.PrefCategoria;
 import com.vcortes.canjehoras.model.PrefProvincia;
 import com.vcortes.canjehoras.model.Provincia;
-import com.vcortes.canjehoras.model.Publicacion;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
@@ -215,8 +213,7 @@ public class TruequeController extends BaseController{
 			// Envio de email por cada uno de los usuarios
 			for(String email: listadoEmail){
 				Mail mail = new Mail();
-				String cuerpo = "<img src=\"https://ci5.googleusercontent.com/proxy/z7RMBizZYcW1ApMmTWW8xagRvYg2Pn4xeo17wINvNSD6wKgZ_MF20qcxm-PUsF9XlDJkZMUGLR_LA2WdoUpzsF0jhlIQA6hFU3tygljGZv_7bIsV1A=s0-d-e1-ft#http://img407.imageshack.us/img407/1795/headerbtburgosemail.png\" class=\"CToWUd\">" + 
-						"<h2>Hola, " + usuario.getNombre() + "</h2>" + 
+				String cuerpo = "<h2>Hola, " + usuario.getNombre() + "</h2>" + 
 						"<h2>Te enviamos información de un nuevo Trueque publicado en la web conforme tus preferencias." + 
 						"Desde el equipo de canjehoras te animamos a que publiques tus ofertas y demandas." + 
 						"Puedes hacerlo desde la propia Web, iniciando sesión con tu E-mail y tu contraseña.</h2></br></br>" + 
@@ -226,7 +223,7 @@ public class TruequeController extends BaseController{
 						"<h3>" + "OFERTA: " + descripcionOferta + "</h3>" +
 						"<h3>" + "DEMANDA: " + descripcionDemanda + "</h3>" +
 						"<h4>Publicado por: " + trueque.getUsuario().getCorreo_electronico() + "</h4>"; 
-				mail.enviarMail(email, null, null, Constantes.EMAIL_ASUNTO, cuerpo, null, null);
+				mail.enviarMail(email, null, null, Constantes.EMAIL_ASUNTO_NUEVO, cuerpo, null, null);
 				log.debug("Envio email a " + email);
 			}
 			
@@ -438,14 +435,24 @@ public class TruequeController extends BaseController{
 		log.debug("Opciones canjeo de trueque");	
 		ModelAndView model = new ModelAndView(Constantes.OPCIONES_CANJEO_TRUEQUE); 
 		try{
-			String id = (String) request.getParameter(Constantes.ID);
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(null !=usuario){
+				// Si hay usuario registrado
+
+			}else{
+				model = new ModelAndView(Constantes.LOGIN); 
+			}
+			
+			
+			
+			/**String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
 			
 			Foro foro = foroBL.findForoPorTrueque(trueque.getId());
 			
 			List<Publicacion> listaPublicacion = publicacionBL.findPublicacionPorForo(foro.getId());
 			model.addObject("listaPublicacion", listaPublicacion);
-			model.addObject( Constantes.TRUEQUE, trueque);
+			model.addObject( Constantes.TRUEQUE, trueque);*/
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
