@@ -72,14 +72,7 @@ graficasUsuario = function(){
 }
 
 borrarTrueque = function(){
-	var txt;
-	var r = confirm("Press a button!");
-	if (r == true) {
-	    txt = "You pressed OK!";
-	} else {
-	    txt = "You pressed Cancel!";
-	}
-	window.location.href= "/canjehoras/trueque/borrar.html"
+	window.location.href= "/canjehoras/trueque/borrar.html?id=" + id
 }
 
 cerrar = function(){

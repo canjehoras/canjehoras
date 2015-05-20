@@ -256,17 +256,26 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView preferencias(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque por preferencias");	
-		/**Long idUsuario = null;
+		Long idUsuario = null;
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
 			idUsuario = usuario.getId();
-		}*/
+		}
 		
-		ArrayList<Long> listadoProvincia = (ArrayList<Long>)request.getSession().getAttribute("listadoProvincia");
-		ArrayList<Long> listadoCategoria = (ArrayList<Long>)request.getSession().getAttribute("listadoCategoria");
-		
-		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
-		try{
+		try{		
+			// Recuperar las preferencias
+			ArrayList<Long> listadoProvincia = new ArrayList<Long>();
+			List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+			for(PrefProvincia provincia: listPrefProvincia){
+				listadoProvincia.add(provincia.getProvincia().getId());
+			}
+			ArrayList<Long> listadoCategoria = new ArrayList<Long>();
+			List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+			for(PrefCategoria categoria: listPrefCategoria){
+				listadoCategoria.add(categoria.getCategoria().getId());
+			}
+			
 			List<Trueque> listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);
 			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
