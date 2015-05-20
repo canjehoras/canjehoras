@@ -42,6 +42,14 @@ detalleTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/detalle.html?id=" + id
 }
 
+preferenciaTrueque = function(id){
+	window.location.href= "/canjehoras/trueque/preferencias.html"
+}
+
+todosTrueque = function(id){
+	window.location.href= "/canjehoras/trueque/listado.html"
+}
+
 denunciarTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/denunciado.html?id=" + id
 }

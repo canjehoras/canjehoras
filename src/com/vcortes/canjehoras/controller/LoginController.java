@@ -73,7 +73,7 @@ public class LoginController extends BaseController{
 	 * @return
 	 */
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView model = new ModelAndView(Constantes.LOGIN);  
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE);  
 		try {
 			String descripcion = "";
 			String email = request.getParameter("correo_electronico");
@@ -106,12 +106,13 @@ public class LoginController extends BaseController{
 					usuarioBL.saveOrUpdate(usuario);
 				}
 				
-//				try {
-//					response.sendRedirect("../trueque/preferencias.html");
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-				model = new ModelAndView(Constantes.LISTA_TRUEQUE);  
+				try{
+					List<Trueque> listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);
+					getListadoTrueques(listado);
+					model.addObject(Constantes.TRUEQUES, listado);
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
 			}
 		} catch (Exception e) {
 			log.error("Error obteniendo usuario",e);
