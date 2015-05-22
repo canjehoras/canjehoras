@@ -54,6 +54,22 @@ public class GraficasController extends BaseController{
 			canjes.add(1);
 			canjes.add(2);
 			canjes.add(3);
+			canjes.add(3);
+
+			List canjes2 = new ArrayList();
+
+			canjes2.add(0);
+			canjes2.add(3);
+			canjes2.add(1);
+			canjes2.add(2);
+			canjes2.add(3);
+			canjes2.add(1);
+			canjes2.add(3);
+			canjes2.add(2);
+			canjes2.add(1);
+			canjes2.add(1);
+			canjes2.add(1);
+			canjes2.add(2);
 			
 			JSONObject o1 = new JSONObject();
 			o1.put("name", "Publicados");
@@ -62,7 +78,7 @@ public class GraficasController extends BaseController{
 			
 			JSONObject o2 = new JSONObject();
 			o2.put("name", "Canjeados");
-			o2.put("data", canjes);
+			o2.put("data", canjes2);
 			listSeries.put(1, o2);
 			
 			o.put("series", listSeries);
