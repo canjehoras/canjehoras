@@ -61,7 +61,9 @@ public class Constantes {
 	public static final String AGENDA = "agenda";
 	public static final String AGENDA_DETALLE = "agendaDetalle";
 	public static final String GRAFICAS = "graficas";
+	public static final String FOROS = "foros";
 	public static final String CONTACTO = "contacto";
+	public static final String ENVIAR_EMAIL = "enviarEmail";
 	
 	// Estados de los trueques
 	public static final String TRUEQUE_ESTADO_NUEVO  = "N";

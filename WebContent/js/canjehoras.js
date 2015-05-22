@@ -22,6 +22,10 @@ agenda = function(){
 	window.location.href= "/canjehoras/agenda/agenda.html"
 }
 
+canjeAgenda = function(id){
+	window.location.href= "/canjehoras/agenda/agenda.html"
+}
+
 publicar = function(){
 	window.location.href= "/canjehoras/trueque/nuevo.html"
 }
@@ -116,6 +120,14 @@ gestionDenunciados = function(id){
 
 graficas = function(){
 	$("#foro").load("/canjehoras/graficas/verGraficas.html");
+}
+
+canjeForo = function(id){
+	$("#foro").load("/canjehoras/foro/verForos.html");
+}
+
+canjeEmail = function(id_usuario){
+	$("#foro").load("/canjehoras/login/contactoEmail.html?id_usuario=" + id_usuario);
 }
 
 gestionActivos = function(id){

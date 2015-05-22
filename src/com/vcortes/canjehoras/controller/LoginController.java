@@ -364,5 +364,9 @@ public class LoginController extends BaseController{
 		}
 		return model;
 	}
-
+	
+	public ModelAndView contactoEmail(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		ModelAndView model = new ModelAndView(Constantes.ENVIAR_EMAIL); 
+		return model;
+	}
 }

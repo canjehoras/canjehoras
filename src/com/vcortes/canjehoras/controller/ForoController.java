@@ -46,5 +46,10 @@ public class ForoController extends BaseController{
 		}
 		return model;
 	}
+	
+	public ModelAndView verForos(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		ModelAndView model = new ModelAndView(Constantes.FOROS); 
+		return model;
+	}
 
 }

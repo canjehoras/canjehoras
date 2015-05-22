@@ -16,24 +16,32 @@
 		    <div class="container">
 		      <div class="hero_section">
 		        <div class="row">
-		          <div class="col-lg-5 col-sm-7">
-		            <div class="top_left_cont zoomIn wow animated"> 
-						<h3 class="animated fadeInUp wow" style="color:white;">
-							<fmt:message key="contacte" />
-						</h3>
-						<p class="animated fadeInDown wow" style="color:white;">${trueque.usuario.nombre}
-							${trueque.usuario.apellido1} ${trueque.usuario.apellido2}</p>
-						<p class="animated fadeInDown wow" style="color:white;">${trueque.usuario.correo_electronico}</p>
-						<p class="animated fadeInDown wow" style="color:white;"> ${trueque.usuario.movil}</p>
-						<input type="button" value="<fmt:message key="boton.email"/>" onclick="canjeEmail(${trueque.id});"/>
+			       <div class="col-lg-5 col-sm-7 wow fadeInLeft animated" style="margin-top: 20px">	
+						 <div class="contact_info">
+				             <div class="detail">
+				                 <h4>Usuario</h4>
+				                 <p>${usuario.nombre} ${usuario.apellido1} ${usuario.apellido2}</p>
+				             </div>
+				             <div class="detail">
+				                 <h4>Telefono</h4>
+				                 <p>${usuario.movil}</p>
+				             </div>
+				             <div class="detail">
+				                 <h4>Email</h4>
+				                 <p>${usuario.correo_electronico}</p>
+				             </div> 
+				             <div class="detail">
+				                 <h4>Fecha nacimiento:</h4>
+				                 <p>${usuario.fecha_nacimiento}</p>
+				             </div> 
+						</div>
+						<input type="button" value="<fmt:message key="boton.email"/>" onclick="canjeEmail(${usuario.id});"/>
 						<input type="button" value="<fmt:message key="boton.foro"/>" onclick="canjeForo(${trueque.id});"/>
 						<input type="button" value="<fmt:message key="boton.agenda"/>" onclick="canjeAgenda(${trueque.id});"/>
 						<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
 						<input type="button" value="<fmt:message key="boton.graficas"/>" onclick="graficas();"/>
-		            </div>
 		          </div>
 		          <div  id="foro" class="col-lg-7 col-sm-5">
-					${listaPublicacion.comentario}
 				  </div>
 		        </div>
 		      </div>
