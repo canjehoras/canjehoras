@@ -20,12 +20,16 @@
 			                 <p>${usuario.nombre} ${usuario.apellido1} ${usuario.apellido2}</p>
 			             </div>
 			             <div class="detail">
-			                 <h4>call us</h4>
+			                 <h4>Telefono</h4>
 			                 <p>${usuario.movil}</p>
 			             </div>
 			             <div class="detail">
-			                 <h4>Email us</h4>
+			                 <h4>Email</h4>
 			                 <p>${usuario.correo_electronico}</p>
+			             </div> 
+			             <div class="detail">
+			                 <h4>Fecha nacimiento:</h4>
+			                 <p>${usuario.fecha_nacimiento}</p>
 			             </div> 
 					</div>
         	   </div>
@@ -33,6 +37,7 @@
 			          <div class="form">
 			            	<textarea required="required" title="<fmt:message key="contacto.mensaje"/>" name="mensaje" id="mensaje" placeholder="<fmt:message key="contacto.mensaje"/>"></textarea>
 			            	<input type="submit" value="<fmt:message key="boton.enviar.email"/>" />
+			            	<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
 			          </div>
 			        </div>
       		</div>

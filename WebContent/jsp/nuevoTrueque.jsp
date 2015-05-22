@@ -69,7 +69,8 @@
     	$("#fecha").datepicker({ 
     		dateFormat: 'dd/mm/yy',
     		 changeMonth: true, 
-    		 changeYear: true
+    		 changeYear: true,
+    		 minDate: "+0m +0d"
     	});
     });
 </script>

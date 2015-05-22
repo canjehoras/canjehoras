@@ -64,7 +64,9 @@
     	$("#fecha_nacimiento").datepicker({ 
     		dateFormat: 'dd/mm/yy',
     		 changeMonth: true, 
-    		 changeYear: true
+    		 changeYear: true, 
+    		 yearRange: "-99:+0",
+			 maxDate: "+0m +0d"
     	});
     });
 </script>

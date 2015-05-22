@@ -10,8 +10,8 @@
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
 		<div class="container">
-			<input type="button" value="Preferencias" onclick="preferenciaTrueque();"/>
-			<input type="button" value="Todos" onclick="todosTrueque();"/>
+			<input style="width: 20%" type="button" value="Preferencias" onclick="preferenciaTrueque();"/>
+			<input style="width: 20%" type="button" value="Todos" onclick="todosTrueque();"/>
 			
 			<c:set var="primero" value="true"></c:set>
 			<c:forEach var="trueques" items="${trueques}" varStatus="count" >

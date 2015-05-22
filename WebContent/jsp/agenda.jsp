@@ -91,15 +91,16 @@
 	</script>
 	
 
-	<div id="agendaCanje" style="display: none;"> </div>
-	
+	<div id="agendaCanje" style="display: none;" class="content_dialog"> </div>
+
 	<script type="text/javascript">
 		var agendaCanje=$("#agendaCanje").dialog({
 			zIndex: 150,
-			width: 600,
-			height: 350,
+			width: 'auto',
+			height: 300,
 			modal: true,
-			autoOpen: false,
+			maxWidth: 600,
+			autoOpen: true,
 			closeOnEscape: false,
 			resizable: false,
 			title: 'Listado de canjes',
@@ -108,7 +109,7 @@
 			},
 			show: {effect: 'fade', duration: 400}
 		});
-	  
+		
 	  showAgendaCanje = function(){
 			document.getElementById('agendaCanje').style.display="";
 			agendaCanje.dialog('open');

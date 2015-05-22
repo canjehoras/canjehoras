@@ -61,17 +61,24 @@ public class TruequeDAO extends BaseDAO {
 	public List<Trueque> findTruequePreferencias(ArrayList<Long> listadoProvincia, ArrayList<Long> listadoCategoria, String estado) throws Throwable {
 		log.debug("findTruequePreferencias");
 		try {
-			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class);
+			
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class); 
+			
 			if(listadoProvincia.size()!=0){
-				q.add(Restrictions.in("provincia.id", listadoProvincia));
-			}
-			if(listadoCategoria.size()!=0){
-				q.add(Restrictions.in("categoria.id", listadoCategoria));
+				if(listadoCategoria.size()!=0){
+					q.add(Restrictions.or(Restrictions.in("provincia.id", listadoProvincia), Restrictions.in("categoria.id", listadoCategoria)));					
+				}else{
+					q.add(Restrictions.in("provincia.id", listadoProvincia));
+				}
+			}else{
+				if(listadoCategoria.size()!=0){
+					q.add(Restrictions.in("categoria.id", listadoCategoria));
+				}				
 			}
 			if(null != estado){
 				q.add(Restrictions.eq("estado", estado));
 			}
-			q.addOrder(Order.desc("id"));
+			q.addOrder(Order.desc("fecha_alta"));
 			List result = q.list();
 			return result;
 		} catch (Exception e) {

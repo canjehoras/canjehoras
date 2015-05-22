@@ -10,6 +10,12 @@
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
 		<div class="container">
+		
+			<input type="button" value="Nuevos" onclick="preferenciaTrueque();"/>
+			<input type="button" value="Denunciados" onclick="preferenciaTrueque();"/>
+			<input type="button" value="Borrados" onclick="preferenciaTrueque();"/>
+			<input type="button" value="Todos" onclick="todosTrueque();"/>
+			
 			<c:set var="primero" value="true"></c:set>
 			<c:forEach var="trueques" items="${trueques}" varStatus="count" >
 			<c:choose>
@@ -41,6 +47,10 @@
 					<c:if test="${sessionScope.usuario != null}">
 						<c:if test="${trueques.estado == 'B'}">
 							<input type="button" value="<fmt:message key="boton.reactivar"/>" onclick="reactivarTrueque(${trueques.id});"/>
+							Borrado
+						</c:if>
+						<c:if test="${trueques.estado == 'D'}">
+						Denunciado
 						</c:if>
 						<c:if test="${trueques.estado == 'N'}">
 							<input type="button" value="<fmt:message key="boton.editar"/>" onclick="editarTrueque(${trueques.id});"/>

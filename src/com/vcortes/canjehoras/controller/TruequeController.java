@@ -256,17 +256,26 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView preferencias(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque por preferencias");	
-		/**Long idUsuario = null;
+		Long idUsuario = null;
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
 			idUsuario = usuario.getId();
-		}*/
+		}
 		
-		ArrayList<Long> listadoProvincia = (ArrayList<Long>)request.getSession().getAttribute("listadoProvincia");
-		ArrayList<Long> listadoCategoria = (ArrayList<Long>)request.getSession().getAttribute("listadoCategoria");
-		
-		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
-		try{
+		try{		
+			// Recuperar las preferencias
+			ArrayList<Long> listadoProvincia = new ArrayList<Long>();
+			List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+			for(PrefProvincia provincia: listPrefProvincia){
+				listadoProvincia.add(provincia.getProvincia().getId());
+			}
+			ArrayList<Long> listadoCategoria = new ArrayList<Long>();
+			List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+			for(PrefCategoria categoria: listPrefCategoria){
+				listadoCategoria.add(categoria.getCategoria().getId());
+			}
+			
 			List<Trueque> listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);
 			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
@@ -401,6 +410,30 @@ public class TruequeController extends BaseController{
 		return model;			
 	}
 	
+	public ModelAndView republicar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Republicar trueque");	
+		ModelAndView model = new ModelAndView(Constantes.MI_LISTA_TRUEQUE); 
+		try{
+			String id = (String) request.getParameter(Constantes.ID);
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			// Modificar el estado
+			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
+			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+			Long idUsuario = null;
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(null !=usuario){
+				idUsuario = usuario.getId();
+			}
+			List<Trueque> listado = truequeBL.findTrueque(null, null, idUsuario, null);
+			getListadoTrueques(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;			
+	}
+	
 	public ModelAndView reactivar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Borrar trueque");	
 		ModelAndView model = new ModelAndView(Constantes.MI_LISTA_TRUEQUE); 
@@ -438,10 +471,11 @@ public class TruequeController extends BaseController{
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			if(null !=usuario){
 				// Si hay usuario registrado
-
+				model.addObject("usuario", usuario);
 			}else{
 				model = new ModelAndView(Constantes.LOGIN); 
 			}
+			
 			
 			
 			
