@@ -15,6 +15,7 @@ import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
+import com.vcortes.canjehoras.utils.JSONArray;
 import com.vcortes.canjehoras.utils.JSONObject;
 
 public class GraficasController extends BaseController{
@@ -30,7 +31,49 @@ public class GraficasController extends BaseController{
 	public void setTruequeBL(TruequeBL truequeBL) {
 		this.truequeBL = truequeBL;
 	}
+	
+	public ModelAndView verGraficas(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		ModelAndView model = new ModelAndView(Constantes.GRAFICAS); 
+		return model;
+	}
+	
+	public ModelAndView datosGraficas(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		JSONObject o = new JSONObject();
+		JSONArray listSeries = new JSONArray();
+		try{
+			List canjes = new ArrayList();
+			
+			canjes.add(10);
+			canjes.add(2);
+			canjes.add(13);
+			canjes.add(4);
+			canjes.add(2);
+			canjes.add(1);
+			canjes.add(8);
+			canjes.add(6);
+			canjes.add(1);
+			canjes.add(2);
+			canjes.add(3);
+			
+			JSONObject o1 = new JSONObject();
+			o1.put("name", "Publicados");
+			o1.put("data", canjes);
+			listSeries.put(0, o1);
+			
+			JSONObject o2 = new JSONObject();
+			o2.put("name", "Canjeados");
+			o2.put("data", canjes);
+			listSeries.put(1, o2);
+			
+			o.put("series", listSeries);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return enviarRespuestaAJAX(response, o.toString());
+	}
 
+	
 	public ModelAndView graficas(HttpServletRequest request, HttpServletResponse response) throws Throwable{
 		ModelAndView model = new ModelAndView(Constantes.GRAFICAS); 
 

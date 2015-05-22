@@ -1,57 +1,57 @@
-<!doctype html>
-<%@ include file="comunes/include-taglib.jspf"%>
+<!DOCTYPE HTML>
 <html>
 	<head>
-		<%@page contentType="text/html" pageEncoding="UTF-8"%>
-		<meta http-equiv="Content-Type" name="viewport"	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
-		
-		<link href="../css/calendar.css" rel="stylesheet" type="text/css"> 
-	</head>
-	<body>
-		<%@ include file="comunes/include-cabecera.jsp"%>
-		<section id="categoria" class="content">
-			<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-		</section>	
-	
-		<script src="http://code.highcharts.com/highcharts.js"></script>
-		<script src="http://code.highcharts.com/modules/exporting.js"></script>
-	
-		<script type="text/javascript">	
-			$(function () {
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+		<script src="../js/highcharts.js"></script>
+		<script src="../js/highcharts-3d.js"></script>
+		<style type="text/css">
+			#container {
+				height: 400px; 
+				min-width: 310px; 
+				max-width: 800px;
+				margin: 0 auto;
+			}
+		</style>
+		<script type="text/javascript">
+			pintaGrafico = function () {
 			    $('#container').highcharts({
 			        chart: {
 			            type: 'column'
 			        },
 			        title: {
-			            text: 'Numero de canjeos por usuario ${sessionScope.usuario.nombre}'
+			            text: 'Monthly Average Rainfall'
+			        },
+			        subtitle: {
+			            text: 'Source: WorldClimate.com'
 			        },
 			        xAxis: {
 			            categories: [
-			                'Enero',
-			                'Febrero',
-			                'Marzo',
-			                'Abril',
-			                'Mayo',
-			                'Junio',
-			                'Julio',
-			                'Agosto',
-			                'Septiembre',
-			                'Octubre',
-			                'Noviembre',
-			                'Diciembre'
+			                'Jan',
+			                'Feb',
+			                'Mar',
+			                'Apr',
+			                'May',
+			                'Jun',
+			                'Jul',
+			                'Aug',
+			                'Sep',
+			                'Oct',
+			                'Nov',
+			                'Dec'
 			            ],
 			            crosshair: true
 			        },
 			        yAxis: {
 			            min: 0,
 			            title: {
-			                text: 'CANJEOS (Horas)'
+			                text: 'Rainfall (mm)'
 			            }
 			        },
 			        tooltip: {
 			            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
 			            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-			                '<td style="padding:0"><b>{point.y:.1f} trueques</b></td></tr>',
+			                '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
 			            footerFormat: '</table>',
 			            shared: true,
 			            useHTML: true
@@ -61,70 +61,43 @@
 			                pointPadding: 0.2,
 			                borderWidth: 0
 			            }
-			        },
-			        series: ${series}
+			        }/*,
+			        series: [{
+			            name: 'Publicados',
+			            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+	
+			        }, {
+			            name: 'Canjeados',
+			            data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
+	
+			        }]*/
 			    });
+			};
+			
+			
+			$(document).ready(function() {
+				$.post("/canjehoras/graficas/datosGraficas.html",
+						{ 
+						},
+						function (respuesta) {
+							var chart = $('#container').highcharts();
+							if(chart!=null){
+								chart.destroy();
+							}
+							chart.addSeries(respuesta.series);
+							
+						}
+			, "json");
+			
+				
 			});
 			
-			<div id="chart1" style="height:300px; width:1000px"></div>
-
-
-
-
-			function graficaPulsaciones (clase) {
-			    $.getJSON("graficas.do", { method: 'listaLecturas', random: Math.random()},
-			        function(respuesta) {
-
-			        var vector = new Array();
-			        for (var i = 0; i < respuesta.lecturas.length; i++) {   
-			            var indice = parseInt(i) + 1;
-			            var ind = parseInt(i);
-			            vector[ind] = respuesta.lecturas[i].pulsacion;
-			        }
-			       
-			        $(document).ready(function(){
-			          // var line1 = [[9, 3.5], [15, 4.4], [22, 6.0], [38, 9.1], [51, 12.0], [62, 14.4]];
-			            var line1 = vector;
-			           
-			            var plot2 = $.jqplot('chart1', [line1], {
-			                title: 'GRÁFICA PULSACIONES',
-			                axes:{                   
-			                  xaxis:{
-			                      pad: 0,
-			                      showTicks: false,
-			                      showTickMarks: false,
-			                      label: '',
-			                      labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-			                  },
-			                  yaxis:{
-			                     // showTicks: false,
-			                      //showLabel: false,
-			                     // showTickMarks: false,
-			                      //min: 40,
-			                      //max: 120,
-			                      label: '',
-			                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-			                      ticks: [40, 50, 60, 70, 80, 90, 100, 110, 120],                     
-			                      tickOptions: {
-			                          formatString: '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;%.0f&nbsp;',
-			                         textColor: '#888'
-			                      }
-			                        //renderer: $.jqplot.CategoryAxisRenderer,
-			                        //ticks:[40, 50, 60],
-			                      //labelRenderer: $.jqplot.CanvasAxisLabelRenderer
-			                  }
-			                }
-			            });
-			         
-			        });
-			       
-			    });
-			}
 		</script>
-		
-		
-		
-	
-		<%@ include file="comunes/include-pie.jsp"%>
+	</head>
+	<body>
+
+
+
+<div id="container" style="height: 400px"></div>
 	</body>
 </html>

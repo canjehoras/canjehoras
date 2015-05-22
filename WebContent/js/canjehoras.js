@@ -113,6 +113,10 @@ gestionDenunciados = function(id){
 	window.location.href= "/canjehoras/trueque/gestionDenunciados.html"
 }
 
+graficas = function(){
+	$("#foro").load("/canjehoras/graficas/verGraficas.html");
+}
+
 gestionActivos = function(id){
 	window.location.href= "/canjehoras/trueque/gestionActivos.html"
 }
