@@ -75,6 +75,14 @@ borrarTrueque = function(){
 	window.location.href= "/canjehoras/trueque/borrar.html?id=" + id
 }
 
+publicarTruequeAdmin = function(id){
+	window.location.href= "/canjehoras/trueque/republicar.html?id=" + id
+}
+
+eliminarTruequeAdmin = function(id){
+	window.location.href= "/canjehoras/trueque/borrar.html?id=" + id
+}
+
 cerrar = function(){
 	window.location.href= "/canjehoras/login/logout.html"
 }

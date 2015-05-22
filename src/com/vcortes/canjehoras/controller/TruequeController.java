@@ -410,6 +410,30 @@ public class TruequeController extends BaseController{
 		return model;			
 	}
 	
+	public ModelAndView republicar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Republicar trueque");	
+		ModelAndView model = new ModelAndView(Constantes.MI_LISTA_TRUEQUE); 
+		try{
+			String id = (String) request.getParameter(Constantes.ID);
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			// Modificar el estado
+			trueque.setEstado(Constantes.TRUEQUE_ESTADO_NUEVO);
+			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
+			
+			Long idUsuario = null;
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(null !=usuario){
+				idUsuario = usuario.getId();
+			}
+			List<Trueque> listado = truequeBL.findTrueque(null, null, idUsuario, null);
+			getListadoTrueques(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;			
+	}
+	
 	public ModelAndView reactivar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Borrar trueque");	
 		ModelAndView model = new ModelAndView(Constantes.MI_LISTA_TRUEQUE); 
@@ -447,10 +471,11 @@ public class TruequeController extends BaseController{
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			if(null !=usuario){
 				// Si hay usuario registrado
-
+				model.addObject("usuario", usuario);
 			}else{
 				model = new ModelAndView(Constantes.LOGIN); 
 			}
+			
 			
 			
 			
