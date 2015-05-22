@@ -115,6 +115,10 @@ gestionDenunciados = function(id){
 }
 
 graficas = function(){
+	var chart = $('#container').highcharts();
+	if(chart!=null){
+		chart.destroy();
+	}
 	$("#foro").load("/canjehoras/graficas/verGraficas.html");
 }
 
