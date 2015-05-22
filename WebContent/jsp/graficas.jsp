@@ -84,6 +84,9 @@
 							if(chart!=null){
 								chart.destroy();
 							}
+							
+							pintaGrafico();
+							chart = $('#container').highcharts();
 							chart.addSeries(respuesta.series);
 							
 						}
