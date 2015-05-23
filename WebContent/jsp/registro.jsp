@@ -23,7 +23,7 @@
 	    <h1><fmt:message key="registro.datos.personales"/></h1>
 	    <input type="text" title="Introduzca el nombre" name="nombre" id="nombre" placeholder="<fmt:message key="registro.nombre"/>" required/>
 	    <input type="text" title="Introduzca el primer apellido" name="apellido1" id="apellido1" placeholder="<fmt:message key="registro.apellido1"/>" required/>
-	    <input type="text" title="Introduzca el segundo apellido" name="apellido2" id="apellido2" placeholder="<fmt:message key="registro.apellido2"/>" required/>
+	    <input type="text" title="Introduzca el segundo apellido" name="apellido2" id="apellido2" placeholder="<fmt:message key="registro.apellido2"/>"/>
 	    <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="<fmt:message key="seleccione.fecha.nacimiento" />"/>
 	    <select name="provincias" id="provincias" required="required">
 			<option value="-1"><fmt:message key="registro.seleccione.provincia" /></option>
@@ -53,7 +53,7 @@
 	    		<div style="width: 100%"><input type="checkbox" name="provincia" value="${provincia.id}" /> ${provincia.descripcion}</div>
 	    	</c:forEach>
 	    </div>
-	    <div class="tituloSelect"><fmt:message key="campos.obligatorios"/></div>
+
 		<input type="submit" value="<fmt:message key="boton.crear.cuenta"/>" />
 		<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
 	</form>
