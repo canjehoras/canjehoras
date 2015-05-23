@@ -1,6 +1,8 @@
 package com.vcortes.canjehoras.controller;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,44 +43,35 @@ public class GraficasController extends BaseController{
 		JSONObject o = new JSONObject();
 		JSONArray listSeries = new JSONArray();
 		try{
-			List canjes = new ArrayList();
 			
-			canjes.add(10);
-			canjes.add(2);
-			canjes.add(13);
-			canjes.add(4);
-			canjes.add(2);
-			canjes.add(1);
-			canjes.add(8);
-			canjes.add(6);
-			canjes.add(1);
-			canjes.add(2);
-			canjes.add(3);
-			canjes.add(3);
-
-			List canjes2 = new ArrayList();
-
-			canjes2.add(0);
-			canjes2.add(3);
-			canjes2.add(1);
-			canjes2.add(2);
-			canjes2.add(3);
-			canjes2.add(1);
-			canjes2.add(3);
-			canjes2.add(2);
-			canjes2.add(1);
-			canjes2.add(1);
-			canjes2.add(1);
-			canjes2.add(2);
+			Long idUsuario = null;
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(null !=usuario){
+				idUsuario = usuario.getId();
+			}
+			/* Trueques totales del usuario por mes */
+			//String sql = new String("SELECT COUNT(id), YEAR(FECHA_ALTA), MONTH(FECHA_ALTA) FROM trueque WHERE ID_USUARIO = " + idUsuario + " AND FECHA_ALTA > NOW() - INTERVAL 6 MONTH GROUP BY YEAR(FECHA_ALTA), MONTH(FECHA_ALTA)");
+			String sql = new String("SELECT COUNT(id), YEAR(FECHA_ALTA), MONTH(FECHA_ALTA) FROM trueque WHERE ID_USUARIO = " + idUsuario + 
+					" AND YEAR(FECHA_ALTA) = YEAR(NOW()) GROUP BY YEAR(FECHA_ALTA), MONTH(FECHA_ALTA)");
+			
+			List totales = truequeBL.executeSQL(sql);
+			Integer[] canjesTotales = getListFromResult(totales);			
 			
 			JSONObject o1 = new JSONObject();
 			o1.put("name", "Publicados");
-			o1.put("data", canjes);
+			o1.put("data", getListFromArray(canjesTotales));
 			listSeries.put(0, o1);
+
+			/* Trueques canjeados del usuario por mes */
+			String sql2 = new String("SELECT COUNT(t.id), YEAR(FECHA_ALTA), MONTH(FECHA_ALTA) FROM trueque t INNER JOIN canje c on t.ID = c.ID_TRUEQUE WHERE c.ID_USUARIO IS NOT NULL "
+					+ " AND YEAR(FECHA_ALTA) = YEAR(NOW()) GROUP BY YEAR(FECHA_ALTA), MONTH(FECHA_ALTA)");
+			
+			List canjeados = truequeBL.executeSQL(sql2);
+			Integer[] canjesCanjeados = getListFromResult(canjeados);			
 			
 			JSONObject o2 = new JSONObject();
 			o2.put("name", "Canjeados");
-			o2.put("data", canjes2);
+			o2.put("data", getListFromArray(canjesCanjeados));
 			listSeries.put(1, o2);
 			
 			o.put("series", listSeries);
@@ -87,6 +80,36 @@ public class GraficasController extends BaseController{
 			e.printStackTrace();
 		}
 		return enviarRespuestaAJAX(response, o.toString());
+	}
+
+	private Integer[] getListFromResult(List totales) {
+		Integer[] canjesTotales = new Integer[12];
+		Arrays.fill(canjesTotales, new Integer("0"));
+		
+		for (int i = 0; i < totales.size(); i++) {
+			Object[] valores = (Object[]) totales.get(i);
+			Integer mes = (Integer) valores[2];
+			canjesTotales[mes-1] = ((BigInteger)valores[0]).intValue();
+		}
+		return canjesTotales;
+	}
+	
+	
+	private String getMonth(Integer mes){
+		String[] str = {"Enero",      
+				   "Febrero",
+				   "Marzo",        
+				   "Abril",        
+				   "Mayo",          
+				   "Junio",         
+				   "Julio",         
+				   "Agosto",       
+				   "Septiembre",    
+				   "Octubre",      
+				   "Noviembre",     
+				   "Diciembre"};
+		
+		return str[mes];
 	}
 
 	

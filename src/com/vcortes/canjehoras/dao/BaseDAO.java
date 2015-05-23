@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Example;
@@ -89,4 +90,16 @@ public class BaseDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
+	
+	/**
+	 * Ejecuta una consulta "SQL"
+	 * @param sql
+	 * @return
+	 * @throws Exception
+	 */
+	public List executeSQL(String sql) throws Exception {
+		logger.debug("executeSQL");
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sql);
+		return query.list();
+	}
 }

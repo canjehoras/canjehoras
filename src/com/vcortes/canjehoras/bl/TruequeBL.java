@@ -56,4 +56,14 @@ public class TruequeBL {
 	public List<Trueque> buscarTrueques(String descripcion, List<Provincia> provincias, Categoria categoria){
 		return truequeDAO.buscarTrueques(descripcion, provincias, categoria);
 	}
+	
+	/**
+	 * Ejecuta una consulta "SQL"
+	 * @param sql
+	 * @return
+	 * @throws Exception
+	 */
+	public List executeSQL(String sql) throws Exception {
+		return truequeDAO.executeSQL(sql);
+	}
 }

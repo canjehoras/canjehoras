@@ -2,6 +2,7 @@ package com.vcortes.canjehoras.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -145,6 +146,14 @@ public abstract class BaseController extends MultiActionController {
 		}
 		return null;
 
+	}
+	
+	public static List getListFromArray(Object[] array){
+		List list = new ArrayList();
+		for (int i = 0; i < array.length; i++) {
+			list.add(array[i]);
+		}
+		return list;
 	}
 
 	
