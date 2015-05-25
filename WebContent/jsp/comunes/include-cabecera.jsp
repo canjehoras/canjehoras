@@ -1,5 +1,8 @@
 <%@ include file="include-javascript.jsp" %>
 <%@ include file="include-estilos.jsp" %>
+<%@ include file="include-taglib.jspf"%>
+
+<fmt:setLocale value="${sessionScope.idioma}" scope="session"/>
 
 <!--Header_section-->
 <header id="header_wrapper">
@@ -9,8 +12,8 @@
     <div class="header_box">
       <div class="logo" ><a href="#" class="scroll-link" id="toggle-inicio"><img src="../img/logo2.jpg" ></a></div>
       <div class="logo" style="float: right;">
-      	<a href="#" class="scroll-link" id="toggle-inicio"><img src="../img/es.png" style="width: 9%"></a>
-      	<a href="#" class="scroll-link" id="toggle-inicio"><img src="../img/en.jpg" style="width: 9%"></a>
+      	<a href="#" class="scroll-link" id="toggle-inicio" onclick="cambiarIdioma('es');"><img src="../img/es.png" style="width: 9%"></a>
+      	<a href="#" class="scroll-link" id="toggle-inicio" onclick="cambiarIdioma('en');"><img src="../img/en.jpg" style="width: 9%"></a>
       	<c:if test="${sessionScope.usuario != null}">
       		<a href="#" class="scroll-link" id="toggle-cerrar"><fmt:message key="registro"/>${sessionScope.usuario.nombre}<img src="../img/close.png" alt="cerrar sesion"></a>
       	</c:if>
@@ -83,5 +86,16 @@
 		$('#toggle-cerrar').click(function(){
 			cerrar();
 		});
+		
+		cambiarIdioma = function(idioma){	
+			$.post("/canjehoras/login/cambiarIdioma.html",
+				{ idioma: idioma
+				},
+				function (respuesta) {
+					window.location.reload();
+				}
+			, "json");
+			
+		}
 	</script>
 </header>

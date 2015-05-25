@@ -31,6 +31,10 @@ public class InicioController extends BaseController{
 	public ModelAndView inicio(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
 		return new ModelAndView(Constantes.INICIO);
 	}
+	
+	
+	
+	
 	public TruequeBL getTruequeBL() {
 		return truequeBL;
 	}

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
+import com.vcortes.canjehoras.utils.JSONObject;
 
 
 public class LoginController extends BaseController{
@@ -368,5 +370,34 @@ public class LoginController extends BaseController{
 	public ModelAndView contactoEmail(HttpServletRequest request, HttpServletResponse response) throws Throwable{
 		ModelAndView model = new ModelAndView(Constantes.ENVIAR_EMAIL); 
 		return model;
+	}
+	
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Throwable 
+	 */
+	public ModelAndView cambiarIdioma(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		logger.debug(" :: Cambio de idioma ::");
+		JSONObject o = new JSONObject();
+		String idioma = request.getParameter("idioma");
+		
+		if(idioma!=null && !"".equals(idioma)){
+			request.getSession().setAttribute("idioma", idioma);
+			Locale.setDefault(new Locale(idioma));
+			
+/*			if("es".equals(idioma)){
+			}else if("en".equals(idioma)){
+				Locale.setDefault(new Locale("EN","en"));
+			}
+*/			
+			
+			
+		}
+		return enviarRespuestaAJAX(response, o.toString());
+		
+		
 	}
 }
