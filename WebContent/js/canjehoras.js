@@ -141,3 +141,4 @@ gestionActivos = function(id){
 resolucionCanje = function(id, resolucion){
 	window.location.href= "/canjehoras/agenda/resolucionCanje.html?id="+id+"&resolucion="+resolucion
 }
+
