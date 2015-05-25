@@ -23,7 +23,7 @@ agenda = function(){
 }
 
 canjeAgenda = function(id){
-	window.location.href= "/canjehoras/agenda/agenda.html"
+	window.location.href= "/canjehoras/agenda/agendaTrueque.html?id=" + id
 }
 
 publicar = function(){
@@ -104,6 +104,13 @@ habilitarDemanda = function(radio){
 }
 
 mostrarEvento = function(fecha){
+	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle.html?fecha="+fecha,  function(){
+		showAgendaCanje();
+	}
+	);
+};
+
+mostrarEvento2 = function(fecha){
 	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle.html?fecha="+fecha,  function(){
 		showAgendaCanje();
 	}

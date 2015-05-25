@@ -37,4 +37,8 @@ public class CanjeBL {
 	public Canje detalle(Long id) throws Throwable {
 		return canjeDAO.detalle(id);
 	}
+	
+	public List<Canje> findCanjesPorTrueque(Long idTrueque)throws Throwable {
+		return canjeDAO.findCanjesPorTrueque(idTrueque);
+	}
 }

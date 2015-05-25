@@ -58,6 +58,24 @@ public class AgendaController extends BaseController {
 		return model;
 	}
 	
+	public ModelAndView agendaTrueque(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Entramos en la agenda del usuario");	
+		ModelAndView model = new ModelAndView("agendaTrueque"); 
+		Long idUsuario = null;
+		try {
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			if(null !=usuario){
+				idUsuario = usuario.getId();
+			}
+			String idTrueque = request.getParameter("id");
+			List<Canje> listadoFechasTrueques = canjeBL.findCanjesPorTrueque(new Long(idTrueque));
+			model.addObject("listadoFechasTrueques", listadoFechasTrueques);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
 	
 	public ModelAndView agendaDetalle(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Entramos en el detalle de la agenda del usuario");	
@@ -104,6 +122,9 @@ public class AgendaController extends BaseController {
 			}else if(Constantes.RESOLUCION_NOK.equals(resolucion)){
 				resolucionLabel = Constantes.RESOLUCION_NOK_LABEL;
 				canje.setEstado(Constantes.ESTADO_CANJE_LIBRE);
+			}else if(Constantes.RESOLUCION_LIBRE_RESERVADO.equals(resolucion)){
+				resolucionLabel = Constantes.RESOLUCION_LIBRE_RESERVADO_LABEL;
+				canje.setEstado(Constantes.ESTADO_CANJE_RESERVADO);
 			}
 			
 			// Almacenar información

@@ -12,6 +12,11 @@
 			<div><fmt:message key="agenda.horario"/>${canje.fechaLabel}  ${canje.hora_inicio} - ${canje.hora_fin}</div>
 			<div><fmt:message key="agenda.estado"/>${canje.estado}</div>
 			<c:if test="${canje.estado == 'LIBRE'}">
+				<div>
+					<fmt:message key="agenda.trueque"/>
+					<input src="../img/ok.png" type="image" onclick="resolucionCanje(${canje.id}, 'LIBRE_RESERVADO');" />
+					<input src="../img/nok.png" type="image" onclick="resolucionCanje(${canje.id}, 'NOK');" />
+				</div>
 			</c:if>
 			<c:if test="${canje.estado == 'RESERVADO'}">
 				<div><fmt:message key="agenda.reservado"/>${canje.usuario.nombre} ${canje.usuario.apellido1} ${canje.usuario.apellido2}</div>

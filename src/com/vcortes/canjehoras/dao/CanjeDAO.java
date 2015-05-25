@@ -35,6 +35,21 @@ public class CanjeDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
+	
+	public List<Canje> findCanjesPorTrueque(Long idTrueque)throws Throwable {
+		log.debug("findCanjesPorTrueque");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Canje.class);
+			q.add(Restrictions.eq("trueque.id", idTrueque));
+			List result = q.list();
+			return result;
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}
+	
 
 	public List<Canje> listadoCanjesFecha(Date fecha)throws Throwable {
 		log.debug("listadoCanjesFecha");
@@ -64,4 +79,6 @@ public class CanjeDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
+	
 }

@@ -106,5 +106,6 @@ public class Constantes {
 	public final static String RESOLUCION_OK_LABEL = "ACEPTADO";
 	public final static String RESOLUCION_NOK = "NOK";
 	public final static String RESOLUCION_NOK_LABEL = "RECHAZADO";
-	
+	public final static String RESOLUCION_LIBRE_RESERVADO = "OK";
+	public final static String RESOLUCION_LIBRE_RESERVADO_LABEL = "ACEPTADO";
 }

@@ -25,6 +25,7 @@ public class Trueque implements Serializable{
 	private Provincia provincia;
 	private String modalidad;
 	private Usuario denunciante;
+    //private List<MuestraBanderin> listadoMuestra;
 
 	/**
 	 * Constructor por defecto
