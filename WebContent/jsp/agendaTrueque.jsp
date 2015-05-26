@@ -80,7 +80,15 @@
 			*/
 		
 		<c:forEach var="canje" items="${listadoFechasTrueques}">
-			cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento2('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#F1AB37; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+			<c:if test="${canje.estado == 'L'}">
+				cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento2('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#339933; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+			</c:if>
+			<c:if test="${canje.estado == 'P'}">
+				cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento2('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#FFB84D; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+			</c:if>
+			<c:if test="${canje.estado == 'C'}">
+				cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"mostrarEvento2('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#FF0000; cursor: pointer\">${canje.hora_inicio} - ${canje.hora_fin}</div>"} );
+			</c:if>
 		</c:forEach>
 		});
 		  

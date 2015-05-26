@@ -476,17 +476,14 @@ public class TruequeController extends BaseController{
 				model = new ModelAndView(Constantes.LOGIN); 
 			}
 			
-			
-			
-			
-			/**String id = (String) request.getParameter(Constantes.ID);
+			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
+			model.addObject( Constantes.TRUEQUE, trueque);
 			
-			Foro foro = foroBL.findForoPorTrueque(trueque.getId());
+			/**Foro foro = foroBL.findForoPorTrueque(trueque.getId());
 			
 			List<Publicacion> listaPublicacion = publicacionBL.findPublicacionPorForo(foro.getId());
-			model.addObject("listaPublicacion", listaPublicacion);
-			model.addObject( Constantes.TRUEQUE, trueque);*/
+			model.addObject("listaPublicacion", listaPublicacion);*/
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

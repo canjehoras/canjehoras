@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.vcortes.canjehoras.model.Canje;
@@ -19,13 +20,19 @@ public class CanjeDAO extends BaseDAO {
 		return findAll(Canje.class);
 	}
 
-	public List<Canje> listadoCanjes(Long idAgenda, String estado)throws Throwable {
+	public List<Canje> listadoCanjesPorAgenda(Long idAgenda, String estado)throws Throwable {
 		log.debug("listadoTruequesLibres");
 		try {
 			Criteria q = sessionFactory.getCurrentSession().createCriteria(Canje.class);
 			if(null != idAgenda){
 				q.add(Restrictions.eq("agenda.id", idAgenda));
 			}
+			
+			// Recupera los trueques NUEVOS, PENDIENTES o CANJEADOS
+			/**q.add(Restrictions.or(Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_NUEVO), 
+					Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_PENDIENTE),
+					Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_CANJEADO)));*/		
+		
 			q.add(Restrictions.eq("estado", estado));
 			List result = q.list();
 			return result;
@@ -35,6 +42,23 @@ public class CanjeDAO extends BaseDAO {
 		}
 		return null;
 	}
+	
+	public List<Canje> listadoCanjesUsuarioDemanda (Long idUsuario)throws Throwable {
+		log.debug("listadoCanjesUsuarioDemanda");
+		try {
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Canje.class);
+			if(null != idUsuario){
+				q.add(Restrictions.eq("usuario.id", idUsuario));
+			}
+			q.addOrder(Order.desc("id"));
+			List result = q.list();
+			return result;
+			
+		} catch (Exception e) {
+			log.error("", e);
+		}
+		return null;
+	}	
 	
 	
 	public List<Canje> findCanjesPorTrueque(Long idTrueque)throws Throwable {
