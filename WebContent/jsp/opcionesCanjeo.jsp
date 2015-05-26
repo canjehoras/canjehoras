@@ -1,4 +1,5 @@
 <!doctype html>
+
 <%@ include file="comunes/include-taglib.jspf" %>
 <html>
 	<head>
@@ -16,32 +17,44 @@
 		    <div class="container">
 		      <div class="hero_section">
 		        <div class="row">
-			       <div class="col-lg-5 col-sm-7 wow fadeInLeft animated" style="margin-top: 20px">	
-						 <div class="contact_info">
-				             <div class="detail">
-				                 <h4>Usuario</h4>
+		          <div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated">
+						<h1 style="background:#3399cc; padding:20px 0; font-size:140%; font-weight:300; text-align:center; color:#fff;"><fmt:message key="informacion.canje"/></h1>
+						<form action="" method="post" accept-charset="UTF-8">
+							<div class="detail">
+				                 <b>Usuario: </b>
 				                 <p>${usuario.nombre} ${usuario.apellido1} ${usuario.apellido2}</p>
 				             </div>
 				             <div class="detail">
-				                 <h4>Telefono</h4>
+				                 <b>Telefono: </b>
 				                 <p>${usuario.movil}</p>
 				             </div>
 				             <div class="detail">
-				                 <h4>Email</h4>
+				                 <b>Email: </b>
 				                 <p>${usuario.correo_electronico}</p>
 				             </div> 
 				             <div class="detail">
-				                 <h4>Fecha nacimiento:</h4>
+				                 <b>Fecha nacimiento: </b>
 				                 <p>${usuario.fecha_nacimiento}</p>
 				             </div> 
+						    
+							
+						</form>
+						<div style="width: 100%; padding: 5px; background: #f0f0f0; margin-bottom: 15px;">
+							<img title="Enviar email" class="imagenOpcionesCanjeo" src="/canjehoras/img/enviarMail.png" onclick="canjeEmail(${usuario.id});" />
+							<img title="Dejar comentario" class="imagenOpcionesCanjeo" src="/canjehoras/img/dejarComentario.png" onclick="canjeForo(${trueque.id});" />
+							<img title="Agenda" class="imagenOpcionesCanjeo" src="/canjehoras/img/agenda.png" onclick="canjeAgenda(${trueque.id});" />
+							<img title="Denunciar trueque" class="imagenOpcionesCanjeo" src="/canjehoras/img/denunciar.png" onclick="denunciarTrueque(${trueque.id});" />
+							<img title="Gráficas" class="imagenOpcionesCanjeo" src="/canjehoras/img/graficas.png" onclick="graficas();" />
+							<%-- 
+							<input type="button" value="<fmt:message key="boton.email"/>" onclick="canjeEmail(${usuario.id});"/>
+							<input type="button" value="<fmt:message key="boton.foro"/>" onclick="canjeForo(${trueque.id});"/>
+							<input type="button" value="<fmt:message key="boton.agenda"/>" onclick="canjeAgenda(${trueque.id});"/>
+							<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
+							<input type="button" value="<fmt:message key="boton.graficas"/>" onclick="graficas();"/>
+							--%>
 						</div>
-						<input type="button" value="<fmt:message key="boton.email"/>" onclick="canjeEmail(${usuario.id});"/>
-						<input type="button" value="<fmt:message key="boton.foro"/>" onclick="canjeForo(${trueque.id});"/>
-						<input type="button" value="<fmt:message key="boton.agenda"/>" onclick="canjeAgenda(${trueque.id});"/>
-						<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
-						<input type="button" value="<fmt:message key="boton.graficas"/>" onclick="graficas();"/>
-		          </div>
-		          <div  id="foro" class="col-lg-7 col-sm-5">
+			        </div>
+		          <div  id="foro" >
 				  </div>
 		        </div>
 		      </div>

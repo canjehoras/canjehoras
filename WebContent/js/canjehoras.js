@@ -24,6 +24,8 @@ agenda = function(){
 
 canjeAgenda = function(id){
 	window.location.href= "/canjehoras/agenda/agendaTrueque.html?id=" + id
+	/*$("#foro").load("/canjehoras/agenda/agenda.html");*/
+	
 }
 
 publicar = function(){
@@ -126,10 +128,6 @@ gestionDenunciados = function(id){
 }
 
 graficas = function(){
-	var chart = $('#container').highcharts();
-	if(chart!=null){
-		chart.destroy();
-	}
 	$("#foro").load("/canjehoras/graficas/verGraficas.html");
 }
 

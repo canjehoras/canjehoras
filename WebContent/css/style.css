@@ -1655,6 +1655,19 @@ div.mc-image {
     border-radius: 15px;
 }
 
+.imagenOpcionesCanjeo{
+	width: 15%;
+	margin: 2%;
+}
+
+.info_canje{
+	width: 100%; 
+	border: 5px solid #000; 
+	padding: 5px; 
+	margin: 5px; 
+	border-radius: 25px;
+}
+
 /*
    Media Queries
 --------------------------- */
@@ -1687,9 +1700,20 @@ div.mc-image {
 		z-index: 2;
 		width: 20%;
 	}
+	
+	.imagenOpcionesCanjeo{
+		width: 15%;
+		margin: 2%;
+		cursor: pointer;
+	}
 }
 
 @media (max-width: 768px) {
+	.imagenOpcionesCanjeo{
+		width: 14%;
+		margin: 2%;
+		cursor: pointer;
+	}
 	.logo {
 	    float: left;
 	    margin-top: 8px;
