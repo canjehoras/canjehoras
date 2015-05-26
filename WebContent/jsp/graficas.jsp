@@ -7,7 +7,7 @@
 			#container {
 				height: 400px; 
 				min-width: 310px; 
-				max-width: 800px;
+				max-width: 750px;
 				margin: 0 auto;
 			}
 		</style>

@@ -20,8 +20,8 @@
 	                 	<div style="margin-left: 15px">${trueques.fecha} - ${trueques.titulo} (${trueques.provincia.descripcion})</div>
 	                 </a>  
 	              </c:forEach>
-			      <div style="padding-bottom: 20px" class="col-lg-3 col-sm-5 fadeInLeft delay-06s animated">
-					<img src="../img/reloj.jpg" class="zoomIn wow animated" alt="" />
+			      <div style="padding-bottom: 20px; width: 100%; text-align: center; margin-top: 10px;" class="col-lg-3 col-sm-5 fadeInLeft delay-06s animated">
+					<img src="../img/reloj.jpg" class="zoomIn wow animated" alt="" style="width: 50%"/>
 				  </div>
         	    </div>
 		        <div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated">
