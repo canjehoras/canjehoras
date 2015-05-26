@@ -105,15 +105,15 @@ habilitarDemanda = function(radio){
 	} 
 }
 
-mostrarEvento = function(fecha){
-	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle.html?fecha="+fecha,  function(){
+eventoMiAgenda = function(fecha){
+	$("#agendaCanje").load("/canjehoras/agenda/detalleMiAgenda.html?fecha="+fecha,  function(){
 		showAgendaCanje();
 	}
 	);
 };
 
 mostrarEvento2 = function(fecha){
-	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle.html?fecha="+fecha,  function(){
+	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle3.html?fecha="+fecha,  function(){
 		showAgendaCanje();
 	}
 	);

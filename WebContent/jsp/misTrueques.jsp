@@ -38,6 +38,7 @@
 					<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueques.provincia.descripcion}</p>
 					<p class="animated fadeInDown wow">OFERTA: ${trueques.descripcionOferta}</p>
 					<p class="animated fadeInDown wow">DEMANDA: ${trueques.descripcionOferta}</p>
+					<p class="animated fadeInDown wow">ESTADO: ${trueques.estado}</p>
 					<c:if test="${sessionScope.usuario == null}">
 						<p>
 							<fmt:message key="listado.usuario.registro"/>&nbsp; 

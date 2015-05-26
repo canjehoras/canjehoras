@@ -70,12 +70,14 @@ public class Constantes {
 	public static final String TRUEQUE_ESTADO_REVISADO  = "R";
 	public static final String TRUEQUE_ESTADO_DENUNCIADO = "D";
 	public static final String TRUEQUE_ESTADO_BORRADO = "B";
+	public static final String TRUEQUE_ESTADO_PENDIENTE = "P";
+	public static final String TRUEQUE_ESTADO_CANJEADO = "C";
 	
 	// Estado de los canjes
 	public static final String ESTADO_CANJE_LIBRE  = "L";
 	public static final String ESTADO_CANJE_LIBRE_STRING  = "LIBRE";
-	public static final String ESTADO_CANJE_RESERVADO  = "R";
-	public static final String ESTADO_CANJE_RESERVADO_STRING  = "RESERVADO";
+	public static final String ESTADO_CANJE_PENDIENTE  = "P";
+	public static final String ESTADO_CANJE_PENDIENTE_STRING  = "PENDIENTE";
 	public static final String ESTADO_CANJE_CANJEADO  = "C";
 	public static final String ESTADO_CANJE_CANJEADO_STRING  = "CANJEADO";
 	
