@@ -54,8 +54,8 @@
 							--%>
 						</div>
 			        </div>
-		          <div  id="foro" >
-				  </div>
+		          	<div  id="foro"></div>
+		          
 		        </div>
 		      </div>
 		    </div>

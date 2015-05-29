@@ -9,12 +9,13 @@
 	
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
+		<section id="categoria" class="content">
+		<h1>Visualiza tus trueques</h1>
 		<div class="container">
-		
-			<input type="button" value="Nuevos" onclick="preferenciaTrueque();"/>
-			<input type="button" value="Denunciados" onclick="preferenciaTrueque();"/>
-			<input type="button" value="Borrados" onclick="preferenciaTrueque();"/>
-			<input type="button" value="Todos" onclick="todosTrueque();"/>
+			<a href="#" onclick="preferenciaTrueque();">Nuevos</a>
+			<a href="#" onclick="preferenciaTrueque();">Denunciados</a>
+			<a href="#" onclick="preferenciaTrueque();">Borrados</a>
+			<a href="#" onclick="todosTrueque();">Todos</a>
 			
 			<c:set var="primero" value="true"></c:set>
 			<c:forEach var="trueques" items="${trueques}" varStatus="count" >
@@ -59,6 +60,7 @@
 						</c:if>
 					</c:if>
 				</div>
+			
 		</div>
 		
 	  	<c:if test="${(count.count % 3) == 0}">
@@ -70,6 +72,7 @@
 	</div>
 	</div>
 	</div>
+	</section>
 	<%@ include file="comunes/include-pie.jsp" %>
 	</body>
 </html>
