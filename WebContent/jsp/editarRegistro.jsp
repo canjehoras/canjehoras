@@ -8,6 +8,13 @@
 	</head>
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+	    	  	seleccionado('toggle-datos');
+	      	});
+		</script>
+		
 		<section id="login" class="top_cont_outer">
 			<h1><fmt:message key="titulo.registro.editar"/></h1>
 		 	<form action="/canjehoras/login/envioRegistro.html" method="post" accept-charset="UTF-8">

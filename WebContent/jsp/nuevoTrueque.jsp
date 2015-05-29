@@ -72,7 +72,10 @@
     		 changeYear: true,
     		 minDate: "+0m +0d"
     	});
+    	
+	  	seleccionado('toggle-publicar');
     });
+    
 </script>
 
 <%@ include file="comunes/include-pie.jsp" %>

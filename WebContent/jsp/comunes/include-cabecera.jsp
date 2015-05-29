@@ -60,6 +60,7 @@
 			buscador();
 		});
 		$('#toggle-agenda').click(function(){
+			seleccionado('toggle-agenda');
 			agenda();
 		});
 		$('#toggle-publicar').click(function(){
@@ -97,5 +98,9 @@
 			, "json");
 			
 		}
+		
+		seleccionado = function(id){
+			$("#"+id).closest("li").attr("class","active");			
+		};
 	</script>
 </header>

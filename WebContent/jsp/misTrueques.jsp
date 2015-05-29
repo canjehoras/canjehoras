@@ -5,13 +5,20 @@
 		<%@page contentType="text/html" pageEncoding="UTF-8"%>
 		<meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8; width=device-width, maximum-scale=1"> 
 		<title><fmt:message key="titulo"/></title>
+		
 	</head>
 	
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+	    	  	seleccionado('toggle-trueques');
+	      	});
+		</script>
+		<div class="container">
 		<section id="categoria" class="content">
 		<h1>Visualiza tus trueques</h1>
-		<div class="container">
 			<a href="#" onclick="preferenciaTrueque();">Nuevos</a>
 			<a href="#" onclick="preferenciaTrueque();">Denunciados</a>
 			<a href="#" onclick="preferenciaTrueque();">Borrados</a>
@@ -71,8 +78,8 @@
 		</c:forEach>
 	</div>
 	</div>
-	</div>
 	</section>
+	</div>
 	<%@ include file="comunes/include-pie.jsp" %>
 	</body>
 </html>

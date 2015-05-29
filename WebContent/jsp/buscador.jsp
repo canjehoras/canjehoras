@@ -98,6 +98,12 @@
     	  $("#categoria2").load("/canjehoras/buscador/buscar.html?descripcion="+escape(descripcion)+"&provincias="+provincias+"&categoria="+categoria);
     	  
       };
+      
+      
+      $(document).ready(function() {
+    	  seleccionado('toggle-buscador');
+      });
+     
     </script>
     
     
