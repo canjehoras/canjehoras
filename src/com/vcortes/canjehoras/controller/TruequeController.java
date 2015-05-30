@@ -112,7 +112,7 @@ public class TruequeController extends BaseController{
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
 		
 		try {
-			request.setCharacterEncoding("UTF-8");
+			request.setCharacterEncoding(Constantes.ENCODING);
 			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			

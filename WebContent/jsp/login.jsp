@@ -18,11 +18,6 @@
 		    <div class="forget-password">
 				<p><a href="/canjehoras/login/recordarContrasenya.html" id="forget-password"><fmt:message key="login.olvidar.pass"/></a></p>
 			</div>
-			<div class="create-account">
-				<p>
-					<a href="/canjehoras/login/registro.html" id="register-btn" ><fmt:message key="login.cuenta"/></a>
-				</p>
-			</div>
 			
 			<input type="submit" value="<fmt:message key="boton.iniciar.sesion"/>" />
             <input type="button" value="<fmt:message key="boton.registrar"/>" onclick="registro();"/>			
