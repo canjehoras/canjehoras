@@ -3,6 +3,8 @@
 <%@ include file="include-taglib.jspf"%>
 
 <fmt:setLocale value="${sessionScope.idioma}" scope="session"/>
+<link rel="icon" type="image/png" href="/canjehoras/img/main_device_image.jpg" />
+
 
 <!--Header_section-->
 <header id="header_wrapper">
