@@ -40,9 +40,9 @@
 				var cal = $( '#calendar' ).calendario( {
 						onDayClick : function( $el, $contentEl, dateProperties ) {
 							
-							for( var key in dateProperties ) {
+							/*for( var key in dateProperties ) {
 								console.log( key + ' = ' + dateProperties[ key ] );
-							}
+							}*/
 	
 						},
 						caldata : codropsEvents
@@ -109,7 +109,7 @@
 			var agendaCanje=$("#agendaCanje").dialog({
 				zIndex: 150,
 				width: 'auto',
-				height: 300,
+				height: 400,
 				modal: true,
 				maxWidth: 600,
 				autoOpen: false,
