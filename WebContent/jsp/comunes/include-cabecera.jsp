@@ -32,7 +32,6 @@
 					<li><a href="#" class="scroll-link" id="toggle-agenda"><fmt:message key="agenda"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-publicar"><fmt:message key="publicar"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-buscador"><fmt:message key="buscador"/></a></li>
-					<li><a href="#" class="scroll-link" id="toggle-activos"><fmt:message key="trueques.activos"/></a></li>
 					<li><a href="#" class="scroll-link" id="toggle-denunciados"><fmt:message key="trueques.denunciados"/></a></li>
 				</c:if>
 				<c:if test="${sessionScope.perfil == 'U'}">
