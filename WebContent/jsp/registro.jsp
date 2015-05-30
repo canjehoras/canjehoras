@@ -63,6 +63,7 @@
     $(document).ready(function() {
     	$("#fecha_nacimiento").datepicker({ 
     		dateFormat: 'dd/mm/yy',
+    		firstDay: 1,
     		 changeMonth: true, 
     		 changeYear: true, 
     		 yearRange: "-99:+0",

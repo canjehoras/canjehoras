@@ -23,7 +23,7 @@
 				</c:otherwise>
 			</c:choose>
 				<div class="service_block">
-					<div class="service_icon delay-03s animated wow  zoomIn"> 
+					<div class="service_icon delay-03s animated wow  zoomIn" style="height: auto;"> 
 						<img src="data:image/jpg;base64,${trueques.imagen64}" style="max-height: 190px; border: 2px solid #4BAAD6;"/> 
 					</div>
 					<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>

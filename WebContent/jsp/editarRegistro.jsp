@@ -12,6 +12,15 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 	    	  	seleccionado('toggle-datos');
+	    	  	
+    	    	$("#fecha_nacimiento").datepicker({ 
+    	    		dateFormat: 'dd/mm/yy',
+    	    		firstDay: 1,
+    	    		 changeMonth: true, 
+    	    		 changeYear: true, 
+    	    		 yearRange: "-99:+0",
+    				 maxDate: "+0m +0d"
+    	    	});
 	      	});
 		</script>
 		

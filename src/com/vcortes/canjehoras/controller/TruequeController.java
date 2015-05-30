@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.util.Streams;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -132,7 +133,12 @@ public class TruequeController extends BaseController{
 		    for (FileItem item : items) {
 		    	if (item.isFormField()) {
 		    		String fieldName = item.getFieldName();
-		            String fieldValue = item.getString();
+		            String fieldValue = "";
+		            
+		            InputStream stream = item.getInputStream();
+		            if (item.isFormField()) {
+		            	fieldValue = Streams.asString(stream, Constantes.ENCODING);
+		            } 
 		            
 		            if(Constantes.ID.equals(fieldName)){
 		            	id = fieldValue;

@@ -68,6 +68,7 @@
     $(document).ready(function() {
     	$("#fecha").datepicker({ 
     		dateFormat: 'dd/mm/yy',
+    		firstDay: 1,
     		 changeMonth: true, 
     		 changeYear: true,
     		 minDate: "+0m +0d"

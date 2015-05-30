@@ -310,6 +310,7 @@ a.read_more2:hover {
     padding-right: 15px;
     background: #fff;
     padding: 4%;
+    overflow: auto;
 }
 
 .service_icon {
@@ -1660,6 +1661,10 @@ div.mc-image {
 	margin: 2%;
 }
 
+.imagenOpcionesCanjeo:hover{
+	opacity: 0.6;
+}
+
 .info_canje{
 	width: 100%; 
 	border: 5px solid #000; 
@@ -1667,6 +1672,7 @@ div.mc-image {
 	margin: 5px; 
 	border-radius: 25px;
 }
+
 
 /*
    Media Queries
@@ -1706,9 +1712,20 @@ div.mc-image {
 		margin: 2%;
 		cursor: pointer;
 	}
+	
+	.textoTrueque{
+		width: 48%; 
+		float: left;
+	}
+	
 }
 
 @media (max-width: 768px) {
+	
+	.textoTrueque{
+		width: 100%; 
+		height: auto;
+	}
 	.imagenOpcionesCanjeo{
 		width: 14%;
 		margin: 2%;
