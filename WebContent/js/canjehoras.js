@@ -93,9 +93,6 @@ cerrar = function(){
 	window.location.href= "/canjehoras/login/logout.html"
 }
 
-canjeForo = function(id){
-	$("#divForo").hide();
-}
 
 habilitarDemanda = function(radio){
 	if (radio=='C'){
@@ -132,7 +129,7 @@ graficas = function(){
 }
 
 canjeForo = function(id){
-	$("#foro").load("/canjehoras/foro/verForos.html");
+	$("#foro").load("/canjehoras/foro/verForos.html?idTrueque="+id);
 }
 
 canjeEmail = function(id_usuario){

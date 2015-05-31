@@ -1716,6 +1716,7 @@ div.mc-image {
 	.textoTrueque{
 		width: 48%; 
 		float: left;
+		height: auto;
 	}
 	
 }

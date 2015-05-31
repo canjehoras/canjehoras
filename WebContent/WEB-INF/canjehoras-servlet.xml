@@ -104,6 +104,8 @@
         </property>
 		<property name="usuarioBL" ref="usuarioBL" />
 		<property name="truequeBL" ref="truequeBL" />
+		<property name="foroBL" ref="foroBL" />
+		<property name="publicacionBL" ref="publicacionBL" />
     </bean> 
 	
 	<!-- Graficas -->

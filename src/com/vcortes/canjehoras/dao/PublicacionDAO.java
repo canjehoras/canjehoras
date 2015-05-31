@@ -9,7 +9,6 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import com.vcortes.canjehoras.model.Publicacion;
-import com.vcortes.canjehoras.model.Trueque;
 
 public class PublicacionDAO extends BaseDAO {
 
@@ -23,7 +22,7 @@ public class PublicacionDAO extends BaseDAO {
 	public List<Publicacion>  findPublicacionPorForo(Long idForo)throws Throwable {
 		log.debug("findPublicacionPorForo");
 		try {
-			Criteria q = sessionFactory.getCurrentSession().createCriteria(Trueque.class);
+			Criteria q = sessionFactory.getCurrentSession().createCriteria(Publicacion.class);
 			if(null != idForo){
 				q.add(Restrictions.eq("foro.id", idForo));
 			}	

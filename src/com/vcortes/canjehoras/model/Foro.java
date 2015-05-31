@@ -11,11 +11,13 @@ import java.util.Date;
  */
 public class Foro implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
 	private Long id;
 	private Date fecha_creacion;
 	private String hora_creacion;
 	private Trueque trueque;
-
+	
+	
 	/**
 	 * Constructor por defecto
 	 * 
