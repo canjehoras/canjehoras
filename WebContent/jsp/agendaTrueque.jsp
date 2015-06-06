@@ -4,12 +4,11 @@
 	<head>
 		<%@page contentType="text/html" pageEncoding="UTF-8"%>
 		<meta http-equiv="Content-Type" name="viewport"	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
-		<link href="../css/calendar.css" rel="stylesheet" type="text/css"> 
 	</head>
 	
 	<body>	
 		 <div class="row">
-  		      <div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated">	
+  		      <div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated agendaTrueque" >	
 				<div class="custom-calendar-wrap custom-calendar-full">
 					<div class="custom-header clearfix">
 						<h3 class="custom-month-year">

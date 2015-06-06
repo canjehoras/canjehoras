@@ -1719,6 +1719,15 @@ div.mc-image {
 		height: auto;
 	}
 	
+	.agendaTrueque{
+		width: 60%; 
+		height: 600px 
+	}
+	
+	.opcionesCanjeo{
+		width: 31%;
+	}
+	
 }
 
 @media (max-width: 768px) {

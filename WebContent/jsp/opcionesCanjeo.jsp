@@ -6,6 +6,9 @@
 		<%@page contentType="text/html" pageEncoding="UTF-8"%>
 		<meta http-equiv="Content-Type" name="viewport" content="text/html; charset=UTF-8; width=device-width, maximum-scale=1"> 
 		<title><fmt:message key="titulo"/></title>
+		
+		<link href="../css/calendar.css" rel="stylesheet" type="text/css"> 
+		
 	</head>
 	
 	<body>
@@ -14,10 +17,10 @@
 	<c:if test="${sessionScope.usuario != null}">
 		<section id="hero_section" class="top_cont_outer">
 		  <div class="hero_wrapper">
-		    <div class="container">
+		    <div class="container" style="width: 98%">
 		      <div class="hero_section">
-		        <div class="row">
-		          <div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated">
+		        <div class="row" >
+		          <div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated opcionesCanjeo">
 						<h1 style="background:#3399cc; padding:20px 0; font-size:140%; font-weight:300; text-align:center; color:#fff;"><fmt:message key="informacion.canje"/></h1>
 						<form action="" method="post" accept-charset="UTF-8">
 							<div class="detail">
@@ -55,7 +58,7 @@
 							--%>
 						</div>
 			        </div>
-		          	<div  id="foro"></div>
+		          	<div  id="foro" style="width: 100%; height: 600px"></div>
 		          
 		        </div>
 		      </div>
