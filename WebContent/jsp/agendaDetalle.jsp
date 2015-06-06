@@ -17,15 +17,13 @@
 						<div>
 							<fmt:message key="agenda.trueque"/>
 							<input src="../img/manos2.png" type="image" onclick="resolucionCanje(${canje.id}, 'LIBRE_RESERVADO');" style="width: 30px" />
-							<input src="../img/nok.png" type="image" onclick="resolucionCanje(${canje.id}, 'NOK');" style="width: 30px" />
 						</div>
 					</c:if>
-					<c:if test="${canje.estado == 'RESERVADO'}">
-						<div><fmt:message key="agenda.reservado"/>${canje.usuario.nombre} ${canje.usuario.apellido1} ${canje.usuario.apellido2}</div>
+					<c:if test="${canje.estado == 'PENDIENTE'}">
 						<div>
-							<fmt:message key="agenda.aceptas"/>
-							<input src="../img/manos2.png" type="image" onclick="resolucionCanje(${canje.id}, 'OK');" style="width: 30px" />
-							<input src="../img/nok.png" type="image" onclick="resolucionCanje(${canje.id}, 'NOK');"  style="width: 30px" />
+							<fmt:message key="agenda.trueque.aceptar"/>
+							<input src="../img/manos2.png" type="image" onclick="resolucionCanje(${canje.id}, 'LIBRE_RESERVADO');" style="width: 30px" />
+							<input src="../img/nok.png" type="image" onclick="resolucionCanje(${canje.id}, 'NOK');" style="width: 30px" />
 						</div>
 					</c:if>
 					<c:if test="${canje.estado == 'CANJEADO'}">

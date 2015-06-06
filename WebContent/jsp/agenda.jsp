@@ -81,17 +81,22 @@
 				*/
 			
 				<c:forEach var="canje" items="${listadoLibres}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#F1AB37; cursor: pointer\"><label style=\"background:white;\">L</label></div>"} );
+					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#FF0000; cursor: pointer\"><label style=\"background:white;\">L</label></div>"} );
 				</c:forEach>
 				<c:forEach var="canje" items="${listadoPendientes}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#fff; cursor: pointer\"><label style=\"background:white;\">P</label></div>"} );
+					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#FFA500; cursor: pointer\"><label style=\"background:white;\">P</label></div>"} );
 				</c:forEach>
 				<c:forEach var="canje" items="${listadoCanjeadosOferta}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#fff; cursor: pointer\"><label style=\"background:white;\">C</label></div>"} );
+					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\"><label style=\"background:white;\">C</label></div>"} );
 				</c:forEach>
 				<c:forEach var="canje" items="${listadoCanjeadosDemanda}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#fff; cursor: pointer\"><label style=\"background:white;\">D</label></div>"} );
+					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#6A5ACD; cursor: pointer\"><label style=\"background:white;\">D</label></div>"} );
 				</c:forEach>
+				
+				<c:forEach var="canje" items="${todos}">
+				cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\"><label>CONSULTAR</label></div>"} );
+			</c:forEach>
+			
 			});
 			  
 			  

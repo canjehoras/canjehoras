@@ -109,8 +109,8 @@ eventoMiAgenda = function(fecha){
 	);
 };
 
-mostrarEvento2 = function(fecha){
-	$("#agendaCanje").load("/canjehoras/agenda/agendaDetalle3.html?fecha="+fecha,  function(){
+eventoRealizar = function(fecha){
+	$("#agendaCanjeR").load("/canjehoras/agenda/detalleAgendaCanjeo.html?fecha="+fecha,  function(){
 		showAgendaCanje();
 	}
 	);
@@ -130,6 +130,10 @@ graficas = function(){
 
 canjeForo = function(id){
 	$("#foro").load("/canjehoras/foro/verForos.html?idTrueque="+id);
+}
+
+canjeAgendaTrueque= function(id){
+	$("#foro").load("/canjehoras/agenda/verAgenda.html?id="+id);
 }
 
 canjeEmail = function(id_usuario){

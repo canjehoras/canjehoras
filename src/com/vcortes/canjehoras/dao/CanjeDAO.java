@@ -33,7 +33,7 @@ public class CanjeDAO extends BaseDAO {
 					Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_PENDIENTE),
 					Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_CANJEADO)));*/		
 		
-			q.add(Restrictions.eq("estado", estado));
+			//q.add(Restrictions.eq("estado", estado));
 			List result = q.list();
 			return result;
 			

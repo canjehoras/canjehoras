@@ -37,10 +37,11 @@ public class AgendaController extends BaseController {
 		ModelAndView model = new ModelAndView(Constantes.AGENDA); 
 		Long idUsuario = null;
 		Long idAgenda = null;
-		List<Canje> libres = null;
-		List<Canje> pendientes = null;
-		List<Canje> canjeadosOferta = null;
-		List<Canje> canjeadosDemanda = null;
+//		List<Canje> libres = null;
+//		List<Canje> pendientes = null;
+//		List<Canje> canjeadosOferta = null;
+//		List<Canje> canjeadosDemanda = null;
+		List<Canje> todos = null;
 		try {
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			if(null !=usuario){
@@ -50,15 +51,19 @@ public class AgendaController extends BaseController {
 			// Si hay agenda asociada al usuario registrado 
 			if(null !=agenda){
 				idAgenda = agenda.getId();
-				libres = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_LIBRE);
-				pendientes = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_PENDIENTE);
-				canjeadosOferta = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_CANJEADO);
+				todos = canjeBL.listadoCanjesPorAgenda(idAgenda, null);
+				
+				
+//				libres = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_LIBRE);
+//				pendientes = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_PENDIENTE);
+//				canjeadosOferta = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_CANJEADO);
 			}
-			canjeadosDemanda = canjeBL.listadoCanjesUsuarioDemanda(idUsuario);
-			model.addObject("listadoLibres", libres);
-			model.addObject("listadoPendientes", pendientes);
-			model.addObject("listadoCanjeadosOferta", canjeadosOferta);
-			model.addObject("listadoCanjeadosDemanda", canjeadosDemanda);
+//			canjeadosDemanda = canjeBL.listadoCanjesUsuarioDemanda(idUsuario);
+//			model.addObject("listadoLibres", libres);
+//			model.addObject("listadoPendientes", pendientes);
+//			model.addObject("listadoCanjeadosOferta", canjeadosOferta);
+//			model.addObject("listadoCanjeadosDemanda", canjeadosDemanda);
+			model.addObject("todos", todos);
 		} catch (Throwable e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,6 +128,41 @@ public class AgendaController extends BaseController {
 			e.printStackTrace();
 		}
 		
+		return model;
+	}
+	
+	public ModelAndView detalleAgendaCanjeo(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Entramos en el detalle de la agenda del usuario");	
+		ModelAndView model = new ModelAndView(Constantes.AGENDA_DETALLE_TRUEQUE); 
+		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+		try {
+			String fecha = request.getParameter("fecha");
+			List<Canje> canje = canjeBL.listadoCanjesFecha(sdf.parse(fecha));
+			getListadoCanje(canje);
+			model.addObject("canjes", canje);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+		return model;
+	}
+	
+	
+	
+	public ModelAndView verAgenda(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		
+		log.debug("Entramos en el detalle de la agenda del usuario");	
+		ModelAndView model = new ModelAndView(Constantes.AGENDA_DETALLE_TRUEQUE); 
+//		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+//		try {
+//			String fecha = request.getParameter("fecha");
+//			List<Canje> canje = canjeBL.listadoCanjesFecha(sdf.parse(fecha));
+//			getListadoCanje(canje);
+//			model.addObject("canjes", canje);
+//		} catch (Throwable e) {
+//			e.printStackTrace();
+//		}
+//		
 		return model;
 	}
 	
