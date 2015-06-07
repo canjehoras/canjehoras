@@ -14,12 +14,25 @@
 				<form action="/canjehoras/foro/nuevoComentario.html" method="post" accept-charset="UTF-8">
 			
 					<c:forEach var="p" items="${publicaciones}">
-				
-						${p.comentario}
-						
+						<div style="margin: 5px;">
+							<div style="background: #3399cc; padding:10px; color: #fff">
+								COMENTARIO - Fecha: <fmt:formatDate value="${p.fecha}" pattern="dd/MM/yyyy"/>  -  Hora: ${p.hora}
+							</div>
+							<div>
+								<textarea readonly="readonly" style="background: #ddd">${p.comentario}</textarea>
+							</div>
+						</div>
 					</c:forEach>
 					
-					<textarea rows="5" style="width: 100%" id="comentario" name="comentario"></textarea>
+					
+						<div style="margin: 5px;">
+							<div style="background: #3399cc; padding:10px; color: #fff">
+								ESCRIBE UN NUEVO COMENTARIO
+							</div>
+							<div>
+								<textarea rows="5" style="width: 100%" id="comentario" name="comentario"></textarea>
+							</div>
+						</div>
 					
 					<input type="submit" value="Añadir Comentario" />
 					
