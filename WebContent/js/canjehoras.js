@@ -24,8 +24,6 @@ agenda = function(){
 
 canjeAgenda = function(id){
 	window.location.href= "/canjehoras/agenda/agendaTrueque.html?id=" + id
-	/*$("#foro").load("/canjehoras/agenda/agenda.html");*/
-	
 }
 
 publicar = function(){
@@ -72,7 +70,6 @@ contacto = function(id_usuario){
 	window.location.href= "/canjehoras/login/contacto.html?id_usuario=" + id_usuario
 }
 
-
 graficasUsuario = function(){
 	window.location.href= "/canjehoras/graficas/graficas.html"
 }
@@ -93,7 +90,6 @@ cerrar = function(){
 	window.location.href= "/canjehoras/login/logout.html"
 }
 
-
 habilitarDemanda = function(radio){
 	if (radio=='C'){
 		$("#divDescripcionDemanda").hide();
@@ -109,8 +105,8 @@ eventoMiAgenda = function(fecha){
 	);
 };
 
-eventoRealizar = function(fecha){
-	$("#agendaCanjeR").load("/canjehoras/agenda/detalleAgendaCanjeo.html?fecha="+fecha,  function(){
+eventoRealizar = function(id){
+	$("#agendaCanjeR").load("/canjehoras/agenda/detalleAgendaCanjeo.html?id="+id,  function(){
 		showAgendaCanje();
 	}
 	);
@@ -133,7 +129,7 @@ canjeForo = function(id){
 }
 
 canjeAgendaTrueque= function(id){
-	$("#foro").load("/canjehoras/agenda/verAgenda.html?id="+id);
+	$("#foro").load("/canjehoras/agenda/agendaTrueque.html?id="+id);
 }
 
 canjeEmail = function(id_usuario){
@@ -148,10 +144,6 @@ resolucionCanje = function(id, resolucion){
 	window.location.href= "/canjehoras/agenda/resolucionCanje.html?id="+id+"&resolucion="+resolucion
 }
 
-
 verTrueques = function(id){
-	var sel = $('#'+id).val();
-	
-	
-		
+	var sel = $('#'+id).val();	
 }

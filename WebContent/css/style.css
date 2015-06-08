@@ -1699,6 +1699,11 @@ div.mc-image {
 		margin: 3px;
 	}
 	
+	#botonesDetalleDenunciados input[type="button"]{
+		width: 50%;
+		margin: 3px;
+	}
+	
 	.logo {
 	    float: left;
 	    margin-top: 8px;
@@ -1757,6 +1762,11 @@ div.mc-image {
 		margin: 4px;
 	}
 	#botonesDetalle input[type="button"]{
+		width: 100%;
+		margin: 3px;
+	}
+	
+	#botonesDetalleDenunciados input[type="button"]{
 		width: 100%;
 		margin: 3px;
 	}

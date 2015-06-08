@@ -58,8 +58,17 @@
 							--%>
 						</div>
 			        </div>
-		          	<div  id="foro" style="width: 100%; height: 600px"></div>
-		          
+		          	<div  id="foro" style="width: 100%; height: 600px">
+		          		<%if(request.getSession().getAttribute(Constantes.MENSAJE_DENUNCIADO) != null){ %>
+							<div class="row">
+				  		      	<div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated">
+									<h1 style="padding:20px 0; font-size:140%; font-weight:300; text-align:center; color:#fff;"></h1>
+									<span style="color:white; font-size:140%;"><%=request.getSession().getAttribute(Constantes.MENSAJE_DENUNCIADO) %></span>
+		          					<img title="<fmt:message key="boton.volver"/>" class="imagenOpcionesCanjeo" src="/canjehoras/img/volver.png" onclick="javascript:history.back();" />
+				        		</div>
+				       		</div>
+						<%} %>
+		          	</div>
 		        </div>
 		      </div>
 		    </div>

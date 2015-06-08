@@ -361,7 +361,7 @@ public class TruequeController extends BaseController{
 	
 	public ModelAndView denunciado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Denunciar trueque");	
-		ModelAndView model = new ModelAndView(Constantes.DETALLE_TRUEQUE); 
+		ModelAndView model = new ModelAndView(Constantes.OPCIONES_CANJEO_TRUEQUE); 
 		Long idUsuario = null;
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
@@ -384,7 +384,9 @@ public class TruequeController extends BaseController{
 				}
 				getImagen(trueque);			
 			}
+			request.getSession().setAttribute(Constantes.MENSAJE_DENUNCIADO, Constantes.ERROR_DENUNCIADO);
 			model.addObject( Constantes.TRUEQUE, trueque);
+			model.addObject( Constantes.ID, id);
 			
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -485,7 +487,7 @@ public class TruequeController extends BaseController{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
 			model.addObject( Constantes.TRUEQUE, trueque);
-			
+			request.getSession().setAttribute(Constantes.MENSAJE_DENUNCIADO, null);
 			/**Foro foro = foroBL.findForoPorTrueque(trueque.getId());
 			
 			List<Publicacion> listaPublicacion = publicacionBL.findPublicacionPorForo(foro.getId());

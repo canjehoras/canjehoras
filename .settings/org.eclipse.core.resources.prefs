@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
-encoding//WebContent/css/login/font-awesome.min.css=ISO-8859-1
 encoding//WebContent/jsp/comunes/include-pie.jsp=UTF-8
 encoding//WebContent/jsp/inicio.jsp=UTF-8
-encoding//WebContent/jsp/login.jsp=UTF-8
+encoding//WebContent/jsp/registro.jsp=UTF-8
+encoding//src/com/vcortes/canjehoras/controller/ForoController.java=UTF-8
+encoding//src/com/vcortes/canjehoras/controller/GraficasController.java=UTF-8
+encoding//src/com/vcortes/canjehoras/controller/TruequeController.java=UTF-8
 encoding/<project>=UTF-8

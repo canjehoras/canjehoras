@@ -30,11 +30,17 @@ import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
 import com.vcortes.canjehoras.utils.JSONObject;
 
-
+/**
+ * Lógica de negocio de la clase Login
+ * 
+ * @author Vanesa Cortés
+ *
+ */
 public class LoginController extends BaseController{
 	
 	public static final Log log = LogFactory.getLog(LoginController.class);
 	
+	/** Declaración de los BL necesarios */
 	private UsuarioBL usuarioBL;
 	private BuscadorBL buscadorBL;
 	private ProvinciaBL provinciaBL;
@@ -42,6 +48,7 @@ public class LoginController extends BaseController{
 	private PrefProvinciaBL prefProvinciaBL;
 	private PrefCategoriaBL prefCategoriaBL;
 	
+	/** Getter y setter de los BL necesarios */
 	public UsuarioBL getUsuarioBL() {
 		return usuarioBL;
 	}
@@ -68,67 +75,96 @@ public class LoginController extends BaseController{
 	}
 	
 	/**
-	 * Método que comprueba si el login y la password son correctos
-	 * @param arg0
-	 * @param arg1
-	 * @param form
-	 * @return
+	 * Método que comprueba si el login y el password son correctos
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView
 	 */
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response){
+		
+		// Se retorna al listado de trueques
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE);  
+		
 		try {
-			String descripcion = "";
-			String email = request.getParameter("correo_electronico");
-			String pass = request.getParameter("pass");
+			// Parametros que se recuperan de la pantalla login
+			String email = request.getParameter(Constantes.CORREO_ELECTRONICO);
+			String pass = request.getParameter(Constantes.PASS);
+			
+			// Recupera datos del usuario registrado
 			Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(email);
-			if(usuario != null && comprobarPass(usuario, pass)){
-				//ponemos usuario en sesión
-				request.getSession().setAttribute(Constantes.USUARIO, usuario);
-				request.getSession().setAttribute(Constantes.PERFIL, usuario.getPerfil());
+			
+			// Comprobar que el usuario existe en bbdd
+			if(usuario != null){
 				
-				// Recuperar las preferencias
-				ArrayList<Long> listadoProvincia = new ArrayList<Long>();
-				List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
-				for(PrefProvincia provincia: listPrefProvincia){
-					listadoProvincia.add(provincia.getProvincia().getId());
+				// Comprobar que el password corresponde con el usuario registrado
+				if(comprobarPass(usuario, pass)){
+					//ponemos usuario en sesión
+					request.getSession().setAttribute(Constantes.USUARIO, usuario);
+					request.getSession().setAttribute(Constantes.PERFIL, usuario.getPerfil());
+					
+					// Recuperar las preferencias
+					ArrayList<Long> listadoProvincia = new ArrayList<Long>();
+					List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+					for(PrefProvincia provincia: listPrefProvincia){
+						listadoProvincia.add(provincia.getProvincia().getId());
+					}
+					request.getSession().setAttribute("listadoProvincia", listadoProvincia);
+					ArrayList<Long> listadoCategoria = new ArrayList<Long>();
+					List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+					for(PrefCategoria categoria: listPrefCategoria){
+						listadoCategoria.add(categoria.getCategoria().getId());
+					}
+					request.getSession().setAttribute("listadoCategoria", listadoCategoria);
+					
+					// Suma el contador de numero de accesos
+					int num_acceso = usuario.getNum_acceso();
+					if(num_acceso > 0){
+						num_acceso = num_acceso + new Integer(1);
+						usuario.setNum_acceso(num_acceso);
+						usuarioBL.saveOrUpdate(usuario);
+					}
+					
+					try{
+						List<Trueque> listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);
+						getListadoTrueques(listado);
+						request.getSession().setAttribute(Constantes.MENSAJE_ERROR, null);
+						model.addObject(Constantes.TRUEQUES, listado);
+					} catch (Throwable e) {
+						e.printStackTrace();
+					}
+				}else{
+					// Cuando el password no corresponde con el usuario registrado
+		            List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
+		            getListadoTrueques(listado);
+		            model.addObject(Constantes.TRUEQUES, listado);
+		            request.getSession().setAttribute(Constantes.MENSAJE_ERROR, Constantes.ERROR_PASS);
+					model = new ModelAndView(Constantes.INICIO); 
 				}
-				request.getSession().setAttribute("listadoProvincia", listadoProvincia);
-				ArrayList<Long> listadoCategoria = new ArrayList<Long>();
-				List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
-				for(PrefCategoria categoria: listPrefCategoria){
-					listadoCategoria.add(categoria.getCategoria().getId());
-				}
-				request.getSession().setAttribute("listadoCategoria", listadoCategoria);
-				
-				// Suma el contador de numero de accesos
-				int num_acceso = usuario.getNum_acceso();
-				if(num_acceso > 0){
-					num_acceso = num_acceso + new Integer(1);
-					usuario.setNum_acceso(num_acceso);
-					usuarioBL.saveOrUpdate(usuario);
-				}
-				
-				try{
-					List<Trueque> listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);
-					getListadoTrueques(listado);
-					model.addObject(Constantes.TRUEQUES, listado);
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
+			}else{
+				// El usuario no tiene datos
+	            List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
+	            getListadoTrueques(listado);
+	            model.addObject(Constantes.TRUEQUES, listado);
+	            request.getSession().setAttribute(Constantes.MENSAJE_ERROR, Constantes.ERROR_USUARIO);
+				model = new ModelAndView(Constantes.INICIO); 
 			}
+			
 		} catch (Exception e) {
-			log.error("Error obteniendo usuario",e);
+			log.error("Error al recuperar usuario",e);
 		} catch (Throwable e) {
-			log.error("Error obteniendo usuario",e);
+			log.error("Error al recuperar usuario",e);
 		}
 		return model;
 	}
 	
+	
 	/**
 	 * Método que hace las comprobaciones necesarias para verificar que el password introducido es el del usuario
+	 * 
 	 * @param usuario
 	 * @param pass
-	 * @return
+	 * @return boolean
 	 */
 	private boolean comprobarPass(Usuario usuario, String pass){
 		if(usuario.getPass().equals(pass)){

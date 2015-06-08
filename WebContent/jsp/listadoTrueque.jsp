@@ -10,8 +10,17 @@
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
 		<div class="container">
-			<input style="width: 20%" type="button" value="Preferencias" onclick="preferenciaTrueque();"/>
-			<input style="width: 20%" type="button" value="Todos" onclick="todosTrueque();"/>
+		<section id="categoria" class="content">
+			<%-- <input style="width: 20%" type="button" value="Preferencias" onclick="preferenciaTrueque();"/>
+			<input style="width: 20%" type="button" value="Todos" onclick="todosTrueque();"/>--%>
+			<h1>Listado de trueques</h1>
+			<div style="width: 30%">
+				<select id="filtroTrueque" onchange="comboTruequeInicio(id);">
+					<option id="preferencias" <c:if test="${filtroTrueque == 'preferencias'}">selected</c:if> >PREFERENCIAS</option>
+					<option id="todos" <c:if test="${filtroTrueque == 'todos'}">selected</c:if> >TODOS</option>
+				</select>
+			</div>
+			
 			
 			<c:set var="primero" value="true"></c:set>
 			<c:forEach var="trueques" items="${trueques}" varStatus="count" >
@@ -62,6 +71,7 @@
 		</c:forEach>
 	</div>
 	</div>
+		</section>
 	</div>
 	<%@ include file="comunes/include-pie.jsp" %>
 	</body>

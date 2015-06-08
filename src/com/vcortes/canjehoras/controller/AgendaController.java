@@ -133,36 +133,15 @@ public class AgendaController extends BaseController {
 	
 	public ModelAndView detalleAgendaCanjeo(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Entramos en el detalle de la agenda del usuario");	
-		ModelAndView model = new ModelAndView(Constantes.AGENDA_DETALLE_TRUEQUE); 
-		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+		ModelAndView model = new ModelAndView(Constantes.AGENDA_DETALLE_RESERVA); 
 		try {
-			String fecha = request.getParameter("fecha");
-			List<Canje> canje = canjeBL.listadoCanjesFecha(sdf.parse(fecha));
-			getListadoCanje(canje);
-			model.addObject("canjes", canje);
+			String idTrueque = request.getParameter("id");
+			List<Canje> listadoFechasTrueques = canjeBL.findCanjesPorTrueque(new Long(idTrueque));
+			model.addObject("listadoFechasTrueques", listadoFechasTrueques);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		
-		return model;
-	}
-	
-	
-	
-	public ModelAndView verAgenda(HttpServletRequest request, HttpServletResponse response) throws Throwable{
-		
-		log.debug("Entramos en el detalle de la agenda del usuario");	
-		ModelAndView model = new ModelAndView(Constantes.AGENDA_DETALLE_TRUEQUE); 
-//		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
-//		try {
-//			String fecha = request.getParameter("fecha");
-//			List<Canje> canje = canjeBL.listadoCanjesFecha(sdf.parse(fecha));
-//			getListadoCanje(canje);
-//			model.addObject("canjes", canje);
-//		} catch (Throwable e) {
-//			e.printStackTrace();
-//		}
-//		
 		return model;
 	}
 	

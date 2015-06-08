@@ -10,15 +10,16 @@
 	<body>	
 		 <div class="row">
   		      <div class="col-lg-5 col-sm-5 fadeInLeft delay-06s animated">
-				<h1 style="background:#3399cc; padding:20px 0; font-size:140%; font-weight:300; text-align:center; color:#fff;"><fmt:message key="informacion.canje"/></h1>
+				<h1 style="background:#3399cc; padding:20px 0; font-size:140%; font-weight:300; text-align:center; color:#fff;">Foro: Escribe tu comentario</h1>
 				<form action="/canjehoras/foro/nuevoComentario.html" method="post" accept-charset="UTF-8">
 			
 					<c:forEach var="p" items="${publicaciones}">
 						<div style="margin: 5px;">
 							<div style="background: #3399cc; padding:10px; color: #fff">
-								COMENTARIO - Fecha: <fmt:formatDate value="${p.fecha}" pattern="dd/MM/yyyy"/>  -  Hora: ${p.hora}
+								Fecha: <fmt:formatDate value="${p.fecha}" pattern="dd/MM/yyyy"/>  -  Hora: ${p.hora}
 							</div>
 							<div>
+								${p.usuario.nombre} ${p.usuario.apellido1} ${p.usuario.apellido2}
 								<textarea readonly="readonly" style="background: #ddd">${p.comentario}</textarea>
 							</div>
 						</div>

@@ -10,7 +10,13 @@ public class UsuarioBL {
 	
 	private UsuarioDAO usuarioDAO;
 
-	
+	/**
+	 * Recupera los datos del Usuario por el nombre de usuario
+	 * 
+	 * @param login
+	 * @return Usuario
+	 * @throws Exception
+	 */
 	public Usuario findUsuarioByLogin(String login) throws Exception {
 		return usuarioDAO.findUsuarioByLogin(login);
 	}

@@ -15,12 +15,12 @@
 			<c:choose>
 				<c:when test="${primero}">
 				<div class="service_wrapper">
-				<div class="row borderTop">
+				<div class="row ">
 					<div class="col-lg-12 mrgTop">
 					<c:set var="primero" value="false"/>
 				</c:when>
 				<c:otherwise>
-				<div class="col-lg-12 borderLeft mrgTop">
+				<div class="col-lg-12 mrgTop">
 				</c:otherwise>
 			</c:choose>
 				<div class="service_block">
@@ -35,10 +35,12 @@
 					</c:if>
 					<p class="animated fadeInDown wow"><fmt:message key="listado.publicado"/>${trueques.usuario.correo_electronico}</p>
 					<p class="animated fadeInDown wow"><fmt:message key="listado.denunciado"/>${trueques.denunciante.correo_electronico}</p>
-					
-					<input style="width: 33%" type="button" value="<fmt:message key="boton.eliminar"/>" onclick="eliminarTruequeAdmin(${trueques.id});"/>
-					<input style="width: 33%" type="button" value="<fmt:message key="boton.volver.publicar"/>" onclick="publicarTruequeAdmin(${trueques.id});"/>
-					<input style="width: 33%" type="button" value="<fmt:message key="boton.contactar.usuario"/>" onclick="contacto(${trueques.usuario.id});"/>
+					<p> </p>
+					<div style="width: 30%; margin: 0 auto;">
+						<input type="button" value="<fmt:message key="boton.eliminar"/>" onclick="eliminarTruequeAdmin(${trueques.id});"/>
+						<input type="button" value="<fmt:message key="boton.volver.publicar"/>" onclick="publicarTruequeAdmin(${trueques.id});"/>
+							
+					</div>
 				</div>
 		</div>
 		

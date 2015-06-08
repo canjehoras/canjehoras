@@ -2,13 +2,50 @@ package com.vcortes.canjehoras.utils;
 
 public class Constantes {
 
+	// Idioma
+	public final static String IDIOMA_ES = "ES";
+	public final static String IDIOMA_EN = "EN";
+	public final static String IDIOMA_ESPANOL = "Castellano";
+	public final static String IDIOMA_INGLES = "Ingles";
+	
+	// Tipos de usuario
+	public final static String TIPO_ADMINISTRADOR = "A";
+	public final static String TIPO_USUARIO = "U";
+	
+	// Mensaje de errores
+	public final static String MENSAJE_ERROR = "error";
+	public final static String MENSAJE_DENUNCIADO = "denunciado";
+	public final static String ERROR_PASS = "El password no es correcto";
+	public final static String ERROR_USUARIO = "El usuario no esta registrado en la aplicación";
+	public final static String ERROR_DENUNCIADO = "El trueque ha sido denunciado";
+	
+	// Estados de los trueques
+	public static final String TRUEQUE_ESTADO_NUEVO  = "N";
+	public static final String TRUEQUE_ESTADO_REVISADO  = "R";
+	public static final String TRUEQUE_ESTADO_DENUNCIADO = "D";
+	public static final String TRUEQUE_ESTADO_BORRADO = "B";
+	public static final String TRUEQUE_ESTADO_PENDIENTE = "P";
+	public static final String TRUEQUE_ESTADO_CANJEADO = "C";
+	
+	// Nombre de los .jsp
+	public static final String INICIO  = "inicio";
+	public static final String LISTA_TRUEQUE  = "listadoTrueque";
+	
+	// Nombre de atributos
+	public final static String CORREO_ELECTRONICO = "correo_electronico";
+	public final static String PASS = "pass";
+	public final static String TRUEQUES = "trueques";
+	
+	
+	
+	///////////////////////////
+	
 	public final static String FORMATO_FECHA = "dd/MM/yyyy";
 	public final static String FORMATO_FECHA2 = "dd-MM-yyyy";
 	public final static String ENCODING = "UTF-8";
 	public final static String MAX_DESCRIPCION = "25";
 
-	public final static String TIPO_ADMINISTRADOR = "A";
-	public final static String TIPO_USUARIO = "U";
+
 	public final static String TIPO_OFERTA = "O";
 	public final static String TIPO_OFERTA_DESC = "Oferta";
 	public final static String TIPO_DEMANDA = "D";
@@ -28,7 +65,7 @@ public class Constantes {
 	public final static String DESCRIPCION_DEMANDA = "descripcionDemanda";
 	public final static String TITULO = "titulo";
 	public final static String IMAGEN = "imagen";
-	public final static String TRUEQUES = "trueques";
+
 	public final static String TRUEQUE = "trueque";
 	public final static String ID = "id";
 	public final static String PERFIL = "perfil";
@@ -39,16 +76,16 @@ public class Constantes {
 	public final static String HORA_FIN = "hora_fin";
 	
 	
-	// Nombre de los .jsp
+	
 	public static final String LOGIN  = "login";
 	public static final String REGISTRO  = "registro";
 	public static final String EDITAR_REGISTRO  = "editarRegistro";
 	public static final String RECORDAR_PASS  = "recordarContrasenya";
 	public static final String RECORDAR_PASS_OK  = "recordarContrasenyaAceptar";
-	public static final String INICIO  = "inicio";
+	
 	public static final String PUBLICAR  = "publicar";
 	public static final String NUEVO_TRUEQUE  = "nuevoTrueque";
-	public static final String LISTA_TRUEQUE  = "listadoTrueque";
+	
 	public static final String EDITAR_TRUEQUE  = "edicionTrueque";
 	public static final String MI_LISTA_TRUEQUE  = "misTrueques";
 	public static final String DETALLE_TRUEQUE  = "detalleTrueque";
@@ -60,19 +97,13 @@ public class Constantes {
 	public static final String BUSCADOR_RESULTADOS ="busquedaResultados";
 	public static final String AGENDA = "agenda";
 	public static final String AGENDA_DETALLE = "agendaDetalle";
+	public static final String AGENDA_DETALLE_RESERVA = "agendaDetalleReserva";
 	public static final String AGENDA_DETALLE_TRUEQUE = "agendaTrueque";
 	public static final String GRAFICAS = "graficas";
 	public static final String FOROS = "foros";
 	public static final String CONTACTO = "contacto";
 	public static final String ENVIAR_EMAIL = "enviarEmail";
-	
-	// Estados de los trueques
-	public static final String TRUEQUE_ESTADO_NUEVO  = "N";
-	public static final String TRUEQUE_ESTADO_REVISADO  = "R";
-	public static final String TRUEQUE_ESTADO_DENUNCIADO = "D";
-	public static final String TRUEQUE_ESTADO_BORRADO = "B";
-	public static final String TRUEQUE_ESTADO_PENDIENTE = "P";
-	public static final String TRUEQUE_ESTADO_CANJEADO = "C";
+
 	
 	// Estado de los canjes
 	public static final String ESTADO_CANJE_LIBRE  = "L";
@@ -82,11 +113,7 @@ public class Constantes {
 	public static final String ESTADO_CANJE_CANJEADO  = "C";
 	public static final String ESTADO_CANJE_CANJEADO_STRING  = "CANJEADO";
 	
-	// Idiomas
-	public final static String IDIOMA_ES = "ES";
-	public final static String IDIOMA_EN = "EN";
-	public final static String IDIOMA_ESPANOL = "Castellano";
-	public final static String IDIOMA_INGLES = "Ingles";
+
 	
 	// Atributos de base de datos
 	public final static String BBDD_USUARIO_CORREO = "correo_electronico";
