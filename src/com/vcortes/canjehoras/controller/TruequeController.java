@@ -359,35 +359,53 @@ public class TruequeController extends BaseController{
 		return model;
 	}
 	
+	/**
+	 * Método para la denuncia de un trueque
+	 * 
+	 * Cambia el estado del trueque por D - Denunciado
+	 * Se envia un email al administrador informativo
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView
+	 */
 	public ModelAndView denunciado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Denunciar trueque");	
 		ModelAndView model = new ModelAndView(Constantes.OPCIONES_CANJEO_TRUEQUE); 
+		
+		// Recupera información del usuario registrado
 		Long idUsuario = null;
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
 			idUsuario = usuario.getId();
 		}
+		
 		try{
 			String id = (String) request.getParameter(Constantes.ID);
 			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
-			// Modificar el estado
+			
+			// Modificar el estado y asocia el usuario que ha denunciado
 			trueque.setEstado(Constantes.TRUEQUE_ESTADO_DENUNCIADO);
 			trueque.setDenunciante(usuario);
 			trueque = (Trueque) truequeBL.saveOrUpdate(trueque);
-			
-			if(null != trueque){				
-				if(trueque.getModalidad().equals(Constantes.TIPO_COMPARTIR_HORAS)){
-					trueque.setModalidad(Constantes.TIPO_COMPARTIR_HORAS_DESC);
-				}
-				if(trueque.getModalidad().equals(Constantes.TIPO_INTERCAMBIAR_HORAS)){
-					trueque.setModalidad(Constantes.TIPO_INTERCAMBIAR_HORAS_DESC);
-				}
-				getImagen(trueque);			
-			}
+
+			// Envia un email al administrador
+			Mail mail = new Mail();
+			String cuerpo = Constantes.EMAIL_CABECERA_ADMINISTRADOR + 
+					Constantes.EMAIL_CABECERA_DENUNCIADO + trueque.getTitulo() + Constantes.COMILLAS + 
+					Constantes.EMAIL_CIERRE_H2  + Constantes.BR + Constantes.BR +
+					Constantes.EMAIL_APERTURA_H3 + trueque.getCategoria().getDescripcion() + Constantes.EMAIL_CIERRE_H3 + 
+					Constantes.EMAIL_APERTURA_H3 + trueque.getProvincia().getDescripcion() + Constantes.EMAIL_CIERRE_H3 + 
+					Constantes.EMAIL_APERTURA_H4 + Constantes.EMAIL_PUBLICADO_POR + trueque.getUsuario().getCorreo_electronico() + 
+					Constantes.EMAIL_CIERRE_H4 + Constantes.EMAIL_APERTURA_H4 + Constantes.EMAIL_DENUNCIADO_POR + usuario.getNombre() + 
+					Constantes.ESPACIO_BLANCO + usuario.getApellido1() + Constantes.ESPACIO_BLANCO +
+					usuario.getApellido2() + Constantes.ESPACIO_BLANCO + usuario.getCorreo_electronico() + Constantes.EMAIL_CIERRE_H4;
+			mail.enviarMail(Constantes.EMAIL_ADMINISTRADOR, null, null, Constantes.EMAIL_ASUNTO_DENUNCIAR, cuerpo, null, null);
+			log.debug("Envio email a " + Constantes.EMAIL_ADMINISTRADOR);
+		
 			request.getSession().setAttribute(Constantes.MENSAJE_DENUNCIADO, Constantes.ERROR_DENUNCIADO);
 			model.addObject( Constantes.TRUEQUE, trueque);
 			model.addObject( Constantes.ID, id);
-			
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

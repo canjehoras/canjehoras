@@ -2,6 +2,11 @@ package com.vcortes.canjehoras.utils;
 
 public class Constantes {
 
+	// General
+	public final static String ESPACIO_BLANCO = " ";
+	public final static String COMILLAS = "'";
+	public final static String BR = "</br>";
+	
 	// Idioma
 	public final static String IDIOMA_ES = "ES";
 	public final static String IDIOMA_EN = "EN";
@@ -12,12 +17,28 @@ public class Constantes {
 	public final static String TIPO_ADMINISTRADOR = "A";
 	public final static String TIPO_USUARIO = "U";
 	
+	// Email
+	public final static String EMAIL_ASUNTO_NUEVO = "Nuevo trueque publicado";
+	public final static String EMAIL_ASUNTO_RESOLUCION = "Resolución del canjeo";
+	public final static String EMAIL_ASUNTO_DENUNCIAR = "Denuncia trueque";
+	public final static String EMAIL_ADMINISTRADOR = "canjehoras@gmail.com";
+	public final static String EMAIL_CABECERA_ADMINISTRADOR = "<h2>Hola, Administrador</h2>";
+	public final static String EMAIL_CABECERA_DENUNCIADO = "<h2>Se ha denunciado el trueque '";
+	public final static String EMAIL_APERTURA_H2 = "<h2>";
+	public final static String EMAIL_APERTURA_H3 = "<h3>";
+	public final static String EMAIL_APERTURA_H4 = "<h4>";
+	public final static String EMAIL_CIERRE_H2 = "</h2>";
+	public final static String EMAIL_CIERRE_H3 = "</h3>";
+	public final static String EMAIL_CIERRE_H4 = "</h4>";
+	public final static String EMAIL_PUBLICADO_POR = "Publicado por:"; 
+	public final static String EMAIL_DENUNCIADO_POR = "Denunciado por:";
+
 	// Mensaje de errores
 	public final static String MENSAJE_ERROR = "error";
 	public final static String MENSAJE_DENUNCIADO = "denunciado";
 	public final static String ERROR_PASS = "El password no es correcto";
 	public final static String ERROR_USUARIO = "El usuario no esta registrado en la aplicación";
-	public final static String ERROR_DENUNCIADO = "El trueque ha sido denunciado";
+	public final static String ERROR_DENUNCIADO = "El trueque ha sido denunciado. Se ha enviado un email al Administrador. Gracias.";
 	
 	// Estados de los trueques
 	public static final String TRUEQUE_ESTADO_NUEVO  = "N";
@@ -130,8 +151,7 @@ public class Constantes {
 	public final static String BBDD_IDIOMA = "idioma";
 	
 	// Email
-	public final static String EMAIL_ASUNTO_NUEVO = "Nuevo trueque publicado";
-	public final static String EMAIL_ASUNTO_RESOLUCION = "Resolución del canjeo";
+
 	public final static String RESOLUCION_OK = "OK";
 	public final static String RESOLUCION_OK_LABEL = "ACEPTADO";
 	public final static String RESOLUCION_NOK = "NOK";

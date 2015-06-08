@@ -1,15 +1,8 @@
 package com.vcortes.canjehoras.utils;
 
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.net.URL;
 import java.util.Properties;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.imageio.ImageIO;
 import javax.mail.Address;
 import javax.mail.Authenticator;
 import javax.mail.BodyPart;
@@ -23,30 +16,31 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
-import javax.servlet.http.HttpServletRequest;
 
-import org.apache.axis.attachments.OctetStream;
-import org.apache.axis.attachments.OctetStreamDataSource;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-
+/**
+ * Clase que gestiona el envio de emails
+ * 
+ * @author Vanesa Cortés
+ *
+ */
 public class Mail {
 
 	private static Logger log = Logger.getLogger(Mail.class);
 
 	/**
-	 * Metodo que envia un email directamente
+	 * Método que envia un email
 	 * 
-	 * @param mail Direccion destino del e-mail
-	 * @param cc Resto de direcciones de destino
-	 * @param asunto Asunto del e-mail
-	 * @param texto Cuerpo del mensaje
-	 * @param nombreFichero Nombre del fichero a adjuntar
-	 * @param adjunto Fichero a adjuntar
-	 * @return true si el mensaje ha sido enviado, false en caso contrario
+	 * @param mailTo email receptor
+	 * @param from email emisor
+	 * @param cc email copia
+	 * @param asunto
+	 * @param texto
+	 * @param nombreFichero
+	 * @param adjunto
+	 * @return true si se ha enviado, false si no se ha enviado
 	 */
 	public Boolean enviarMail(String mailTo, String from, String[] cc, String asunto, String texto, String nombreFichero, byte[] adjunto) {
 		log.debug("[MAIL] ENVIANDO MAIL....");
@@ -99,29 +93,10 @@ public class Mail {
 			//Definimos el cuerpo del mensaje
 			BodyPart bodyPart = new MimeBodyPart();
 			MimeMultipart multiPart = new MimeMultipart();
-			
-			if(texto.toUpperCase().contains("@@FIRMA")){
-				multiPart.addBodyPart(createInlineImagePart());
-				texto = reemplazar(texto);
-			}
-			
-			bodyPart.setDataHandler(new DataHandler(new FileDataSource("../img/sinfoto.jpg")));
 			bodyPart.setContent(texto, mailContentType);
 			
 			multiPart.addBodyPart(bodyPart);
-		
-			
-			//INCLUIMOS EL contenido
-			//Por si en algun momento queremos enviar adjuntos (habria que revisarlo)
-			if (adjunto != null && adjunto.length > 0 && !StringUtils.isEmpty(nombreFichero)) {
-				// Create the message part
-				BodyPart messageBody2 = new MimeBodyPart();
-				DataSource source = new OctetStreamDataSource("adjunto", new OctetStream(adjunto));
-				messageBody2.setDataHandler(new DataHandler(source));
-				messageBody2.setFileName(nombreFichero);
-				multiPart.addBodyPart(messageBody2);
-			} 
-			
+
 			//Anadimos al mensaje el cuerpo y el asunto
 	        message.setContent(multiPart, mailContentType);
 	        if(asunto!=null){
@@ -163,67 +138,12 @@ public class Mail {
 		}
 		return error;
 	}
-	
-	/**
-	 * Método que comprueba el número de veces que aparece la firma, ya que en los mails agrupados aparece más de una vez.
-	 * Si aparece más de una vez se quita y se pone al final.
-	 * @param texto
-	 * @return
-	 */
-	private String reemplazar(String texto){
-		int count = StringUtils.countMatches(texto, "@@FIRMA");
-		if(count>1){
-			texto = texto.replace("@@FIRMA", "");
-			texto = texto + ("<BR>"+ "<img src=\"cid:firma\"/>");
-		} else {
-			texto = texto.replace("@@FIRMA", "<img src=\"cid:firma\"/>");
-		}
-		return texto;
-	}
-	
-	
-	/**
-	 * Método que recupera una imagen y la inserta en el email como una parte más del body
-	 * 
-	 * @return
-	 */
-	private BodyPart createInlineImagePart()  {
 
-        MimeBodyPart imagePart =null;
-        try{
-        	ServletRequestAttributes sra = (ServletRequestAttributes)RequestContextHolder.getRequestAttributes();
-		    HttpServletRequest request = sra.getRequest();    
-		    
-		    
-        	imagePart = new MimeBodyPart();
-        	String urlString =  request.getRequestURL().toString().substring(0, request.getRequestURL().toString().lastIndexOf("/")) 
-        			+ "/" + M.sg("nombre.carpeta.archivos.raiz") + "/";
-        	URL url = new URL (urlString + M.sg("nombre.imagen.firma"));
-			BufferedImage img = ImageIO.read(url);
-		    ByteArrayOutputStream os = new ByteArrayOutputStream();
-		    ImageIO.write(img, "jpg", os);
-            os.flush();
-        	
-			DataSource source = new OctetStreamDataSource("firma",new OctetStream(os.toByteArray()));
-			imagePart.setDataHandler(new DataHandler(source));
-			imagePart.setFileName("firma.jpg");
-			imagePart.setContentID("<firma>");
-			
-        }
-        catch(Exception exp)
-        {
-            log.error("17 - Logo Attach Error : "+exp);
-        }
-
-        return imagePart;
-	}
-
-	
-	
 
 	/**
 	 * Clase MailAuthenticator
-	 * @author emarin
+	 * 
+	 * @author Vanesa Cortés
 	 *
 	 */
 	class MailAuthenticator extends Authenticator {
@@ -240,5 +160,4 @@ public class Mail {
 	      return new PasswordAuthentication(user, pw);
 	   }
 	}
-
 }
