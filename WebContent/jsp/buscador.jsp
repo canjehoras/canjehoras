@@ -95,7 +95,13 @@
     	  var provincias = $("#provincia").val();
     	  var categoria = $("#categorias").val();
     	  
-    	  $("#categoria2").load("/canjehoras/buscador/buscar.html?descripcion="+escape(descripcion)+"&provincias="+provincias+"&categoria="+categoria);
+    	  $("#categoria2").load("/canjehoras/buscador/buscar.html?descripcion="+escape(descripcion)+"&provincias="+provincias+"&categoria="+categoria, function(){
+    		  
+    		  $('html, body').animate({
+	  		        scrollTop: $("#categoria2").offset().top - 170
+	  		  }, 1000);
+    		  
+    	  });
     	  
       };
       
