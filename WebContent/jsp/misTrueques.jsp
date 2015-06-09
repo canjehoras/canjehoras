@@ -25,11 +25,11 @@
 			<a href="#" onclick="todosTrueque();">Todos</a> --%>
 			
 			<div style="width: 30%">
-				<select id="filtroTrueque" onchange="verTrueques();">
-					<option id="todos" <c:if test="${filtroTrueque == 'todos'}">selected</c:if> >Todos</option>
-					<option id="denunciados" <c:if test="${filtroTrueque == 'denunciados'}">selected</c:if> >Denunciados</option>
-					<option id="borrados" <c:if test="${filtroTrueque == 'borrados'}">selected</c:if> >Borrados</option>
-					<option id="nuevos" <c:if test="${filtroTrueque == 'nuevos'}">selected</c:if> >Nuevos</option>
+				<select id="filtroTrueque" onchange="verTrueques('filtroTrueque');">
+					<option value="" <c:if test="${filtroTrueque == 'todos'}">selected</c:if> >Todos</option>
+					<option value="<%=Constantes.TRUEQUE_ESTADO_DENUNCIADO %>" <c:if test="${filtroTrueque == 'D'}">selected</c:if> >Denunciados</option>
+					<option value="<%=Constantes.TRUEQUE_ESTADO_BORRADO %>" <c:if test="${filtroTrueque == 'B'}">selected</c:if> >Borrados</option>
+					<option value="<%=Constantes.TRUEQUE_ESTADO_NUEVO %>" <c:if test="${filtroTrueque == 'N'}">selected</c:if> >Nuevos</option>
 				</select>
 			</div>
 			<c:set var="primero" value="true"></c:set>

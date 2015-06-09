@@ -101,6 +101,8 @@
 	  		        scrollTop: $("#categoria2").offset().top - 170
 	  		  }, 1000);
     		  
+    		 // $('html, body').animate({scrollTop:800}, 1000); return false;
+    		  
     	  });
     	  
       };

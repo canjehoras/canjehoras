@@ -95,13 +95,14 @@ public class LoginController extends BaseController{
 			String pass = request.getParameter(Constantes.PASS);
 			
 			// Si el usuario a marcado la opción de recordatorio de contraseña
-//			if((request.getSession().getAttribute(Constantes.CORREO_ELECTRONICO)).equals(Constantes.RECORDATORIO)){
-//	            List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
-//	            getListadoTrueques(listado);
-//	            model.addObject(Constantes.TRUEQUES, listado);
-//	            request.getSession().setAttribute(Constantes.MENSAJE_ERROR, Constantes.EMAIL_RECORDATORIO);
-//				model = new ModelAndView(Constantes.INICIO); 
-//			}
+			if((request.getSession().getAttribute(Constantes.CORREO_ELECTRONICO)).equals(Constantes.RECORDATORIO)){
+	            List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
+	            getListadoTrueques(listado);
+	            model.addObject(Constantes.TRUEQUES, listado);
+	            request.getSession().setAttribute(Constantes.MENSAJE_ERROR, Constantes.EMAIL_RECORDATORIO);
+				model = new ModelAndView(Constantes.INICIO); 
+				return model;
+			}
 			
 			// Recupera datos del usuario registrado
 			Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(email);
@@ -408,7 +409,7 @@ public class LoginController extends BaseController{
 	public ModelAndView recordar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio recordar");
 		request.getSession().setAttribute(Constantes.CORREO_ELECTRONICO, Constantes.RECORDATORIO);
-		String email = (String) request.getParameter(Constantes.CORREO_ELECTRONICO);
+		String email = (String) request.getParameter(Constantes.BBDD_EMAIL);
 		String pass = "pepepeppe";
 		
 		// Envio un email al interesado

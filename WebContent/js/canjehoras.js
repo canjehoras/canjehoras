@@ -10,8 +10,8 @@ registro = function(){
 	window.location.href= "/canjehoras/login/registro.html"
 }
 
-recordarContrasenya = function(){
-	window.location.href= "/canjehoras/login/recordar.html"
+recordarContrasenya = function(email){
+	window.location.href= "/canjehoras/login/recordar.html?email="+$("#correo_electronico").val();
 }
 
 buscador = function(){
@@ -74,7 +74,7 @@ graficasUsuario = function(){
 	window.location.href= "/canjehoras/graficas/graficas.html"
 }
 
-borrarTrueque = function(){
+borrarTrueque = function(id){
 	window.location.href= "/canjehoras/trueque/borrar.html?id=" + id
 }
 
@@ -146,4 +146,8 @@ resolucionCanje = function(id, resolucion){
 
 verTrueques = function(id){
 	var sel = $('#'+id).val();	
+	
+	window.location.href= "/canjehoras/trueque/mistrueques.html?estado="+sel;
+	
+	
 }
