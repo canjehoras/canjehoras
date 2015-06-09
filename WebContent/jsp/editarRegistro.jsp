@@ -7,23 +7,9 @@
 		<title><fmt:message key="titulo"/></title>
 	</head>
 	<body>
+	
 		<%@ include file="comunes/include-cabecera.jsp" %>
-		
-		<script type="text/javascript">
-			$(document).ready(function() {
-	    	  	seleccionado('toggle-datos');
-	    	  	
-    	    	$("#fecha_nacimiento").datepicker({ 
-    	    		dateFormat: 'dd/mm/yy',
-    	    		firstDay: 1,
-    	    		 changeMonth: true, 
-    	    		 changeYear: true, 
-    	    		 yearRange: "-99:+0",
-    				 maxDate: "+0m +0d"
-    	    	});
-	      	});
-		</script>
-		
+
 		<section id="login" class="top_cont_outer">
 			<h1><fmt:message key="titulo.registro.editar"/></h1>
 		 	<form action="/canjehoras/login/envioRegistro.html" method="post" accept-charset="UTF-8">
@@ -31,7 +17,7 @@
 				
 				<h1><fmt:message key="registro.datos.acceso"/></h1>
 			    <div class="tituloSelect"><fmt:message key="registro.usuario"/></div>
-			    <input type="email" name="correo_electronico" id="correo_electronico" value="${usuario.correo_electronico}" placeholder="<fmt:message key="registro.usuario"/>" disabled="disabled"/>
+			    <input type="email" name="correo_electronico" id="correo_electronico" value="${usuario.correo_electronico}" placeholder="<fmt:message key="registro.usuario"/>"/>
 				<div class="tituloSelect"><fmt:message key="registro.pass"/></div>
 			    <input type="password" name="pass" id="pass" placeholder="<fmt:message key="registro.pass"/>" value="${usuario.pass}"  required/>
 
@@ -43,8 +29,8 @@
 			    <div class="tituloSelect"><fmt:message key="registro.apellido2"/></div>
 			    <input type="text" name="apellido2" id="apellido2" placeholder="<fmt:message key="registro.apellido2"/>" value="${usuario.apellido2}" />
 			    <div class="tituloSelect"><fmt:message key="seleccione.fecha.nacimiento"/></div>
-			    <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="<fmt:message key="seleccione.fecha.nacimiento" />"/>
-			    <div class="tituloSelect"><fmt:message key="registro.prov"/></div>
+			    <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="${usuario.fecha_nacimiento}" placeholder="<fmt:message key="seleccione.fecha.nacimiento" />"/>
+			    <div class="tituloSelect"><fmt:message key="registro.seleccione.provincia"/></div>
 			    <select name="provincias" id="provincias" required="required">
 					<option value="-1"><fmt:message key="registro.seleccione.provincia" /></option>
 		            <c:forEach var="provincia" items="${provincias}">
@@ -53,11 +39,11 @@
 		        </select> 
 			    <div class="tituloSelect"><fmt:message key="registro.movil"/></div>
 			    <input type="tel" name="movil" id="movil" placeholder="<fmt:message key="registro.movil"/>" pattern="[0-9]{9}" value="${usuario.movil}" required/>
-			   	<div class="tituloSelect"><fmt:message key="registro.idioma"/></div>
+			   	<div class="tituloSelect"><fmt:message key="registro.seleccione.idioma"/></div>
 			   	<select name="idioma" id="idioma" required="required">
 					<option value="-1"><fmt:message key="registro.seleccione.idioma" /></option>
 		            <c:forEach var="idioma" items="${listadoIdiomas}">
-		            	<option value="${idioma}">${idioma}</option>
+		            	<option <c:if test="${usuario.idioma == idioma}" > selected="selected" </c:if> value="${idioma}">${idioma}</option>
 		            </c:forEach>
 		        </select> 
 		
@@ -79,6 +65,16 @@
 				<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
 			</form>
 		</section>
+		<script type="text/javascript">
+		    $(document).ready(function() {
+		    	$("#fecha_nacimiento").datepicker({ 
+					dateFormat: 'dd/mm/yy',
+				 	changeMonth: true, 
+				 	changeYear: true, 
+				 	yearRange: "-100:+0"
+		    	});
+		    });
+		</script>
 		<%@ include file="comunes/include-pie.jsp" %>
 	</body>
 </html>

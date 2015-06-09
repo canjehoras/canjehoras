@@ -39,6 +39,10 @@
 				                 <b>Fecha nacimiento: </b>
 				                 <p>${usuario.fecha_nacimiento}</p>
 				             </div> 
+				             <div class="detail">
+				                 <b>Fecha Ultimo acceso </b>
+				                 <p>${usuario.fecha_ultimo_acceso}</p>
+				             </div> 
 						    
 							
 						</form>

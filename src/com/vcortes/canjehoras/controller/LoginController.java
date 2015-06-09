@@ -29,9 +29,10 @@ import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
 import com.vcortes.canjehoras.utils.JSONObject;
+import com.vcortes.canjehoras.utils.Mail;
 
 /**
- * Lógica de negocio de la clase Login
+ * Lógica de negocio de la Clase Login
  * 
  * @author Vanesa Cortés
  *
@@ -75,11 +76,13 @@ public class LoginController extends BaseController{
 	}
 	
 	/**
-	 * Método que comprueba si el login y el password son correctos
+	 * Método inicio de sesión de un usuario registrado
+	 * 
+	 * Comprueba si el login y el password son correctos
 	 * 
 	 * @param request
 	 * @param response
-	 * @return ModelAndView
+	 * @return ModelAndView listado de trueques
 	 */
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response){
 		
@@ -90,6 +93,15 @@ public class LoginController extends BaseController{
 			// Parametros que se recuperan de la pantalla login
 			String email = request.getParameter(Constantes.CORREO_ELECTRONICO);
 			String pass = request.getParameter(Constantes.PASS);
+			
+			// Si el usuario a marcado la opción de recordatorio de contraseña
+//			if((request.getSession().getAttribute(Constantes.CORREO_ELECTRONICO)).equals(Constantes.RECORDATORIO)){
+//	            List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
+//	            getListadoTrueques(listado);
+//	            model.addObject(Constantes.TRUEQUES, listado);
+//	            request.getSession().setAttribute(Constantes.MENSAJE_ERROR, Constantes.EMAIL_RECORDATORIO);
+//				model = new ModelAndView(Constantes.INICIO); 
+//			}
 			
 			// Recupera datos del usuario registrado
 			Usuario usuario = (Usuario) usuarioBL.findUsuarioByLogin(email);
@@ -160,11 +172,11 @@ public class LoginController extends BaseController{
 	
 	
 	/**
-	 * Método que hace las comprobaciones necesarias para verificar que el password introducido es el del usuario
+	 * Método que comprueba si el password introducido por el usuario es correcto
 	 * 
 	 * @param usuario
 	 * @param pass
-	 * @return boolean
+	 * @return true si el pass es correcto, false si el pass no es correcto
 	 */
 	private boolean comprobarPass(Usuario usuario, String pass){
 		if(usuario.getPass().equals(pass)){
@@ -173,117 +185,54 @@ public class LoginController extends BaseController{
 		return false;
 	}
 	
-	
 	/**
+	 * Método que carga el formulario de registro
 	 * 
-	 * @param arg0
-	 * @param arg1
-	 * @param form
-	 * @return
+	 * @param request
+	 * @param response
+	 * @return ModelAndView formulario registro
 	 */
 	public ModelAndView registro(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio registro");
 		ModelAndView model = new ModelAndView(Constantes.REGISTRO);
-		try{
-			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), "descripcion");
-			model.addObject("categorias", categorias);
-			
-			List<Categoria> provincias = buscadorBL.findAll(new Provincia(),  "descripcion");
-			model.addObject("provincias", provincias);
 		
-			List<String> listadoIdiomas = new ArrayList<String>();  
-			listadoIdiomas.add("Castellano"); 
-			listadoIdiomas.add("Ingles"); 
-			model.addObject("listadoIdiomas", listadoIdiomas);
-			
-		} catch(Exception e){
-			logger.error("Error al obtener los listados de la pantalla de login",e);
-		}
-		return model;
-	}
-	
-	/**
-	 * 
-	 * @param arg0
-	 * @param arg1
-	 * @param form
-	 * @return
-	 */
-	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
-		log.debug("Editar registro");
-		ModelAndView model = new ModelAndView(Constantes.EDITAR_REGISTRO);
 		try{
+			// Obtiene listado de categorias
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			model.addObject(Constantes.CATEGORIAS, categorias);
 			
-			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
-			model.addObject("usuario", usuario);
-			
-			ArrayList<Long> listadoProvincia = new ArrayList<Long>();
-			List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
-			for(PrefProvincia provincia: listPrefProvincia){
-				listadoProvincia.add(provincia.getProvincia().getId());
-			}
-			
-			ArrayList<Long> listadoCategoria = new ArrayList<Long>();
-			List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
-			for(PrefCategoria categoria: listPrefCategoria){
-				listadoCategoria.add(categoria.getCategoria().getId());
-			}
-
-			
-			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), "descripcion");
-			for (Iterator iterator = categorias.iterator(); iterator.hasNext();) {
-				Categoria categoria = (Categoria) iterator.next();
-				if(listadoCategoria.contains(categoria.getId())){
-					categoria.setSeleccionado(Boolean.TRUE);
-				}
-			}
-			
-			model.addObject("categorias", categorias);
-			
-			List<Provincia> provincias = buscadorBL.findAll(new Provincia(),  "descripcion");
-			for (Iterator iterator = provincias.iterator(); iterator.hasNext();) {
-				Provincia provincia = (Provincia) iterator.next();
-				if(listadoProvincia.contains(provincia.getId())){
-					provincia.setSeleccionado(Boolean.TRUE);
-				}
-			}
-			model.addObject("provincias", provincias);
+			// Obtiene listado de provincias
+			List<Categoria> provincias = buscadorBL.findAll(new Provincia(), Constantes.DESCRIPCION);
+			model.addObject(Constantes.PROVINCIAS, provincias);
+		
+			// Obtiene listado de idiomas
+			List<String> listadoIdiomas = new ArrayList<String>();  
+			listadoIdiomas.add(Constantes.IDIOMA_ESPANOL); 
+			listadoIdiomas.add(Constantes.IDIOMA_INGLES); 
+			model.addObject(Constantes.IDIOMAS, listadoIdiomas);
 			
 		} catch(Exception e){
 			logger.error("Error al obtener los listados de la pantalla de login",e);
-		} catch (Throwable e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return model;
 	}
 	
-	public ModelAndView recordarContrasenya(HttpServletRequest request, HttpServletResponse response){
-		log.debug("Inicio recordar contrasenya");
-		ModelAndView model = new ModelAndView(Constantes.RECORDAR_PASS);
-		return model;
-	}
-	
-	public ModelAndView recordar(HttpServletRequest request, HttpServletResponse response){
-		log.debug("Inicio recordar");
-		ModelAndView model = new ModelAndView(Constantes.RECORDAR_PASS_OK);
-		return model;
-	}
-	
+
 	/**
+	 * Método para registrar un usuario o modificar datos personales
 	 * 
-	 * @param arg0
-	 * @param arg1
-	 * @param form
-	 * @return
+	 * @param request
+	 * @param response
+	 * @return ModelAndView inicio
 	 */
 	public ModelAndView envioRegistro(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Inicio registro");
 		
 		try {
+			// Codificación UTF-8
+			request.setCharacterEncoding(Constantes.ENCODING);
 			
 			// Recuperación de los atributos
-			request.setCharacterEncoding(Constantes.ENCODING);
 			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 			String correo_electronico = (String) request.getParameter(Constantes.BBDD_USUARIO_CORREO);
 			String pass = (String) request.getParameter(Constantes.BBDD_USUARIO_PASS);
@@ -296,20 +245,14 @@ public class LoginController extends BaseController{
 			String provincias = request.getParameter(Constantes.BBDD_USUARIO_PROVINCIAS);
 			String fechaNacimiento = request.getParameter(Constantes.BBDD_FECHA_NACIMIENTO);
 			String idioma = (String) request.getParameter(Constantes.BBDD_IDIOMA);
-			if(idioma.equals(Constantes.IDIOMA_ESPANOL)){
-				idioma = Constantes.IDIOMA_ES;
-			}
-			if(idioma.equals(Constantes.IDIOMA_INGLES)){
-				idioma = Constantes.IDIOMA_EN;
-			}
 			
+			// Se comprueba si hay un usuario registrado
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			if(usuario == null){
 				usuario = new Usuario();
 				usuario.setFecha_alta(sdf.parse(sdf.format(new Date())));
 				usuario.setNum_acceso(new Integer(1));				
 			}
-			
 			usuario.setCorreo_electronico(correo_electronico);
 			usuario.setPass(pass);
 			usuario.setNombre(nombre);
@@ -318,20 +261,28 @@ public class LoginController extends BaseController{
 			usuario.setMovil(movil);
 			usuario.setFecha_nacimiento(sdf.parse(fechaNacimiento));
 			usuario.setFecha_ultimo_acceso(sdf.parse(sdf.format(new Date())));
+			if(idioma.equals(Constantes.IDIOMA_ESPANOL)){
+				idioma = Constantes.IDIOMA_ES;
+			}
+			if(idioma.equals(Constantes.IDIOMA_INGLES)){
+				idioma = Constantes.IDIOMA_EN;
+			}
 			usuario.setIdioma(idioma);
 			usuario.setPerfil(Constantes.TIPO_USUARIO);
 			
 			Provincia pr = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincias));
 			usuario.setProvincia(pr);
 		
+			// Guarda o modifica los datos del usuario
 			usuario = (Usuario) usuarioBL.saveOrUpdate(usuario);
 			
-			/* Eliminamos las preferencias para incluirle las nuevas */
+			//Eliminamos las preferencias de provincia para incluirle las nuevas
 			Collection<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
 			for (Iterator iterator = listPrefProvincia.iterator(); iterator.hasNext();) {
 				PrefProvincia prefProvincia = (PrefProvincia) iterator.next();
 				prefProvinciaBL.delete(prefProvincia);
 			}
+			// Recupera preferencias de provincia
 			for (int i = 0; i < provincia.length; i++) {
 				Provincia p = (Provincia) provinciaBL.findById(new Provincia(), new Long(provincia[i]));
 				PrefProvincia prefProvincia = new PrefProvincia();
@@ -340,11 +291,13 @@ public class LoginController extends BaseController{
 				prefProvinciaBL.saveOrUpdate(prefProvincia);
 			}
 			
+			//Eliminamos las preferencias de categoria para incluirle las nuevas
 			Collection<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
 			for (Iterator iterator = listPrefCategoria.iterator(); iterator.hasNext();) {
 				PrefCategoria prefCategoria = (PrefCategoria) iterator.next();
 				prefProvinciaBL.delete(prefCategoria);
 			}
+			// Recupera preferencias de categoria
 			for (int i = 0; i < categoria.length; i++) {
 				Categoria c = (Categoria) buscadorBL.findById(new Categoria(), new Long(categoria[i]));
 				PrefCategoria prefCategoria = new PrefCategoria();
@@ -352,21 +305,123 @@ public class LoginController extends BaseController{
 				prefCategoria.setCategoria(c);
 				prefCategoriaBL.saveOrUpdate(prefCategoria);
 			}
-			
 		} catch (Exception e) {
 			logger.error("Error registrando usuario", e);
 		} catch (Throwable e) {
 			logger.error("Error registrando usuario", e);
 			e.printStackTrace();
 		}
-//		try {
-//			response.sendRedirect("../trueque/listado.html");
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		// Inicia la sesión
+		return login(request, response);
+	}	
+	
+	/**
+	 * Método que recupera los datos para mostrar el formulario de datos personales
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView formulario de registro para la edición
+	 */
+	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Editar registro");
+		String fecha = Constantes.ESPACIO_BLANCO;
+		ModelAndView model = new ModelAndView(Constantes.EDITAR_REGISTRO);
+		try{
+			
+			// Recupera el datos del usuario de sesión
+			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+			String idioma = Constantes.IDIOMA_ESPANOL;
+			if(usuario.getIdioma().equals(Constantes.IDIOMA_EN)){
+				idioma = Constantes.IDIOMA_INGLES;
+			}
+			usuario.setIdioma(idioma);
+			model.addObject(Constantes.USUARIO, usuario);
+			
+			// Recupera el listado de Preferencias por Provincias 
+			ArrayList<Long> listadoProvincia = new ArrayList<Long>();
+			List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+			for(PrefProvincia provincia: listPrefProvincia){
+				listadoProvincia.add(provincia.getProvincia().getId());
+			}
+			
+			// Recupera el listado de Preferencias porCategorias 
+			ArrayList<Long> listadoCategoria = new ArrayList<Long>();
+			List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+			for(PrefCategoria categoria: listPrefCategoria){
+				listadoCategoria.add(categoria.getCategoria().getId());
+			}
+
+			// Recupera el listado de todas las Categorias y marca las preferencias
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			for (Iterator iterator = categorias.iterator(); iterator.hasNext();) {
+				Categoria categoria = (Categoria) iterator.next();
+				if(listadoCategoria.contains(categoria.getId())){
+					categoria.setSeleccionado(Boolean.TRUE);
+				}
+			}
+			model.addObject(Constantes.CATEGORIAS, categorias);
+			
+			// Recupera el listado de todas las Provincias y marca las preferencias
+			List<Provincia> provincias = buscadorBL.findAll(new Provincia(), Constantes.DESCRIPCION);
+			for (Iterator iterator = provincias.iterator(); iterator.hasNext();) {
+				Provincia provincia = (Provincia) iterator.next();
+				if(listadoProvincia.contains(provincia.getId())){
+					provincia.setSeleccionado(Boolean.TRUE);
+				}
+			}
+			model.addObject(Constantes.PROVINCIAS, provincias);
+			
+			// Recupera listado de idiomas y marca el correcto
+			List<String> listadoIdiomas = new ArrayList<String>();  
+			listadoIdiomas.add(Constantes.IDIOMA_ESPANOL); 
+			listadoIdiomas.add(Constantes.IDIOMA_INGLES); 
+			model.addObject(Constantes.IDIOMAS, listadoIdiomas);
+			
+		} catch(Exception e){
+			logger.error("Error al obtener los listados de la pantalla de login",e);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	/**
+	 * Método que muestra el formulario para recordar contraseña
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView formulario de recordatorio
+	 */
+	public ModelAndView recordarContrasenya(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Inicio recordar contrasenya");
+		ModelAndView model = new ModelAndView(Constantes.RECORDAR_PASS);
+		return model;
+	}
+	
+	/**
+	 * Método que envia email de recordatorio.
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView informacion
+	 */
+	public ModelAndView recordar(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Inicio recordar");
+		request.getSession().setAttribute(Constantes.CORREO_ELECTRONICO, Constantes.RECORDATORIO);
+		String email = (String) request.getParameter(Constantes.CORREO_ELECTRONICO);
+		String pass = "pepepeppe";
+		
+		// Envio un email al interesado
+		Mail mail = new Mail();
+		String cuerpo = Constantes.EMAIL_CABECERA_USUARIO + Constantes.BR + Constantes.BR +
+				Constantes.EMAIL_APERTURA_H3 + Constantes.EMAIL_RECORDATORIO_PASS + pass  + Constantes.EMAIL_CIERRE_H3;
+		mail.enviarMail(email, Constantes.EMAIL_ADMINISTRADOR, null, Constantes.EMAIL_ASUNTO_RECORDATORIO_PASS, cuerpo, null, null);
+		log.debug("Envio email a " + email);
+		
 		return login(request, response);
 	}
+	
+
 	
 	/**
 	 * Cierre de sesión
@@ -387,7 +442,7 @@ public class LoginController extends BaseController{
 		return model;
 	}
 	
-	public ModelAndView contacto(HttpServletRequest request, HttpServletResponse response){
+/**	public ModelAndView contacto(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Contacto Usuario");
 		ModelAndView model = new ModelAndView(Constantes.CONTACTO); 
 		try {
@@ -406,34 +461,27 @@ public class LoginController extends BaseController{
 	public ModelAndView contactoEmail(HttpServletRequest request, HttpServletResponse response) throws Throwable{
 		ModelAndView model = new ModelAndView(Constantes.ENVIAR_EMAIL); 
 		return model;
-	}
+	}*/
 	
 	
 	/**
+	 * Método que cambia el idioma de la página
 	 * 
 	 * @param request
 	 * @param response
 	 * @throws Throwable 
 	 */
 	public ModelAndView cambiarIdioma(HttpServletRequest request, HttpServletResponse response) throws Throwable{
-		logger.debug(" :: Cambio de idioma ::");
+		logger.debug("Cambio de idioma");
 		JSONObject o = new JSONObject();
-		String idioma = request.getParameter("idioma");
+		String idioma = request.getParameter(Constantes.BBDD_IDIOMA);
 		
+		// Se comprueba el idioma
 		if(idioma!=null && !"".equals(idioma)){
-			request.getSession().setAttribute("idioma", idioma);
+			request.getSession().setAttribute(Constantes.BBDD_IDIOMA, idioma);
 			Locale.setDefault(new Locale(idioma));
-			
-/*			if("es".equals(idioma)){
-			}else if("en".equals(idioma)){
-				Locale.setDefault(new Locale("EN","en"));
-			}
-*/			
-			
-			
 		}
+		// Retorna a la página filtrado por idioma
 		return enviarRespuestaAJAX(response, o.toString());
-		
-		
 	}
 }

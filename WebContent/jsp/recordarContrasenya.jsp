@@ -11,19 +11,17 @@
 	<%@ include file="comunes/include-cabecera.jsp" %>
 	<section id="login" class="top_cont_outer">
 		<h1><fmt:message key="titulo.recordar.pass"/></h1>
-		<form action="/canjehoras/login/login.html" method="post" accept-charset="UTF-8">
 			<div class="subtituloSelect" style="margin-bottom: 5px;"><fmt:message key="subtitulo.recordar.pass"/></div>
 			<div class="control-group">
 				<div class="controls">
 					<div class="input-icon left">
 						<i class="icon-envelope"></i>
-						<input class="m-wrap placeholder-no-fix" type="text" placeholder="<fmt:message key="login.usuario"/>" autocomplete="off" name="email" />
+						<input type="email" name="correo_electronico" id="correo_electronico" placeholder="<fmt:message key="registro.usuario"/>" required/>
 					</div>
 				</div>
 			</div>
 			<input type="submit" value="<fmt:message key="boton.enviar"/>" onclick="recordarContrasenya();"/>
-			<input type="button" value="<fmt:message key="boton.volver"/>" onclick="javascript:history.back();"/>
-		</form>
+			<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
 	</section>
 	<%@ include file="comunes/include-pie.jsp" %>
 	</body>

@@ -3,6 +3,7 @@ package com.vcortes.canjehoras.controller;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -87,6 +88,11 @@ public abstract class BaseController extends MultiActionController {
 			
 		}
 		return listado;
+	}
+	
+	public String getFecha (Date fecha) {
+		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
+		return sdf.format(fecha);
 	}
 	
 	public List<Canje> getListadoCanje(List<Canje> listado){

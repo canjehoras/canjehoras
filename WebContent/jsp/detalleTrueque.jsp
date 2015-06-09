@@ -14,7 +14,7 @@
 		<div class="service_block" style="margin: 10px;">
 		
 			<div class="service_icon delay-03s animated wow  zoomIn textoTrueque"> 
-				<img src="data:image/jpg;base64,${trueque.imagen64}" style="width:100%; height:auto; border: 2px solid #4BAAD6;"/> 
+				<img src="data:image/jpg;base64,${trueque.imagen64}" style="width:60%; height:auto; border: 2px solid #4BAAD6;"/> 
 			</div>
 			
 			
