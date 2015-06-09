@@ -45,8 +45,10 @@ public class Constantes {
 	public final static String RESOLUCION_OK_LABEL = "ACEPTADO";
 	public final static String RESOLUCION_NOK = "NOK";
 	public final static String RESOLUCION_NOK_LABEL = "RECHAZADO";
-	public final static String RESOLUCION_LIBRE_RESERVADO = "OK";
-	public final static String RESOLUCION_LIBRE_RESERVADO_LABEL = "ACEPTADO";
+	public final static String RESOLUCION_LIBRE_RESERVADO = "LIBRE_RESERVADO";
+	public final static String RESOLUCION_LIBRE_RESERVADO_LABEL = "RESERVADO";
+	public final static String RESOLUCION_RESERVADO_CANJEADO = "RESERVADO_CANJEADO";
+	public final static String RESOLUCION_RESERVADO_CANJEADO_LABEL = "ACEPTADO";
 	
 	// Email
 	public final static String EMAIL_ASUNTO_NUEVO = "Nuevo trueque publicado";
@@ -66,6 +68,16 @@ public class Constantes {
 	public final static String EMAIL_DENUNCIADO_POR = "Denunciado por:";
 	public final static String EMAIL_CABECERA_USUARIO = "<h2>Hola, Usuario</h2>";
 	public final static String EMAIL_RECORDATORIO_PASS = "La contraseña de acceso es: ";
+	public final static String EMAIL_CABECERA_HOLA = "<h2>Hola, ";
+	public final static String EMAIL_INFORMA = "<h2>Le informamos que ";
+	public final static String EMAIL_CANJEO_REALIZA = "<h2>El canjeo se realizara el día ";
+	public final static String EMAIL_DE = " de ";
+	public final static String EMAIL_A = " a ";
+	public final static String EMAIL_HA = " ha ";
+	public final static String EMAIL_SALUDO = "</br></br><h2>Un saludo.</h2>";
+	public final static String EMAIL_TRUEQUE = " el trueque ";
+	public final static String EMAIL_ASUNTO_RESERVA = "Reserva de un trueque";
+
 
 	// Mensaje de errores
 	public final static String MENSAJE_ERROR = "error";

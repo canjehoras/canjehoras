@@ -71,7 +71,8 @@
     		firstDay: 1,
     		 changeMonth: true, 
     		 changeYear: true,
-    		 minDate: "+0m +0d"
+    		 minDate: "+0m +0d",
+    		 firstDay: 1
     	});
     	
 	  	seleccionado('toggle-publicar');

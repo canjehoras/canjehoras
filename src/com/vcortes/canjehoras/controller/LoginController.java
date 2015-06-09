@@ -451,29 +451,33 @@ public class LoginController extends BaseController{
 	}
 	
 	/**
-	 * Método que envia email de recordatorio.
+	 * Método que envia email de recordatorio de contraseña
 	 * 
 	 * @param request
 	 * @param response
 	 * @return ModelAndView informacion
+	 * @throws Exception 
 	 */
-	public ModelAndView recordar(HttpServletRequest request, HttpServletResponse response){
+	public ModelAndView recordar(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		log.debug("Inicio recordar");
-		request.getSession().setAttribute(Constantes.CORREO_ELECTRONICO, Constantes.RECORDATORIO);
+		
+		// Recuperamos el email y los datos del usuario
 		String email = (String) request.getParameter(Constantes.BBDD_EMAIL);
-		String pass = "pepepeppe";
-		
-		// Envio un email al interesado
-		Mail mail = new Mail();
-		String cuerpo = Constantes.EMAIL_CABECERA_USUARIO + Constantes.BR + Constantes.BR +
-				Constantes.EMAIL_APERTURA_H3 + Constantes.EMAIL_RECORDATORIO_PASS + pass  + Constantes.EMAIL_CIERRE_H3;
-		mail.enviarMail(email, Constantes.EMAIL_ADMINISTRADOR, null, Constantes.EMAIL_ASUNTO_RECORDATORIO_PASS, cuerpo, null, null);
-		log.debug("Envio email a " + email);
-		
+		Usuario usuario = usuarioBL.findUsuarioByLogin(email);
+		if(null != usuario){
+			request.getSession().setAttribute(Constantes.CORREO_ELECTRONICO, Constantes.RECORDATORIO);
+			// Envio un email al interesado
+			Mail mail = new Mail();
+			String cuerpo = Constantes.EMAIL_CABECERA_USUARIO + Constantes.BR + Constantes.BR +
+					Constantes.EMAIL_APERTURA_H3 + Constantes.EMAIL_RECORDATORIO_PASS + usuario.getPass() + Constantes.EMAIL_CIERRE_H3 + 
+					Constantes.EMAIL_SALUDO;
+			mail.enviarMail(email, Constantes.EMAIL_ADMINISTRADOR, null, Constantes.EMAIL_ASUNTO_RECORDATORIO_PASS, cuerpo, null, null);
+			log.debug("Envio email a " + email);
+		}else{
+			request.getSession().setAttribute(Constantes.CORREO_ELECTRONICO, Constantes.ERROR_USUARIO);
+		}
 		return login(request, response);
 	}
-	
-
 	
 	/**
 	 * Cierre de sesión

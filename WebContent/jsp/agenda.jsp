@@ -4,7 +4,6 @@
 	<head>
 		<%@page contentType="text/html" pageEncoding="UTF-8"%>
 		<meta http-equiv="Content-Type" name="viewport"	content="text/html; charset=UTF-8; width=device-width, maximum-scale=1">
-		
 		<link href="../css/calendar.css" rel="stylesheet" type="text/css"> 
 	</head>
 	<body>
@@ -26,24 +25,16 @@
 					</div>
 					<div id="calendar" class="fc-calendar-container"></div>
 				</div>
-			</div><!-- /container -->
-		
+			</div>
 		</section>	
 	
 		<script type="text/javascript" src="../js/jquery.calendario.js"></script>
 		<script type="text/javascript" src="../js/data.js"></script>
 		
 		<script type="text/javascript">	
-		
 			  $(function() {
-			
 				var cal = $( '#calendar' ).calendario( {
 						onDayClick : function( $el, $contentEl, dateProperties ) {
-							
-							/*for( var key in dateProperties ) {
-								console.log( key + ' = ' + dateProperties[ key ] );
-							}*/
-	
 						},
 						caldata : codropsEvents
 					} ),
@@ -64,48 +55,14 @@
 					$month.html(cal.getMonthName());
 					$year.html(cal.getYear());
 				}
-	
-				// you can also add more data later on. As an example:
-				/*
-				someElement.on( 'click', function() {
-					
-					cal.setData( {
-						'03-01-2013' : '<a href="#">testing</a>',
-						'03-10-2013' : '<a href="#">testing</a>',
-						'03-12-2013' : '<a href="#">testing</a>'
-					} );
-					// goes to a specific month/year
-					cal.goto( 3, 2013, updateMonthYear );
-					
-				} );
-				*/
-			
-				<c:forEach var="canje" items="${listadoLibres}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#FF0000; cursor: pointer\"><label style=\"background:white;\">L</label></div>"} );
-				</c:forEach>
-				<c:forEach var="canje" items="${listadoPendientes}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#FFA500; cursor: pointer\"><label style=\"background:white;\">P</label></div>"} );
-				</c:forEach>
-				<c:forEach var="canje" items="${listadoCanjeadosOferta}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\"><label style=\"background:white;\">C</label></div>"} );
-				</c:forEach>
-				<c:forEach var="canje" items="${listadoCanjeadosDemanda}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#6A5ACD; cursor: pointer\"><label style=\"background:white;\">D</label></div>"} );
-				</c:forEach>
-				
 				<c:forEach var="canje" items="${todos}">
-				cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\"><label>CONSULTAR</label></div>"} );
-			</c:forEach>
-			
+					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\"><label>CONSULTAR</label></div>"} );
+				</c:forEach>
 			});
-			  
-			  
 		</script>
 		
-	
 		<div id="agendaCanje" style="display: none;" ></div>
 		
-	
 		<script type="text/javascript">
 			$(document).ready(function() {
 			  	seleccionado('toggle-agenda');
@@ -120,7 +77,7 @@
 				autoOpen: false,
 				closeOnEscape: false,
 				resizable: false,
-				title: 'Listado de canjes',
+				title: 'Listado de Trueques',
 				close: function(event, ui) {
 					agendaCanje.hide();		
 				},

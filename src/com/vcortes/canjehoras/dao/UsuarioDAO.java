@@ -38,17 +38,4 @@ public class UsuarioDAO extends BaseDAO {
 		return (Usuario) first(result);
 	}
 
-/**	public Usuario findProvincia(Long id_usuario)throws Throwable {
-		log.debug("detalle");
-		try {
-			Criteria q = sessionFactory.getCurrentSession().createCriteria(Usuario.class);
-			q.add(Restrictions.eq("id", id_usuario));
-			return (Usuario) q.uniqueResult();
-			
-		} catch (Exception e) {
-			log.error("", e);
-		}
-		return null;
-	}*/
-
 }
