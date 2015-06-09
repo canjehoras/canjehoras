@@ -6,6 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vcortes.canjehoras.bl.AgendaBL;
@@ -18,29 +20,69 @@ import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
 import com.vcortes.canjehoras.utils.Mail;
 
+/**
+ * Lógica de negocio de la Clase Agenda
+ * 
+ * @author Vanesa Cortés
+ *
+ */
 public class AgendaController extends BaseController {
 	
+	public static final Log log = LogFactory.getLog(AgendaController.class);
+	
+	/** Declaración de los BL necesarios */
 	private UsuarioBL usuarioBL;
 	private TruequeBL truequeBL;
 	private CanjeBL canjeBL;
 	private AgendaBL agendaBL;
 	
+	
+	/** Getter y setter de los BL necesarios */
+	public UsuarioBL getUsuarioBL() {
+		return usuarioBL;
+	}
+
+	public void setUsuarioBL(UsuarioBL usuarioBL) {
+		this.usuarioBL = usuarioBL;
+	}
+
+	public TruequeBL getTruequeBL() {
+		return truequeBL;
+	}
+
+	public void setTruequeBL(TruequeBL truequeBL) {
+		this.truequeBL = truequeBL;
+	}
+
+	public CanjeBL getCanjeBL() {
+		return canjeBL;
+	}
+
+	public void setCanjeBL(CanjeBL canjeBL) {
+		this.canjeBL = canjeBL;
+	}
+
+	public AgendaBL getAgendaBL() {
+		return agendaBL;
+	}
+
+	public void setAgendaBL(AgendaBL agendaBL) {
+		this.agendaBL = agendaBL;
+	}
+
+	
 	/**
-	 * Método que recupera la agenda del usuario registrado
+	 * Método que recupera la agenda completa del usuario registrado
 	 * 
 	 * @param request
 	 * @param response
-	 * @return model
+	 * @return ModelAndView muestra la agenda
 	 */
 	public ModelAndView agenda(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Recupera la agenda del usuario registrado");	
 		ModelAndView model = new ModelAndView(Constantes.AGENDA); 
 		Long idUsuario = null;
 		Long idAgenda = null;
-//		List<Canje> libres = null;
-//		List<Canje> pendientes = null;
-//		List<Canje> canjeadosOferta = null;
-//		List<Canje> canjeadosDemanda = null;
 		List<Canje> todos = null;
 		try {
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
@@ -48,27 +90,16 @@ public class AgendaController extends BaseController {
 				idUsuario = usuario.getId();
 			}
 			Agenda agenda = agendaBL.findAgendaPorUsuario(idUsuario);
+			
 			// Si hay agenda asociada al usuario registrado 
 			if(null !=agenda){
 				idAgenda = agenda.getId();
 				todos = canjeBL.listadoCanjesPorAgenda(idAgenda, null);
-				
-				
-//				libres = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_LIBRE);
-//				pendientes = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_PENDIENTE);
-//				canjeadosOferta = canjeBL.listadoCanjesPorAgenda(idAgenda, Constantes.ESTADO_CANJE_CANJEADO);
 			}
-//			canjeadosDemanda = canjeBL.listadoCanjesUsuarioDemanda(idUsuario);
-//			model.addObject("listadoLibres", libres);
-//			model.addObject("listadoPendientes", pendientes);
-//			model.addObject("listadoCanjeadosOferta", canjeadosOferta);
-//			model.addObject("listadoCanjeadosDemanda", canjeadosDemanda);
 			model.addObject("todos", todos);
 		} catch (Throwable e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return model;
 	}
 	
@@ -147,16 +178,17 @@ public class AgendaController extends BaseController {
 	
 
 	/**
-	 * ACEPTAR: Se cambia estado a CANJEADO y se manda un email al interesado
-	 * CANCELAR: Se cambia el estado a LIBRE y se manda un email al interesado
+	 * Método que modifica el estado del trueque
+	 * 
+	 * LIBRE_RESERVADO: El trueque pasa del estado LIBRE a RESERVADO
+	 * RESERVADO_CANJEADO: El trueque pasa del estado RESERVADO a CANJEADO
 	 * 
 	 * @param request
 	 * @param response
-	 * @return
+	 * @return ModelAndView agenda
 	 */
 	public ModelAndView resolucionCanje (HttpServletRequest request, HttpServletResponse response){
 		log.debug("resolucionCanje");
-		ModelAndView model = new ModelAndView(Constantes.AGENDA_DETALLE); 
 		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 		try {
 			// Usuario que ha publicado el trueque
@@ -169,58 +201,40 @@ public class AgendaController extends BaseController {
 			// Comprobar resolución
 			String resolucion = request.getParameter("resolucion");
 			String resolucionLabel = "";
-			if(Constantes.RESOLUCION_OK.equals(resolucion)){
-				resolucionLabel = Constantes.RESOLUCION_OK_LABEL;
-				canje.setEstado(Constantes.ESTADO_CANJE_CANJEADO);
-			}else if(Constantes.RESOLUCION_NOK.equals(resolucion)){
-				resolucionLabel = Constantes.RESOLUCION_NOK_LABEL;
-				canje.setEstado(Constantes.ESTADO_CANJE_LIBRE);
-			}else if(Constantes.RESOLUCION_LIBRE_RESERVADO.equals(resolucion)){
-				resolucionLabel = Constantes.RESOLUCION_LIBRE_RESERVADO_LABEL;
+			String asunto = "";
+
+			// El trueque ha sido reservado por un usuario
+			if(Constantes.RESOLUCION_LIBRE_RESERVADO.equals(resolucion)){
 				canje.setEstado(Constantes.ESTADO_CANJE_PENDIENTE);
+				resolucionLabel = Constantes.RESOLUCION_LIBRE_RESERVADO_LABEL; 
+				asunto = Constantes.EMAIL_ASUNTO_RESERVA;
+			// El trueque ha sido aceptado por el usuario propietario
+			}else if(Constantes.RESOLUCION_RESERVADO_CANJEADO.equals(resolucion)){
+				canje.setEstado(Constantes.ESTADO_CANJE_CANJEADO);
+				resolucionLabel = Constantes.RESOLUCION_RESERVADO_CANJEADO_LABEL; 
+				asunto = Constantes.EMAIL_ASUNTO_RESERVA;
 			}
 			
-			// Almacenar información
+			// Almacenar información del canje
 			canjeBL.saveOrUpdate(canje);
 			
-			// Envio de email al usuario que ha reservado el trueque
+			// Envio de email al usuario propietario del trueque
 			Mail mail = new Mail();
-			String cuerpo = "<h2>Hola, " + canje.getUsuario().getNombre() + "</h2>" + 
-					"<h2>Le informamos que " + usuario.getNombre() + " ha " + resolucionLabel  + " el canjeo del trueque " +
-					canje.getTrueque().getTitulo() + ".</br></br></h2>" + 
-					"<h2>El canjeo se realizara el día " + sdf.format(canje.getFecha()) + " de " + canje.getHora_inicio() +
-					" a " + canje.getHora_fin() + ".</h2></br></br><h2>Un saludo.</h2>"; 
-			mail.enviarMail(canje.getUsuario().getCorreo_electronico(), null, null, Constantes.EMAIL_ASUNTO_RESOLUCION, cuerpo, null, null);
-			log.debug("Envio email a " + canje.getUsuario().getCorreo_electronico());			
+			String cuerpo = Constantes.EMAIL_CABECERA_HOLA + canje.getAgenda().getUsuario().getNombre() + Constantes.EMAIL_CIERRE_H2 + 
+					Constantes.EMAIL_INFORMA + usuario.getNombre() + usuario.getApellido1() + usuario.getApellido2() + 
+					Constantes.EMAIL_HA + resolucionLabel  + Constantes.EMAIL_TRUEQUE + Constantes.COMILLAS + 
+					canje.getTrueque().getTitulo() + Constantes.COMILLAS + Constantes.BR + Constantes.BR + Constantes.EMAIL_CIERRE_H2 + 
+					Constantes.EMAIL_CANJEO_REALIZA + sdf.format(canje.getFecha()) + Constantes.EMAIL_DE + canje.getHora_inicio() +
+					Constantes.EMAIL_A + canje.getHora_fin() + Constantes.EMAIL_CIERRE_H2 +  Constantes.EMAIL_SALUDO; 
+			mail.enviarMail(canje.getAgenda().getUsuario().getCorreo_electronico(), Constantes.EMAIL_ADMINISTRADOR, null, asunto, cuerpo, null, null);
+			log.debug("Envio email a " + canje.getAgenda().getUsuario().getCorreo_electronico());			
 
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		return model;
-	}
-
-	public UsuarioBL getUsuarioBL() {
-		return usuarioBL;
+		return agenda(request, response);
 	}
 
 
-	public void setUsuarioBL(UsuarioBL usuarioBL) {
-		this.usuarioBL = usuarioBL;
-	}
-
-
-	public void setTruequeBL(TruequeBL truequeBL) {
-		this.truequeBL = truequeBL;
-	}
-
-
-	public void setCanjeBL(CanjeBL canjeBL) {
-		this.canjeBL = canjeBL;
-	}
-
-
-	public void setAgendaBL(AgendaBL agendaBL) {
-		this.agendaBL = agendaBL;
-	}
 
 }

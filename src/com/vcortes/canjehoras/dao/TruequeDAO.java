@@ -126,8 +126,6 @@ public class TruequeDAO extends BaseDAO {
 			log.error("Error realizando la búsqueda de trueques", e);
 		}
 		return null;
-		
-		
 	}
 	
 	

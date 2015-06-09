@@ -22,7 +22,7 @@
 					<c:if test="${canje.estado == 'PENDIENTE'}">
 						<div>
 							<fmt:message key="agenda.trueque.aceptar"/>
-							<input src="../img/manos2.png" type="image" onclick="resolucionCanje(${canje.id}, 'LIBRE_RESERVADO');" style="width: 30px" />
+							<input src="../img/manos2.png" type="image" onclick="resolucionCanje(${canje.id}, 'RESERVADO_CANJEADO');" style="width: 30px" />
 							<input src="../img/nok.png" type="image" onclick="resolucionCanje(${canje.id}, 'NOK');" style="width: 30px" />
 						</div>
 					</c:if>
@@ -31,6 +31,9 @@
 					</c:if>
 				</div>
 			</c:forEach>
+			<div style="border-bottom: 2px solid black; padding: 15px;">
+				<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="hideAgendaCanje();"/>
+			</div>
 		</div>
 	</body>
 </html>
