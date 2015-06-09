@@ -9,6 +9,11 @@
 	
 	<body>
 		<%@ include file="comunes/include-cabecera.jsp" %>
+		<script type="text/javascript">
+			$(document).ready(function() {
+	    	  	seleccionado('toggle-denunciados');
+	      	});
+		</script>
 		<div class="container">
 			<c:set var="primero" value="true"></c:set>
 			<c:forEach var="trueques" items="${trueques}" varStatus="count" >
@@ -23,18 +28,18 @@
 				<div class="col-lg-12 mrgTop">
 				</c:otherwise>
 			</c:choose>
-				<div class="service_block">
+				<div class="service_block" style="margin-bottom: 25px ">
 					<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.fecha.alta"/>${trueques.fecha_alta}</p>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueques.categoria.descripcion}</p>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueques.provincia.descripcion}</p>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.modalidad"/>${trueques.modalidad}</p>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.ofrezco"/>${trueques.descripcionOferta}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.fecha.alta"/> <fmt:formatDate value='${trueques.fecha_alta}' pattern='dd/MM/yyyy' /></p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/> ${trueques.categoria.descripcion}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/> ${trueques.provincia.descripcion}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.modalidad"/> ${trueques.modalidad}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.ofrezco"/> ${trueques.descripcionOferta}</p>
 					<c:if test="${trueques.descripcionDemanda != ''}">
-						<p class="animated fadeInDown wow"><fmt:message key="listado.busco"/>${trueques.descripcionDemanda}</p>
+						<p class="animated fadeInDown wow"><fmt:message key="listado.busco"/> ${trueques.descripcionDemanda}</p>
 					</c:if>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.publicado"/>${trueques.usuario.correo_electronico}</p>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.denunciado"/>${trueques.denunciante.correo_electronico}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.publicado"/> ${trueques.usuario.correo_electronico}</p>
+					<p class="animated fadeInDown wow"><fmt:message key="listado.denunciado"/> ${trueques.denunciante.correo_electronico}</p>
 					<p> </p>
 					<div style="width: 30%; margin: 0 auto;">
 						<input type="button" value="<fmt:message key="boton.eliminar"/>" onclick="eliminarTruequeAdmin(${trueques.id});"/>

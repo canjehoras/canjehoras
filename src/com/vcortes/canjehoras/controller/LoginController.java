@@ -93,9 +93,9 @@ public class LoginController extends BaseController{
 			// Parametros que se recuperan de la pantalla login
 			String email = request.getParameter(Constantes.CORREO_ELECTRONICO);
 			String pass = request.getParameter(Constantes.PASS);
-			
+			String correo = (String) request.getSession().getAttribute(Constantes.CORREO_ELECTRONICO);
 			// Si el usuario a marcado la opción de recordatorio de contraseña
-			if((request.getSession().getAttribute(Constantes.CORREO_ELECTRONICO)).equals(Constantes.RECORDATORIO)){
+			if(correo!= null && correo.equals(Constantes.RECORDATORIO)){
 	            List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
 	            getListadoTrueques(listado);
 	            model.addObject(Constantes.TRUEQUES, listado);
@@ -169,6 +169,56 @@ public class LoginController extends BaseController{
 		} catch (Throwable e) {
 			log.error("Error al recuperar usuario",e);
 		}
+		return model;
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	public ModelAndView verTrueques(HttpServletRequest request, HttpServletResponse response){
+		// Se retorna al listado de trueques
+		// Recuperar las preferencias
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE);  
+		ArrayList<Long> listadoProvincia = new ArrayList<Long>();
+		ArrayList<Long> listadoCategoria = new ArrayList<Long>();
+		List<Trueque> listado = new ArrayList<Trueque>();
+		try{
+			String filtroTrueque = request.getParameter("filtroTrueque");
+			model.addObject("filtroTrueque", filtroTrueque);
+			
+			if(filtroTrueque!=null && !filtroTrueque.equals("")){
+				if(filtroTrueque.equalsIgnoreCase("todos")){
+					listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);	
+				} else if(filtroTrueque.equalsIgnoreCase("preferencias")){
+					Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+					
+					List<PrefProvincia> listPrefProvincia = prefProvinciaBL.findByUsuario(usuario.getId());
+					for(PrefProvincia provincia: listPrefProvincia){
+						listadoProvincia.add(provincia.getProvincia().getId());
+					}
+					
+					List<PrefCategoria> listPrefCategoria = prefCategoriaBL.findByUsuario(usuario.getId());
+					for(PrefCategoria categoria: listPrefCategoria){
+						listadoCategoria.add(categoria.getCategoria().getId());
+					}
+					listado = truequeBL.findTruequePreferencias(listadoProvincia, listadoCategoria, Constantes.TRUEQUE_ESTADO_NUEVO);
+				}
+			}
+			
+			getListadoTrueques(listado);
+			
+		}catch(Exception e){
+			logger.error("Error filtrando trueques", e);
+		} catch (Throwable e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addObject(Constantes.TRUEQUES, listado);
+		
 		return model;
 	}
 	

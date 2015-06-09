@@ -37,11 +37,11 @@
 				             </div> 
 				             <div class="detail">
 				                 <b>Fecha nacimiento: </b>
-				                 <p>${usuario.fecha_nacimiento}</p>
+				                 <p><fmt:formatDate value='${usuario.fecha_nacimiento}' pattern='dd/MM/yyyy' /></p>
 				             </div> 
 				             <div class="detail">
 				                 <b>Fecha Ultimo acceso </b>
-				                 <p>${usuario.fecha_ultimo_acceso}</p>
+				                 <p><fmt:formatDate value='${usuario.fecha_ultimo_acceso}' pattern='dd/MM/yyyy' /></p>
 				             </div> 
 						    
 							

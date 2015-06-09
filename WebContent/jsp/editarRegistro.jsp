@@ -29,7 +29,7 @@
 			    <div class="tituloSelect"><fmt:message key="registro.apellido2"/></div>
 			    <input type="text" name="apellido2" id="apellido2" placeholder="<fmt:message key="registro.apellido2"/>" value="${usuario.apellido2}" />
 			    <div class="tituloSelect"><fmt:message key="seleccione.fecha.nacimiento"/></div>
-			    <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="${usuario.fecha_nacimiento}" placeholder="<fmt:message key="seleccione.fecha.nacimiento" />"/>
+			    <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" value="<fmt:formatDate value='${usuario.fecha_nacimiento}' pattern='dd/MM/yyyy' />" placeholder="<fmt:message key="seleccione.fecha.nacimiento" />"/>
 			    <div class="tituloSelect"><fmt:message key="registro.seleccione.provincia"/></div>
 			    <select name="provincias" id="provincias" required="required">
 					<option value="-1"><fmt:message key="registro.seleccione.provincia" /></option>

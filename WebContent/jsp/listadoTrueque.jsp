@@ -14,9 +14,9 @@
 			<section id="categoria" class="content">
 				<h1><fmt:message key="listado.titulo"/></h1>
 				<div style="width: 30%">
-					<select id="filtroTrueque" onchange="comboTruequeInicio(id);">
-						<option id="preferencias" <c:if test="${filtroTrueque == 'preferencias'}">selected</c:if> ><fmt:message key="combo.preferencias"/></option>
-						<option id="todos" <c:if test="${filtroTrueque == 'todos'}">selected</c:if> ><fmt:message key="combo.todos"/></option>
+					<select id="filtroTrueque" onchange="comboTruequeInicio('filtroTrueque');">
+						<option id="preferencias" value="PREFERENCIAS" <c:if test="${filtroTrueque == 'PREFERENCIAS'}">selected</c:if> ><fmt:message key="combo.preferencias"/></option>
+						<option id="todos" value="TODOS" <c:if test="${filtroTrueque == 'TODOS'}">selected</c:if> ><fmt:message key="combo.todos"/></option>
 					</select>
 				</div>
 			

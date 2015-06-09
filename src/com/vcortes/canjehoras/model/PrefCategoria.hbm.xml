@@ -6,7 +6,7 @@
 			<column name="ID" precision="22" scale="0" />
 			<generator class="native" />
 		</id>
-		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none"/>
-		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="none"/>
+		<many-to-one column="ID_USUARIO" class="Usuario" name="usuario" lazy="proxy" cascade="none" fetch="join"/>
+		<many-to-one column="ID_CATEGORIA" class="Categoria" name="categoria" lazy="proxy" cascade="none" fetch="join"/>
 	</class>
 </hibernate-mapping>

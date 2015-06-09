@@ -146,8 +146,10 @@ resolucionCanje = function(id, resolucion){
 
 verTrueques = function(id){
 	var sel = $('#'+id).val();	
-	
 	window.location.href= "/canjehoras/trueque/mistrueques.html?estado="+sel;
-	
-	
+}
+
+comboTruequeInicio = function(id){
+	var sel = $('#'+id).val();	
+	window.location.href= "/canjehoras/login/verTrueques.html?filtroTrueque="+sel;
 }
