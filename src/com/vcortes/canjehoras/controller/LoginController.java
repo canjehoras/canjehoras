@@ -100,6 +100,7 @@ public class LoginController extends BaseController{
 	            getListadoTrueques(listado);
 	            model.addObject(Constantes.TRUEQUES, listado);
 	            request.getSession().setAttribute(Constantes.MENSAJE_ERROR, Constantes.EMAIL_RECORDATORIO);
+	            request.getSession().setAttribute(Constantes.CORREO_ELECTRONICO, "");
 				model = new ModelAndView(Constantes.INICIO); 
 				return model;
 			}
