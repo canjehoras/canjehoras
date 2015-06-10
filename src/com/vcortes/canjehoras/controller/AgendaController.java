@@ -250,7 +250,7 @@ public class AgendaController extends BaseController {
 	 */
 	public ModelAndView contacto(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Contacto Usuario");
-		ModelAndView model = new ModelAndView(Constantes.CONTACTO);
+		ModelAndView model = new ModelAndView(Constantes.OPCIONES_CANJEO_TRUEQUE);
 		// Usuario en sesion
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		
