@@ -35,7 +35,14 @@
 			</c:choose>
 			<div class="service_block">
 				<div class="service_icon delay-03s animated wow  zoomIn" style="height: auto;"> 
-					<img src="data:image/jpg;base64,${trueques.imagen64}" style="max-height: 190px; border: 2px solid #4BAAD6;"/> 
+				<c:choose>
+					<c:when test="${trueques.imagen64==''}">
+						<img src="/canjehoras/img/sinfoto.jpg" style="max-height: 190px; border: 3px solid #4BAAD6;" />		
+					</c:when>
+					<c:otherwise>
+						<img src="data:image/jpg;base64,${trueques.imagen64}" style="max-height: 190px; border: 2px solid #4BAAD6;"/> 
+					</c:otherwise>
+				</c:choose>
 				</div>
 				<h3 class="animated fadeInUp wow">${trueques.titulo}</h3>
 				<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueques.categoria.descripcion}</p>
