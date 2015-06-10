@@ -262,8 +262,8 @@ public class AgendaController extends BaseController {
 			Mail mail = new Mail();
 			String cuerpo = Constantes.EMAIL_CABECERA_HOLA + email + Constantes.EMAIL_CIERRE_H2 + 
 							Constantes.EMAIL_APERTURA_H3 + Constantes.EMAIL_CIERRE_H3 +
-							Constantes.EMAIL_USUARIO + usuario.getNombre() + " " + usuario.getApellido1() + " " + usuario.getApellido2() + 
-							Constantes.EMAIL_MSM + Constantes.BR + Constantes.BR + Constantes.EMAIL_SALUDO; 
+							Constantes.EMAIL_USUARIO + usuario.getNombre() + " " + usuario.getApellido1() + " " + usuario.getApellido2() + " " +
+							Constantes.EMAIL_MSM + Constantes.BR + mensaje + Constantes.BR + Constantes.EMAIL_SALUDO; 
 			mail.enviarMail(email, Constantes.EMAIL_ADMINISTRADOR, null, Constantes.EMAIL_ASUNTO_CONSULTA, cuerpo, null, null);
 			log.debug("Envio email a " + email);			
 			
