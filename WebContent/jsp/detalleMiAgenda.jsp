@@ -9,7 +9,7 @@
 	<body>
 		<c:forEach var="canje" items="${canjes}">
 			<div><fmt:message key="agenda.titulo"/>${canje.trueque.titulo}</div>
-			<div><fmt:message key="agenda.horario"/>${canje.fechaLabel}  ${canje.hora_inicio} - ${canje.hora_fin}</div>
+			<div><fmt:message key="agenda.horario"/><fmt:formatDate value="${canje.fecha}" pattern="dd/MM/yyyy" />  ${canje.hora_inicio} - ${canje.hora_fin}</div>
 			<div><fmt:message key="agenda.estado"/>${canje.estado}</div>
 
 			<c:if test="${canje.estado == 'PENDIENTE'}">
