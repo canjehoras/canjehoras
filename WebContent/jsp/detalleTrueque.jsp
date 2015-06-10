@@ -10,9 +10,9 @@
 		<%@ include file="comunes/include-cabecera.jsp"%>
 		<div class="container" >
 			<div class="service_block" style="margin: 10px;">
-				<div class="service_icon delay-03s animated wow  zoomIn textoTrueque"> 
+				<div class="service_icon delay-03s animated wow  zoomIn textoTrueque">
 					<c:choose>
-						<c:when test="${trueques.imagen64==''}">
+						<c:when test="${trueque.imagen64==''}">
 							<img src="/canjehoras/img/sinfoto.jpg" style="width:80%; height:auto; border: 2px solid #4BAAD6;" />		
 						</c:when>
 						<c:otherwise>
