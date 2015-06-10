@@ -144,6 +144,7 @@ public class LoginController extends BaseController{
 						getListadoTrueques(listado);
 						request.getSession().setAttribute(Constantes.MENSAJE_ERROR, null);
 						model.addObject(Constantes.TRUEQUES, listado);
+						model.addObject(Constantes.COMBO_FILTRO_TRUEQUE, Constantes.PREFERENCIAS);
 					} catch (Throwable e) {
 						e.printStackTrace();
 					}
@@ -497,29 +498,7 @@ public class LoginController extends BaseController{
 		request.getSession().setAttribute(Constantes.USUARIO, null);
 		return model;
 	}
-	
-/**	public ModelAndView contacto(HttpServletRequest request, HttpServletResponse response){
-		log.debug("Contacto Usuario");
-		ModelAndView model = new ModelAndView(Constantes.CONTACTO); 
-		try {
-			request.setCharacterEncoding(Constantes.ENCODING);
-			String id_usuario = request.getParameter("id_usuario");
-			Long id = new Long(id_usuario);
-			Usuario usuario = usuarioBL.findUsuarioById(id);
-			model.addObject("usuario", usuario);
-		} catch (Throwable e) {
-			logger.error("Error registrando usuario", e);
-			e.printStackTrace();
-		}
-		return model;
-	}
-	
-	public ModelAndView contactoEmail(HttpServletRequest request, HttpServletResponse response) throws Throwable{
-		ModelAndView model = new ModelAndView(Constantes.ENVIAR_EMAIL); 
-		return model;
-	}*/
-	
-	
+
 	/**
 	 * Método que cambia el idioma de la página
 	 * 

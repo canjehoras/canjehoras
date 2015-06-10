@@ -132,8 +132,8 @@ canjeAgendaTrueque= function(id){
 	$("#foro").load("/canjehoras/agenda/agendaTrueque.html?id="+id);
 }
 
-canjeEmail = function(id_usuario){
-	$("#foro").load("/canjehoras/login/contactoEmail.html?id_usuario=" + id_usuario);
+canjeEmail = function(correo){
+	$("#foro").load("/canjehoras/agenda/contactoEmail.html?email=" + correo);
 }
 
 gestionActivos = function(id){

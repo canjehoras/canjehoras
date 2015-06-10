@@ -13,7 +13,7 @@
 			<div><fmt:message key="agenda.estado"/>${canje.estado}</div>
 
 			<c:if test="${canje.estado == 'PENDIENTE'}">
-				<div><fmt:message key="agenda.reservado"/>${canje.usuario.nombre} ${canje.usuario.apellido1} ${canje.usuario.apellido2}</div>
+				<div><fmt:message key="agenda.reservado"/>${canje.agenda.usuario.nombre} ${canje.agenda.usuario.apellido1} ${canje.agenda.usuario.apellido2}</div>
 				<div>
 					<fmt:message key="agenda.aceptas"/>
 					<input src="../img/ok.png" type="image" onclick="resolucionCanje(${canje.id}, 'OK');" />
@@ -21,7 +21,7 @@
 				</div>
 			</c:if>
 			<c:if test="${canje.estado == 'CANJEADO'}">
-				<div><fmt:message key="agenda.canjeado"/>${canje.usuario.nombre}</div>
+				<div><fmt:message key="agenda.canjeado"/>${canje.agenda.usuario.nombre} ${canje.agenda.usuario.apellido1} ${canje.agenda.usuario.apellido2}</div>>
 			</c:if>
 			<c:if test="${canje.usuario != null}">
 				otro

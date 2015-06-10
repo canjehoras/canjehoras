@@ -107,6 +107,15 @@ public class TruequeController extends BaseController{
 		return model;
 	}
 	
+	/**
+	 * Método que guarda los datos de un trueque.
+	 * 
+	 * Publicación de un trueque o edición de los datos de un trueque.
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView listado de trueques
+	 */
 	public ModelAndView publicar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Publicar nuevo trueque");
 		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
@@ -116,18 +125,20 @@ public class TruequeController extends BaseController{
 			SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			
+			// Recupera toda la información del trueque
 			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(request);
 			String titulo = "";
 			String descripcionOferta = "";
 			String descripcionDemanda = "";
 			String categoria = "";
-			//String tipo = "";
 			String id = "";
 			String provincia = "";
 			String modalidad = "";
 			String fecha = "";
 			String hora_inicio = "";
 			String hora_fin = "";
+			
+			// Inicializa el trueque vacio y se va guardando la informacion
 			Trueque trueque = new Trueque();
 			InputStream fileContent = null;
 		    for (FileItem item : items) {
@@ -168,7 +179,7 @@ public class TruequeController extends BaseController{
 		    	}
 		    }
 			
-		    // Si ya existe en bbdd - Edición
+		    // Si ya existe en bbdd - Edición del trueque
 		    if(id!=null && !("").equals(id)){
 		    	trueque = (Trueque) truequeBL.findById(new Trueque(), Long.valueOf(id));
 		    }
@@ -177,7 +188,6 @@ public class TruequeController extends BaseController{
 		    trueque.setTitulo(titulo);
 		    trueque.setCategoria((Categoria) buscadorBL.findById(new Categoria(), Long.valueOf(categoria)));
 		    trueque.setProvincia((Provincia) buscadorBL.findById(new Provincia(), Long.valueOf(provincia)));
-		    //trueque.setTipo(tipo);
 		    trueque.setModalidad(modalidad);
 		    trueque.setDescripcionOferta(descripcionOferta);
 		    trueque.setDescripcionDemanda(descripcionDemanda);
@@ -194,6 +204,8 @@ public class TruequeController extends BaseController{
 		    	agenda.setUsuario(usuario);
 		    	agenda = (Agenda) agendaBL.saveOrUpdate(agenda);
 		    }
+		    
+		    // Guardar los datos del canje
 			Canje canje = new Canje();
 			if(!"".equals(fecha)){
 				canje.setFecha(sdf.parse(fecha));
@@ -205,7 +217,7 @@ public class TruequeController extends BaseController{
 				canjeBL.saveOrUpdate(canje);
 			}
 			
-			// Se buscan los usuarios que corresponden con las preferencias
+			// Se buscan los usuarios que corresponden con las preferencias para enviar el email
 			List <String> listadoEmail = new ArrayList<String>();
 			List <PrefCategoria> listadoCategoria = prefCategoriaBL.findPreferenciaCategoria(trueque.getCategoria().getId());
 			for(PrefCategoria listado: listadoCategoria){
@@ -219,17 +231,16 @@ public class TruequeController extends BaseController{
 			// Envio de email por cada uno de los usuarios
 			for(String email: listadoEmail){
 				Mail mail = new Mail();
-				String cuerpo = "<h2>Hola, " + usuario.getNombre() + "</h2>" + 
-						"<h2>Te enviamos información de un nuevo Trueque publicado en la web conforme tus preferencias." + 
-						"Desde el equipo de canjehoras te animamos a que publiques tus ofertas y demandas." + 
-						"Puedes hacerlo desde la propia Web, iniciando sesión con tu E-mail y tu contraseña.</h2></br></br>" + 
-						"<h3>" + trueque.getTitulo() + "</h3>" +
-						"<h3>" + trueque.getCategoria().getDescripcion() + "</h3>" + 
-						"<h3>" + trueque.getProvincia().getDescripcion() + "</h3>" + 
-						"<h3>" + "OFERTA: " + descripcionOferta + "</h3>" +
-						"<h3>" + "DEMANDA: " + descripcionDemanda + "</h3>" +
-						"<h4>Publicado por: " + trueque.getUsuario().getCorreo_electronico() + "</h4>"; 
-				mail.enviarMail(email, null, null, Constantes.EMAIL_ASUNTO_NUEVO, cuerpo, null, null);
+				String cuerpo = Constantes.EMAIL_CABECERA_HOLA + usuario.getNombre() + Constantes.EMAIL_CIERRE_H2 + 
+						Constantes.EMAIL_APERTURA_H2 + Constantes.EMAIL_NUEVO_TRUEQUE + Constantes.EMAIL_CIERRE_H2 + Constantes.BR + Constantes.BR + 
+						Constantes.EMAIL_APERTURA_H3 + trueque.getTitulo() + Constantes.EMAIL_CIERRE_H3 +
+						Constantes.EMAIL_APERTURA_H3 + trueque.getCategoria().getDescripcion() + Constantes.EMAIL_CIERRE_H3 + 
+						Constantes.EMAIL_APERTURA_H3 + trueque.getProvincia().getDescripcion() + Constantes.EMAIL_CIERRE_H3 + 
+						Constantes.EMAIL_APERTURA_H3 + Constantes.EMAIL_OFERTA + descripcionOferta + Constantes.EMAIL_CIERRE_H3 +
+						Constantes.EMAIL_APERTURA_H3 + Constantes.EMAIL_DEMANDA + descripcionDemanda + Constantes.EMAIL_CIERRE_H3 +
+						Constantes.EMAIL_APERTURA_H4 + Constantes.EMAIL_PUBLICADO_POR + trueque.getUsuario().getCorreo_electronico() + Constantes.EMAIL_CIERRE_H4 + 
+						Constantes.EMAIL_SALUDO; 
+				mail.enviarMail(email, Constantes.EMAIL_ADMINISTRADOR, null, Constantes.EMAIL_ASUNTO_NUEVO, cuerpo, null, null);
 				log.debug("Envio email a " + email);
 			}
 			
@@ -239,21 +250,35 @@ public class TruequeController extends BaseController{
 			logger.error("Error registrando trueque", e);
 		}
 		
+		// Retorna al listado de trueques
 		return listado(request, response);
 	}
 	
+	/**
+	 * Método que muestra el listado de todos los trueques en estado NUEVO.
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView listado de trueques
+	 */
 	public ModelAndView listado(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Listado de trueque");	
+		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
+		
+		// Recupera el usuario de sesion
 		Long idUsuario = null;
 		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 		if(null !=usuario){
 			idUsuario = usuario.getId();
 		}
-		ModelAndView model = new ModelAndView(Constantes.LISTA_TRUEQUE); 
+		
 		try{
+			// Busca los trueques libres
 			List<Trueque> listado = truequeBL.findTrueque(null, null, null, Constantes.TRUEQUE_ESTADO_NUEVO);
 			getListadoTrueques(listado);
 			model.addObject(Constantes.TRUEQUES, listado);
+			// Muestra el combo TODOS
+			model.addObject(Constantes.COMBO_FILTRO_TRUEQUE, Constantes.TODOS);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -347,22 +372,49 @@ public class TruequeController extends BaseController{
 		return model;
 	}
 	
+	/**
+	 * Método que recupera los datos para poder editar un trueque
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView formulario de nuevo trueque
+	 */
 	public ModelAndView editar(HttpServletRequest request, HttpServletResponse response){
 		log.debug("Editar trueque");
 		ModelAndView model = new ModelAndView(Constantes.NUEVO_TRUEQUE);
 		
 		try {
+			// Recupera los datos del trueque
 			String id = request.getParameter("id");			
 			Trueque trueque = (Trueque) truequeBL.findById(new Trueque(), Long.valueOf(id));
 			model.addObject("trueque", trueque);
 			
+			// Recuperar la fecha y hora inicio y hora fin
+			List <Canje> canje = canjeBL.findCanjesPorTrueque(Long.valueOf(id));
+			for (Canje c: canje){
+				model.addObject("fecha", c.getFecha());
+				model.addObject("hora_inicio", c.getHora_inicio());
+				model.addObject("hora_fin", c.getHora_fin());
+			}
+			
+			// Recupera el listado de categorias
 			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
 			model.addObject( Constantes.CATEGORIAS, categorias);
 			
-			List<Categoria> provincias = buscadorBL.findAll(new Provincia(), Constantes.DESCRIPCION);
+			// Recupera el listado de provincias
+			List<Provincia> provincias = buscadorBL.findAll(new Provincia(), Constantes.DESCRIPCION);
 			model.addObject(Constantes.PROVINCIAS, provincias);
 			
+			// Listado de horas para el trueque
+			List<String> listadoHoras = new ArrayList<String>();
+			for (int i= 0; i <24; i++){     
+				listadoHoras.add("" + i +":00"); 
+			}
+			model.addObject("listadoHoras", listadoHoras);
+			
 		} catch (Exception e) {
+			logger.error("Error editando trueque", e);
+		}catch (Throwable e) {
 			logger.error("Error editando trueque", e);
 		}
 		return model;

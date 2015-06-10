@@ -20,20 +20,11 @@ public class CanjeDAO extends BaseDAO {
 		return findAll(Canje.class);
 	}
 
-	public List<Canje> listadoCanjesPorAgenda(Long idAgenda, String estado)throws Throwable {
+	public List<Canje> listadoCanjesPorAgenda(Long idAgenda, String estado, Long idUsuario)throws Throwable {
 		log.debug("listadoTruequesLibres");
 		try {
 			Criteria q = sessionFactory.getCurrentSession().createCriteria(Canje.class);
-			if(null != idAgenda){
-				q.add(Restrictions.eq("agenda.id", idAgenda));
-			}
-			
-			// Recupera los trueques NUEVOS, PENDIENTES o CANJEADOS
-			/**q.add(Restrictions.or(Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_NUEVO), 
-					Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_PENDIENTE),
-					Restrictions.eq("trueque.estado", Constantes.TRUEQUE_ESTADO_CANJEADO)));*/		
-		
-			//q.add(Restrictions.eq("estado", estado));
+			q.add(Restrictions.or(Restrictions.eq("agenda.id", idAgenda), Restrictions.eq("usuario.id", idUsuario)));
 			List result = q.list();
 			return result;
 			

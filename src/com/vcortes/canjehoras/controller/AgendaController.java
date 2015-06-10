@@ -16,6 +16,7 @@ import com.vcortes.canjehoras.bl.TruequeBL;
 import com.vcortes.canjehoras.bl.UsuarioBL;
 import com.vcortes.canjehoras.model.Agenda;
 import com.vcortes.canjehoras.model.Canje;
+import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.model.Usuario;
 import com.vcortes.canjehoras.utils.Constantes;
 import com.vcortes.canjehoras.utils.Mail;
@@ -89,13 +90,13 @@ public class AgendaController extends BaseController {
 			if(null !=usuario){
 				idUsuario = usuario.getId();
 			}
-			Agenda agenda = agendaBL.findAgendaPorUsuario(idUsuario);
 			
-			// Si hay agenda asociada al usuario registrado 
+			Agenda agenda = agendaBL.findAgendaPorUsuario(idUsuario);
 			if(null !=agenda){
 				idAgenda = agenda.getId();
-				todos = canjeBL.listadoCanjesPorAgenda(idAgenda, null);
 			}
+			todos = canjeBL.listadoCanjesPorAgenda(idAgenda, null, idUsuario);
+			
 			model.addObject("todos", todos);
 		} catch (Throwable e) {
 			e.printStackTrace();
@@ -191,12 +192,13 @@ public class AgendaController extends BaseController {
 		log.debug("resolucionCanje");
 		SimpleDateFormat sdf = new SimpleDateFormat(Constantes.FORMATO_FECHA);
 		try {
-			// Usuario que ha publicado el trueque
+			// Usuario en sesion
 			Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
 			
 			// Comprobar canje
 			String id = request.getParameter("id");
 			Canje canje = canjeBL.detalle(Long.valueOf(id));
+			Trueque trueque = truequeBL.detalle(Long.valueOf(id));
 			
 			// Comprobar resolución
 			String resolucion = request.getParameter("resolucion");
@@ -205,15 +207,18 @@ public class AgendaController extends BaseController {
 
 			// El trueque ha sido reservado por un usuario
 			if(Constantes.RESOLUCION_LIBRE_RESERVADO.equals(resolucion)){
+				trueque.setEstado(Constantes.ESTADO_CANJE_PENDIENTE);
 				canje.setEstado(Constantes.ESTADO_CANJE_PENDIENTE);
+				canje.setUsuario(usuario);
 				resolucionLabel = Constantes.RESOLUCION_LIBRE_RESERVADO_LABEL; 
 				asunto = Constantes.EMAIL_ASUNTO_RESERVA;
 			// El trueque ha sido aceptado por el usuario propietario
 			}else if(Constantes.RESOLUCION_RESERVADO_CANJEADO.equals(resolucion)){
+				trueque.setEstado(Constantes.ESTADO_CANJE_CANJEADO);
 				canje.setEstado(Constantes.ESTADO_CANJE_CANJEADO);
 				resolucionLabel = Constantes.RESOLUCION_RESERVADO_CANJEADO_LABEL; 
 				asunto = Constantes.EMAIL_ASUNTO_RESERVA;
-			}
+			} 
 			
 			// Almacenar información del canje
 			canjeBL.saveOrUpdate(canje);
@@ -235,6 +240,53 @@ public class AgendaController extends BaseController {
 		return agenda(request, response);
 	}
 
-
+	
+	/**
+	 * Método que envia un email al usuario
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView 
+	 */
+	public ModelAndView contacto(HttpServletRequest request, HttpServletResponse response){
+		log.debug("Contacto Usuario");
+		ModelAndView model = new ModelAndView(Constantes.CONTACTO);
+		// Usuario en sesion
+		Usuario usuario = (Usuario)request.getSession().getAttribute(Constantes.USUARIO);
+		
+		try {
+			request.setCharacterEncoding(Constantes.ENCODING);
+			String email = request.getParameter("email");
+			String mensaje = request.getParameter("mensaje");
+			// Envio de email
+			Mail mail = new Mail();
+			String cuerpo = Constantes.EMAIL_CABECERA_HOLA + email + Constantes.EMAIL_CIERRE_H2 + 
+							Constantes.EMAIL_APERTURA_H3 + Constantes.EMAIL_CIERRE_H3 +
+							Constantes.EMAIL_USUARIO + usuario.getNombre() + " " + usuario.getApellido1() + " " + usuario.getApellido2() + 
+							Constantes.EMAIL_MSM + Constantes.BR + Constantes.BR + Constantes.EMAIL_SALUDO; 
+			mail.enviarMail(email, Constantes.EMAIL_ADMINISTRADOR, null, Constantes.EMAIL_ASUNTO_CONSULTA, cuerpo, null, null);
+			log.debug("Envio email a " + email);			
+			
+		} catch (Throwable e) {
+			logger.error("Error registrando usuario", e);
+			e.printStackTrace();
+		}
+		return model;
+	}
+	
+	/**
+	 * Método que muestra el formulario para enviar un email
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView formulario email
+	 * @throws Throwable
+	 */
+	public ModelAndView contactoEmail(HttpServletRequest request, HttpServletResponse response) throws Throwable{
+		ModelAndView model = new ModelAndView(Constantes.ENVIAR_EMAIL); 
+		String email = request.getParameter("email");
+		model.addObject("email", email);
+		return model;
+	}	
 
 }

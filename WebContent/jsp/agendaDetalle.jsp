@@ -27,7 +27,7 @@
 						</div>
 					</c:if>
 					<c:if test="${canje.estado == 'CANJEADO'}">
-						<div><fmt:message key="agenda.canjeado"/>${canje.usuario.nombre}</div>
+						<div><fmt:message key="agenda.canjeado"/>${canje.usuario.nombre} ${canje.usuario.apellido1} ${canje.usuario.apellido2}</div>
 					</c:if>
 				</div>
 			</c:forEach>

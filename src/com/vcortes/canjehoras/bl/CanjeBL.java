@@ -22,8 +22,8 @@ public class CanjeBL {
 		return canjeDAO.saveOrUpdate(instance);
 	}
 	
-	public List<Canje> listadoCanjesPorAgenda(Long idAgenda, String estado)throws Throwable {
-		return canjeDAO.listadoCanjesPorAgenda(idAgenda, estado);
+	public List<Canje> listadoCanjesPorAgenda(Long idAgenda, String estado, Long idUsuario)throws Throwable {
+		return canjeDAO.listadoCanjesPorAgenda(idAgenda, estado, idUsuario);
 	}
 	
 	public List<Canje> listadoCanjesUsuarioDemanda (Long idUsuario)throws Throwable {
