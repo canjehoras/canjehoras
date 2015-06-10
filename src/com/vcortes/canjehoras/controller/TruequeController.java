@@ -392,9 +392,9 @@ public class TruequeController extends BaseController{
 			// Recuperar la fecha y hora inicio y hora fin
 			List <Canje> canje = canjeBL.findCanjesPorTrueque(Long.valueOf(id));
 			for (Canje c: canje){
-				model.addObject("fecha", c.getFecha());
-				model.addObject("hora_inicio", c.getHora_inicio());
-				model.addObject("hora_fin", c.getHora_fin());
+				model.addObject("fechaCanje", c.getFecha());
+				model.addObject("hora_inicioCanje", c.getHora_inicio());
+				model.addObject("hora_finCanje", c.getHora_fin());
 			}
 			
 			// Recupera el listado de categorias

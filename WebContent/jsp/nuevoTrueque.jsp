@@ -30,8 +30,8 @@
         
           
         <div style="background: none repeat scroll 0 0 #fff; border: 1px solid #ccc; color: #555; font-size: 95%; margin-bottom: 4%; padding: 2%; width: 92%;">
-	        <input onclick="habilitarDemanda(this.value);" type="radio" value="C" name="modalidad" id="modalidad" <c:if test="${'C' == trueque.modalidad}">selected</c:if>/> Compartir Horas
-	        <input onclick="habilitarDemanda(this.value);" type="radio" value="I" name="modalidad" id="modalidad" <c:if test="${'I' == trueque.modalidad}">selected</c:if>/> Intercambiar Horas
+	        <input onclick="habilitarDemanda(this.value);" type="radio" value="C" name="modalidad" id="modalidad" <c:if test="${'C' == trueque.modalidad}"> checked="checked" </c:if>/> Compartir Horas
+	        <input onclick="habilitarDemanda(this.value);" type="radio" value="I" name="modalidad" id="modalidad" <c:if test="${'I' == trueque.modalidad}"> checked="checked" </c:if>/> Intercambiar Horas
         </div>
         <div class="tituloSelect"><fmt:message key="nuevo.trueque.descripcion.oferta"/></div>	
  		<textarea maxlength="500" title="<fmt:message key="nuevo.trueque.descripcion2"/>" name="descripcionOferta" id="descripcionOferta" placeholder="<fmt:message key="nuevo.trueque.descripcion"/>" required="required">${trueque.descripcionOferta}</textarea>
@@ -44,18 +44,18 @@
 		
 		<h1><fmt:message key="nuevo.trueque.agenda"/></h1>
 		<div class="subtituloSelect" style="margin-bottom: 5px;"><fmt:message key="nuevo.trueque.subtitulo"/></div>
-		<input type="text" name="fecha" id="fecha" value="<fmt:formatDate value='${fecha}' pattern='dd/MM/yyyy' />" placeholder="<fmt:message key="nuevo.trueque.seleccione.fecha" />"/>
+		<input type="text" name="fecha" id="fecha" value="<fmt:formatDate value='${fechaCanje}' pattern='dd/MM/yyyy' />" placeholder="<fmt:message key="nuevo.trueque.seleccione.fecha" />"/>
 		
 		<select name="hora_inicio" id="hora_inicio" >
 			<option value="-1"><fmt:message key="nuevo.trueque.hora.inicio" /></option>
             <c:forEach var="hora_inicio" items="${listadoHoras}">
-            	<option value="${hora_inicio}" <c:if test="${hora_inicio == hora_inicio}">selected</c:if>>${hora_inicio}</option>
+            	<option value="${hora_inicio}" <c:if test="${hora_inicioCanje == hora_inicio}">selected</c:if>>${hora_inicio}</option>
             </c:forEach>
         </select>       
 		<select name="hora_fin" id="hora_fin" >
 			<option value="-1"><fmt:message key="nuevo.trueque.hora.fin" /></option>
             <c:forEach var="hora_fin" items="${listadoHoras}">
-                    <option value="${hora_fin}">${hora_fin}</option>
+                    <option value="${hora_fin}" <c:if test="${hora_finCanje == hora_fin}">selected</c:if>>${hora_fin}</option>
             </c:forEach>
         </select> 		
         
