@@ -12,6 +12,7 @@ import org.hibernate.criterion.Restrictions;
 import com.vcortes.canjehoras.model.Categoria;
 import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Trueque;
+import com.vcortes.canjehoras.utils.Constantes;
 
 
 public class TruequeDAO extends BaseDAO {
@@ -128,6 +129,7 @@ public class TruequeDAO extends BaseDAO {
 			if(categoria!=null){
 				q.add(Restrictions.eq("categoria", categoria));
 			}
+			q.add(Restrictions.eq("estado", Constantes.TRUEQUE_ESTADO_NUEVO));
 			return q.list();
 		} catch (Exception e) {
 			log.error("Error realizando la búsqueda de trueques", e);

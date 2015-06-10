@@ -18,75 +18,22 @@ import com.vcortes.canjehoras.model.Provincia;
 import com.vcortes.canjehoras.model.Trueque;
 import com.vcortes.canjehoras.utils.Constantes;
 
+/**
+ * Lógica de negocio de la Clase Buscador
+ * 
+ * @author Vanesa Cortés
+ *
+ */
 public class BuscadorController extends BaseController {
 
 	public static final Log log = LogFactory.getLog(BuscadorController.class);
+	
+	/** Declaración de los BL necesarios */
 	private BuscadorBL buscadorBL;
 	private TruequeBL truequeBL;
 	private ProvinciaBL provinciaBL;
-
-
-	/**
-	 * @throws Throwable
-	 */
-	public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-		ModelAndView model = new ModelAndView(Constantes.BUSCADOR);
-		try {
-			
-			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
-			model.addObject(Constantes.CATEGORIAS, categorias);			
-
-			/*List<Trueque> listado = truequeBL.findAll(new Trueque());
-			model.addObject(Constantes.TRUEQUES, listado);*/
-		} catch (Exception e) {
-			logger.error("Error al entrar en la pantalla del buscador", e);
-		}
-		return model;
-	}
 	
-	/**
-	 * Método que realiza la búsqueda marcadada
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	public ModelAndView buscar(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView model = new ModelAndView(Constantes.BUSCADOR_RESULTADOS);
-		try {
-
-			String descripcion = request.getParameter("descripcion");
-			String codProvincias = request.getParameter("provincias");
-			String idCategoria = request.getParameter("categoria");
-			
-			Categoria categoria = null;
-			if(idCategoria!=null){
-				categoria = (Categoria) truequeBL.findById(new Categoria(), Long.valueOf(idCategoria));
-			}
-			
-			String[] p = codProvincias.split(",");
-			ArrayList<Provincia> provincias = new ArrayList();
-			Provincia prov = null;
-			for (int i = 0; i < p.length; i++) {
-				String codigo = p[i];
-				
-				prov = provinciaBL.findProvinciaByCodigo(codigo);
-				if(prov!=null){
-					provincias.add(prov);
-				}
-			}
-			
-			List<Trueque> listado = truequeBL.buscarTrueques(descripcion, provincias, categoria);
-			getListadoTrueques(listado);
-			model.addObject(Constantes.TRUEQUES, listado);
-		
-		} catch (Exception e) {
-			logger.error("Error realizar la búsqueda introducida", e);
-		}
-		return model;
-	}
-
-	
-	
+	/** Getter y setter de los BL necesarios */
 	public void setBuscadorBL(BuscadorBL buscadorBL) {
 		this.buscadorBL = buscadorBL;
 	}
@@ -97,5 +44,69 @@ public class BuscadorController extends BaseController {
 
 	public void setProvinciaBL(ProvinciaBL provinciaBL) {
 		this.provinciaBL = provinciaBL;
+	}
+
+	/**
+	 * Método que devuelve los datos para mostrar el formulario de búsqueda
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView formulario de búsqueda
+	 * @throws Throwable
+	 */
+	public ModelAndView inicio(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+		ModelAndView model = new ModelAndView(Constantes.BUSCADOR);
+		try {
+			// Recupera el listado de categorias
+			List<Categoria> categorias = buscadorBL.findAll(new Categoria(), Constantes.DESCRIPCION);
+			model.addObject(Constantes.CATEGORIAS, categorias);			
+		} catch (Exception e) {
+			logger.error("Error al entrar en la pantalla del buscador", e);
+		}
+		return model;
+	}
+	
+	/**
+	 * Método que realiza la búsqueda marcada
+	 * 
+	 * @param request
+	 * @param response
+	 * @return ModelAndView listado con resultados
+	 */
+	public ModelAndView buscar(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView model = new ModelAndView(Constantes.BUSCADOR_RESULTADOS);
+		try {
+
+			String descripcion = request.getParameter("descripcion");
+			String codProvincias = request.getParameter("provincias");
+			String idCategoria = request.getParameter("categoria");
+			
+			// Busca las categorias
+			Categoria categoria = null;
+			if(idCategoria!=null){
+				categoria = (Categoria) truequeBL.findById(new Categoria(), Long.valueOf(idCategoria));
+			}
+			
+			// Busca por provincia
+			String[] p = codProvincias.split(",");
+			ArrayList<Provincia> provincias = new ArrayList();
+			Provincia prov = null;
+			for (int i = 0; i < p.length; i++) {
+				String codigo = p[i];
+				prov = provinciaBL.findProvinciaByCodigo(codigo);
+				if(prov!=null){
+					provincias.add(prov);
+				}
+			}
+			
+			// Realiza la búsqueda de todos trueques por los filtros
+			List<Trueque> listado = truequeBL.buscarTrueques(descripcion, provincias, categoria);
+			getListadoTrueques(listado);
+			model.addObject(Constantes.TRUEQUES, listado);
+		
+		} catch (Exception e) {
+			logger.error("Error realizar la búsqueda introducida", e);
+		}
+		return model;
 	}
 }
