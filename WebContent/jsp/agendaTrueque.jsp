@@ -76,13 +76,13 @@
 				*/
 		 		<c:forEach var="canje" items="${listadoFechasTrueques}">
 					<c:if test="${canje.estado == 'L'}">
-						cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoRealizar('${canje.id}');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\"><label>${canje.hora_inicio}-${canje.hora_fin}</label></div>"} );
+						cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoRealizar('${canje.id}');\" style=\"cursor: pointer; width: 100%; text-align: center; padding: 3px; color: rgb(68, 68, 68); background:#00FF11; \">${canje.hora_inicio}-${canje.hora_fin}</div>"} );
 					</c:if>
 					<c:if test="${canje.estado == 'P'}">
-						cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoRealizar('${canje.id}');\" style=\"width:100%; height 20px; background:#FFB84D; cursor: pointer\"><label>${canje.hora_inicio}-${canje.hora_fin}</label></div>"} );
+						cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoRealizar('${canje.id}');\" style=\"cursor: pointer; width: 100%; text-align: center; padding: 3px; color: rgb(68, 68, 68); background:#00FF11; \">${canje.hora_inicio}-${canje.hora_fin}</div>"} );
 					</c:if>
 					<c:if test="${canje.estado == 'C'}">
-						cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoRealizar('${canje.id}');\" style=\"width:100%; height 20px; background:#FF0000; cursor: pointer\"><label>${canje.hora_inicio}-${canje.hora_fin}</label></div>"} );
+						cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoRealizar('${canje.id}');\" style=\"cursor: pointer; width: 100%; text-align: center; padding: 3px; color: rgb(68, 68, 68); background:#00FF11; \">${canje.hora_inicio}-${canje.hora_fin}</div>"} );
 					</c:if>
 				</c:forEach>
 			
@@ -113,7 +113,15 @@
 				close: function(event, ui) {
 					agendaCanje.hide();		
 				},
-				show: {effect: 'fade', duration: 400}
+				show: {effect: 'fade', duration: 400},
+			 	buttons: [
+		            {
+		              text: '<fmt:message key="boton.cancelar"/>',
+		              click: function() {
+		            	  hideAgendaCanje();
+		              }
+		            }
+		          ]
 			});
 		  	showAgendaCanje = function(){
 				document.getElementById('agendaCanjeR').style.display="";

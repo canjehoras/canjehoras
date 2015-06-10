@@ -56,7 +56,7 @@
 					$year.html(cal.getYear());
 				}
 				<c:forEach var="canje" items="${todos}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\">CONSULTAR</div>"} );
+					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"cursor: pointer; width: 100%; text-align: center; padding: 3px; color: rgb(68, 68, 68); background:#00FF11; \">CONSULTAR</div>"} );
 				</c:forEach>
 			});
 		</script>
@@ -81,7 +81,15 @@
 				close: function(event, ui) {
 					agendaCanje.hide();		
 				},
-				show: {effect: 'fade', duration: 400}
+				show: {effect: 'fade', duration: 400},
+			 	buttons: [
+		            {
+		              text: '<fmt:message key="boton.cancelar"/>',
+		              click: function() {
+		            	  hideAgendaCanje();
+		              }
+		            }
+		          ]
 			});
 		  	showAgendaCanje = function(){
 				document.getElementById('agendaCanje').style.display="";

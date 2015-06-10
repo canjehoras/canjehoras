@@ -110,9 +110,6 @@ public abstract class BaseController extends MultiActionController {
 				if(canje.getEstado().equals(Constantes.ESTADO_CANJE_CANJEADO)){
 					canje.setEstado(Constantes.ESTADO_CANJE_CANJEADO_STRING);
 				}
-				if(null != canje.getFecha()){
-					canje.setFechaLabel(sdf.format(canje.getFecha()));
-				}
 			}
 		} catch (Exception e) {
 			

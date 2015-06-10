@@ -11,7 +11,7 @@
 			<c:forEach var="canje" items="${canjes}">
 				<div style="border-bottom: 2px solid black; padding: 3px;">
 					<div><fmt:message key="agenda.titulo"/>${canje.trueque.titulo}</div>
-					<div><fmt:message key="agenda.horario"/>${canje.fechaLabel}  ${canje.hora_inicio} - ${canje.hora_fin}</div>
+					<div><fmt:message key="agenda.horario"/><fmt:formatDate value="${canje.fecha}" pattern="dd/MM/yyyy" />  ${canje.hora_inicio} - ${canje.hora_fin}</div>
 					<div><fmt:message key="agenda.estado"/>${canje.estado}</div>
 					<c:if test="${canje.estado == 'LIBRE'}">
 						<div>
@@ -31,9 +31,6 @@
 					</c:if>
 				</div>
 			</c:forEach>
-			<div style="border-bottom: 2px solid black; padding: 15px;">
-				<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="hideAgendaCanje();"/>
-			</div>
 		</div>
 	</body>
 </html>
