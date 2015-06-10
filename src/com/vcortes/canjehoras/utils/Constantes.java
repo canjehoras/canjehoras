@@ -1,5 +1,6 @@
 package com.vcortes.canjehoras.utils;
 
+
 public class Constantes {
 
 	// General
@@ -11,6 +12,8 @@ public class Constantes {
 	public final static String ENCODING = "UTF-8";
 	public final static String MAX_DESCRIPCION = "25";
 	public final static String RECORDATORIO = "RECORDATORIO";
+	public final static String PREFERENCIAS = "PREFERENCIAS";
+	public final static String TODOS = "TODOS";
 	
 	// Idioma
 	public final static String IDIOMA_ES = "ES";
@@ -52,9 +55,10 @@ public class Constantes {
 	
 	// Email
 	public final static String EMAIL_ASUNTO_NUEVO = "Nuevo trueque publicado";
-	public final static String EMAIL_ASUNTO_RESOLUCION = "Resolución del canjeo";
+	public final static String EMAIL_ASUNTO_RESOLUCION = "Resolución del canje";
 	public final static String EMAIL_ASUNTO_DENUNCIAR = "Denuncia trueque";
 	public final static String EMAIL_ASUNTO_RECORDATORIO_PASS = "Recordatorio contraseña";
+	public final static String EMAIL_ASUNTO_CONSULTA = "Consulta sobre un trueque";
 	public final static String EMAIL_ADMINISTRADOR = "canjehoras@gmail.com";
 	public final static String EMAIL_CABECERA_ADMINISTRADOR = "<h2>Hola, Administrador</h2>";
 	public final static String EMAIL_CABECERA_DENUNCIADO = "<h2>Se ha denunciado el trueque '";
@@ -65,6 +69,10 @@ public class Constantes {
 	public final static String EMAIL_CIERRE_H3 = "</h3>";
 	public final static String EMAIL_CIERRE_H4 = "</h4>";
 	public final static String EMAIL_PUBLICADO_POR = "Publicado por:"; 
+	public final static String EMAIL_OFERTA = "OFERTA:"; 
+	public final static String EMAIL_USUARIO = "El usuario "; 
+	public final static String EMAIL_MSM = "le envia este mensaje: ";
+	public final static String EMAIL_DEMANDA = "DEMANDA:"; 
 	public final static String EMAIL_DENUNCIADO_POR = "Denunciado por:";
 	public final static String EMAIL_CABECERA_USUARIO = "<h2>Hola, Usuario</h2>";
 	public final static String EMAIL_RECORDATORIO_PASS = "La contraseña de acceso es: ";
@@ -77,6 +85,9 @@ public class Constantes {
 	public final static String EMAIL_SALUDO = "</br></br><h2>Un saludo.</h2>";
 	public final static String EMAIL_TRUEQUE = " el trueque ";
 	public final static String EMAIL_ASUNTO_RESERVA = "Reserva de un trueque";
+	public final static String EMAIL_NUEVO_TRUEQUE = "Te enviamos información de un nuevo Trueque publicado en la web conforme tus preferencias." + 
+	"Desde el equipo de canjehoras te animamos a que publiques tus ofertas y demandas." + 
+	"Puedes hacerlo desde la propia Web, iniciando sesión con tu E-mail y tu contraseña.";
 
 
 	// Mensaje de errores
@@ -94,6 +105,14 @@ public class Constantes {
 	public static final String TRUEQUE_ESTADO_BORRADO = "B";
 	public static final String TRUEQUE_ESTADO_PENDIENTE = "P";
 	public static final String TRUEQUE_ESTADO_CANJEADO = "C";
+	public static final String TRUEQUE_ESTADO_TODOS = "T";
+	public static final String TRUEQUE_ESTADO_NUEVO_STRING  = "NUEVO";
+	public static final String TRUEQUE_ESTADO_REVISADO_STRING  = "REVISADO";
+	public static final String TRUEQUE_ESTADO_DENUNCIADO_STRING = "DENUNCIADO";
+	public static final String TRUEQUE_ESTADO_BORRADO_STRING = "BORRADO";
+	public static final String TRUEQUE_ESTADO_PENDIENTE_STRING = "PENDIENTE";
+	public static final String TRUEQUE_ESTADO_CANJEADO_STRING = "CANJEADO";
+	public static final String TRUEQUE_ESTADO_TODOS_STRING = "TODOS";
 	
 	// Nombre de los .jsp
 	public static final String INICIO  = "inicio";
@@ -158,4 +177,5 @@ public class Constantes {
 	public final static String BBDD_FECHA_NACIMIENTO = "fecha_nacimiento";
 	public final static String BBDD_IDIOMA = "idioma";
 	public final static String BBDD_EMAIL = "email";
+	public final static String COMBO_FILTRO_TRUEQUE = "filtroTrueque";
 }

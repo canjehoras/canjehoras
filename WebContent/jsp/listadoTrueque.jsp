@@ -15,8 +15,8 @@
 				<h1><fmt:message key="listado.titulo"/></h1>
 				<div style="width: 30%">
 					<select id="filtroTrueque" onchange="comboTruequeInicio('filtroTrueque');">
-						<option id="preferencias" value="PREFERENCIAS" <c:if test="${filtroTrueque == 'PREFERENCIAS'}">selected</c:if> ><fmt:message key="combo.preferencias"/></option>
-						<option id="todos" value="TODOS" <c:if test="${filtroTrueque == 'TODOS'}">selected</c:if> ><fmt:message key="combo.todos"/></option>
+						<option id="preferencias" value="<%=Constantes.PREFERENCIAS %>" <c:if test="${filtroTrueque == 'PREFERENCIAS'}">selected</c:if> ><fmt:message key="combo.preferencias"/></option>
+						<option id="todos" value="<%=Constantes.TODOS %>" <c:if test="${filtroTrueque == 'TODOS'}">selected</c:if> ><fmt:message key="combo.todos"/></option>
 					</select>
 				</div>
 			
@@ -48,7 +48,9 @@
 					<p class="animated fadeInDown wow"><fmt:message key="listado.categoria"/>${trueques.categoria.descripcion}</p>
 					<p class="animated fadeInDown wow"><fmt:message key="listado.provincia"/>${trueques.provincia.descripcion}</p>
 					<p class="animated fadeInDown wow"><fmt:message key="listado.ofrezco"/> ${trueques.descripcionOferta}</p>
-					<p class="animated fadeInDown wow"><fmt:message key="listado.busco"/> ${trueques.descripcionDemanda}</p>
+					<c:if test="${trueques.descripcionDemanda != ''}">
+						<p class="animated fadeInDown wow"><fmt:message key="listado.busco"/>${trueques.descripcionDemanda}</p>
+					</c:if>
 					<c:if test="${sessionScope.usuario == null}">
 						<p>
 							<fmt:message key="listado.usuario.registro"/>&nbsp; 

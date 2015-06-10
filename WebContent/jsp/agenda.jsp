@@ -56,7 +56,7 @@
 					$year.html(cal.getYear());
 				}
 				<c:forEach var="canje" items="${todos}">
-					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\"><label>CONSULTAR</label></div>"} );
+					cal.setData( {"<fmt:formatDate value='${canje.fecha}' pattern='MM-dd-yyyy'/>" : "<div onclick=\"eventoMiAgenda('<fmt:formatDate value='${canje.fecha}' pattern='dd/MM/yyyy'/>');\" style=\"width:100%; height 20px; background:#00FF11; cursor: pointer\">CONSULTAR</div>"} );
 				</c:forEach>
 			});
 		</script>

@@ -88,6 +88,13 @@ public class TruequeDAO extends BaseDAO {
 	}
 	
 	
+	/**
+	 * Metodo par buscar el detalle de un trueque
+	 * 
+	 * @param id
+	 * @return
+	 * @throws Throwable
+	 */
 	public Trueque detalle(Long id)throws Throwable {
 		log.debug("detalle");
 		try {

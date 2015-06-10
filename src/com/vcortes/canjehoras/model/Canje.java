@@ -18,7 +18,6 @@ public class Canje implements Serializable{
 	private String hora_inicio;
 	private String hora_fin;
 	private String estado;
-	private String fechaLabel;
 	
 	/**
 	 * Constructor por defecto
@@ -179,14 +178,5 @@ public class Canje implements Serializable{
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-
-	public String getFechaLabel() {
-		return fechaLabel;
-	}
-
-	public void setFechaLabel(String fechaLabel) {
-		this.fechaLabel = fechaLabel;
-	}
-	
 }
 

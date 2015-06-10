@@ -47,19 +47,11 @@
 							
 						</form>
 						<div style="width: 100%; padding: 5px; background: #f0f0f0; margin-bottom: 5px;">
-							<img title="Enviar email" class="imagenOpcionesCanjeo" src="/canjehoras/img/enviarMail.png" onclick="canjeEmail(${usuario.id});" />
+							<img title="Enviar email" class="imagenOpcionesCanjeo" src="/canjehoras/img/enviarMail.png" onclick="canjeEmail('${usuario.correo_electronico}');" />
 							<img title="Dejar comentario" class="imagenOpcionesCanjeo" src="/canjehoras/img/dejarComentario.png" onclick="canjeForo(${trueque.id});" />
-							<%-- <img title="Agenda" class="imagenOpcionesCanjeo" src="/canjehoras/img/agenda.png" onclick="canjeAgenda(${trueque.id});" />--%>
 							<img title="Agenda" class="imagenOpcionesCanjeo" src="/canjehoras/img/agenda.png" onclick="canjeAgendaTrueque(${trueque.id});" />
 							<img title="Denunciar trueque" class="imagenOpcionesCanjeo" src="/canjehoras/img/denunciar.png" onclick="denunciarTrueque(${trueque.id});" />
 							<img title="Gráficas" class="imagenOpcionesCanjeo" src="/canjehoras/img/graficas.png" onclick="graficas();" />
-							<%-- 
-							<input type="button" value="<fmt:message key="boton.email"/>" onclick="canjeEmail(${usuario.id});"/>
-							<input type="button" value="<fmt:message key="boton.foro"/>" onclick="canjeForo(${trueque.id});"/>
-							<input type="button" value="<fmt:message key="boton.agenda"/>" onclick="canjeAgenda(${trueque.id});"/>
-							<input type="button" value="<fmt:message key="boton.denunciar"/>" onclick="denunciarTrueque(${trueque.id});"/>
-							<input type="button" value="<fmt:message key="boton.graficas"/>" onclick="graficas();"/>
-							--%>
 						</div>
 			        </div>
 		          	<div  id="foro" style="width: 100%; height: 600px">

@@ -44,11 +44,12 @@
 		
 		<h1><fmt:message key="nuevo.trueque.agenda"/></h1>
 		<div class="subtituloSelect" style="margin-bottom: 5px;"><fmt:message key="nuevo.trueque.subtitulo"/></div>
-		<input type="text" name="fecha" id="fecha" placeholder="<fmt:message key="nuevo.trueque.seleccione.fecha" />"/>
+		<input type="text" name="fecha" id="fecha" value="<fmt:formatDate value='${fecha}' pattern='dd/MM/yyyy' />" placeholder="<fmt:message key="nuevo.trueque.seleccione.fecha" />"/>
+		
 		<select name="hora_inicio" id="hora_inicio" >
 			<option value="-1"><fmt:message key="nuevo.trueque.hora.inicio" /></option>
             <c:forEach var="hora_inicio" items="${listadoHoras}">
-                    <option value="${hora_inicio}">${hora_inicio}</option>
+            	<option value="${hora_inicio}" <c:if test="${hora_inicio == hora_inicio}">selected</c:if>>${hora_inicio}</option>
             </c:forEach>
         </select>       
 		<select name="hora_fin" id="hora_fin" >
