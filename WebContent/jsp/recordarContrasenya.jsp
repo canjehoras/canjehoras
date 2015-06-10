@@ -8,6 +8,7 @@
 	</head>
 	
 	<body>
+	<div id="categoria" class="content">
 	<%@ include file="comunes/include-cabecera.jsp" %>
 	<section id="login" class="top_cont_outer">
 		<h1><fmt:message key="titulo.recordar.pass"/></h1>
@@ -25,6 +26,7 @@
 				<input type="button" value="<fmt:message key="boton.cancelar"/>" onclick="javascript:history.back();"/>
 			</form>
 	</section>
+	</div>
 	<%@ include file="comunes/include-pie.jsp" %>
 	</body>
 </html>		
